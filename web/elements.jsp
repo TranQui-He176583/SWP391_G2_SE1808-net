@@ -7,18 +7,8 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
- 	<!-- CSS here -->
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-	<link rel="stylesheet" href="assets/css/slicknav.css">
-	<link rel="stylesheet" href="assets/css/animate.min.css">
-	<link rel="stylesheet" href="assets/css/magnific-popup.css">
-	<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-	<link rel="stylesheet" href="assets/css/themify-icons.css">
-	<link rel="stylesheet" href="assets/css/slick.css">
-	<link rel="stylesheet" href="assets/css/nice-select.css">
-	<link rel="stylesheet" href="assets/css/style.css">
+  <%@include file="commonFunction/CSS.jsp" %>
+ 	
 </head>
 <body>
     <!--? Preloader Start -->
@@ -33,55 +23,7 @@
         </div>
     </div>
     <!-- Preloader Start -->
-    <header>
-        <!--? Header Start -->
-        <div class="header-area header-transparent">
-            <div class="main-header header-sticky">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <!-- Logo -->
-                        <div class="col-xl-2 col-lg-2 col-md-1">
-                            <div class="logo">
-                                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
-                            </div>
-                        </div>
-                        <div class="col-xl-10 col-lg-10 col-md-10">
-                            <div class="menu-main d-flex align-items-center justify-content-end">
-                                <!-- Main-menu -->
-                                <div class="main-menu f-right d-none d-lg-block">
-                                    <nav>
-                                        <ul id="navigation">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="services.html">Services</a></li>
-                                            <li><a href="schedule.html">schedule</a></li>
-                                            <li><a href="gallery.html">gallery</a></li>
-                                            <li><a href="blog.html">Blog</a>
-                                                <ul class="submenu">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="blog_details.html">Blog Details</a></li>
-                                                    <li><a href="elements.html">Element</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                    <a href="from.html" class="btn header-btn">became a member</a>
-                                </div>
-                            </div>
-                        </div>   
-                        <!-- Mobile Menu -->
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Header End -->
-    </header>
+      <%@include file="commonFunction/header.jsp" %>
 	<main>
         <!--? Hero Start -->
         <div class="slider-area2">
@@ -105,11 +47,11 @@
 				<p class="sample-text">
 					Every avid independent filmmaker has <b>Bold</b> about making that <i>Italic</i> interest documentary,
 					or short
-					film to show off their creative prowess. Many have great ideas and want to “wow”
+					film to show off their creative prowess. Many have great ideas and want to ?wow?
 					the<sup>Superscript</sup> scene,
-					or video renters with their big project. But once you have the<sub>Subscript</sub> “in the can” (no easy
+					or video renters with their big project. But once you have the<sub>Subscript</sub> ?in the can? (no easy
 					feat), how
-					do you move from a <del>Strike</del> through of master DVDs with the <u>“Underline”</u> marked
+					do you move from a <del>Strike</del> through of master DVDs with the <u>?Underline?</u> marked
 					hand-written title
 					inside a secondhand CD case, to a pile of cardboard boxes full of shiny new, retail-ready DVDs, with UPC
 					barcodes
@@ -264,7 +206,7 @@
 						<div class="col-md-9">
 							<p class="text-right">Over time, even the most sophisticated, memory packed computer can begin
 								to run slow if we
-								don’t do something to prevent it. The reason why has less to do with how computers are made
+								don?t do something to prevent it. The reason why has less to do with how computers are made
 								and how they age and
 								more to do with the way we use them. You see, all of the daily tasks that we do on our PC
 								from running programs
@@ -273,8 +215,8 @@
 								understand the reasons why your PC is getting slower and do something to keep your PC
 								running at its best. You
 								can do this through regular maintenance and PC performance optimization programs</p>
-							<p class="text-right">Before we discuss all of the things that could be affecting your PC’s
-								performance, let’s
+							<p class="text-right">Before we discuss all of the things that could be affecting your PC?s
+								performance, let?s
 								talk a little about what symptoms</p>
 						</div>
 						<div class="col-md-3">
@@ -322,7 +264,7 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<blockquote class="generic-blockquote">
-								“Recently, the US Federal government banned online casinos from operating in America by
+								?Recently, the US Federal government banned online casinos from operating in America by
 								making it illegal to
 								transfer money to them through any US bank or payment system. As a result of this law, most
 								of the popular
@@ -336,7 +278,7 @@
 								them legal. A major
 								part of this was enlisting electronic banking systems that would accept this new
 								clarification and start doing
-								business with me. Listed in this article are the electronic banking”
+								business with me. Listed in this article are the electronic banking?
 							</blockquote>
 						</div>
 					</div>
@@ -740,91 +682,7 @@
 		</div>
 		<!-- End Align Area -->
 	</main>
-    <footer>
-        <!--? Footer Start-->
-        <div class="footer-area section-bg" data-background="assets/img/gallery/section_bg03.png">
-            <div class="container">
-                <div class="footer-top footer-padding">
-                    <!-- Footer Menu -->
-                    <div class="row d-flex justify-content-between">
-                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>COMPANY</h4>
-                                    <ul>
-                                        <li><a href="#">About Us</a></li>
-                                        <li><a href="#">Company</a></li>
-                                        <li><a href="#"> Press & Blog</a></li>
-                                        <li><a href="#"> Privacy Policy</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Open hour</h4>
-                                    <ul>
-                                        <li><a href="#">Monday 11am-7pm</a></li>
-                                        <li><a href="#"> Tuesday-Friday 11am-8pm</a></li>
-                                        <li><a href="#"> Saturday 10am-6pm</a></li>
-                                        <li><a href="#"> Sunday 11am-6pm</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>RESOURCES</h4>
-                                    <ul>
-                                        <li><a href="#">Home Insurance</a></li>
-                                        <li><a href="#">Travel Insurance</a></li>
-                                        <li><a href="#"> Car Insurance</a></li>
-                                        <li><a href="#"> Business Insurance</a></li>
-                                        <li><a href="#"> Heal Insurance</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-5 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <!-- logo -->
-                                <div class="footer-logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
-                                </div>
-                                <div class="footer-tittle">
-                                    <div class="footer-pera">
-                                        <p class="info1">GThe trade war currently ensuing between te US anfd several natxions around thdhe globe, most fiercely with.</p>
-                                    </div>
-                                </div>
-                                <!-- Footer Social -->
-                                <div class="footer-social ">
-                                    <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                    <a href=""><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fas fa-globe"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Footer Bottom -->
-                <div class="footer-bottom">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-lg-12">
-                            <div class="footer-copy-right text-center">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End-->
-    </footer>
+      <%@include file="commonFunction/footer.jsp" %>
     <!-- Scroll Up -->
     <div id="back-top" >
         <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
