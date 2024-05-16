@@ -73,7 +73,7 @@
     
     <div class="signup-container">
         <h2 style="font-size: 50px;">Sign Up</h2>
-        <form>
+        <form action="register">
             <input type="text" placeholder="Full Name" required>
             <input type="email" placeholder="Email" required>
             <input type="password" placeholder="Password" required>
