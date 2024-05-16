@@ -102,8 +102,8 @@
             <button type="submit">Login</button>
         </form>
         <div class="links">
-            <a style="font-size: 13px" href="#">Forgot Password?</a>
-            <a style="font-size: 13px" href="#">Sign Up</a>
+            <a style="font-size: 13px" href=f-password.jsp>Forgot Password?</a>
+            <a style="font-size: 13px" href="register.jsp">Sign Up</a>
         </div>
         <div class="separator"><span>or</span></div>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
