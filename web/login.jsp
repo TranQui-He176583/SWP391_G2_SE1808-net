@@ -78,7 +78,7 @@
         }
     </style>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="164431467380-npfbq2oqttd0peo0fhjjnfj1vorq39he.apps.googleusercontent.com">
     <script>
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
@@ -86,7 +86,7 @@
             console.log('Name: ' + profile.getName());
             console.log('Image URL: ' + profile.getImageUrl());
             console.log('Email: ' + profile.getEmail());
-            // Redirect or handle the sign-in success
+            
         }
     </script>
 </head>
@@ -96,7 +96,7 @@
     <div style="">
     <div class="login-container">
         <h2 style="font-size: 50px" >Login</h2>
-        <form>
+        <form action="login" method="post">
             <input type="text" placeholder="Username" required>
             <input type="password" placeholder="Password" required>
             <button type="submit">Login</button>
