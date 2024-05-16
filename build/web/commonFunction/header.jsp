@@ -1,4 +1,5 @@
- <header>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<header>
         <!--? Header Start -->
         <div class="header-area header-transparent">
             <div class="main-header header-sticky">
@@ -16,10 +17,7 @@
                                 <div class="main-menu f-right d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.jsp">Home</a></li>
-                                            
-                                           
-                                            
+                                            <li><a href="index.jsp">Home page</a></li>
                                             <li><a href="blog.jsp">Blog</a>
                                                 <ul class="submenu">
                                                     <li><a href="blog.jsp">Blog</a></li>
@@ -32,7 +30,7 @@
                                     </nav>
                                 </div>
                                 <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                    <a href="from.html" class="btn header-btn">became a member</a>
+                                    <a href="from.html" class="btn header-btn">Sign in/Sign up</a>
                                 </div>
                             </div>
                         </div>   

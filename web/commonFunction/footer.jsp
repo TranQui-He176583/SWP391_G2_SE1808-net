@@ -1,3 +1,5 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <footer>
         <!--? Footer Start-->
         <div class="footer-area section-bg" data-background="assets/img/gallery/section_bg03.png">
