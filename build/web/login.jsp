@@ -82,23 +82,23 @@
     <script>
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId());
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail());
+            document.getElementById('googleEmail').value = profile.getEmail();
+             document.getElementById('googleFullName').value = profile.getName();
+        document.querySelector('googleLogin').submit();
             
         }
     </script>
 </head>
 <%@include file="commonFunction/CSS.jsp" %>
 <%@include file="commonFunction/header.jsp" %>
+
 <body>
-    <div style="">
+    
     <div class="login-container">
         <h2 style="font-size: 50px" >Login</h2>
         <form action="login" method="post">
-            <input type="text" placeholder="Username" required>
-            <input type="password" placeholder="Password" required>
+            <input type="text" placeholder="Username" name="username" required>
+            <input type="password" placeholder="Password" name="password" required>
             <button type="submit">Login</button>
         </form>
         <div class="links">
@@ -108,6 +108,13 @@
         <div class="separator"><span>or</span></div>
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
-        </div>
+    
+    <form id="googleLogin" action="login" method="post">
+    <input type="hidden" id="googleEmail" name="googleEmail">
+    <input type="hidden" id="googleFullName" name="googleFullName">
+    
+    </form>
 </body>
+
 </html>
+
