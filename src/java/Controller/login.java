@@ -76,7 +76,7 @@ public class login extends HttpServlet {
         encodePassword ep = new encodePassword();
         xPassWord = ep.toSHA1(xPassWord);
           
-        out.print(aDAO.checkAccount(xUserName,xPassWord));
+        out.print(aDAO.checkLogin(xUserName,xPassWord));
         
         
     }

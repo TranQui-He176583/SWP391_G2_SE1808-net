@@ -99,6 +99,7 @@
         <form action="login" method="post">
             <input type="text" placeholder="Username" name="username" required>
             <input type="password" placeholder="Password" name="password" required>
+            <<p style="color: green; font-size: 14px" >${requestScope.completeRegister}</p>
             <button type="submit">Login</button>
         </form>
         <div class="links">

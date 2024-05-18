@@ -76,15 +76,26 @@ public class register extends HttpServlet {
         String xEmail = request.getParameter("email");
         String xFullname = request.getParameter("fullname");
         String xPassWord = request.getParameter("password");
+        AccountDAO  aDAO = new AccountDAO();
+        if (aDAO.checkAccountExist(xEmail)) {
+            request.setAttribute("wrongRegister", "This email is registered to another account");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        } else {
+            
+        
         encodePassword ep = new encodePassword();
        xPassWord = ep.toSHA1(xPassWord);
         String xGender = request.getParameter("gender");
         int gender = Integer.parseInt(xGender);
-       AccountDAO  aDAO = new AccountDAO();
+       
        int numberAccount = aDAO.getNumberAccount()+1;
         Account a = new Account(numberAccount, xPassWord, 3, 0, xFullname, xEmail, "", 0);
        out.print(aDAO.insert(a));
-               
+       
+        request.setAttribute("completeRegister", "Account registration has been successful");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+       
+           }    
     
     }
 

@@ -69,9 +69,10 @@
 <%@include file="commonFunction/header.jsp" %>
 
 
+
 <body>
     
-    <div class="signup-container">
+    <div style="margin-top: 80px" class="signup-container">
         <h2 style="font-size: 50px;">Sign Up</h2>
         <form action="register" method="post">
             <input type="text" placeholder="Full Name" name="fullname" id="fullname" required>
@@ -83,10 +84,12 @@
                 <option value="2">Female</option>
                 <option value="3">Other</option>
             </select>
+           
+            <p style="color: red;  font-size: 15px">${requestScope.wrongRegister}</p>
             <button type="submit">Sign Up</button>
         </form>
         <div class="links">
-            <a style="color: black" href="login.jsp">Already have an account? Login</a>
+            <a style="color: black;font-size: 15px" href="login.jsp">Already have an account? Login</a>
         </div>
     </div>
 </body>

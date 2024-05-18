@@ -50,12 +50,30 @@ public class AccountDAO extends MyDAO {
     }
      
      
- public boolean checkAccount(String username, String password) {
+ public boolean checkLogin(String username, String password) {
         xSql = "select *from account where email=? and password=?";     
         try {
       ps = con.prepareStatement(xSql);   
       ps.setString(1, username );
       ps.setString(2, password );
+      rs = ps.executeQuery();           
+      if (rs.next()) {         
+       return true;                    
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {      
+     } 
+        return false;
+    }
+ 
+  public boolean checkAccountExist(String username) {
+        xSql = "select *from account where email=? ";     
+        try {
+      ps = con.prepareStatement(xSql);   
+      ps.setString(1, username );
+     
       rs = ps.executeQuery();           
       if (rs.next()) {         
        return true;                    
