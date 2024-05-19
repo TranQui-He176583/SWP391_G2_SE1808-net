@@ -89,7 +89,7 @@ public class register extends HttpServlet {
         int gender = Integer.parseInt(xGender);
        
        int numberAccount = aDAO.getNumberAccount()+1;
-        Account a = new Account(numberAccount, xPassWord, 3, 0, xFullname, xEmail, "", 0);
+        Account a = new Account(numberAccount, xPassWord, 3, 0, xFullname, xEmail, "", gender);
        out.print(aDAO.insert(a));
        
         request.setAttribute("completeRegister", "Account registration has been successful");

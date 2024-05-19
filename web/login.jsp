@@ -99,9 +99,12 @@
         <form action="login" method="post">
             <input type="text" placeholder="Username" name="username" required>
             <input type="password" placeholder="Password" name="password" required>
-            <<p style="color: green; font-size: 14px" >${requestScope.completeRegister}</p>
+            
+            
             <button type="submit">Login</button>
         </form>
+        <p style="color: green; font-size: 14px" >${requestScope.completeRegister}</p>
+            <p style="color: red; font-size: 14px" >${requestScope.wrongLogin}</p>
         <div class="links">
             <a style="font-size: 13px" href=f-password.jsp>Forgot Password?</a>
             <a style="font-size: 13px" href="register.jsp">Sign Up</a>
