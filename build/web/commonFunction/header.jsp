@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
     <!--? Header Start -->
     <div class="header-area header-transparent">
@@ -30,29 +29,11 @@
                                     </ul>
                                 </nav>
                             </div>
-                        <c:if test="${sessionScope.account.roleId == null}">      
                             <div class="header-right-btn f-right d-none d-lg-block ml-30">
                                 <a href="login.jsp" class="btn header-btn">Sign in</a>
                                 <span style="margin-right: 20px;"></span>
                                 <a href="register.jsp" class="btn header-btn">Sign up</a>
                             </div>
-                         </c:if>  
-                        
-                         <c:if test="${sessionScope.account.roleId != null}">                                  
-                             
-                             
-                             <div class="image-container">
-                                    <img style="width: 28px; margin-top: -10px" src="assets/img/logo/userlogo2.jpg" class="img-fluid"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               <div class="dropdown-menu"> 
-                                   <a style="font-size: 13px" class="dropdown-item" href="#">Thông tin cá nhân</a>
-                                   <a style="font-size: 13px" class="dropdown-item" href="logout">Đăng xuất</a>                           
-                                </div>
-                            </div>
-                         </c:if>     
-                           
-}
-                           
                         </div>
                     </div>   
                     <!-- Mobile Menu -->

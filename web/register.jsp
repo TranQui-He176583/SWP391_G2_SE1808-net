@@ -69,27 +69,24 @@
 <%@include file="commonFunction/header.jsp" %>
 
 
-
 <body>
     
-    <div style="margin-top: 80px" class="signup-container">
+    <div class="signup-container">
         <h2 style="font-size: 50px;">Sign Up</h2>
-        <form action="register" method="post">
-            <input type="text" placeholder="Full Name" name="fullname" id="fullname" required>
-            <input type="email" placeholder="Email" name="email" required>
-            <input type="password" placeholder="Password" name="password" minlength="6" required>
-            <select required name="gender">
+        <form action="register">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <select required>
                 <option value="" disabled selected>Gender</option>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-                <option value="3">Other</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
             </select>
-           
-            <p style="color: red;  font-size: 15px">${requestScope.wrongRegister}</p>
             <button type="submit">Sign Up</button>
         </form>
         <div class="links">
-            <a style="color: black;font-size: 15px" href="login.jsp">Already have an account? Login</a>
+            <a style="color: black" href="login.jsp">Already have an account? Login</a>
         </div>
     </div>
 </body>
