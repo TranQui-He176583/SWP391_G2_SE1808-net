@@ -75,7 +75,7 @@
             </div>
             <!-- slider Area End-->
             <!--? About Area Start -->
-            <section class="about-area section-padding30">
+            <section style="background: white" class="about-area section-padding30">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-12">
@@ -168,7 +168,7 @@
             </section>
             <!-- Services Area End -->
             <!--? About-2 Area Start -->
-            <section class="about-area2 testimonial-area section-padding30 fix">
+            <section style="background: white" class="about-area2 testimonial-area section-padding30 fix">
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-5 col-md-11 col-sm-11">
