@@ -19,9 +19,9 @@
                 <div class="row d-flex justify-content-center"> 
                     <!-- Footer Social -->
                     <div class="footer-social ">
-                        <a href="https://www.facebook.com/daihocfpt"><i class="fab fa-facebook-f" style="font-size: 40px;"></i></a>
-                        <a href="https://www.youtube.com/channel/UC4vAAvyjYMpirmYayY4_lHQ/featured"><i class="fab fa-youtube-square" style="font-size: 40px;"></i></a>
-                        <a href="https://daihoc.fpt.edu.vn/"><i class="fas fa-globe" style="font-size: 40px;"></i></a>
+                        <a href="https://www.facebook.com/daihocfpt" target="_blank"><i class="fab fa-facebook-f" style="font-size: 40px;"></i></a>
+                        <a href="https://www.youtube.com/channel/UC4vAAvyjYMpirmYayY4_lHQ/featured" target="_blank"><i class="fab fa-youtube-square" style="font-size: 40px;"></i></a>
+                        <a href="https://daihoc.fpt.edu.vn/" target="_blank"><i class="fas fa-globe" style="font-size: 40px;"></i></a>
                     </div>
                 </div>
                 <div class="footer-bottom">
