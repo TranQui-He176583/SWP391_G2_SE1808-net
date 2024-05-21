@@ -91,19 +91,18 @@
                                     <div class="single-testimonial">
                                         <div class="testimonial-caption">
                                             <p style="font:inherit; font-size:25px">Câu lạc bộ Taekwondo FPT University là nơi tạo ra không khí đầy cảm hứng và năng động, nơi mà sinh viên không chỉ rèn luyện kỹ năng võ thuật mà còn tạo ra mối quan hệ gắn kết và sự tự tin vững chắc.</p>
-                                            <div class="rattiong-caption">
-                                                <span>Cu Duc Binh<span>Truong CLB</span> </span>
+                                            <div class="rattiong-caption" style="display: flex; justify-content: space-between; align-items: center;">
+                                                <span>Cu Duc Binh <span>Truong CLB</span> </span>
                                                 <a href="https://www.facebook.com/FTCTaekwondo" target="_blank" class="btn">Fanpage</a>
                                             </div>
-
                                         </div>
                                     </div>
                                     <!-- Single Testimonial -->
                                     <div class="single-testimonial">
                                         <div class="testimonial-caption">
                                             <p style="font:inherit; font-size:25px">FPTU Taekwondo Club is a place that creates an inspiring and dynamic atmosphere, where students not only practice martial arts skills but also create strong relationships and confidence.</p>
-                                            <div class="rattiong-caption">
-                                                <span>Binh Cu<span>Leader</span> </span>
+                                            <div class="rattiong-caption" style="display: flex; justify-content: space-between; align-items: center;">
+                                                <span>Binh Cu <span>Leader</span> </span>
                                                 <a href="https://www.facebook.com/FTCTaekwondo" target="_blank" class="btn">Fanpage</a>
                                             </div>
                                         </div>
@@ -112,6 +111,7 @@
                                 <!-- Testimonial End -->
                             </div>
                         </div>
+
                         <div class="col-lg-5 col-md-11 col-sm-11">
                             <!-- about-img -->
                             <div class="about-img2">
@@ -145,10 +145,9 @@
                                     <div class="single-testimonial">
                                         <div class="testimonial-caption">
                                             <p style="font:inherit; font-size:25px">Câu lạc bộ Street Workout FPT University là nơi hội tụ những người yêu thích thể dục và rèn luyện cơ thể dưới ánh nắng mặt trời, tạo ra không gian đầy sức sống và đam mê, khuyến khích sinh viên thể hiện bản thân và tạo nên cộng đồng sôi động.</p>
-                                            <div class="rattiong-caption">
-                                                <span>Nguyen Huy<span>Truong CLB</span> </span>
+                                            <div class="rattiong-caption" style="display: flex; justify-content: space-between; align-items: center;">
+                                                <span>Nguyen Huy <span>Truong CLB</span></span>
                                                 <a href="https://www.facebook.com/FuStreetWorkout" target="_blank" class="btn">Fanpage</a>
-
                                             </div>
                                         </div>
                                     </div>
@@ -156,13 +155,14 @@
                                     <div class="single-testimonial">
                                         <div class="testimonial-caption">
                                             <p style="font:inherit; font-size:25px">FPT University Street Workout Club is a gathering place for people who love fitness and exercising under the sun, creating a space full of vitality and passion, encouraging students to express themselves and create vibrant community.</p>
-                                            <div class="rattiong-caption">
-                                                <span>Huy Nguyen<span>Leader</span> </span>
+                                            <div class="rattiong-caption" style="display: flex; justify-content: space-between; align-items: center;">
+                                                <span>Huy Nguyen <span>Leader</span></span>
                                                 <a href="https://www.facebook.com/FuStreetWorkout" target="_blank" class="btn">Fanpage</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <!-- Testimonial End -->
                             </div>
                         </div>
@@ -187,24 +187,24 @@
                                     <div class="single-testimonial">
                                         <div class="testimonial-caption">
                                             <p style="font:inherit; font-size:25px">Câu lạc bộ Melody tại FPT University là nơi tạo ra không gian sôi động và sáng tạo cho sinh viên yêu thích âm nhạc, thúc đẩy sự phát triển cá nhân và sự sáng tạo trong lĩnh vực âm nhạc.</p>
-                                            <div class="rattiong-caption">
-                                                <span>Dao Duc Hai<span>Truong CLB</span> </span>
-                                                <a href="https://www.facebook.com/FTCTaekwondo" target="_blank" class="btn">Fanpage</a>
+                                            <div class="rattiong-caption" style="display: flex; justify-content: space-between; align-items: center;">
+                                                <span>Dao Duc Hai <span>Truong CLB</span></span>
+                                                <a href="https://www.facebook.com/fptu.melody.club" target="_blank" class="btn">Fanpage</a>
                                             </div>
-
                                         </div>
                                     </div>
                                     <!-- Single Testimonial -->
                                     <div class="single-testimonial">
                                         <div class="testimonial-caption">
                                             <p style="font:inherit; font-size:25px">Melody Club at FPT University is a place that creates a vibrant and creative space for students who love music, promoting personal development and creativity in the field of music.</p>
-                                            <div class="rattiong-caption">
-                                                <span>Hai Duc<span>Leader</span> </span>
-                                                <a href="https://www.facebook.com/FTCTaekwondo" target="_blank" class="btn">Fanpage</a>
+                                            <div class="rattiong-caption" style="display: flex; justify-content: space-between; align-items: center;">
+                                                <span>Hai Duc <span>Leader</span></span>
+                                                <a href="https://www.facebook.com/fptu.melody.club" target="_blank" class="btn">Fanpage</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <!-- Testimonial End -->
                             </div>
                         </div>
@@ -241,10 +241,9 @@
                                     <div class="single-testimonial">
                                         <div class="testimonial-caption">
                                             <p style="font:inherit; font-size:25px">Câu lạc bộ Tiếng Trung tại FPT University là nơi sinh viên có cơ hội học và thực hành tiếng Trung một cách sâu sắc, tạo điều kiện cho việc hiểu rõ văn hóa và giao tiếp hiệu quả trong cộng đồng quốc tế ngày nay.</p>
-                                            <div class="rattiong-caption">
-                                                <span>Tran Tung Duong<span>Truong CLB</span> </span>
+                                            <div class="rattiong-caption" style="display: flex; justify-content: space-between; align-items: center;">
+                                                <span>Tran Tung Duong <span>Truong CLB</span></span>
                                                 <a href="https://www.facebook.com/tiengtrungFPT" target="_blank" class="btn">Fanpage</a>
-
                                             </div>
                                         </div>
                                     </div>
@@ -252,13 +251,14 @@
                                     <div class="single-testimonial">
                                         <div class="testimonial-caption">
                                             <p style="font:inherit; font-size:25px">The Chinese Club at FPT University is where students have the opportunity to learn and practice Chinese deeply, facilitating cultural understanding and effective communication in today's international community.</p>
-                                            <div class="rattiong-caption">
-                                                <span>Duong Tran<span>Leader</span> </span>
+                                            <div class="rattiong-caption" style="display: flex; justify-content: space-between; align-items: center;">
+                                                <span>Duong Tran <span>Leader</span></span>
                                                 <a href="https://www.facebook.com/tiengtrungFPT" target="_blank" class="btn">Fanpage</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                                 <!-- Testimonial End -->
                             </div>
                         </div>
