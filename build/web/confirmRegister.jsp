@@ -1,11 +1,12 @@
+<%-- 
+    Document   : confirmRegister
+    Created on : May 21, 2024, 8:40:25 PM
+    Author     : quyka
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Form</title>
-    <style>
+<style>
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -78,51 +79,25 @@
             text-decoration: underline;
         }
     </style>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="164431467380-npfbq2oqttd0peo0fhjjnfj1vorq39he.apps.googleusercontent.com">
-    <script>
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            document.getElementById('googleEmail').value = profile.getEmail();
-             document.getElementById('googleFullName').value = profile.getName();
-        document.querySelector('googleLogin').submit();
-            
-        }
-    </script>
-</head>
-<%@include file="commonFunction/CSS.jsp" %>
+    <%@include file="commonFunction/CSS.jsp" %>
 <%@include file="commonFunction/header.jsp" %>
-
-<body>
+ 
+<html>
     
-    <c:if test ="${requestScope.code == null}"  >
-        <div class="login-container">
-        <h2 style="font-size: 50px" >Reset Password</h2>
-        <form action="forgotPassword" method="post">
-            <input type="email" placeholder="Gmail" name="gmail" required>
-         <button type="submit">Get Code</button>
-         <p style="color: red; font-size: 14px">${requestScope.wrongEmail}</p>
-        </div>
-        </form>
-    </c:if>    
-     
-     <c:if test ="${requestScope.code != null}"  >
-          <div class="login-container"> 
-        <h2 style="font-size: 50px" >Reset Password</h2>
+    <body>
+       <div class="login-container"> 
+        <h2 style="font-size: 50px" >Email Verify</h2>
         <p style="color: red">${requestScope.wrongCode}</p>
         <p> Enter Code in ${requestScope.email}: </p>
-        <form action="confirmCodeF_Password" method="post">
+        <form action="confirmRegisterPassword" method="post">
             <input type="text" placeholder="${requestScope.email}" name="email" value="${requestScope.email}" readonly required>
             <input type="text" placeholder="Code" name="code" required>
             <input type="hidden"  name="realcode" value="${requestScope.code}" >
-<!--            <input type="hidden"  name="fullname" value="${requestScope.fullname}" >
+            <input type="hidden"  name="fullname" value="${requestScope.fullname}" >
             <input type="hidden"  name="password" value="${requestScope.password}" >
-            <input type="hidden"  name="gender" value="${requestScope.gender}" >-->
+            <input type="hidden"  name="gender" value="${requestScope.gender}" >
          <button type="submit">Confirm</button>
         </form>
           </div>
-    </c:if>
-</body>
-
+    </body>
 </html>
-

@@ -98,7 +98,7 @@
         <h2 style="font-size: 50px" >Login</h2>
         <form action="changePassword" method="post">
             <input type="text"  name="email" value="${requestScope.email}" readonly required>
-            <input type="password" placeholder="New Password" name="password" required>
+            <input type="password" placeholder="New Password" name="password" minlength="6" maxlength="20" required>
          <button type="submit">Login</button>
         </form>
        

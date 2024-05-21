@@ -68,16 +68,16 @@
 <%@include file="commonFunction/CSS.jsp" %>
 <%@include file="commonFunction/header.jsp" %>
 
-
+ <link rel="stylesheet" href="assets/css/formI-A-PassWord.css">
 
 <body>
     
     <div style="margin-top: 80px" class="signup-container">
         <h2 style="font-size: 50px;">Sign Up</h2>
-        <form action="register" method="post">
+        <form action="sendMailRegister" method="post">
             <input type="text" placeholder="Full Name" name="fullname" id="fullname" required>
             <input type="email" placeholder="Email" name="email" required>
-            <input type="password" placeholder="Password" name="password" minlength="6" required>
+            <input type="password" placeholder="Password" name="password" minlength="6" maxlength="20" required>
             <select required name="gender">
                 <option value="" disabled selected>Gender</option>
                 <option value="1">Male</option>

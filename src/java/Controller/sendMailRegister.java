@@ -4,6 +4,8 @@
  */
 
 package Controller;
+
+import Model.AccountDAO;
 import Util.MailHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,15 +14,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import Model.*;
 import java.util.Random;
 
 /**
  *
  * @author quyka
  */
-@WebServlet(name="forgotPassword", urlPatterns={"/forgotPassword"})
-public class forgotPassword extends HttpServlet {
+@WebServlet(name="sendMailRegister", urlPatterns={"/sendMailRegister"})
+public class sendMailRegister extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +38,10 @@ public class forgotPassword extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet forgotPassword</title>");  
+            out.println("<title>Servlet sendMailRegister</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet forgotPassword at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet sendMailRegister at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,19 +68,20 @@ public class forgotPassword extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         PrintWriter pr = response.getWriter();
-        String xMail = (String) request.getParameter("gmail");
+        String xMail = (String) request.getParameter("email");
+        String xFullname = request.getParameter("fullname");
+        String xPassWord = request.getParameter("password");
+        String xGender = request.getParameter("gender");
        AccountDAO aDAO = new AccountDAO();
-       if ( aDAO.checkAccountExist(xMail) ==false   ) {
-           request.setAttribute("wrongEmail", "There are no accounts matching this email!");
-           request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
-       } else {
-           
-      
+      if (aDAO.checkAccountExist(xMail)) {
+            request.setAttribute("wrongRegister", "This email is registered to another account");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        }  else {
         MailHandler mh = new MailHandler(); 
              Random rand = new Random();
          int code = rand.nextInt(900000) + 100000;
@@ -91,10 +93,13 @@ public class forgotPassword extends HttpServlet {
             }
 
         request.setAttribute("code", code);
+        request.setAttribute("fullname", xFullname);
+        request.setAttribute("password", xPassWord);
+        request.setAttribute("gender", xGender);
         request.setAttribute("email", xMail);
-        request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
+        request.getRequestDispatcher("confirmRegister.jsp").forward(request, response);
     }
-        }
+    }
 
     /** 
      * Returns a short description of the servlet.
