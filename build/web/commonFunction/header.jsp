@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+
 <header>
     <!--? Header Start -->
     <div style="background: black" class="header-area header-transparent">
@@ -21,11 +23,6 @@
                                     <ul id="navigation">
                                         <li><a href="index.jsp">Home page</a></li>
                                         <li><a href="blog.jsp">Blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.jsp">Blog</a></li>
-                                                <li><a href="blog_details.jsp">Blog Details</a></li>
-                                                <li><a href="elements.jsp">Element</a></li>
-                                            </ul>
                                         </li>
                                         <li><a href="contact.jsp">Contact</a></li>
                                     </ul>
