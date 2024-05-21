@@ -104,9 +104,10 @@
             <button type="submit">Login</button>
         </form>
         <p style="color: green; font-size: 14px" >${requestScope.completeRegister}</p>
+        <p style="color: green; font-size: 14px" >${requestScope.cPassword}</p>
             <p style="color: red; font-size: 14px" >${requestScope.wrongLogin}</p>
         <div class="links">
-            <a style="font-size: 13px" href=f-password.jsp>Forgot Password?</a>
+            <a style="font-size: 13px" href=forgotPassword.jsp>Forgot Password?</a>
             <a style="font-size: 13px" href="register.jsp">Sign Up</a>
         </div>
         <div class="separator"><span>or</span></div>

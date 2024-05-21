@@ -87,26 +87,7 @@ public class AccountDAO extends MyDAO {
      } 
         return false;
     }
-//  
-//  public Account getAccount(String email, String password) {
-//        xSql = "select *from account where email=? and password=?";
-//       Account account = new Account();
-//        try {
-//      ps = con.prepareStatement(xSql);  
-//       ps.setString(1, email );
-//       ps.setString(2,password);
-//      rs = ps.executeQuery();      
-//      if (rs.next()) {   
-//        
-//        }
-//      rs.close();
-//      ps.close();
-//     }
-//     catch(Exception e) {
-//       
-//     } 
-//        return account;
-//    }
+
  
      public Account getAccount(String username, String password) {
         xSql = "select *from account where email=? and password=?"; 
@@ -136,6 +117,21 @@ public class AccountDAO extends MyDAO {
         return account;
     }
   
+     
+     public void updatePassWord (String username, String newPassWord) {
+     xSql = "UPDATE account SET password = ? WHERE email = ?"; 
+     try {         
+      ps = con.prepareStatement(xSql);
+      ps.setString(1, newPassWord);
+      ps.setString(2, username);
+      ps.executeUpdate();
+      ps.close();
+     }     
+     catch(Exception e) {
+        
+     }
+     
+  }
   
   
 }

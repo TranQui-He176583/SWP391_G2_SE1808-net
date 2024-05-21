@@ -1,15 +1,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <header>
     <!--? Header Start -->
-    <div class="header-area header-transparent">
+    <div style="background: black" class="header-area header-transparent">
         <div class="main-header header-sticky">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <!-- Logo -->
                     <div class="col-xl-2 col-lg-2 col-md-1">
-                        <div class="logo" style="opacity: 1;">
-                            <a href="index.jsp"><img src="assets/img/logo/banner.jpg" alt="" ></a>
+                        <div class="logo">
+                                <a href="index.jsp"><img src="assets/img/logo/banner.png" alt="" width   ="40%" height="40%"></a>
                         </div>
                     </div>
                     <div class="col-xl-10 col-lg-10 col-md-10">
@@ -49,7 +50,7 @@
                                    <a style="font-size: 13px" class="dropdown-item" href="logout">Đăng xuất</a>                           
                                 </div>
                             </div>
-                         </c:if>     
+                         </c:if>
                         </div>
                     </div>   
                     <!-- Mobile Menu -->
