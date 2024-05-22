@@ -70,7 +70,7 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  font-size: 20px;
+
 }
     </style>
 </head>
@@ -92,7 +92,7 @@
 <!--               </a>-->
            </c:if> 
                     
-            <img src="profile-picture.jpg" alt="Profile Picture">
+           
             <div class="account-info-details">
                 <h2 style="text-align: left;" >Account Profile</h2>
                 <div class="detail-row">
@@ -126,7 +126,7 @@
                 </div>
                 
                 <a href="changeInformation.jsp">
-                <button>Change Information</button>
+                    <button style="margin: 12px;font-size: 13px;border-radius: 13px;">Change Information</button>
                 </a>
             </div>
         </div>

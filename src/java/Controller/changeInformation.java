@@ -81,9 +81,8 @@ public class changeInformation extends HttpServlet {
         
          response.setContentType("text/html;charset=UTF-8");
          PrintWriter pr = response.getWriter();  
-         String xImage = request.getParameter("image");
-         
-      
+         Part xImage = request.getPart("image");
+        pr.print(xImage.getSize());
        String xFullName = request.getParameter("fullname");
        String xEmail = request.getParameter("email");
        String xPhone = request.getParameter("phone");
@@ -93,15 +92,15 @@ public class changeInformation extends HttpServlet {
        Account a = new Account();
        a = (Account)session.getAttribute("account");
        String imageURL="";
-       if (xImage == null) {
-             imageURL = a.getImage();
-             
+       if (xImage.getSize()==0) {
+             imageURL = a.getImage();             
          } else {
                imageURL = saveUploadedFile(request);
          }
        a.setFullname(xFullName);
        a.setGender(gender);
        a.setImage(imageURL);
+      
        a.setPhone(xPhone);
        AccountDAO aDAO = new AccountDAO();
        aDAO.updateInformation(a);      

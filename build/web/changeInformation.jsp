@@ -77,7 +77,7 @@
             <label for="image"></label>
     <input type="file" id="image" name="image" accept="image/*" ><br><br>
     <input type="text" value="${sessionScope.account.fullname}" name="fullname" id="fullname" required>
-    <input type="email" value="${sessionScope.account.email}" name="email" required>
+    <input type="email" value="${sessionScope.account.email}" name="email" readonly required>
             
             <select required name="gender">
                 <option value="" disabled selected>Gender</option>
@@ -86,8 +86,8 @@
                 <option value="3">Other</option>
             </select>
     <input type="text" placeholder="Phone Number" value="${sessionScope.account.phone}" name="phone" minlength="10" maxlength="11" >     
-            
-            <button type="submit">Change</button>
+   
+            <button  type="submit">Change</button>
         </form>
         
     </div>
