@@ -40,7 +40,7 @@
         <style>
             .slider-area2 {
                 height: 100%;
-                background-image: url('assets/img/hero/anhnen5.png'); 
+                background-image: url('assets/img/hero/anhnen5.png');
                 background-size: cover;
                 background-position: center;
                 background-repeat: no-repeat;
@@ -62,17 +62,22 @@
         <!-- Hero End -->
         <!--?  Contact Area start  -->
         <section class="contact-section" style="background-color: white">
-            
+
             <div class="row">
                 <div class="col-12">
                     <h2 class="contact-title">Get in Touch</h2>
                 </div>
                 <div class="col-lg-5">
-                    <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                    <form class="form-contact" action="addContact" method="Post" novalidate="novalidate">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder=" Enter Message"></textarea>
+                                    <textarea class="form-control w-100" name="details" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder=" Enter Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder="Enter Subject">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -85,27 +90,21 @@
                                     <input class="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Subject'" placeholder="Enter Subject">
-                                </div>
-                            </div>
                         </div>
-                        <div class="form-group mt-3">
-                            <button type="submit" class="button button-contactForm boxed-btn">Send</button>
-                        </div>
+                        <button type="submit" class="button button-contactForm boxed-btn">Send</button>
+                        <p>${requestScope.send}</p>
                     </form>
                 </div>
                 <div class="col-lg-3">
                     <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.506216904078!2d105.52271427596938!3d21.01242168833815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135abc60e7d3f19%3A0x2be9d7d0b5abcbf4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgSMOgIE7hu5lp!5e0!3m2!1svi!2s!4v1716094621660!5m2!1svi!2s" 
-                    width="100%" 
-                    height="350" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.506216904078!2d105.52271427596938!3d21.01242168833815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135abc60e7d3f19%3A0x2be9d7d0b5abcbf4!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBGUFQgSMOgIE7hu5lp!5e0!3m2!1svi!2s!4v1716094621660!5m2!1svi!2s" 
+                        width="100%" 
+                        height="350" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
                 <div class="col-lg-3 offset-lg-1">
                     <div class="media contact-info">
