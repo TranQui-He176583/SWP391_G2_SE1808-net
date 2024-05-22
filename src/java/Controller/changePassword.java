@@ -72,12 +72,23 @@ public class changePassword extends HttpServlet {
     throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         String xEmail = request.getParameter("email");
-        String xPassword = request.getParameter("password");
+        String xOldPassword = request.getParameter("oldPassword");
+        String xNewPassword = request.getParameter("newPassword");
+       
          encodePassword ep = new encodePassword();
-         xPassword = ep.toSHA1(xPassword);
+          xNewPassword = ep.toSHA1(xNewPassword);
+         xOldPassword = ep.toSHA1(xOldPassword);
          AccountDAO aDAO = new AccountDAO();
+         if (aDAO.checkLogin(xEmail, xOldPassword)) {
+             aDAO.updatePassWord(xEmail, xNewPassword);
+             request.setAttribute("cPassword", "Change Password Complete, Please Login again!");
+                 request.getRequestDispatcher("login.jsp").forward(request, response);
+         }  else {
+             request.setAttribute("wrong", "Old Password Wrong!");
+             request.getRequestDispatcher("changePassword.jsp").forward(request, response);
+         }
          
-          aDAO.updatePassWord(xEmail, xPassword);
+          
           
          request.setAttribute("cPassword", "Change Password Complete!");
          request.getRequestDispatcher("login.jsp").forward(request, response);

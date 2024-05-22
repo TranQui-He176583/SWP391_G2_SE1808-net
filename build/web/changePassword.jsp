@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -83,45 +84,23 @@
 <%@include file="commonFunction/header.jsp" %>
 
 <body>
-    
+    <c:if test="${sessionScope.account.email != null}"> 
     <div class="login-container">
-        <h2 style="font-size: 50px" >Login</h2>
-        <form action="login" method="post">
-            <input type="text" placeholder="Username" name="username" required>
-            <input type="password" placeholder="Password" name="password" required>
-            
-            
-            <button type="submit">Login</button>
+        <h2 style="font-size: 50px" >Reset Password</h2>
+        <form action="changePassword" method="post">
+            <input type="text" value="${sessionScope.account.email}" name="email" readonly required>
+            <input type="password" placeholder="Old Password" name="oldPassword" minlength="6" maxlength="20" required>
+            <input type="password" placeholder="New Password" name="newPassword" minlength="6" maxlength="20" required>
+            <p style="font-size: 14px; color: red;">${requestScope.wrong}</p>
+            <button type="submit">Change</button>
         </form>
-        <p style="color: green; font-size: 14px" >${requestScope.completeRegister}</p>
-        <p style="color: green; font-size: 14px" >${requestScope.cPassword}</p>
-            <p style="color: red; font-size: 14px" >${requestScope.wrongLogin}</p>
-        <div class="links">
-            <a style="font-size: 13px" href=forgotPassword.jsp>Forgot Password?</a>
-            <a style="font-size: 13px" href="register.jsp">Sign Up</a>
-        </div>
-        <div class="separator"><span>or</span></div>
-            <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid
-
-&redirect_uri=http://localhost:9999/SWP/login
-
-&response_type=code
-
-&client_id=164431467380-npfbq2oqttd0peo0fhjjnfj1vorq39he.apps.googleusercontent.com
-
-&approval_prompt=force">
-                Login With Google            
-            </a>
-
-                    
-
-                    
-
-                   
-
+             </div>
+    </c:if>
         
-    </div>
-    
+   
+    <c:if test="${sessionScope.account.email == null}">      
+                    <% request.getRequestDispatcher("login.jsp").forward(request, response); %>
+           </c:if>
     </body>
 
 </html>

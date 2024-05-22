@@ -52,7 +52,7 @@
                                     
                                         <div style="margin-top: 20px" class="dropdown-menu"> 
                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="userProfile.jsp">Information</a>
-                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="changePassWord.jsp">Change Password</a>
+                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="changePassword.jsp">Change Password</a>
                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           
                                 </div>
                             </div>

@@ -70,7 +70,7 @@
   border: none;
   border-radius: 10px;
   cursor: pointer;
-
+  font-size: 20px;
 }
     </style>
 </head>
