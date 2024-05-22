@@ -101,9 +101,9 @@
             <a style="font-size: 13px" href="register.jsp">Sign Up</a>
         </div>
         <div class="separator"><span>or</span></div>
-            <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid
+        <a style="color: black" href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid
 
-&redirect_uri=http://localhost:9999/SWP/login
+&redirect_uri=http://localhost:9999/SWP/loginGoogle
 
 &response_type=code
 

@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import Model.*;
 import Util.*;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -81,6 +82,8 @@ public class changePassword extends HttpServlet {
          AccountDAO aDAO = new AccountDAO();
          if (aDAO.checkLogin(xEmail, xOldPassword)) {
              aDAO.updatePassWord(xEmail, xNewPassword);
+             HttpSession session = request.getSession();
+             session.invalidate();
              request.setAttribute("cPassword", "Change Password Complete, Please Login again!");
                  request.getRequestDispatcher("login.jsp").forward(request, response);
          }  else {

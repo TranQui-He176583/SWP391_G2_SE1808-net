@@ -12,7 +12,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import Util.*;
+import Model.*;
+import jakarta.servlet.http.HttpSession;
 /**
  *
  * @author quyka
@@ -30,20 +32,32 @@ public class loginGoogle extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet loginGoogle</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet loginGoogle at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    } 
-
+        PrintWriter out = response.getWriter();
+        String code = request.getParameter("code");
+        googleLogin gl = new googleLogin();
+        String accessToken = gl.getToken(code);
+        googleAccount ga = new googleAccount();
+        ga = gl.getUserInfo(accessToken);
+       encodePassword ep  = new encodePassword();
+       String password = ep.toSHA1("123456");
+       Account a = new  Account();
+       a.setEmail(ga.getEmail());
+       a.setFullname(ga.getName());
+       AccountDAO aDAO = new AccountDAO();
+       out.print(aDAO.checkAccountExist(ga.getEmail()));
+       if (aDAO.checkAccountExist(ga.getEmail())==false) {
+           a.setPassWord(password);
+           a.setId(aDAO.getNumberAccount()+1);
+           a.setRoleId(3);
+           out.print(aDAO.insert(a));
+        
+       }
+       HttpSession session = request.getSession();
+       a = aDAO.getAccount(a.getEmail()); 
+       session.setAttribute("account", a);
+       request.getRequestDispatcher("index.jsp").forward(request, response);
+       
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
