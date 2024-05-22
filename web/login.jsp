@@ -77,17 +77,7 @@
             text-decoration: underline;
         }
     </style>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="164431467380-npfbq2oqttd0peo0fhjjnfj1vorq39he.apps.googleusercontent.com">
-    <script>
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            document.getElementById('googleEmail').value = profile.getEmail();
-             document.getElementById('googleFullName').value = profile.getName();
-        document.querySelector('googleLogin').submit();
-            
-        }
-    </script>
+    
 </head>
 <%@include file="commonFunction/CSS.jsp" %>
 <%@include file="commonFunction/header.jsp" %>
@@ -111,15 +101,27 @@
             <a style="font-size: 13px" href="register.jsp">Sign Up</a>
         </div>
         <div class="separator"><span>or</span></div>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <a href="https://accounts.google.com/o/oauth2/auth?scope=email profile openid
+
+&redirect_uri=http://localhost:9999/SWP/login
+
+&response_type=code
+
+&client_id=164431467380-npfbq2oqttd0peo0fhjjnfj1vorq39he.apps.googleusercontent.com
+
+&approval_prompt=force">
+                Login With Google            
+            </a>
+
+                    
+
+                    
+
+                   
+
+        
     </div>
     
-    <form id="googleLogin" action="login" method="post">
-    <input type="hidden" id="googleEmail" name="googleEmail">
-    <input type="hidden" id="googleFullName" name="googleFullName">
-    
-    </form>
-</body>
+    </body>
 
 </html>
-

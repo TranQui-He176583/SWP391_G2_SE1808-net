@@ -17,8 +17,9 @@ public class Account {
     String email;
     String phone;
     int gender;
+    String image;
 
-    public Account(int id,  String passWord, int roleId, int status, String fullname, String email, String phone, int gender) {
+    public Account(int id,  String passWord, int roleId, int status, String fullname, String email, String phone, int gender,String image) {
         this.id = id;
     
         this.passWord = passWord;
@@ -28,6 +29,7 @@ public class Account {
         this.email = email;
         this.phone = phone;
         this.gender = gender;
+        this.image = image;
     }
 
     public Account() {
@@ -95,6 +97,14 @@ public class Account {
 
     public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
     
 }

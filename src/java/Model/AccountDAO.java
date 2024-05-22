@@ -106,7 +106,8 @@ public class AccountDAO extends MyDAO {
         account.passWord = password;
         account.phone = rs.getString("phone");
         account.roleId = rs.getInt("roleId");
-        account.status = rs.getInt("status");    
+        account.status = rs.getInt("status"); 
+        account.image = rs.getString("image");
         return account;                   
       }
       rs.close();
@@ -124,6 +125,28 @@ public class AccountDAO extends MyDAO {
       ps = con.prepareStatement(xSql);
       ps.setString(1, newPassWord);
       ps.setString(2, username);
+      ps.executeUpdate();
+      ps.close();
+     }     
+     catch(Exception e) {
+        
+     }
+     
+  }
+       public void updateInformation (Account a) {
+     xSql = "UPDATE account \n" +
+        "SET fullname = ? ,\n" +        
+        "  phone = ?,\n" +
+        "  gender = ?,\n" +
+        "   image = ?\n" +
+        "WHERE email = ?"; 
+     try {         
+      ps = con.prepareStatement(xSql);
+      ps.setString(1, a.fullname);
+      ps.setString(2, a.phone);
+      ps.setInt(3, a.gender);
+      ps.setString(4, a.image);
+      ps.setString(5, a.email);
       ps.executeUpdate();
       ps.close();
      }     

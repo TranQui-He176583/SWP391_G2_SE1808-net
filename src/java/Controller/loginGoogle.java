@@ -5,23 +5,20 @@
 
 package Controller;
 
-import Model.*;
-import Util.*;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-
 
 /**
  *
  * @author quyka
  */
-public class register extends HttpServlet {
+@WebServlet(name="loginGoogle", urlPatterns={"/loginGoogle"})
+public class loginGoogle extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +35,10 @@ public class register extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet register</title>");  
+            out.println("<title>Servlet loginGoogle</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet register at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet loginGoogle at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,8 +55,7 @@ public class register extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.print("1");
+        processRequest(request, response);
     } 
 
     /** 
@@ -72,30 +68,8 @@ public class register extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        String xEmail = (String) request.getAttribute("email");
-        String xFullname = (String)request.getAttribute("fullname");
-        String xPassWord =(String) request.getAttribute("password");
-        
-        AccountDAO  aDAO = new AccountDAO();
-        
-            
-        
-        encodePassword ep = new encodePassword();
-       xPassWord = ep.toSHA1(xPassWord);
-        String xGender = (String) request.getAttribute("gender");
-        int gender = Integer.parseInt(xGender);     
-       
-       int numberAccount = aDAO.getNumberAccount()+1;
-        Account a = new Account(numberAccount, xPassWord, 3, 0, xFullname, xEmail, "", gender,"");
-       out.print(aDAO.insert(a));
-       
-        request.setAttribute("completeRegister", "Account registration has been successful");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-       
-           }    
-    
-    
+        processRequest(request, response);
+    }
 
     /** 
      * Returns a short description of the servlet.

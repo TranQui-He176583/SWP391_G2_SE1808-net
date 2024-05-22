@@ -43,7 +43,7 @@
                                     <img style="width: 28px; margin-top: -10px" src="assets/img/logo/userlogo.jpg" class="img-fluid"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                <div class="dropdown-menu"> 
-                                   <a style="font-size: 13px" class="dropdown-item" href="#">Thông tin cá nhân</a>
+                                   <a style="font-size: 13px" class="dropdown-item" href="userProfile.jsp">Thông tin cá nhân</a>
                                    <a style="font-size: 13px" class="dropdown-item" href="logout">Đăng xuất</a>                           
                                 </div>
                             </div>
