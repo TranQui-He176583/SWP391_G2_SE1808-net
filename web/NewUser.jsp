@@ -1,11 +1,11 @@
-
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
         <html>
 
         <head>
             <title>User Management Application</title>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-                  
+           
+        </head>
 
         <body>
 
@@ -24,41 +24,57 @@
             <div class="container col-md-5">
                 <div class="card">
                     <div class="card-body">
-                        <c:if test="${user != null}">
-                            <form action="update" method="post">
-                        </c:if>
-                        <c:if test="${user == null}">
-                            <form action="insert" method="post">
-                        </c:if>
-
-                        <caption>
-                            <h2>
-                                <c:if test="${user != null}">
-                                    Edit User
-                                </c:if>
-                                <c:if test="${user == null}">
-                                    Add New User
-                                </c:if>
-                            </h2>
-                        </caption>
-
-                        <c:if test="${user != null}">
-                            <input type="hidden" name="id" value="<c:out value='${user.id}' />" />
-                        </c:if>
+                       
+                        
+                        <form action="add" method="post" enctype="multipart/form-data> 
+                            <h2>Add New User</h2>
+                        
 
                         <fieldset class="form-group">
-                            <label>User Name</label> <input type="text" value="<c:out value='${user.name}' />" class="form-control" name="name" required="required">
+                            <label>User Name</label> <input type="text" class="form-control" name="fullname" id="fullname"required="required">
+                        </fieldset>
+                        
+                         <fieldset class="form-group">
+                             <label>password</label> <input type="text" class="form-control" name="password" id="password" required="required">
+                        </fieldset>
+                       
+                        <fieldset class="form-group">
+                            <label>User Email</label> 
+                            <input type="text" class="form-control" name="email" id="email" required="required">
                         </fieldset>
 
                         <fieldset class="form-group">
-                            <label>User Email</label> <input type="text" value="<c:out value='${user.email}' />" class="form-control" name="email">
+                            <label>User phone</label> 
+                            <input type="text" class="form-control" name="phone" id="phone">
                         </fieldset>
-
                         <fieldset class="form-group">
-                            <label>User Country</label> <input type="text" value="<c:out value='${user.country}' />" class="form-control" name="country">
+                            <label>User image</label> 
+                            <input type="file" class="form-control" name="image" id="image" accept="image/*>
                         </fieldset>
-
+                        
+                        <fieldset class="form-group">
+                            <label>User gender</label> 
+                            <select name="gender" id="gender" class="form-control">
+                               <option value="1">male</option>
+                               <option value="2">female</option>
+                              
+                          </select>
+                        </fieldset>
+                        
+                        <fieldset class="form-group">
+                            <label>User status</label> 
+                           <select name="status" id="status" class="form-control">
+                               <option value="1">active</option>
+                               <option value="2">inactive</option>
+                               <option value="3">block</option>
+                               
+                          </select>
+                            
+                        </fieldset>
+                        
                         <button type="submit" class="btn btn-success">Save</button>
+                        <a href="NewUser.jsp" class="btn btn-success">Back</a>
+                       
                         </form>
                     </div>
                 </div>
