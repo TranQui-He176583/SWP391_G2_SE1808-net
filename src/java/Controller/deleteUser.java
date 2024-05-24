@@ -36,7 +36,7 @@ public class deleteUser extends HttpServlet {
             String uid = request.getParameter("uid");
             UserDAO dao = new UserDAO();
             dao.delete(uid);
-            response.sendRedirect("listUser");
+            response.sendRedirect("countUser");
         }
     } 
 

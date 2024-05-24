@@ -18,13 +18,14 @@
         width: auto;
         height: auto;
     }
+   
 </style>
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logofpt.png" alt="" >
+                    <img src="assets/img/logo/logofpt.png" alt=""  >
                 </div>
             </div>
         </div>
@@ -59,9 +60,10 @@
                         
                         <div class="row align-items-center" >
                
-                            <div class="col-lg-6 mb-4 mb-lg-0">
+                            <div class="col-lg-6 mb-4 mb-lg-0" >
                                 
-                                <img src="${detail.image}" alt="...">
+                               <img src="${detail.image}" alt="..." style="width: 200px;">
+                                
                             </div>
                             <div class="col-lg-6 px-xl-10">
                                 <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
@@ -93,7 +95,7 @@
                                     <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> ${detail.email}</li>
                                     <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Phone:</span> ${detail.phone}</li>
                                    
-<!--                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Club:</span> ${c.clubName}</li>-->
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Club:</span> ${c.clubName}</li>
                                     
                                     
                                 </ul>

@@ -72,7 +72,7 @@ $(document).ready(function(){
             </div>
         </div>
         <div class="content-table">
-            
+           
             <table class="table table-striped table-hover">
                 <thead>
                    
@@ -89,13 +89,13 @@ $(document).ready(function(){
                 </thead> 
                <tbody>
                    
-                   <c:if test="${not empty listUser}">
+                   <c:if test="${not empty listUs}">
                       <c:set var="count" value="0" />
-                         <c:forEach items="${listUser}" var="o">
+                         <c:forEach items="${listUs}" var="o">
                             <c:set var="count" value="${count + 1}" />
                          <tr>
                             <td>${count}</td>
-                            <td><img src="${o.image}" style="border-radius: 50%; transform: scale(0.5)"></td>
+                            <td><img src="${o.image}" style="border-radius: 50%; transform: scale(0.5);width: 150px;height: 150px; object-fit: contain;"></td>
                             <td><a href="detailUser?uid=${o.id}">${o.fullname}</a></td>
                             <td>${o.email}</td>
                             <td>${o.phone}</td>
@@ -126,7 +126,7 @@ $(document).ready(function(){
         </tr>
                   </c:forEach>
                  </c:if>
-                    <c:if test="${empty listUser}">
+                    <c:if test="${empty listUs}">
                         <tr>
                            <td colspan="7">
                               <div class="alert alert-danger text-center">There are no users</div>

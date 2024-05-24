@@ -67,69 +67,67 @@ public class add extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+   
     private static final String UPLOAD_DIR = "assets/img/avatar";
-
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-         PrintWriter out = response.getWriter();
-        String fullname = request.getParameter("fullname");
-        String password =request.getParameter("password");
-        String email =request.getParameter("email");
-        String phone =request.getParameter("phone");
-        String xstatus = request.getParameter("status");
-        int status = Integer.parseInt(xstatus);
-        String xgender = request.getParameter("gender");
-        int gender = Integer.parseInt(xgender);
-    //   Part xImage = request.getPart("image");
-        UserDAO user = new UserDAO();
-        if (user.checkUserExist(email)) {
-            request.setAttribute("wrongRegister", "This email is registered to another account");
-            request.getRequestDispatcher("NewUser.jsp").forward(request, response);
-        } else {
-        String imageURL = saveUploadedFile(request);
-        
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    response.setContentType("text/html;charset=UTF-8");
+    PrintWriter out = response.getWriter();
+
+    String fullname = request.getParameter("fullname");
+    String password = request.getParameter("password");
+    String email = request.getParameter("email");
+    String phone = request.getParameter("phone");
+    String xstatus = request.getParameter("status");
+    int status = Integer.parseInt(xstatus);
+    String xgender = request.getParameter("gender");
+    int gender = Integer.parseInt(xgender);
+
+    Part imagePart = request.getPart("image");
+    String imageName = getUniqueFileName(imagePart);
+    String imagePath = saveUploadedFile(request, imageName);
+
+    UserDAO user = new UserDAO();
+    if (user.checkUserExist(email)) {
+        request.setAttribute("wrongRegister", "This email is registered to another account");
+        request.getRequestDispatcher("NewUser.jsp").forward(request, response);
+    } else {
         encodePassword ep = new encodePassword();
         password = ep.toSHA1(password);
-        int numberUser = user.getNumberUser()+1;
-        Account u = new Account(numberUser, password, 3, status, fullname, email, phone, gender,imageURL);
+        int numberUser = user.getNumberUser() + 1;
+        Account u = new Account(numberUser, password, 3, status, fullname, email, phone, gender, imagePath);
         out.print(user.add(u));
-        response.sendRedirect("listUser");
+        response.sendRedirect("countUser");
+    }
+}
     
-    }
-    }
     
 
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */
-   String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
+  String saveUploadedFile(HttpServletRequest request, String fileName) throws IOException, ServletException {
     String uploadPath = "assets/img/avatar/";
+    String applicationPath = request.getServletContext().getRealPath("");
+    String absoluteFilePath = applicationPath + File.separator + uploadPath + fileName;
 
     Part part = request.getPart("image");
-    String fileName = getUniqueFileName(part);
-    String filePath = uploadPath + fileName;
-
-    String applicationPath = request.getServletContext().getRealPath("");
-    String absoluteFilePath = applicationPath + File.separator + filePath;
-
     part.write(absoluteFilePath);
 
     File uploadedFile = new File(absoluteFilePath);
     if (uploadedFile.exists()) {
-        return filePath;
+        return uploadPath + fileName;
     } else {
         return "";
     }
 }
-
-     String getUniqueFileName(Part part) {
-        String submittedFileName = part.getSubmittedFileName();
-        String fileExtension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
-        String newFileName = System.currentTimeMillis() + fileExtension;
-        return newFileName;
-    }
+String getUniqueFileName(Part part) {
+    String submittedFileName = part.getSubmittedFileName();
+    String fileExtension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
+    String newFileName = System.currentTimeMillis() + fileExtension;
+    return newFileName;
+}
 
 }

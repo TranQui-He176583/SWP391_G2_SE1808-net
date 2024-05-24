@@ -34,7 +34,7 @@ public class UserDAO extends MyDAO{
      catch(Exception e) {
         return(e.getMessage());
      }
-     return("Đã Được thêm vào danh sách!");
+     return("OK!");
   }
      
      public List<Account> getAllUsers() {
@@ -54,7 +54,7 @@ public class UserDAO extends MyDAO{
         int gender= rs.getInt("gender");  
         String image= rs.getString("image");  
         t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image));
-        Collections.reverse(t);
+     
       }
       rs.close();
       ps.close();
@@ -89,10 +89,11 @@ public class UserDAO extends MyDAO{
         }
     return null;
     }
-    public void delete(String uid) {
+    public void delete(String uid ) {
      xSql = "delete from account where id=?";
      try {
         ps = con.prepareStatement(xSql);
+       
         ps.setString(1, uid);
         ps.executeUpdate();
         ps.close();
@@ -137,6 +138,8 @@ public class UserDAO extends MyDAO{
      } 
         return false;
     }
+    
+    
     public int getTotalUser(){
         xSql = "select count(*)from account";     
          
@@ -154,14 +157,15 @@ public class UserDAO extends MyDAO{
     return 0;
     }
    
-    public List<Account> pagingUser(int index){
+    public List<Account> pagingUser(int index, int XroleId ){
         List<Account> lst=new ArrayList<>();
-        String xSql = "SELECT * FROM account\n " +
-            "ORDER BY id\n " +
+        String xSql = "SELECT * FROM account where roleId=?\n " +
+            "ORDER BY id desc\n " +
             "LIMIT 5 OFFSET ?";
          try {
            ps = con.prepareStatement(xSql);
-           ps.setInt(1, (index-1)*5);
+           ps.setInt(1, XroleId);
+           ps.setInt(2, (index-1)*5);
            rs = ps.executeQuery();
            
            while(rs.next()){
@@ -175,7 +179,7 @@ public class UserDAO extends MyDAO{
               int gender= rs.getInt("gender");  
               String image= rs.getString("image");  
         lst.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image));
-        Collections.reverse(lst);
+
       }
       rs.close();
       ps.close();

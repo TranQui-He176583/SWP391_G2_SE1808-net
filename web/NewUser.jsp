@@ -16,7 +16,7 @@
                     </div>
 
                     <ul class="navbar-nav">
-                        <li><a href="User_list.jsp" class="nav-link">Users</a></li>
+                        <li><a href="countUser" class="nav-link">Users</a></li>
                     </ul>
                 </nav>
             </header>
@@ -26,7 +26,7 @@
                     <div class="card-body">
                        
                         
-                        <form action="add" method="post" enctype="multipart/form-data> 
+                        <form action="add" method="post" enctype="multipart/form-data"> 
                             <h2>Add New User</h2>
                         
 
@@ -47,14 +47,16 @@
                             <label>User phone</label> 
                             <input type="text" class="form-control" name="phone" id="phone">
                         </fieldset>
+                        
                         <fieldset class="form-group">
-                            <label>User image</label> 
-                            <input type="file" class="form-control" name="image" id="image" accept="image/*>
+                            <label> User image</label>
+                            <input type="file" class="form-control" name="image" id="image" required>
                         </fieldset>
                         
                         <fieldset class="form-group">
                             <label>User gender</label> 
                             <select name="gender" id="gender" class="form-control">
+                                <option value="" disabled selected>Gender</option>
                                <option value="1">male</option>
                                <option value="2">female</option>
                               
@@ -64,6 +66,7 @@
                         <fieldset class="form-group">
                             <label>User status</label> 
                            <select name="status" id="status" class="form-control">
+                                <option value="" disabled selected>Status</option>
                                <option value="1">active</option>
                                <option value="2">inactive</option>
                                <option value="3">block</option>
@@ -71,10 +74,11 @@
                           </select>
                             
                         </fieldset>
-                        
+                       
                         <button type="submit" class="btn btn-success">Save</button>
                         <a href="NewUser.jsp" class="btn btn-success">Back</a>
-                       
+                        <p style="color: red;  font-size: 15px">${requestScope.wrongRegister}</p>
+                        
                         </form>
                     </div>
                 </div>

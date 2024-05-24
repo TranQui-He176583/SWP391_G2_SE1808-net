@@ -25,7 +25,7 @@
                                         <li><a href="blog.jsp">Blog</a>
                                         </li>
                                          <c:if test="${sessionScope.account.roleId == 1}">  
-                                             <li><a href="listUser">User management</a></li>
+                                             <li><a href="countUser">User management</a></li>
                                          </c:if>
                                         <li><a href="contact.jsp">Contact</a></li>
                                     </ul>

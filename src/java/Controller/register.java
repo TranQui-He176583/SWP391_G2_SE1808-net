@@ -91,7 +91,7 @@ public class register extends HttpServlet {
        out.print(aDAO.insert(a));
        
         request.setAttribute("completeRegister", "Account registration has been successful");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+        request.getRequestDispatcher("login.jsp").forward(request, response);
        
            }    
     
