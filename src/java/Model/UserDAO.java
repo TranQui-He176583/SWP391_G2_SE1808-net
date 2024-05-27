@@ -34,7 +34,7 @@ public class UserDAO extends MyDAO{
      catch(Exception e) {
         return(e.getMessage());
      }
-     return("OK!");
+     return("Add Success!");
   }
      
      public List<Account> getAllUsers() {
@@ -112,7 +112,7 @@ public class UserDAO extends MyDAO{
       if (rs.next()) {   
        number = rs.getInt("id");  
        return number;
-                             }
+       }
       rs.close();
       ps.close();
      }
