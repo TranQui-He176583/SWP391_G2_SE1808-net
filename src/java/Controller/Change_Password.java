@@ -12,16 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import Model.*;
-import Util.*;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author quyka
  */
-@WebServlet(name="changePassword", urlPatterns={"/changePassword"})
-public class changePassword extends HttpServlet {
+@WebServlet(name="Change_Password", urlPatterns={"/Change_Password"})
+public class Change_Password extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +35,10 @@ public class changePassword extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet changePassword</title>");  
+            out.println("<title>Servlet Change_Password</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet changePassword at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet Change_Password at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +55,7 @@ public class changePassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("changePassword.jsp").forward(request, response);
     } 
 
     /** 
@@ -71,38 +68,9 @@ public class changePassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        String xEmail = request.getParameter("email");
-        String xOldPassword = request.getParameter("oldPassword");
-        String xNewPassword = request.getParameter("newPassword");
-        String xConfrimPassword = request.getParameter("confirmPassword");
-      if (xNewPassword.equals(xConfrimPassword)==false) {
-            request.setAttribute("password", xOldPassword);
-            request.setAttribute("newpassword", xNewPassword);
-            request.setAttribute("confirmpassword", xConfrimPassword);
-            request.setAttribute("wrong", "New password and confirm password not same!");
-            request.getRequestDispatcher("changePassword.jsp").forward(request, response);
-      }   else {
-         encodePassword ep = new encodePassword();
-          xNewPassword = ep.toSHA1(xNewPassword);
-         xOldPassword = ep.toSHA1(xOldPassword);
-         AccountDAO aDAO = new AccountDAO();
-         if (aDAO.checkLogin(xEmail, xOldPassword)) {
-             aDAO.updatePassWord(xEmail, xNewPassword);           
-             request.setAttribute("cPassword", "Change Password Complete, Please Login again!");
-                 request.getRequestDispatcher("login.jsp").forward(request, response);
-         }  else {
-             request.setAttribute("wrong", "Old Password Wrong!");
-             request.getRequestDispatcher("changePassword.jsp").forward(request, response);
-         }
-         
-          
-          
-         request.setAttribute("cPassword", "Change Password Complete!");
-         request.getRequestDispatcher("login.jsp").forward(request, response);
-        
+        processRequest(request, response);
     }
-    }
+
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description

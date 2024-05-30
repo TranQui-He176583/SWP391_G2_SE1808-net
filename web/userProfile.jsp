@@ -125,7 +125,7 @@
                     <div style="font-weight: bold" class="detail-value">${sessionScope.account.phone}</div>
                 </div>
                 
-                <a href="changeInformation.jsp">
+                <a href="Change_Information">
                     <button style="margin: 12px;font-size: 13px;border-radius: 13px;">Change Information</button>
                 </a>
             </div>

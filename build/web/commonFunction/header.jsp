@@ -3,16 +3,16 @@
 
 
 
-<header>
+<header style="border-bottom:  dotted #ccc;" >
     <!--? Header Start -->
-    <div style="background: black" class="header-area header-transparent">
+    <div style="background: white;" class="header-area header-transparent">
         <div class="main-header header-sticky">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <!-- Logo -->
                     <div class="col-xl-2 col-lg-2 col-md-1">
                         <div class="logo">
-                                <a href="index.jsp"><img src="assets/img/logo/banner.png" alt="" width   ="40%" height="40%"></a>
+                                <a href="Home"><img src="assets/img/logo/banner.png" alt="" width   ="40%" height="40%"></a>
                         </div>
                     </div>
                     <div class="col-xl-10 col-lg-10 col-md-10">
@@ -21,7 +21,7 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="index.jsp">Home page</a></li>
+                                       
                                         <li><a href="blog.jsp">Blog</a>
                                         </li>
                                          <c:if test="${sessionScope.account.roleId == 1}">  
@@ -33,9 +33,9 @@
                             </div>
                             <c:if test="${sessionScope.account.roleId == null}">      
                             <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                <a href="login.jsp" class="btn header-btn">Sign in</a>
+                                <a href="LoginAccount" class="btn header-btn">Sign in</a>
                                 <span style="margin-right: 20px;"></span>
-                                <a href="register.jsp" class="btn header-btn">Sign up</a>
+                                <a href="RegisterAccount" class="btn header-btn">Sign up</a>
                             </div>
                          </c:if>  
                         
@@ -54,8 +54,8 @@
                                     </c:if>
                                     
                                         <div style="margin-top: 20px" class="dropdown-menu"> 
-                                   <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="userProfile.jsp">Information</a>
-                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="changePassword.jsp">Change Password</a>
+                                   <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
+                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>
                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           
                                 </div>
                             </div>
@@ -69,6 +69,11 @@
                 </div>
             </div>
         </div>
+       
     </div>
     <!-- Header End -->
+ 
 </header>
+<script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="./assets/js/popper.min.js"></script>
+        <script src="./assets/js/bootstrap.min.js"></script>

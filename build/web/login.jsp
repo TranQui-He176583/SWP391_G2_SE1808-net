@@ -87,8 +87,8 @@
     <div class="login-container">
         <h2 style="font-size: 50px" >Login</h2>
         <form action="login" method="post">
-            <input type="text" placeholder="Username" name="username" required>
-            <input type="password" placeholder="Password" name="password" required>
+            <input type="text" placeholder="Username" name="username" value="${requestScope.email}" required>
+            <input type="password" placeholder="Password" name="password" value="${requestScope.password}" required>
             
             
             <button type="submit">Login</button>

@@ -4,8 +4,7 @@
  */
 
 package Controller;
-import Util.*;
-import Model.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,14 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author quyka
  */
-@WebServlet(name="login", urlPatterns={"/login"})
-public class login extends HttpServlet {
+@WebServlet(name="Home", urlPatterns={"/Home"})
+public class Home extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,19 +29,7 @@ public class login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet login</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet login at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+       request.getRequestDispatcher("index.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -70,26 +56,7 @@ public class login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-          response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String xUserName = request.getParameter("username");
-        String xPassWord = request.getParameter("password");
-        String xR_P = xPassWord;
-        AccountDAO aDAO = new AccountDAO();
-        encodePassword ep = new encodePassword();
-        xPassWord = ep.toSHA1(xPassWord);
-         HttpSession session = request.getSession();
-          Account account = aDAO.getAccount(xUserName, xPassWord);  
-       if (account.getFullname() ==null) {
-           request.setAttribute("wrongLogin", "Account or password is incorrect");
-           request.setAttribute("email", xUserName);
-           request.setAttribute("password", xR_P);
-          request.getRequestDispatcher("login.jsp").forward(request, response);
-       } else {
-           session.setAttribute("account", account);
-          request.getRequestDispatcher("index.jsp").forward(request, response);
-       }
-        
+        processRequest(request, response);
     }
 
     /** 

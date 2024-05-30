@@ -88,9 +88,10 @@
     <div class="login-container">
         <h2 style="font-size: 50px" >Reset Password</h2>
         <form action="changePassword" method="post">
-            <input type="text" value="${sessionScope.account.email}" name="email" readonly required>
-            <input type="password" placeholder="Old Password" name="oldPassword" minlength="6" maxlength="20" required>
-            <input type="password" placeholder="New Password" name="newPassword" minlength="6" maxlength="20" required>
+            <p>Passwords can be from 6 to 20 characters</p>
+            <input type="password" placeholder="Old Password" name="oldPassword" minlength="6" maxlength="20" value="${requestScope.password}" required>
+            <input type="password" placeholder="New Password" name="newPassword" minlength="6" maxlength="20" value="${requestScope.newpassword}" required>
+            <input type="password" placeholder="Confirm Password" name="confirmPassword" minlength="6" maxlength="20" value="${requestScope.confirmpassword}" required>
             <p style="font-size: 14px; color: red;">${requestScope.wrong}</p>
             <button type="submit">Change</button>
         </form>
