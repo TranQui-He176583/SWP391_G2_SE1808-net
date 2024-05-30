@@ -21,7 +21,7 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="index.jsp">Home page</a></li>
+                                        <li><a href="Home">Home page</a></li>
                                         <li><a href="blog.jsp">Blog</a>
                                         </li>
                                         <li><a href="contact.jsp">Contact</a></li>
@@ -30,9 +30,9 @@
                             </div>
                             <c:if test="${sessionScope.account.roleId == null}">      
                             <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                <a href="login.jsp" class="btn header-btn">Sign in</a>
+                                <a href="LoginAccount" class="btn header-btn">Sign in</a>
                                 <span style="margin-right: 20px;"></span>
-                                <a href="register.jsp" class="btn header-btn">Sign up</a>
+                                <a href="RegisterAccount" class="btn header-btn">Sign up</a>
                             </div>
                          </c:if>  
                         
