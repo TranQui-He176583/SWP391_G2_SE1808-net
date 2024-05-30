@@ -82,7 +82,7 @@ public class changeInformation extends HttpServlet {
          response.setContentType("text/html;charset=UTF-8");
          PrintWriter pr = response.getWriter();  
          Part xImage = request.getPart("image");
-       
+        pr.print(xImage.getSize());
        String xFullName = request.getParameter("fullname");
        String xEmail = request.getParameter("email");
        String xPhone = request.getParameter("phone");

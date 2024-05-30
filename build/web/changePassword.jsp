@@ -102,5 +102,5 @@
                     <% request.getRequestDispatcher("login.jsp").forward(request, response); %>
            </c:if>
     </body>
-<%@include file="commonFunction/js.jsp" %>
+
 </html>

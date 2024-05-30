@@ -18,13 +18,14 @@
         width: auto;
         height: auto;
     }
+   
 </style>
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logofpt.png" alt="" >
+                    <img src="assets/img/logo/logofpt.png" alt=""  >
                 </div>
             </div>
         </div>
@@ -56,49 +57,70 @@
             <div class="col-lg-12 mb-4 mb-sm-5">
                 <div class="card card-style1 border-0">
                     <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
-                       
-                        <div class="row align-items-center">
-                            <div class="col-lg-6 mb-4 mb-lg-0">
+                        
+                        <div class="row align-items-center" >
+               
+                            <div class="col-lg-6 mb-4 mb-lg-0" >
                                 
-                                <img src="${detail.image}" alt="...">
+                               <img src="${detail.image}" alt="..." style="width: 200px;">
+                                
                             </div>
                             <div class="col-lg-6 px-xl-10">
                                 <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
-                                    <h3 class="h2 text-white mb-0">${detail.fullName}</h3>
+                                    <h3 class="h2 text-white mb-0">${detail.fullname}</h3>
+                                     <c:choose>
+                                       <c:when test="${detail.roleId == 1}">
+                                          <span class="text-primary">Admin</span>
+                                       </c:when>
+                                        <c:when test="${detail.roleId == 2}">
+                                          <span class="text-primary">Manager</span>
+                                        </c:when>
+                                        <c:when test="${detail.roleId == 3}">
+                                          <span class="text-primary">NormalUser</span>
+                                        </c:when>
+                                          
+                                    </c:choose>
                                     <span class="text-primary">${role.roleName}</span>
                                 </div>
                                 <ul class="list-unstyled mb-1-9">
-                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Gender:</span> ${detail.gender}</li>
+                                    <c:choose>
+                                       <c:when test="${detail.gender == 1}">
+                                          <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Gender:</span> Male</li>
+                                        </c:when>
+                                        <c:otherwise>
+                                          <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Gender:</span> Female</li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    
                                     <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> ${detail.email}</li>
                                     <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Phone:</span> ${detail.phone}</li>
-                                    <c:forEach items="listC" var=" c">
+                                   
                                     <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Club:</span> ${c.clubName}</li>
-                                    </c:forEach>
+                                    
                                     
                                 </ul>
                                 
                             </div>
                         </div>
+                   
                     </div>
                 </div>
             </div>
-            <div class="col-lg-12 mb-4 mb-sm-5">
+<!--            <div class="col-lg-12 mb-4 mb-sm-5">
                 <div>
                     <span class="section-title text-primary mb-3 mb-sm-4" >About Me</span>
-                    <p>${detail.aboutMe}</p>
+                    <p></p>
                     
                 </div>
-            </div>
-            <div class="col-lg-12">
+            </div>-->
+<!--            <div class="col-lg-12">
                 <div class="row">
                     <div class="col-lg-12 mb-4 mb-sm-5">
                         <div class="mb-4 mb-sm-5">
                             <span class="section-title text-primary mb-3 mb-sm-4">Skill</span>
                             <div class="progress-text">
                                 <div class="row">
-                                    <c:forEach items="${listS}" var="s">
-                                       <div class="col-6">${s.skillName}</div>
-                                    </c:forEach>
+                                   
                                 </div>
                             </div>
                                                  
@@ -106,7 +128,7 @@
                         
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </section>

@@ -131,6 +131,5 @@
             </div>
         </div>
     </div>
-                 <%@include file="commonFunction/js.jsp" %>
 </body>
 </html>

@@ -36,8 +36,9 @@ $(document).ready(function(){
         width: auto;
         height: auto;
     }
+    .active{color: black; font-weight: bold}
 </style>
-    <div id="preloader-active">
+<!--    <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
@@ -46,7 +47,7 @@ $(document).ready(function(){
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
     
     <%@include file="commonFunction/header.jsp" %>
     <main>
@@ -66,102 +67,96 @@ $(document).ready(function(){
         <div class="function-table">
             <div class="row">
                 <div class="col-sm-7">
-                    <a href="NewUser.jsp"  class="btn btn-secondary"> <span>Add New User</span></a> 	   			
+                    <a href="NewUser.jsp" class="btn btn-secondary"> <span>Add New User</span></a> 	   			
                 </div>
             </div>
         </div>
         <div class="content-table">
+           
             <table class="table table-striped table-hover">
                 <thead>
-                    
-                    <tr>
-                        <th>Avatar</th>	
+                   
+                   <tr>
+                        <th>STT</th>	
+                        <th>Avatar</th>
                         <th>Name</th>	
-                        <th>Role</th>	
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr> 
-                                        
+                                   
                 </thead> 
-                <tbody>
-                   <c:forEach items="${litsUser}" var="o">
-                    <tr>  
-                        <td><img src="${o.image}"></td>
-                        <td href="User_detail.jsp"><a href="detail?uid=${o.id}"> ${o.fullName}</a></td> 
-                        <td>>${role.roleName}</td> 
-                        <td>${o.email}</td>                       
-                        <td>${o.phone}</td>
-                        <td><a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">delete</i></a></td>
-                  
-                    </c:forEach>
+               <tbody>
+                   
+                   <c:if test="${not empty listUs}">
+                      <c:set var="count" value="0" />
+                         <c:forEach items="${listUs}" var="o">
+                            <c:set var="count" value="${count + 1}" />
+                         <tr>
+                            <td>${count}</td>
+                            <td><img src="${o.image}" style="border-radius: 50%; transform: scale(0.5);width: 150px;height: 150px; object-fit: contain;"></td>
+                            <td><a href="detailUser?uid=${o.id}">${o.fullname}</a></td>
+                            <td>${o.email}</td>
+                            <td>${o.phone}</td>
+                        <td>
+                        <c:choose>
+                           <c:when test="${o.status == 1}">
+                             
+                               <a class="btn btn-success btn-sm" style="background-color: green; padding:20px 10px;font-weight: normal;">active</a>
+                              
+                           </c:when>
+                            <c:when test="${o.status == 2}">
+                              
+                                  <a class="btn btn-danger btn-sm"  style="background-color: gray; padding:20px 10px;font-weight: normal">inactive</a>
+                              
+                            </c:when>
+                            <c:when test="${o.status == 3}">
+                             
+                               <a class="btn btn-success btn-sm" style="background-color: red; padding:20px 10px;font-weight: normal;">block</a>
+                              
+                           </c:when>
+                        </c:choose>
+            </td>
+            <td>
+                <a href="deleteUser?uid=${o.id}" onclick="return confirm('Bạn có chắc muốn xóa?')" class="delete" title="Delete" data-toggle="tooltip">
+                    <i class="material-icons">delete</i>
+                </a>
+            </td>
+        </tr>
+                  </c:forEach>
+                 </c:if>
+                    <c:if test="${empty listUs}">
+                        <tr>
+                           <td colspan="7">
+                              <div class="alert alert-danger text-center">There are no users</div>
+                           </td>
+                        </tr>
+                    </c:if>
                     </tbody>
             </table>
-            <div class="clearfix">
-  <div class="hint-text">Showing pages <span id="currentPage">1</span> of 5</div>
+          
+             
+            
+           <div class="clearfix">
+  <div class="hint-text">
+    Showing page <b>${tag}</b> of <b>${mPage}</b> entries
+  </div>
   <ul class="pagination" id="pagination">
-    <li class="page-item" id="prevPage">
-      <a href="#" onclick="prevPage(); return false;">Previous</a>
+    <li class="page-item ${tag == 1 ? 'disabled' : ''}" id="prevPage">
+      <a href="countUser?index=${tag - 1}">Previous</a>
     </li>
-    <li class="page-item active">
-      <a href="#" class="page-link" onclick="goToPage(1); return false;">1</a>
-    </li>
-    <li class="page-item">
-      <a href="#" class="page-link" onclick="goToPage(2); return false;">2</a>
-    </li>
-    <li class="page-item">
-      <a href="#" class="page-link" onclick="goToPage(3); return false;">3</a>
-    </li>
-    <li class="page-item">
-      <a href="#" class="page-link" onclick="goToPage(4); return false;">4</a>
-    </li>
-    <li class="page-item">
-      <a href="#" class="page-link" onclick="goToPage(5); return false;">5</a>
-    </li>
-    <li class="page-item" id="nextPage">
-      <a href="#" onclick="nextPage(); return false;">Next</a>
+    <c:forEach begin="1" end="${mPage}" var="i">
+      <li class="page-item ${tag == i ? 'active' : ''}">
+        <a href="countUser?index=${i}">${i}</a>
+      </li>
+    </c:forEach>
+    <li class="page-item ${tag == mPage ? 'disabled' : ''}" id="nextPage">
+      <a href="countUser?index=${tag + 1}">Next</a>
     </li>
   </ul>
 </div>
         </div>
-<script>
-  let currentPage = 1;
-  const totalPages = 5;
-
-  function goToPage(page) {
-    currentPage = page;
-    updatePageInfo();
-  }
-
-  function prevPage() {
-    if (currentPage > 1) {
-      currentPage--;
-      updatePageInfo();
-    }
-  }
-
-  function nextPage() {
-    if (currentPage < totalPages) {
-      currentPage++;
-      updatePageInfo();
-    } else {
-      currentPage = 1;
-      updatePageInfo();
-    }
-  }
-
-  function updatePageInfo() {
-    document.getElementById("currentPage").textContent = currentPage;
-    document.querySelectorAll("#pagination li.page-item").forEach((li, index) => {
-      li.classList.remove("active");
-      if (index === currentPage ) {
-        li.classList.add("active");
-      }
-    });
-    document.getElementById("prevPage").classList.toggle("disabled", currentPage === 1);
-    document.getElementById("nextPage").classList.toggle("disabled", currentPage === totalPages);
-  }
-</script>
  </main>
      <%@include file="commonFunction/footer.jsp" %>
     <!-- Scroll Up -->

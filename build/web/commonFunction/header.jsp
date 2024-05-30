@@ -21,18 +21,21 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="Home">Home page</a></li>
+                                        <li><a href="index.jsp">Home page</a></li>
                                         <li><a href="blog.jsp">Blog</a>
                                         </li>
+                                         <c:if test="${sessionScope.account.roleId == 1}">  
+                                             <li><a href="countUser">User management</a></li>
+                                         </c:if>
                                         <li><a href="contact.jsp">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>
                             <c:if test="${sessionScope.account.roleId == null}">      
                             <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                <a href="LoginAccount" class="btn header-btn">Sign in</a>
+                                <a href="login.jsp" class="btn header-btn">Sign in</a>
                                 <span style="margin-right: 20px;"></span>
-                                <a href="RegisterAccount" class="btn header-btn">Sign up</a>
+                                <a href="register.jsp" class="btn header-btn">Sign up</a>
                             </div>
                          </c:if>  
                         
