@@ -72,19 +72,14 @@
 
 <body>
     
-    <div style="margin-top: 80px" class="signup-container">
+    <div style="margin-top: 100px" class="signup-container">
         <h2 style="font-size: 50px;">Sign Up</h2>
-        <form action="sendMailRegister" method="post">
-            <input type="text" placeholder="Full Name" name="fullname" id="fullname" required>
-            <input type="email" placeholder="Email" name="email" required>
-            <input type="password" placeholder="Password" name="password" minlength="6" maxlength="20" required>
-            <select required name="gender">
-                <option value="" disabled selected>Gender</option>
-                <option value="1">Male</option>
-                <option value="2">Female</option>
-                <option value="3">Other</option>
-            </select>
-           
+        <form style="" action="sendMailRegister" method="post">
+            <input type="text" placeholder="Full Name" name="fullname" id="fullname" value="${requestScope.fullname}" required>
+            <input type="email" placeholder="Email" name="email" value="${requestScope.email}" required>
+            <input type="password" placeholder="Password" name="password" minlength="6" maxlength="20" value="${requestScope.password}"required>
+            <input type="password" placeholder="Confirm Password" name="cpassword" minlength="6" maxlength="20" value="${requestScope.cpassword}"required>  
+            
             <p style="color: red;  font-size: 15px">${requestScope.wrongRegister}</p>
             <button type="submit">Sign Up</button>
         </form>

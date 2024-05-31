@@ -80,7 +80,7 @@
             <label for="image"></label>
     <input type="file" id="image" name="image" accept="image/*" ><br><br>
     <input type="text" value="${sessionScope.account.fullname}" name="fullname" id="fullname" required>
-    <input type="email" value="${sessionScope.account.email}" name="email" required>
+   
             
             <select required name="gender">
                 <option value="" disabled selected>Gender</option>

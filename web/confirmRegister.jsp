@@ -87,17 +87,19 @@
     <body>
        <div class="login-container"> 
         <h2 style="font-size: 50px" >Email Verify</h2>
-        <p style="color: red">${requestScope.wrongCode}</p>
+       
         <p> Enter Code in ${requestScope.email}: </p>
         <form action="confirmRegisterPassword" method="post">
-            <input type="text" placeholder="${requestScope.email}" name="email" value="${requestScope.email}" readonly required>
-            <input type="text" placeholder="Code" name="code" required>
+            <input type="text" placeholder="Code" name="code" value="${requestScope.ucode}" required>
             <input type="hidden"  name="realcode" value="${requestScope.code}" >
+            <input type="hidden"  name="email" value="${requestScope.email}" >
             <input type="hidden"  name="fullname" value="${requestScope.fullname}" >
             <input type="hidden"  name="password" value="${requestScope.password}" >
             <input type="hidden"  name="gender" value="${requestScope.gender}" >
+           <p style="color: red">${requestScope.wrongCode}</p> 
          <button type="submit">Confirm</button>
         </form>
+             
           </div>
     </body>
 </html>

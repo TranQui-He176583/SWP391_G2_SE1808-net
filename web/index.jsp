@@ -1,6 +1,13 @@
 <!doctype html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:if test="${not empty requestScope.completeRegister}">
+  <script>
+    alert(" ${requestScope.completeRegister} ");
+    
+  </script>
+</c:if>
 <html class="no-js" lang="zxx">
     <head>
         <meta charset="utf-8">
@@ -36,6 +43,9 @@
         <!-- Preloader Start -->
         <%@include file="commonFunction/header.jsp" %>
         <main>
+          
+
+
             <!--? slider Area Start-->
             <div class="slider-area position-relative">
                 <div class="slider-active">

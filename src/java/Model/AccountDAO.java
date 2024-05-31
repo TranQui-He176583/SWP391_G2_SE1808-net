@@ -185,6 +185,18 @@ public class AccountDAO extends MyDAO {
      }
      
   }
+       public  boolean isValidEmail(String email) {
+    if (!email.contains("@")) {
+        return false;
+    }
+    int atIndex = email.lastIndexOf("@");
+    if (atIndex == email.length() - 1) {
+        return false;
+    }
+    int firstAtIndex = email.indexOf("@");
+    return firstAtIndex == email.lastIndexOf("@");
+    
+}
   
   
 }

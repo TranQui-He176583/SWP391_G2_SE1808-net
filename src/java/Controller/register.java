@@ -14,6 +14,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 
@@ -76,22 +77,18 @@ public class register extends HttpServlet {
         String xEmail = (String) request.getAttribute("email");
         String xFullname = (String)request.getAttribute("fullname");
         String xPassWord =(String) request.getAttribute("password");
-        
+        HttpSession session = request.getSession();
         AccountDAO  aDAO = new AccountDAO();
-        
-            
-        
         encodePassword ep = new encodePassword();
-       xPassWord = ep.toSHA1(xPassWord);
-        String xGender = (String) request.getAttribute("gender");
-        int gender = Integer.parseInt(xGender);     
-       
+       xPassWord = ep.toSHA1(xPassWord);  
        int numberAccount = aDAO.getNumberAccount()+1;
-        Account a = new Account(numberAccount, xPassWord, 3, 0, xFullname, xEmail, "", gender,"");
-       out.print(aDAO.insert(a));
+        Account account = new Account(numberAccount, xPassWord, 3, 0, xFullname, xEmail, "", 0,"");
+       out.print(aDAO.insert(account));
        
-        request.setAttribute("completeRegister", "Account registration has been successful");
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        session.setAttribute("account", account);
+        request.setAttribute("completeRegister", "Account registration has been successful");       
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+   
        
            }    
     

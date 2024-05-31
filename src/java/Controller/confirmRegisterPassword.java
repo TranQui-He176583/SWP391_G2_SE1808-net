@@ -84,6 +84,7 @@ public class confirmRegisterPassword extends HttpServlet {
                     request.setAttribute("gender", xGender);
                 request.getRequestDispatcher("register").forward(request, response);
        } else {
+           request.setAttribute("ucode", xCode);
            request.setAttribute("email", xEmail);
            request.setAttribute("code", xRealCode);
            request.setAttribute("fullname", xFullName);

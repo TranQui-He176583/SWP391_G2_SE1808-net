@@ -76,10 +76,49 @@ public class sendMailRegister extends HttpServlet {
         String xMail = (String) request.getParameter("email");
         String xFullname = request.getParameter("fullname");
         String xPassWord = request.getParameter("password");
-        String xGender = request.getParameter("gender");
-       AccountDAO aDAO = new AccountDAO();
+        String xCPassWord = request.getParameter("cpassword");
+         AccountDAO aDAO = new AccountDAO();
+   if (xFullname.equals("")){
+       request.setAttribute("fullname", xFullname);
+        request.setAttribute("password", xPassWord);
+         request.setAttribute("cpassword", xCPassWord);
+        request.setAttribute("email", xMail);
+        request.setAttribute("wrongRegister", "Fullname can not be blank!");
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+   }
+    if (aDAO.isValidEmail(xMail)==false){
+       request.setAttribute("fullname", xFullname);
+        request.setAttribute("password", xPassWord);
+         request.setAttribute("cpassword", xCPassWord);
+        request.setAttribute("email", xMail);
+        request.setAttribute("wrongRegister", "Email invalidate!");
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+   }
+    if (xPassWord.equals("")){
+       request.setAttribute("fullname", xFullname);
+        request.setAttribute("password", xPassWord);
+         request.setAttribute("cpassword", xCPassWord);
+        request.setAttribute("email", xMail);
+        request.setAttribute("wrongRegister", "Password invalidate!");
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+   }
+   
+     
+      if (xPassWord.equals(xCPassWord)==false) {
+          request.setAttribute("fullname", xFullname);
+        request.setAttribute("password", xPassWord);
+         request.setAttribute("cpassword", xCPassWord);
+        request.setAttribute("email", xMail);
+        request.setAttribute("wrongRegister", "Password and Confirm Password not the same!");
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+      } else {
+       
       if (aDAO.checkAccountExist(xMail)) {
-            request.setAttribute("wrongRegister", "This email is registered to another account");
+           request.setAttribute("fullname", xFullname);
+        request.setAttribute("password", xPassWord);
+         request.setAttribute("cpassword", xCPassWord);
+        request.setAttribute("email", xMail);
+            request.setAttribute("wrongRegister", "This email is registered to another account!");
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }  else {
         MailHandler mh = new MailHandler(); 
@@ -95,10 +134,11 @@ public class sendMailRegister extends HttpServlet {
         request.setAttribute("code", code);
         request.setAttribute("fullname", xFullname);
         request.setAttribute("password", xPassWord);
-        request.setAttribute("gender", xGender);
+       
         request.setAttribute("email", xMail);
         request.getRequestDispatcher("confirmRegister.jsp").forward(request, response);
     }
+      }
     }
 
     /** 
