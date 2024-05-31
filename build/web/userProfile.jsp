@@ -103,10 +103,7 @@
                     <div class="detail-label">Full Name:</div>
                     <div style="font-weight: bold" class="detail-value">${sessionScope.account.fullname}</div>
                 </div>
-                <div class="detail-row">
-                    <div class="detail-label">Password:</div>
-                    <div style="font-weight: bold" class="detail-value">********</div>
-                </div>
+                
                 <div class="detail-row">
                     <div class="detail-label">Gender:</div>
                     
@@ -126,7 +123,10 @@
                 </div>
                 
                 <a href="Change_Information">
-                    <button style="margin: 12px;font-size: 13px;border-radius: 13px;">Change Information</button>
+                    <button style="font-size: 13px;border-radius: 13px;">Change Information</button>
+                </a>
+                <a href="Change_Password">
+                    <button style="margin: 12px;font-size: 13px;border-radius: 13px;">Change Password</button>
                 </a>
             </div>
         </div>

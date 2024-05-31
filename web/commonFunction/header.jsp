@@ -42,13 +42,13 @@
                          <c:if test="${sessionScope.account.roleId != null}">                                  
                              <div class="image-container">
                              
-                                 <c:if test="${sessionScope.account.image == ''}">  
+                                 <c:if test="${sessionScope.account.image == null }">  
                                      
                                     <img style="width: 28px; margin-top: -10px" src="assets/img/avatar/Avatar1.png" class="img-fluid"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </c:if>
                                     
-                                    <c:if test="${sessionScope.account.image != ''}">  
+                                    <c:if test="${sessionScope.account.image != null}">  
                                        
                                         <img style="width: 28px; margin-top: -10px" src="${sessionScope.account.image}" class="img-fluid"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

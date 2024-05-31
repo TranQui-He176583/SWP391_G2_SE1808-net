@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import Util.*;
 import Model.*;
 import jakarta.servlet.http.HttpSession;
+import java.util.Random;
 /**
  *
  * @author quyka
@@ -39,13 +40,28 @@ public class loginGoogle extends HttpServlet {
         googleAccount ga = new googleAccount();
         ga = gl.getUserInfo(accessToken);
        encodePassword ep  = new encodePassword();
-       String password = ep.toSHA1("123456");
+       
+    
+       
+       
+       String password = "";
        Account a = new  Account();
        a.setEmail(ga.getEmail());
        a.setFullname(ga.getName());
        AccountDAO aDAO = new AccountDAO();
        out.print(aDAO.checkAccountExist(ga.getEmail()));
        if (aDAO.checkAccountExist(ga.getEmail())==false) {
+           
+             MailHandler mh = new MailHandler(); 
+             Random rand = new Random();
+         int Iassword = rand.nextInt(900000) + 100000;
+         String Spassword = String.valueOf(Iassword);
+            try {
+               mh.SendMail(ga.getEmail(), "Account Password", "Your Password:"+Iassword);               
+            } catch (Exception e) {
+                
+            } 
+           password = ep.toSHA1(Spassword);
            a.setPassWord(password);
            a.setId(aDAO.getNumberAccount()+1);
            a.setRoleId(3);

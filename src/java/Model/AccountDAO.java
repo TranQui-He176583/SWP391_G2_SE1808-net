@@ -87,6 +87,28 @@ public class AccountDAO extends MyDAO {
      } 
         return false;
     }
+  public boolean checkPhone(String phone,String email) {
+        xSql = "select *from account where phone=? ";   
+        String xEmail="";
+        try {
+      ps = con.prepareStatement(xSql);   
+      ps.setString(1, phone );
+     
+      rs = ps.executeQuery();           
+      if (rs.next()) {   
+          xEmail=rs.getString("email");
+          if (xEmail.equalsIgnoreCase(email)==false){
+              return false;
+          } 
+                         
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {      
+     } 
+        return true;
+    }
 
  
      public Account getAccount(String username, String password) {

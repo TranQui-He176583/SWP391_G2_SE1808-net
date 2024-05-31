@@ -74,7 +74,9 @@ public class changePassword extends HttpServlet {
         PrintWriter out = response.getWriter();
         String xEmail = request.getParameter("email");
         String xOldPassword = request.getParameter("oldPassword");
+        String oldpass = xOldPassword;
         String xNewPassword = request.getParameter("newPassword");
+        String newpass = xNewPassword;
         String xConfrimPassword = request.getParameter("confirmPassword");
       if (xNewPassword.equals(xConfrimPassword)==false) {
             request.setAttribute("password", xOldPassword);
@@ -86,21 +88,20 @@ public class changePassword extends HttpServlet {
          encodePassword ep = new encodePassword();
           xNewPassword = ep.toSHA1(xNewPassword);
          xOldPassword = ep.toSHA1(xOldPassword);
+          out.print(xEmail);
          AccountDAO aDAO = new AccountDAO();
          if (aDAO.checkLogin(xEmail, xOldPassword)) {
              aDAO.updatePassWord(xEmail, xNewPassword);           
-             request.setAttribute("cPassword", "Change Password Complete, Please Login again!");
-                 request.getRequestDispatcher("login.jsp").forward(request, response);
+             request.setAttribute("complete", "Change Password Complete!");
+                 request.getRequestDispatcher("index.jsp").forward(request, response);
          }  else {
+             request.setAttribute("password", oldpass);
+            request.setAttribute("newpassword", newpass);
+            request.setAttribute("confirmpassword", xConfrimPassword);
              request.setAttribute("wrong", "Old Password Wrong!");
              request.getRequestDispatcher("changePassword.jsp").forward(request, response);
          }
-         
-          
-          
-         request.setAttribute("cPassword", "Change Password Complete!");
-         request.getRequestDispatcher("login.jsp").forward(request, response);
-        
+            
     }
     }
     /** 

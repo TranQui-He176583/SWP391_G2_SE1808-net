@@ -82,11 +82,30 @@ public class changeInformation extends HttpServlet {
          response.setContentType("text/html;charset=UTF-8");
          PrintWriter pr = response.getWriter();  
          Part xImage = request.getPart("image");
-        pr.print(xImage.getSize());
+         AccountDAO aDAO = new AccountDAO();
+       // pr.print(xImage.getSize());
        String xFullName = request.getParameter("fullname");
        String xEmail = request.getParameter("email");
        String xPhone = request.getParameter("phone");
        String xGender = request.getParameter("gender");
+    if (xFullName.equals("")) {
+         request.setAttribute("phone", xPhone);
+        request.setAttribute("wrong", "Fullname can't null!");
+        request.getRequestDispatcher("changeInformation.jsp").forward(request, response);
+    }  
+    if (xGender == null) {
+         request.setAttribute("phone", xPhone);
+        request.setAttribute("wrong", "Please choose gender!");
+        request.getRequestDispatcher("changeInformation.jsp").forward(request, response);
+    }
+    if (aDAO.checkPhone(xPhone,xEmail)==false && xPhone.equals("")==false) {
+        request.setAttribute("phone", xPhone);
+        request.setAttribute("wrong", "This phone number is registered to another account!");
+        request.getRequestDispatcher("changeInformation.jsp").forward(request, response);
+    } else {
+    
+       
+       
        int gender = Integer.parseInt(xGender);
        HttpSession session  = request.getSession();
        Account a = new Account();
@@ -102,10 +121,11 @@ public class changeInformation extends HttpServlet {
        a.setImage(imageURL);
       
        a.setPhone(xPhone);
-       AccountDAO aDAO = new AccountDAO();
+      
        aDAO.updateInformation(a);      
        request.setAttribute("completeChange", "Change Information Susscess!");
        request.getRequestDispatcher("userProfile.jsp").forward(request, response);
+    }
     }
         
     /** 
