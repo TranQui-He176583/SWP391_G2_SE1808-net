@@ -115,7 +115,15 @@ public class changeInformation extends HttpServlet {
              imageURL = a.getImage();             
          } else {
                imageURL = saveUploadedFile(request);
+            if (a.getImage() != null) {
+                File file = new File("D:\\SWP\\Project\\SWP391_G2_SE1808-net\\Swp\\build\\web\\"+a.getImage());
+              file.delete();
+                
+            } 
+               
          }
+       
+       
        a.setFullname(xFullName);
        a.setGender(gender);
        a.setImage(imageURL);
