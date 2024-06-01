@@ -5,6 +5,7 @@
 
 package Controller;
 
+import Model.Account;
 import Model.AccountDAO;
 import Util.encodePassword;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -72,17 +74,38 @@ public class change_F_Password extends HttpServlet {
     throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         String xEmail = request.getParameter("email");
-        String xPassword = request.getParameter("password");
+        String xPassword = request.getParameter("npassword");
+        String xCPassword = request.getParameter("cpassword");
+    if (xPassword.length()<6 || xPassword.length()>20) {
+        request.setAttribute("cp", xCPassword);
+        request.setAttribute("np", xPassword);
+        request.setAttribute("wrong", "Password can be from 6 to 20 characters!");
+        request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+    }    
+    if (xCPassword.equals(xPassword)) {    
          encodePassword ep = new encodePassword();
          xPassword = ep.toSHA1(xPassword);
          AccountDAO aDAO = new AccountDAO();
          
           aDAO.updatePassWord(xEmail, xPassword);
+           HttpSession session = request.getSession();
+          Account account = aDAO.getAccount(xEmail,xPassword);
+         
+          session.setAttribute("account",account);
           
-         request.setAttribute("cPassword", "Change Password Complete!");
-         request.getRequestDispatcher("login.jsp").forward(request, response);
+         request.setAttribute("complete", "Change Password Complete!");
+         request.getRequestDispatcher("index.jsp").forward(request, response);
         
+    } else {
+       
+        
+        request.setAttribute("cp", xCPassword);
+        request.setAttribute("np", xPassword);
+        request.setAttribute("wrong", "Password and Confirm password not the same!");
+        request.getRequestDispatcher("resetPassword.jsp").forward(request, response);
+                
     }
+    } 
 
     /** 
      * Returns a short description of the servlet.

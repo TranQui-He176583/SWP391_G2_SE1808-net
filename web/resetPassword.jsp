@@ -94,12 +94,15 @@
 
 <body>
     
-    <div class="login-container">
-        <h2 style="font-size: 50px" >Login</h2>
+    <div style="margin-top: 100px" class="login-container">
+        <h2 style="font-size: 50px" >Change Password</h2>
         <form action="change_F_Password" method="post">
-            <input type="text"  name="email" value="${requestScope.email}" readonly required>
-            <input type="password" placeholder="New Password" name="password" minlength="6" maxlength="20" required>
-         <button type="submit">Login</button>
+            <p>Password can be from 6 to 20 characters</p>
+            <input type="hidden"  name="email" value="${requestScope.email}" readonly required>
+            <input type="password" placeholder="New Password" name="npassword" minlength="6" maxlength="20" value="${requestScope.np}" required>
+            <input type="password" placeholder="Confirm New Password" name="cpassword" minlength="6" maxlength="20" value="${requestScope.cp}" required>
+            <p style="color:red" >${requestScope.wrong}</p>
+         <button type="submit">Change</button>
         </form>
        
 </body>

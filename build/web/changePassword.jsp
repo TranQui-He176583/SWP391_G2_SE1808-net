@@ -85,10 +85,10 @@
 
 <body>
     <c:if test="${sessionScope.account.email != null}"> 
-    <div class="login-container">
+        <div style="margin-top: 100px" class="login-container">
         <h2 style="font-size: 50px" >Change Password</h2>
         <form action="changePassword" method="post">
-            <p>Passwords can be from 6 to 20 characters</p>
+            <p>Password can be from 6 to 20 characters</p>
             <input type="hidden" name="email"  value="${sessionScope.account.email}" required>
             <input type="password" placeholder="Old Password" name="oldPassword" minlength="6" maxlength="20" value="${requestScope.password}" required>
             <input type="password" placeholder="New Password" name="newPassword" minlength="6" maxlength="20" value="${requestScope.newpassword}" required>

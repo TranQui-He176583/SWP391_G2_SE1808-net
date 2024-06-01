@@ -112,8 +112,8 @@
         <p style="color: red">${requestScope.wrongCode}</p>
         <p> Enter Code in ${requestScope.email}: </p>
         <form action="confirmCodeF_Password" method="post">
-            <input type="text" placeholder="${requestScope.email}" name="email" value="${requestScope.email}" readonly required>
-            <input type="text" placeholder="Code" name="code" required>
+            <input type="hidden" placeholder="${requestScope.email}" name="email" value="${requestScope.email}" readonly required>
+            <input type="text" placeholder="Code" name="code" value="${requestScope.ucode}" required>
             <input type="hidden"  name="realcode" value="${requestScope.code}" >
 <!--            <input type="hidden"  name="fullname" value="${requestScope.fullname}" >
             <input type="hidden"  name="password" value="${requestScope.password}" >

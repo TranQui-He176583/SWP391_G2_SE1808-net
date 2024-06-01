@@ -78,6 +78,14 @@ public class changePassword extends HttpServlet {
         String xNewPassword = request.getParameter("newPassword");
         String newpass = xNewPassword;
         String xConfrimPassword = request.getParameter("confirmPassword");
+      if (xNewPassword.length()<6 || xNewPassword.length()>20) {
+             request.setAttribute("password", xOldPassword);
+            request.setAttribute("newpassword", xNewPassword);
+            request.setAttribute("confirmpassword", xConfrimPassword);
+            request.setAttribute("wrong", "Password can be from 6 to 20 characters!");
+        request.getRequestDispatcher("changePassword.jsp").forward(request, response);
+    }    
+      
       if (xNewPassword.equals(xConfrimPassword)==false) {
             request.setAttribute("password", xOldPassword);
             request.setAttribute("newpassword", xNewPassword);
