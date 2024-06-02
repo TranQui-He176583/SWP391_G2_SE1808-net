@@ -96,7 +96,7 @@
     
     <div style="margin-top: 100px" class="login-container">
         <h2 style="font-size: 50px" >Change Password</h2>
-        <form action="change_F_Password" method="post">
+        <form action=   "change_F_Password" method="post">
             <p>Password can be from 6 to 20 characters</p>
             <input type="hidden"  name="email" value="${requestScope.email}" readonly required>
             <input type="password" placeholder="New Password" name="npassword" minlength="6" maxlength="20" value="${requestScope.np}" required>

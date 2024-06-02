@@ -98,7 +98,7 @@ public class change_F_Password extends HttpServlet {
         
     } else {
        
-        
+        request.setAttribute("email", xEmail);
         request.setAttribute("cp", xCPassword);
         request.setAttribute("np", xPassword);
         request.setAttribute("wrong", "Password and Confirm password not the same!");
