@@ -5,6 +5,8 @@
 
 package Controller;
 
+import Model.Account;
+import Model.AccountDAO;
 import Model.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,13 +15,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author pc
  */
-@WebServlet(name="deleteUser", urlPatterns={"/deleteUser"})
-public class deleteUser extends HttpServlet {
+@WebServlet(name="editUser", urlPatterns={"/editUser"})
+public class editUser extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,16 +34,7 @@ public class deleteUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         PrintWriter out = response.getWriter();
-            String uid = request.getParameter("id");
-            int id = Integer.parseInt(uid);
-            String xStatus  =request.getParameter("status");
-            int status=Integer.parseInt(xStatus);
-            UserDAO dao = new UserDAO();
-            dao.changeStatus(status, id);
-            response.sendRedirect("countUser");
-       
-        
+            
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -65,11 +59,21 @@ public class deleteUser extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+   protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
-    }
-
+       PrintWriter out = response.getWriter();
+       String xid = request.getParameter("id");
+       int id =Integer.parseInt(xid);
+       String xFullName = request.getParameter("fullname");
+       String xPhone = request.getParameter("phone");
+       String xGender = request.getParameter("gender");
+       int gender =Integer.parseInt(xGender);
+       String xRole = request.getParameter("roleId");
+       int roleId =Integer.parseInt(xRole);
+       UserDAO udao = new UserDAO();
+       out.print(udao.EditUser(roleId, xFullName, xPhone, gender, id));
+       response.sendRedirect("countUser");
+}
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description

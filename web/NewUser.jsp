@@ -7,8 +7,8 @@
            
         </head>
 
-        <body>
-
+        <body style="overflow-y: hidden">
+            
             <header>
                 <nav class="navbar navbar-expand-md navbar-dark" style="background-color: black">
                     <div>
@@ -20,69 +20,80 @@
                     </ul>
                 </nav>
             </header>
-            <br>
-            <div class="container col-md-5">
-                <div class="card">
-                    <div class="card-body">
-                       
-                        
-                        <form action="add" method="post" enctype="multipart/form-data"> 
-                            <h2>Add New User</h2>
-                        
+            
+           <div class="container" style="max-width: 800px; margin: 0 auto;">
+    <div class="card">
+        <div class="card-body">
+            <form action="add" method="post">
+                <h2>Add New User</h2>
 
+                <div class="row">
+                    <div class="col-md-6">
                         <fieldset class="form-group">
-                            <label>User Name</label> <input type="text" class="form-control" name="fullname" id="fullname"required="required">
+                            <label>User Name</label>
+                            <input type="text" class="form-control" name="fullname" id="fullname" required="required">
                         </fieldset>
-                        
-                         <fieldset class="form-group">
-                             <label>password</label> <input type="text" class="form-control" name="password" id="password" required="required">
-                        </fieldset>
-                       
+                    </div>
+                    <div class="col-md-6">
                         <fieldset class="form-group">
-                            <label>User Email</label> 
+                            <label>User Email</label>
                             <input type="text" class="form-control" name="email" id="email" required="required">
                         </fieldset>
-
-                        <fieldset class="form-group">
-                            <label>User phone</label> 
-                            <input type="text" class="form-control" name="phone" id="phone">
-                        </fieldset>
-                        
-                        <fieldset class="form-group">
-                            <label> User image</label>
-                            <input type="file" class="form-control" name="image" id="image" required>
-                        </fieldset>
-                        
-                        <fieldset class="form-group">
-                            <label>User gender</label> 
-                            <select name="gender" id="gender" class="form-control">
-                                <option value="" disabled selected>Gender</option>
-                               <option value="1">male</option>
-                               <option value="2">female</option>
-                              
-                          </select>
-                        </fieldset>
-                        
-                        <fieldset class="form-group">
-                            <label>User status</label> 
-                           <select name="status" id="status" class="form-control">
-                                <option value="" disabled selected>Status</option>
-                               <option value="1">active</option>
-                               <option value="2">inactive</option>
-                               <option value="3">block</option>
-                               
-                          </select>
-                            
-                        </fieldset>
-                       
-                        <button type="submit" class="btn btn-success">Save</button>
-                        <a href="NewUser.jsp" class="btn btn-success">Back</a>
-                        <p style="color: red;  font-size: 15px">${requestScope.wrongRegister}</p>
-                        
-                        </form>
                     </div>
                 </div>
-            </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label>Role</label>
+                            <select name="role" id="role" class="form-control">
+                                <option value="1">Admin</option>
+                                <option value="2">Manager</option>
+                                <option value="3">NormalUser</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label>User phone</label>
+                            <input type="text" class="form-control" name="phone" id="phone">
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label>User gender</label>
+                            <select name="gender" id="gender" class="form-control">
+                                <option value="1">male</option>
+                                <option value="2">female</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label>User status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="1">active</option>
+                                <option value="2">inactive</option>
+                                <option value="3">block</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a href="NewUser.jsp" class="btn btn-success">Back</a>
+                    <p style="color: red; font-size: 15px">${requestScope.wrongRegister}</p>
+                    <p style="color: green; font-size: 15px">${requestScope.addnew}</p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+                       
         </body>
 
         </html>

@@ -7,6 +7,7 @@ package Controller;
 
 import Model.Account;
 import Model.UserDAO;
+import Util.MailHandler;
 import Util.encodePassword;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,16 +22,12 @@ import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
 import jakarta.servlet.http.Part;
 import java.io.File;
+import java.util.Random;
 /**
  *
  * @author pc
  */
 @WebServlet(name="add", urlPatterns={"/add"})
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024, // 1MB
-        maxFileSize = 1024 * 1024 * 5, // 5MB
-        maxRequestSize = 1024 * 1024 * 10 // 10MB
-)
 public class add extends HttpServlet {
    
     /** 
@@ -68,38 +65,44 @@ public class add extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
    
-    private static final String UPLOAD_DIR = "assets/img/avatar";
+  
     @Override
 protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
 
-    String fullname = request.getParameter("fullname");
-    String password = request.getParameter("password");
-    String email = request.getParameter("email");
-    String phone = request.getParameter("phone");
-    String xstatus = request.getParameter("status");
-    int status = Integer.parseInt(xstatus);
-    String xgender = request.getParameter("gender");
-    int gender = Integer.parseInt(xgender);
+String xMail = (String) request.getParameter("email");
+String xFullname = request.getParameter("fullname");
+String xPassWord = request.getParameter("password");
 
-    Part imagePart = request.getPart("image");
-    String imageName = getUniqueFileName(imagePart);
-    String imagePath = saveUploadedFile(request, imageName);
+UserDAO aDAO = new UserDAO();
 
-    UserDAO user = new UserDAO();
-    if (user.checkUserExist(email)) {
-        request.setAttribute("wrongRegister", "This email is registered to another account");
-        request.getRequestDispatcher("NewUser.jsp").forward(request, response);
-    } else {
-        encodePassword ep = new encodePassword();
-        password = ep.toSHA1(password);
-        int numberUser = user.getNumberUser() + 1;
-        Account u = new Account(numberUser, password, 3, status, fullname, email, phone, gender, imagePath);
-        out.print(user.add(u));
-        response.sendRedirect("countUser");
+if (aDAO.checkUserExist(xMail)) {
+    request.setAttribute("wrongRegister", "This email is registered to another account");
+    request.getRequestDispatcher("NewUser.jsp").forward(request, response);
+} else {
+    MailHandler mh = new MailHandler();     
+
+    try {
+         mh.SendMail(xMail, "Your Registration Information", 
+                    "Thank you for registering with our application.\n" +
+                    "Here are the details you provided:\n" +
+                    "Email: " + xMail + "\n" +
+                    "Full Name: " + xFullname + "\n" +
+                    "Please use this infor to complete your registration at http://localhost:9999/SWP/register.jsp");
+        
+        
+    } catch (Exception e) {
+        out.print(e);
     }
+    
+    
+    request.setAttribute("fullname", xFullname);
+    request.setAttribute("password", xPassWord);
+    request.setAttribute("email", xMail);
+    request.setAttribute("addnew", "send successfull");
+    request.getRequestDispatcher("NewUser.jsp").forward(request, response);
 }
     
     
@@ -108,26 +111,8 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */
-  String saveUploadedFile(HttpServletRequest request, String fileName) throws IOException, ServletException {
-    String uploadPath = "assets/img/avatar/";
-    String applicationPath = request.getServletContext().getRealPath("");
-    String absoluteFilePath = applicationPath + File.separator + uploadPath + fileName;
+  
 
-    Part part = request.getPart("image");
-    part.write(absoluteFilePath);
 
-    File uploadedFile = new File(absoluteFilePath);
-    if (uploadedFile.exists()) {
-        return uploadPath + fileName;
-    } else {
-        return "";
-    }
 }
-String getUniqueFileName(Part part) {
-    String submittedFileName = part.getSubmittedFileName();
-    String fileExtension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
-    String newFileName = System.currentTimeMillis() + fileExtension;
-    return newFileName;
-}
-
 }

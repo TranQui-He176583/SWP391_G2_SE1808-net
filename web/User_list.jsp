@@ -20,6 +20,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <%@include file="commonFunction/CSS.jsp" %>
   <link rel="stylesheet" href="assets/css/list.css">
 <script>
@@ -64,13 +65,22 @@ $(document).ready(function(){
                 </div>
             </div>
         </div>
-        <div class="function-table">
-            <div class="row">
+        <div class="search-add" style="display: flex">
+       
+            <form action="countUser" method="post" style="padding-top: 20px;font-size: 15px"> 
+                <a class="search" style="padding: 80px">
+                   <input  type="text" name="search" placeholder="search here">
+                   <label for="search"><i class="fas fa-search"></i></label>
+                </a>  
+            </form>
+       
+            <div class="row" style="padding-left: 650px;padding-top: 20px" >
                 <div class="col-sm-7">
-                    <a href="NewUser.jsp" class="btn btn-secondary"> <span>Add New User</span></a> 	   			
+                    <a href="NewUser.jsp" class="btn btn-secondary" style="background: red" > <span>Add New User</span></a> 	   			
                 </div>
             </div>
         </div>
+        
         <div class="content-table">
            
             <table class="table table-striped table-hover">
@@ -80,8 +90,7 @@ $(document).ready(function(){
                         <th>STT</th>	
                         <th>Avatar</th>
                         <th>Name</th>	
-                        <th>Email</th>
-                        <th>Phone</th>
+                        <th>Role</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr> 
@@ -97,31 +106,40 @@ $(document).ready(function(){
                             <td>${count}</td>
                             <td><img src="${o.image}" style="border-radius: 50%; transform: scale(0.5);width: 150px;height: 150px; object-fit: contain;"></td>
                             <td><a href="detailUser?uid=${o.id}">${o.fullname}</a></td>
-                            <td>${o.email}</td>
-                            <td>${o.phone}</td>
+                         
+                            <td>
+                                 <c:choose>
+                                       <c:when test="${o.roleId == 1}">
+                                          <span class="text-primary">Admin</span>
+                                       </c:when>
+                                        <c:when test="${o.roleId == 2}">
+                                          <span class="text-primary">Manager</span>
+                                        </c:when>
+                                        <c:when test="${o.roleId == 3}">
+                                          <span class="text-primary">NormalUser</span>
+                                        </c:when>
+                                    </c:choose>
+                            </td>
+              
                         <td>
-                        <c:choose>
-                           <c:when test="${o.status == 1}">
-                             
-                               <a class="btn btn-success btn-sm" style="background-color: green; padding:20px 10px;font-weight: normal;">active</a>
-                              
-                           </c:when>
-                            <c:when test="${o.status == 2}">
-                              
-                                  <a class="btn btn-danger btn-sm"  style="background-color: gray; padding:20px 10px;font-weight: normal">inactive</a>
-                              
-                            </c:when>
-                            <c:when test="${o.status == 3}">
-                             
-                               <a class="btn btn-success btn-sm" style="background-color: red; padding:20px 10px;font-weight: normal;">block</a>
-                              
-                           </c:when>
-                        </c:choose>
-            </td>
+    
+    <c:if test="${o.status == 1}">
+        <a href="deleteUser?id=${o.id}&status=2"id="statusBtn" class="btn btn-success btn-sm" 
+            style="background-color: green; padding:20px 10px;font-weight: normal;color: black"
+            onclick="toggleStatus(this);">active</a>
+    </c:if>
+    <c:if test="${o.status == 2}">
+        <a href="deleteUser?id=${o.id}&status=1"id="statusBtn" class="btn btn-danger btn-sm" 
+            style="background-color: red; padding:20px 10px;font-weight: normal;color: black"
+            onclick="toggleStatus(this);">block</a>
+    </c:if>
+
+   
+</td>
             <td>
-                <a href="deleteUser?uid=${o.id}" onclick="return confirm('Bạn có chắc muốn xóa?')" class="delete" title="Delete" data-toggle="tooltip">
-                    <i class="material-icons">delete</i>
-                </a>
+               <a href="detailUser?uid=${o.id}" class="detail" title="detail" data-toggle="tooltip">
+    <i class="material-icons">visibility</i>
+</a>
             </td>
         </tr>
                   </c:forEach>
@@ -196,6 +214,19 @@ $(document).ready(function(){
     <!-- Jquery Plugins, main Jquery -->	
     <script src="./assets/js/plugins.js"></script>
     <script src="./assets/js/main.js"></script>
- 
+    <script>
+ $(document).ready(function() {
+    $('#statusBtn').click(function() {
+        var currentStatus = $(this).hasClass('btn-success') ? 1 : 2;
+        var newStatus = currentStatus === 1 ? 2 : 1;
+
+        // Cập nhật trạng thái trong form
+        $('input[name="status"]').val(newStatus);
+
+        // Submit form
+        $('#userStatusForm').submit();
+    });
+});
+</script>
 </body>
 </html>

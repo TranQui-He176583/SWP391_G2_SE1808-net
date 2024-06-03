@@ -76,8 +76,13 @@ public class countUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String NameSearch =request.getParameter("search");
+         UserDAO dao = new UserDAO();
+         List<Account> lis= dao.getSearchUser(NameSearch);
+         request.setAttribute("listUs", lis);
+         request.getRequestDispatcher("User_list.jsp").forward(request, response);
     }
+    
 
     /** 
      * Returns a short description of the servlet.
