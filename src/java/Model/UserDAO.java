@@ -65,6 +65,84 @@ public class UserDAO extends MyDAO{
     return(t);
     }
      
+    public List<Role> getAllRole() {
+        List<Role> t = new ArrayList<>();
+        xSql = "select * from Role";
+       try {
+        ps = con.prepareStatement(xSql);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+        int id = rs.getInt("id");  
+        String name= rs.getString("name");  
+        t.add(new Role(id, name));
+     
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+    }
+
+    public List<Account> getAllUsersByRoleID(int xRoleId) {
+        List<Account> t = new ArrayList<>();
+        xSql = "select * from account where roleId=?";
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setInt(1, xRoleId);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+        int id = rs.getInt("id");  
+        String password= rs.getString("password");  
+        int roleId= rs.getInt("roleId");  
+        int status= rs.getInt("status");  
+        String fullname= rs.getString("fullname");  
+        String email= rs.getString("email");  
+        String phone= rs.getString("phone");  
+        int gender= rs.getInt("gender");  
+        String image= rs.getString("image");  
+        t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image));
+     
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+    }
+       public List<Account> getAllUsersByStatus(String xStatus) {
+        List<Account> t = new ArrayList<>();
+        xSql = "select * from account where Status=?";
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setString(1,xStatus);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+        int id = rs.getInt("id");  
+        String password= rs.getString("password");  
+        int roleId= rs.getInt("roleId");  
+        int status= rs.getInt("status");  
+        String fullname= rs.getString("fullname");  
+        String email= rs.getString("email");  
+        String phone= rs.getString("phone");  
+        int gender= rs.getInt("gender");  
+        String image= rs.getString("image");  
+        t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image));
+     
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+    }
+    
     public Account getUser(String id ) {
       
         xSql = "select * from account\n "+"where id=?";
@@ -162,15 +240,14 @@ public class UserDAO extends MyDAO{
     return 0;
     }
    
-    public List<Account> pagingUser(int index, int XroleId ){
+    public List<Account> pagingUser(int index){
         List<Account> lst=new ArrayList<>();
-        String xSql = "SELECT * FROM account where roleId=?\n " +
+        String xSql = "SELECT * FROM account\n " +
             "ORDER BY id desc\n " +
             "LIMIT 5 OFFSET ?";
          try {
            ps = con.prepareStatement(xSql);
-           ps.setInt(1, XroleId);
-           ps.setInt(2, (index-1)*5);
+           ps.setInt(1, (index-1)*5);
            rs = ps.executeQuery();
            
            while(rs.next()){
@@ -246,6 +323,7 @@ public class UserDAO extends MyDAO{
      }
      return "ok";
  }
+   
     }
     
 

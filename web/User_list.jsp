@@ -65,21 +65,45 @@ $(document).ready(function(){
                 </div>
             </div>
         </div>
-        <div class="search-add" style="display: flex">
-       
-            <form action="countUser" method="post" style="padding-top: 20px;font-size: 15px"> 
-                <a class="search" style="padding: 80px">
-                   <input  type="text" name="search" placeholder="search here">
-                   <label for="search"><i class="fas fa-search"></i></label>
-                </a>  
-            </form>
-       
-            <div class="row" style="padding-left: 650px;padding-top: 20px" >
-                <div class="col-sm-7">
-                    <a href="NewUser.jsp" class="btn btn-secondary" style="background: red" > <span>Add New User</span></a> 	   			
-                </div>
-            </div>
-        </div>
+        <div class="content-setting" style="display: flex; justify-content: space-between; align-items: center;padding-top: 10px;padding-right: 5px">
+  <div class="content-choose" style="display: flex; align-items: center;">
+    <div class="col-md-6">
+  <fieldset class="form-group">
+    <select name="status" id="status" class="form-control" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
+      <option value=""  data-href="countUser">Status</option>
+      <option value="1" data-href="${pageContext.request.contextPath}/role?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
+      <option value="2" data-href="${pageContext.request.contextPath}/role?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
+    </select>
+  </fieldset>
+</div>
+
+    <div class="col-md-6" >
+      <fieldset class="form-group">
+         
+    <select name="role" id="role" class="form-control" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
+      
+      <option value=""  data-href="countUser">Role</option>
+      <option data-href="${pageContext.request.contextPath}/role?xRoleId=${listRo.id}" ${param.xRoleId == '${listRo.id}' ? 'selected' : ''}>${listRo.name}</option>
+      <option data-href="${pageContext.request.contextPath}/role?xRoleId=${listRo.id}" ${param.xRoleId == '${listRo.id}' ? 'selected' : ''}>${listRo.name}</option>
+      <option data-href="${pageContext.request.contextPath}/role?xRoleId=${listRo.id}" ${param.xRoleId == '${listRo.id}' ? 'selected' : ''}>${listRo.name}</option>
+      
+    </select>
+        
+      </fieldset>
+    </div>
+  </div>
+  <form action="countUser" method="post" style="display: flex; align-items: center;">
+    <div class="search-wrapper" style="position: relative;">
+      <input type="text" name="search" placeholder="search here" style="padding-left: 30px;">
+      <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
+    </div>
+    <div style="margin-left: 20px;">
+      <a href="NewUser.jsp" class="btn btn-secondary" style="background: red;">
+        <span>Add New User</span>
+      </a>
+    </div>
+  </form>
+</div>
         
         <div class="content-table">
            
@@ -105,7 +129,7 @@ $(document).ready(function(){
                          <tr>
                             <td>${count}</td>
                             <td><img src="${o.image}" style="border-radius: 50%; transform: scale(0.5);width: 150px;height: 150px; object-fit: contain;"></td>
-                            <td><a href="detailUser?uid=${o.id}">${o.fullname}</a></td>
+                            <td>${o.fullname}</td>
                          
                             <td>
                                  <c:choose>

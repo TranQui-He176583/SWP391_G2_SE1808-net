@@ -6,7 +6,7 @@
 package Controller;
 
 import Model.Account;
-
+import Model.Role;
 import Model.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,8 +21,8 @@ import java.util.List;
  *
  * @author pc
  */
-@WebServlet(name="countUser", urlPatterns={"/countUser"})
-public class countUser extends HttpServlet {
+@WebServlet(name="role", urlPatterns={"/role"})
+public class role extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,28 +32,22 @@ public class countUser extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    
-    String indexPage = request.getParameter("index");
-   
-    int index = 1; // Default to page 1
-    if (indexPage != null) {
-        index = Integer.parseInt(indexPage);
-    }
-
-    UserDAO countdao = new UserDAO();
-    int count = countdao.getTotalUser();
-    int maxPage = (count / 5) + (count % 5 != 0 ? 1 : 0);
-
-    List<Account> list = countdao.pagingUser(index);
-
-    request.setAttribute("listUs", list);
-    request.setAttribute("mPage", maxPage);
-    request.setAttribute("tag", index);
-
-    request.getRequestDispatcher("User_list.jsp").forward(request, response);
-}
+    throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+         String Status = request.getParameter("xStatus");
+         String  xRoleId = request.getParameter("roleId");
+         int roleId=Integer.parseInt(xRoleId);
+         UserDAO dao = new UserDAO();
+         List<Role> list=dao.getAllRole();
+         List<Account> lis = dao.getAllUsersByRoleID(roleId);
+         List<Account> lit = dao.getAllUsersByStatus(Status);
+        
+        request.setAttribute("listRo", list);
+        request.setAttribute("listUs", lis);
+        request.setAttribute("listUs", lit);
+      
+        request.getRequestDispatcher("User_list.jsp").forward(request, response);
+  } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -66,7 +60,7 @@ public class countUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+       processRequest(request, response);
     } 
 
     /** 
@@ -79,13 +73,8 @@ public class countUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String NameSearch =request.getParameter("search");
-         UserDAO dao = new UserDAO();
-         List<Account> lis= dao.getSearchUser(NameSearch);
-         request.setAttribute("listUs", lis);
-         request.getRequestDispatcher("User_list.jsp").forward(request, response);
+        processRequest(request, response);
     }
-    
 
     /** 
      * Returns a short description of the servlet.
