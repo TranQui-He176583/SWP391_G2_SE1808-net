@@ -65,33 +65,13 @@ public class UserDAO extends MyDAO{
     return(t);
     }
      
-    public List<Role> getAllRole() {
-        List<Role> t = new ArrayList<>();
-        xSql = "select * from Role";
-       try {
-        ps = con.prepareStatement(xSql);
-        rs = ps.executeQuery();
-       while(rs.next()) {
-        int id = rs.getInt("id");  
-        String name= rs.getString("name");  
-        t.add(new Role(id, name));
-     
-      }
-      rs.close();
-      ps.close();
-     }
-     catch(Exception e) {
-        e.printStackTrace();
-     }
-    return(t);
-    }
 
-    public List<Account> getAllUsersByRoleID(int xRoleId) {
+    public List<Account> getAllUsersByRoleID(String xRoleId) {
         List<Account> t = new ArrayList<>();
         xSql = "select * from account where roleId=?";
        try {
         ps = con.prepareStatement(xSql);
-        ps.setInt(1, xRoleId);
+        ps.setString(1, xRoleId);
         rs = ps.executeQuery();
        while(rs.next()) {
         int id = rs.getInt("id");  
@@ -114,6 +94,34 @@ public class UserDAO extends MyDAO{
      }
     return(t);
     }
+//    public String getAllUsersByRoleID(String xRoleId) {
+//        List<Account> t = new ArrayList<>();
+//        xSql = "select * from account where roleId=?";
+//       try {
+//        ps = con.prepareStatement(xSql);
+//        ps.setString(1, xRoleId);
+//        rs = ps.executeQuery();
+//       while(rs.next()) {
+//        int id = rs.getInt("id");  
+//        String password= rs.getString("password");  
+//        int roleId= rs.getInt("roleId");  
+//        int status= rs.getInt("status");  
+//        String fullname= rs.getString("fullname");  
+//        String email= rs.getString("email");  
+//        String phone= rs.getString("phone");  
+//        int gender= rs.getInt("gender");  
+//        String image= rs.getString("image");  
+//        t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image));
+//     
+//      }
+//      rs.close();
+//      ps.close();
+//     }
+//     catch(Exception e) {
+//        return e.getMessage();
+//     }
+//    return("ok");
+//    }
        public List<Account> getAllUsersByStatus(String xStatus) {
         List<Account> t = new ArrayList<>();
         xSql = "select * from account where Status=?";

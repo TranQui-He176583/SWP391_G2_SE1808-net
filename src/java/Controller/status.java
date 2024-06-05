@@ -20,8 +20,8 @@ import java.util.List;
  *
  * @author pc
  */
-@WebServlet(name="role", urlPatterns={"/role"})
-public class role extends HttpServlet {
+@WebServlet(name="status", urlPatterns={"/status"})
+public class status extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,15 +32,13 @@ public class role extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        PrintWriter pr = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-         String  RoleId = request.getParameter("xRoleId");
-         UserDAO dao = new UserDAO();
-         List<Account> lis = dao.getAllUsersByRoleID(RoleId);
-        request.setAttribute("listUs", lis);
-      
+        String Status = request.getParameter("xStatus");
+        UserDAO dao = new UserDAO();
+        List<Account> lit = dao.getAllUsersByStatus(Status);
+        request.setAttribute("listUs", lit);
         request.getRequestDispatcher("User_list.jsp").forward(request, response);
-  } 
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -53,7 +51,7 @@ public class role extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       processRequest(request, response);
+        processRequest(request, response);
     } 
 
     /** 

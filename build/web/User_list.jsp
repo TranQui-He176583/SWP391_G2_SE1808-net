@@ -71,8 +71,8 @@ $(document).ready(function(){
   <fieldset class="form-group">
     <select name="status" id="status" class="form-control" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
       <option value=""  data-href="countUser">Status</option>
-      <option value="1" data-href="${pageContext.request.contextPath}/role?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
-      <option value="2" data-href="${pageContext.request.contextPath}/role?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
+      <option value="1" data-href="${pageContext.request.contextPath}/status?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
+      <option value="2" data-href="${pageContext.request.contextPath}/status?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
     </select>
   </fieldset>
 </div>
@@ -80,14 +80,12 @@ $(document).ready(function(){
     <div class="col-md-6" >
       <fieldset class="form-group">
          
-    <select name="role" id="role" class="form-control" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
-      
-      <option value=""  data-href="countUser">Role</option>
-      <option data-href="${pageContext.request.contextPath}/role?xRoleId=${listRo.id}" ${param.xRoleId == '${listRo.id}' ? 'selected' : ''}>${listRo.name}</option>
-      <option data-href="${pageContext.request.contextPath}/role?xRoleId=${listRo.id}" ${param.xRoleId == '${listRo.id}' ? 'selected' : ''}>${listRo.name}</option>
-      <option data-href="${pageContext.request.contextPath}/role?xRoleId=${listRo.id}" ${param.xRoleId == '${listRo.id}' ? 'selected' : ''}>${listRo.name}</option>
-      
-    </select>
+  <select name="role" id="role" class="form-control" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
+  <option value=""  data-href="countUser">Role</option>
+  <option value="1" data-href="${pageContext.request.contextPath}/role?xRoleId=1" ${param.xRoleId eq '1' ? 'selected' : ''}>admin</option>
+  <option value="2" data-href="${pageContext.request.contextPath}/role?xRoleId=2" ${param.xRoleId eq '2' ? 'selected' : ''}>manager</option>
+  <option value="3" data-href="${pageContext.request.contextPath}/role?xRoleId=3" ${param.xRoleId eq '3' ? 'selected' : ''}>normalUser</option>
+</select>
         
       </fieldset>
     </div>
