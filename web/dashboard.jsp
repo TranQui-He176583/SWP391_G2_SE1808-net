@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -34,54 +35,44 @@
 
     <body>
         <!-- Loader -->
-        <div id="preloader">
-            <div id="status">
-                <div class="spinner">
-                    <div class="double-bounce1"></div>
-                    <div class="double-bounce2"></div>
-                </div>
-            </div>
-        </div>
+        
         <!-- Loader -->
 
         <div class="page-wrapper doctris-theme toggled">
-            <nav id="sidebar" class="sidebar-wrapper">
+            <nav id="sidebar" class="sidebar-wrapper"style="background: aliceblue;">
                 <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
-                    <div class="sidebar-brand">
-                        <a href="landing/index-two.html">
-                        <!--<a href="index.html">-->
-                            <img src="assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                            <img src="assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+                    <div class="sidebar-brand" style="font-size: 20px;background: white;">
+                        <a style="text-align: center"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
+                       
                         </a>
                     </div>
                     
                     <ul class="sidebar-menu pt-3">
                         <li><a href="index.html"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
-                        <li><a href="appointment.html"><i class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a></li>
+                        <li><a href="appointment.html"><i class="uil uil-user me-2 d-inline-block"></i>Profile</a></li>
 
                         <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Table</a>
+                            <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
                             <div class="sidebar-submenu">
                                 <ul>
-                                    <li><a href="">User</a></li>
                                    
                                     <li><a href="dr-profile.html">Club</a></li>
+                                    <li><a href="dr-profile.html">Event</a></li>
                                 </ul>
                             </div>
                         </li>
 
                         <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
+                            <a href="javascript:void(0)"><i class="uil uil-setting me-2 d-inline-block"></i>Setting</a>
                             <div class="sidebar-submenu">
                                 <ul>
-                                    <li><a href="patients.html">All Patients</a></li>
-                                    <li><a href="add-patient.html">Add Patients</a></li>
-                                    <li><a href="patient-profile.html">Profile</a></li>
+                                    <li><a href="countUser">Setting</a></li>
+                                    <li><a href="blog-detail.html">Setting Detail</a></li>
                                 </ul>
                             </div>
                         </li>
 
-                        <li class="sidebar-dropdown">
+<!--                        <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
                             <div class="sidebar-submenu">
                                 <ul>
@@ -90,9 +81,9 @@
                                     <li><a href="calendar.html">Calendar</a></li>
                                 </ul>
                             </div>
-                        </li>
+                        </li>-->
 
-                        <li class="sidebar-dropdown">
+<!--                        <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-shopping-cart me-2 d-inline-block"></i>Pharmacy</a>
                             <div class="sidebar-submenu">
                                 <ul>
@@ -102,7 +93,7 @@
                                     <li><a href="checkout.html">Checkout</a></li>
                                 </ul>
                             </div>
-                        </li>
+                        </li>-->
 
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
@@ -114,56 +105,24 @@
                             </div>
                         </li>
 
-                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-file me-2 d-inline-block"></i>Pages</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li><a href="faqs.html">FAQs</a></li>
-                                    <li><a href="review.html">Reviews</a></li>
-                                    <li><a href="invoice-list.html">Invoice List</a></li>
-                                    <li><a href="invoice.html">Invoice</a></li>
-                                    <li><a href="terms.html">Terms & Policy</a></li>
-                                    <li><a href="privacy.html">Privacy Policy</a></li>
-                                    <li><a href="error.html">404 !</a></li>
-                                    <li><a href="blank-page.html">Blank Page</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-sign-in-alt me-2 d-inline-block"></i>Authentication</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="signup.html">Signup</a></li>
-                                    <li><a href="forgot-password.html">Forgot Password</a></li>
-                                    <li><a href="lock-screen.html">Lock Screen</a></li>
-                                    <li><a href="thankyou.html">Thank you...!</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li><a href="components.html"><i class="uil uil-cube me-2 d-inline-block"></i>Components</a></li>
-
-                        <li><a href="landing/index-two.html" target="_blank"><i class="uil uil-window me-2 d-inline-block"></i>Landing page</a></li>
                     </ul>
                     <!-- sidebar-menu  -->
                 </div>
                 <!-- sidebar-content  -->
-                <ul class="sidebar-footer list-unstyled mb-0">
+<!--                <ul class="sidebar-footer list-unstyled mb-0">
                     <li class="list-inline-item mb-0 ms-1">
                         <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
                             <i class="uil uil-comment icons"></i>
                         </a>
                     </li>
-                </ul>
+                </ul>-->
             </nav>
             <!-- sidebar-wrapper  -->
 
             <!-- Start Page Content -->
             <main class="page-content bg-light">
                 <div class="top-header">
-                    <div class="header-bar d-flex justify-content-between border-bottom">
+                    <div class="header-bar d-flex justify-content-between border-bottom"style="background: aliceblue;">
                         <div class="d-flex align-items-center">
                             <a href="#" class="logo-icon">
                                 <img src="assets/images/logo-icon.png" height="30" class="small" alt="">
@@ -188,6 +147,11 @@
                         </div>
         
                         <ul class="list-unstyled mb-0">
+                            <li class="list-inline-item mb-0 ms-1">
+                                <a href="login" >
+                                    <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="home" class="bx bx-home"></i></div>
+                                </a>
+                            </li>
                             
 
                             <li class="list-inline-item mb-0 ms-1">
@@ -273,16 +237,16 @@
                     <div class="layout-specing">
                         <h5 class="mb-0">Dashboard</h5>
 
-                        <div class="row">
+                        <div class="row" style="width: 155%;">
                             <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
                                 <div class="card features feature-primary rounded border-0 shadow p-4">
                                     <div class="d-flex align-items-center">
                                         <div class="icon text-center rounded-md">
-                                            <i class="uil uil-bed h3 mb-0"></i>
+                                            <i class="uil uil-user h3 mb-0"></i>
                                         </div>
                                         <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">558</h5>
-                                            <p class="text-muted mb-0">Patients</p>
+                                            <h5 class="mb-0">${cUser}</h5>
+                                            <p class="text-muted mb-0">USER</p>
                                         </div>
                                     </div>
                                 </div>
@@ -292,11 +256,11 @@
                                 <div class="card features feature-primary rounded border-0 shadow p-4">
                                     <div class="d-flex align-items-center">
                                         <div class="icon text-center rounded-md">
-                                            <i class="uil uil-file-medical-alt h3 mb-0"></i>
+                                            <i class="uil uil-club h3 mb-0"></i>
                                         </div>
                                         <div class="flex-1 ms-2">
                                             <h5 class="mb-0">$2164</h5>
-                                            <p class="text-muted mb-0">Avg. costs</p>
+                                            <p class="text-muted mb-0">CLUB</p>
                                         </div>
                                     </div>
                                 </div>
@@ -306,11 +270,11 @@
                                 <div class="card features feature-primary rounded border-0 shadow p-4">
                                     <div class="d-flex align-items-center">
                                         <div class="icon text-center rounded-md">
-                                            <i class="uil uil-social-distancing h3 mb-0"></i>
+                                            <i class="uil uil-star h3 mb-0"></i>
                                         </div>
                                         <div class="flex-1 ms-2">
                                             <h5 class="mb-0">112</h5>
-                                            <p class="text-muted mb-0">Staff Members</p>
+                                            <p class="text-muted mb-0">EVENT</p>
                                         </div>
                                     </div>
                                 </div>
@@ -320,18 +284,18 @@
                                 <div class="card features feature-primary rounded border-0 shadow p-4">
                                     <div class="d-flex align-items-center">
                                         <div class="icon text-center rounded-md">
-                                            <i class="uil uil-ambulance h3 mb-0"></i>
+                                            <i class="uil uil-share h3 mb-0"></i>
                                         </div>
                                         <div class="flex-1 ms-2">
                                             <h5 class="mb-0">16</h5>
-                                            <p class="text-muted mb-0">Vehicles</p>
+                                            <p class="text-muted mb-0">SHARE</p>
                                         </div>
                                     </div>
                                     
                                 </div>
                             </div><!--end col-->
                             
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+<!--                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
                                 <div class="card features feature-primary rounded border-0 shadow p-4">
                                     <div class="d-flex align-items-center">
                                         <div class="icon text-center rounded-md">
@@ -343,9 +307,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><!--end col-->
+                            </div>end col-->
                             
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+<!--                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
                                 <div class="card features feature-primary rounded border-0 shadow p-4">
                                     <div class="d-flex align-items-center">
                                         <div class="icon text-center rounded-md">
@@ -357,10 +321,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div><!--end col-->
-                        </div><!--end row-->
+                            </div>end col
+                        </div>end row-->
 
-                        <div class="row">
+<!--                        <div class="row">
                             <div class="col-xl-8 col-lg-7 mt-4">
                                 <div class="card shadow border-0 p-4">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -376,9 +340,9 @@
                                     </div>
                                     <div id="dashboard" class="apex-chart"></div>
                                 </div>
-                            </div><!--end col-->
+                            </div>end col-->
 
-                            <div class="col-xl-4 col-lg-5 mt-4">
+<!--                            <div class="col-xl-4 col-lg-5 mt-4">
                                 <div class="card shadow border-0 p-4">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h6 class="align-items-center mb-0">Patients by Department</h6>
@@ -392,306 +356,54 @@
                                     </div>
                                     <div id="department" class="apex-chart"></div>
                                 </div>
-                            </div><!--end col-->
+                            </div>end col-->
                         </div><!--end row-->
 
                         <div class="row">
                             <div class="col-xl-4 col-lg-6 mt-4">
                                 <div class="card border-0 shadow rounded">
                                     <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
-                                        <h6 class="mb-0"><i class="uil uil-calender text-primary me-1 h5"></i> Latest Appointment</h6>
-                                        <h6 class="text-muted mb-0">55 Patients</h6>
+                                        <h6 class="mb-0"><i class="uil uil-user me-1 h5"></i>User</h6>
+                                        <div class="clearfix">
+                                        <ul class="pagination justify-content-center" id="pagination" style="font-size: 10px">
+                                                 <li class="page-item ${tag == 1 ? 'disabled' : ''}">
+                                                      <a class="page-link" href="dboard?index=${tag - 1}">&laquo</a>
+                                                 </li>
+                                                
+                                                  <li class="page-item ${tag == mPage ? 'disabled' : ''}">
+                                                    <a class="page-link" href="dboard?index=${tag + 1}">&raquo</a>
+                                                 </li>
+                                               </ul>
+                                            </div>
+                                            
+                                      
                                     </div>
-
-                                    <ul class="list-unstyled mb-0 p-4">
-                                        <li>
+                                 
+ 
+                                   <c:forEach items="${lisu}" var="lu">
+                                       <ul class="list-unstyled mb-0 p-4">
+                                        <li>                     
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div class="d-inline-flex">
-                                                    <img src="assets/images/client/01.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                    <img src="${lu.image}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
                                                     <div class="ms-3">
-                                                        <h6 class="text-dark mb-0 d-block">Calvin Carlo</h6>
-                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
+                                                        <h6 class="text-dark mb-0 d-block">${lu.fullname}</h6>
+                                                        <small class="text-muted">${lu.email}</small>
                                                     </div>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-check icons"></i></a>
-                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-times icons"></i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="mt-4">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="d-inline-flex">
-                                                    <img src="assets/images/client/02.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                    <div class="ms-3">
-                                                        <h6 class="text-dark mb-0 d-block">Joya Khan</h6>
-                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-check icons"></i></a>
-                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-times icons"></i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="mt-4">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="d-inline-flex">
-                                                    <img src="assets/images/client/03.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                    <div class="ms-3">
-                                                        <h6 class="text-dark mb-0 d-block">Amelia Muli</h6>
-                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-check icons"></i></a>
-                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-times icons"></i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="mt-4">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="d-inline-flex">
-                                                    <img src="assets/images/client/04.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                    <div class="ms-3">
-                                                        <h6 class="text-dark mb-0 d-block">Nik Ronaldo</h6>
-                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-check icons"></i></a>
-                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-times icons"></i></a>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="mt-4">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="d-inline-flex">
-                                                    <img src="../assets/images/client/05.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                    <div class="ms-3">
-                                                        <h6 class="text-dark mb-0 d-block">Crista Joseph</h6>
-                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
-                                                    </div>
-                                                </div>
-                                                <div>
-                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-check icons"></i></a>
-                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-times icons"></i></a>
+                                                   
                                                 </div>
                                             </div>
                                         </li>
                                     </ul>
+                                      </c:forEach>
                                 </div>
                             </div><!--end col-->
 
-                            <div class="col-xl-4 col-lg-6 mt-4">
-                                <div class="card chat chat-person border-0 shadow rounded">
-                                    <div class="d-flex justify-content-between border-bottom p-4">
-                                        <div class="d-flex">
-                                            <img src="assets/images/doctors/02.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                            <div class="flex-1 overflow-hidden ms-3">
-                                                <a href="#" class="text-dark mb-0 h6 d-block text-truncate">Cristino Murphy</a>
-                                                <small class="text-muted"><i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i> Online</small>
-                                            </div>
-                                        </div>
-
-                                        <ul class="list-unstyled mb-0">
-                                            <li class="dropdown dropdown-primary list-inline-item">
-                                                <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="uil uil-ellipsis-h icons"></i></button>
-                                                <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3">
-                                                    <a class="dropdown-item text-dark" href="#"><span class="mb-0 d-inline-block me-1"><i class="uil uil-user align-middle h6"></i></span> Profile</a>
-                                                    <a class="dropdown-item text-dark" href="#"><span class="mb-0 d-inline-block me-1"><i class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
-                                                    <a class="dropdown-item text-dark" href="#"><span class="mb-0 d-inline-block me-1"><i class="uil uil-trash align-middle h6"></i></span> Delete</a>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                    <ul class="p-4 list-unstyled mb-0 chat" data-simplebar style="background: url('../assets/images/bg/bg-chat.png') center center; max-height: 295px;">
-                                        <li>
-                                            <div class="d-inline-block">
-                                                <div class="d-flex chat-type mb-3">
-                                                    <div class="position-relative">
-                                                        <img src="assets/images/doctors/02.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                        <i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i>
-                                                    </div>
-                                                        
-                                                    <div class="flex-1 chat-msg" style="max-width: 500px;">
-                                                        <p class="text-muted small shadow px-3 py-2 bg-white rounded mb-1">Hey Christopher</p>
-                                                        <small class="text-muted msg-time"><i class="uil uil-clock-nine me-1"></i>59 min ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="chat-right">
-                                            <div class="d-inline-block">
-                                                <div class="d-flex chat-type mb-3">
-                                                    <div class="position-relative chat-user-image">
-                                                        <img src="assets/images/client/09.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                        <i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i>
-                                                    </div>
-                                                        
-                                                    <div class="flex-1 chat-msg" style="max-width: 500px;">
-                                                        <p class="text-muted small shadow px-3 py-2 bg-white rounded mb-1">Hello Cristino</p>
-                                                        <small class="text-muted msg-time"><i class="uil uil-clock-nine me-1"></i>45 min ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="chat-right">
-                                            <div class="d-inline-block">
-                                                <div class="d-flex chat-type mb-3">
-                                                    <div class="position-relative chat-user-image">
-                                                        <img src="assets/images/client/09.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                        <i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i>
-                                                    </div>
-                                                        
-                                                    <div class="flex-1 chat-msg" style="max-width: 500px;">
-                                                        <p class="text-muted small shadow px-3 py-2 bg-white rounded mb-1">How can i help you?</p>
-                                                        <small class="text-muted msg-time"><i class="uil uil-clock-nine me-1"></i>44 min ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="d-inline-block">
-                                                <div class="d-flex chat-type mb-3">
-                                                    <div class="position-relative">
-                                                        <img src="assets/images/doctors/02.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                        <i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i>
-                                                    </div>
-                                                        
-                                                    <div class="flex-1 chat-msg" style="max-width: 500px;">
-                                                        <p class="text-muted small shadow px-3 py-2 bg-white rounded mb-1">Nice to meet you</p>
-                                                        <small class="text-muted msg-time"><i class="uil uil-clock-nine me-1"></i>42 min ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="d-inline-block">
-                                                <div class="d-flex chat-type mb-3">
-                                                    <div class="position-relative">
-                                                        <img src="assets/images/doctors/02.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                        <i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i>
-                                                    </div>
-                                                        
-                                                    <div class="flex-1 chat-msg" style="max-width: 500px;">
-                                                        <p class="text-muted small shadow px-3 py-2 bg-white rounded mb-1">Hope you are doing fine?</p>
-                                                        <small class="text-muted msg-time"><i class="uil uil-clock-nine me-1"></i>40 min ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="chat-right">
-                                            <div class="d-inline-block">
-                                                <div class="d-flex chat-type mb-3">
-                                                    <div class="position-relative chat-user-image">
-                                                        <img src="assets/images/client/09.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                        <i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i>
-                                                    </div>
-                                                        
-                                                    <div class="flex-1 chat-msg" style="max-width: 500px;">
-                                                        <p class="text-muted small shadow px-3 py-2 bg-white rounded mb-1">I'm good thanks for asking</p>
-                                                        <small class="text-muted msg-time"><i class="uil uil-clock-nine me-1"></i>45 min ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="d-inline-block">
-                                                <div class="d-flex chat-type mb-3">
-                                                    <div class="position-relative">
-                                                        <img src="assets/images/doctors/02.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                        <i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i>
-                                                    </div>
-                                                        
-                                                    <div class="flex-1 chat-msg" style="max-width: 500px;">
-                                                        <p class="text-muted small shadow px-3 py-2 bg-white rounded mb-1">I am intrested to know more about your prices and services you offer</p>
-                                                        <small class="text-muted msg-time"><i class="uil uil-clock-nine me-1"></i>35 min ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="chat-right">
-                                            <div class="d-inline-block">
-                                                <div class="d-flex chat-type mb-3">
-                                                    <div class="position-relative chat-user-image">
-                                                        <img src="assets/images/client/09.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                        <i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i>
-                                                    </div>
-                                                        
-                                                    <div class="flex-1 chat-msg" style="max-width: 500px;">
-                                                        <p class="text-muted small shadow px-3 py-2 bg-white rounded mb-1">Sure please check below link to find more useful information <a href="https://1.envato.market/landrick" target="_blank" class="text-primary">https://shreethemes.in/landrick/</a></p>
-                                                        <small class="text-muted msg-time"><i class="uil uil-clock-nine me-1"></i>25 min ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="d-inline-block">
-                                                <div class="d-flex chat-type mb-3">
-                                                    <div class="position-relative">
-                                                        <img src="assets/images/doctors/02.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                        <i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i>
-                                                    </div>
-                                                        
-                                                    <div class="flex-1 chat-msg" style="max-width: 500px;">
-                                                        <p class="text-muted small shadow px-3 py-2 bg-white rounded mb-1">Thank you 😊</p>
-                                                        <small class="text-muted msg-time"><i class="uil uil-clock-nine me-1"></i>20 min ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="chat-right">
-                                            <div class="d-inline-block">
-                                                <div class="d-flex chat-type mb-3">
-                                                    <div class="position-relative chat-user-image">
-                                                        <img src="assets/images/client/09.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                        <i class="mdi mdi-checkbox-blank-circle text-success on-off align-text-bottom"></i>
-                                                    </div>
-                                                        
-                                                    <div class="flex-1 chat-msg" style="max-width: 500px;">
-                                                        <p class="text-muted small shadow px-3 py-2 bg-white rounded mb-1">Welcome</p>
-                                                        <small class="text-muted msg-time"><i class="uil uil-clock-nine me-1"></i>18 min ago</small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-
-                                    <div class="p-2 rounded-bottom shadow">
-                                        <div class="row">
-                                            <div class="col">
-                                                <input type="text" class="form-control border" placeholder="Enter Message...">
-                                            </div>
-                                            <div class="col-auto">
-                                                <a href="#" class="btn btn-icon btn-primary"><i class="uil uil-message icons"></i></a>
-                                                <a href="#" class="btn btn-icon btn-primary"><i class="uil uil-smile icons"></i></a>
-                                                <a href="#" class="btn btn-icon btn-primary"><i class="uil uil-paperclip icons"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-
-                            <div class="col-xl-4 col-lg-12 mt-4">
+                           <div class="col-xl-4 col-lg-12 mt-4">
                                 <div class="card border-0 shadow rounded">
                                     <div class="p-4 border-bottom">
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <h6 class="mb-0"><i class="uil uil-user text-primary me-1 h5"></i> Patients Reviews</h6>
+                                            <h6 class="mb-0"><i class="uil uil-club me-1 h5"></i> Club</h6>
                                             
                                             <div class="mb-0 position-relative">
                                                 <select class="form-select form-control" id="dailypatient">
@@ -724,15 +436,35 @@
                                             <p class="text-muted mb-0">150 Patients</p>
                                         </li>
 
-                                        <li class="d-flex align-items-center justify-content-between mt-4">
+                                    </ul>
+                                </div>
+                            </div><!--end col-->
+
+                            <div class="col-xl-4 col-lg-12 mt-4">
+                                <div class="card border-0 shadow rounded">
+                                    <div class="p-4 border-bottom">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="mb-0"><i class="uil uil-star me-1 h5"></i> Event</h6>
+                                            
+                                            <div class="mb-0 position-relative">
+                                                <select class="form-select form-control" id="dailypatient">
+                                                    <option selected>New</option>
+                                                    <option value="2019">Old</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <ul class="list-unstyled mb-0 p-4" data-simplebar style="height: 355px;">
+                                        <li class="d-flex align-items-center justify-content-between">
                                             <div class="d-flex align-items-center">
-                                                <img src="../assets/images/doctors/02.jpg" class="avatar avatar-small rounded-circle border shadow" alt="">
+                                                <img src="assets/images/doctors/01.jpg" class="avatar avatar-small rounded-circle border shadow" alt="">
                                                 <div class="flex-1 ms-3">
-                                                    <span class="d-block h6 mb-0">Dr. Cristino Murphy</span>
-                                                    <small class="text-muted">Gynecology</small>
+                                                    <span class="d-block h6 mb-0">Dr. Calvin Carlo</span>
+                                                    <small class="text-muted">Orthopedic</small>
 
                                                     <ul class="list-unstyled mb-0">
-                                                        <li class="list-inline-item text-muted">(75)</li>
+                                                        <li class="list-inline-item text-muted">(45)</li>
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
                                                         <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
@@ -742,71 +474,9 @@
                                                 </div>
                                             </div>
 
-                                            <p class="text-muted mb-0">350 Patients</p>
+                                            <p class="text-muted mb-0">150 Patients</p>
                                         </li>
 
-                                        <li class="d-flex align-items-center justify-content-between mt-4">
-                                            <div class="d-flex align-items-center">
-                                                <img src="assets/images/doctors/03.jpg" class="avatar avatar-small rounded-circle border shadow" alt="">
-                                                <div class="flex-1 ms-3">
-                                                    <span class="d-block h6 mb-0">Dr. Alia Reddy</span>
-                                                    <small class="text-muted">Psychotherapy</small>
-
-                                                    <ul class="list-unstyled mb-0">
-                                                        <li class="list-inline-item text-muted">(48)</li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <p class="text-muted mb-0">450 Patients</p>
-                                        </li>
-
-                                        <li class="d-flex align-items-center justify-content-between mt-4">
-                                            <div class="d-flex align-items-center">
-                                                <img src="../assets/images/doctors/04.jpg" class="avatar avatar-small rounded-circle border shadow" alt="">
-                                                <div class="flex-1 ms-3">
-                                                    <span class="d-block h6 mb-0">Dr. Toni Kover</span>
-                                                    <small class="text-muted">Dentist</small>
-
-                                                    <ul class="list-unstyled mb-0">
-                                                        <li class="list-inline-item text-muted">(68)</li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <p class="text-muted mb-0">484 Patients</p>
-                                        </li>
-
-                                        <li class="d-flex align-items-center justify-content-between mt-4">
-                                            <div class="d-flex align-items-center">
-                                                <img src="../assets/images/doctors/05.jpg" class="avatar avatar-small rounded-circle border shadow" alt="">
-                                                <div class="flex-1 ms-3">
-                                                    <span class="d-block h6 mb-0">Dr. Jennifer Ballance</span>
-                                                    <small class="text-muted">Cardiology</small>
-
-                                                    <ul class="list-unstyled mb-0">
-                                                        <li class="list-inline-item text-muted">(55)</li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                        <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                            <p class="text-muted mb-0">476 Patients</p>
-                                        </li>
                                     </ul>
                                 </div>
                             </div><!--end col-->
