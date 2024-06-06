@@ -18,19 +18,19 @@
                     
         <div style="margin-top: 150px" class="login-container">
         <h2 style="font-size: 50px; text-align: center;" >Add new Event</h2>
-        <form action="add_Event" method="post" >
+        <form action="add_Event" method="post" enctype="multipart/form-data" >
             <div>
     <label for="name">Tên sự kiện:</label>
     <input type="text" id="name" name="name" required>
   </div>
   
-<!--  <div>
+  <div>
   
       <label style="" for="image">Avatar of Event</label> <br>
       <input style="font-size: 15px;
     margin-top: 5px;
     margin-bottom: 5px;" type="file" id="image" name="image" accept="image/*" >
-  </div>-->
+  </div>
   
   <div>
     <label for="time">Thời gian:</label>
@@ -44,7 +44,7 @@
   
   <div>
     <label for="details">Chi tiết:</label>
-    <textarea id="details" name="details" rows="5" required></textarea>
+    <textarea id="details" name="details" rows="10" required></textarea>
   </div>
   
   <button type="submit">Lưu sự kiện</button>

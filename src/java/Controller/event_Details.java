@@ -5,6 +5,7 @@
 
 package Controller;
 
+import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,23 +13,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.time.LocalDateTime;
-import Model.*;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.http.Part;
-import java.io.File;
-import java.time.LocalDate;
+
 /**
  *
  * @author quyka
  */
-@WebServlet(name="add_Event", urlPatterns={"/add_Event"})
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024, // 1MB
-        maxFileSize = 1024 * 1024 * 5, // 5MB
-        maxRequestSize = 1024 * 1024 * 10 // 10MB
-)
-public class add_Event extends HttpServlet {
+@WebServlet(name="event_Details", urlPatterns={"/event_Details"})
+public class event_Details extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,16 +30,16 @@ public class add_Event extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet add_Event</title>");  
+            out.println("<title>Servlet event_Details</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet add_Event at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet event_Details at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,7 +56,18 @@ public class add_Event extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       request.getRequestDispatcher("add_Event.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+       PrintWriter pr  = response.getWriter();
+       String SId = request.getParameter("id");
+       int id = Integer.parseInt(SId);
+       pr.print(id);
+       EventDAO eDAO = new EventDAO();
+       Event e = new Event();
+       e =eDAO.getEvent(id);
+       request.setAttribute("Event", e);
+       request.getRequestDispatcher("event_Details.jsp").forward(request, response);
+       
+       
     } 
 
     /** 
@@ -75,54 +77,19 @@ public class add_Event extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-     private static final String UPLOAD_DIR = "assets/img/eventlogo";
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter pr  = response.getWriter();
-        String name = request.getParameter("name");
-        String Stime = request.getParameter("time");
-        LocalDateTime time = LocalDateTime.parse(Stime);
-        String xLocation = request.getParameter("location");
-        String xDetail = request.getParameter("details");
-        String imageURL = saveUploadedFile(request);
-        Event e = new Event(0, name, 1, time, xLocation, xDetail,imageURL);
-        EventDAO eDAO = new EventDAO();
-        pr.println(xDetail);
-        pr.print(eDAO.insert(e));
-        pr.print(imageURL);
+        processRequest(request, response);
     }
 
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */
-    String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
-    String uploadPath = "assets/img/eventlogo/";
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
-    Part part = request.getPart("image");
-    String fileName = getUniqueFileName(part);
-    String filePath = uploadPath + fileName;
-
-    String applicationPath = request.getServletContext().getRealPath("");
-    String absoluteFilePath = applicationPath + File.separator + filePath;
-
-    part.write(absoluteFilePath);
-
-    File uploadedFile = new File(absoluteFilePath);
-    if (uploadedFile.exists()) {
-        return filePath;
-    } else {
-        return "";
-    }
-}
-
-     String getUniqueFileName(Part part) {
-        String submittedFileName = part.getSubmittedFileName();
-        String fileExtension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
-        String newFileName = System.currentTimeMillis() + fileExtension;
-        return newFileName;
-    }
 }
