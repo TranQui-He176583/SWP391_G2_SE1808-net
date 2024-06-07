@@ -48,7 +48,7 @@
                     </div>
                     
                     <ul class="sidebar-menu pt-3">
-                        <li><a href="index.html"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
+                        <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
                         <li><a href="appointment.html"><i class="uil uil-user me-2 d-inline-block"></i>Profile</a></li>
 
                         <li class="sidebar-dropdown">
@@ -67,7 +67,7 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                     <li><a href="countUser">Setting</a></li>
-                                    <li><a href="blog-detail.html">Setting Detail</a></li>
+                                    <li><a href="detailUser">Setting Detail</a></li>
                                 </ul>
                             </div>
                         </li>

@@ -15,14 +15,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
-import org.apache.catalina.User;
 
 /**
  *
  * @author pc
  */
-@WebServlet(name="detailUser", urlPatterns={"/detailUser"})
-public class detailUser extends HttpServlet {
+@WebServlet(name="detailDB", urlPatterns={"/detailDB"})
+public class detailDB extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,12 +33,7 @@ public class detailUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-           PrintWriter pr= response.getWriter();
-           String id=request.getParameter("uid");
-           
-           UserDAO dao= new UserDAO();
-           Account u= dao.getUser(id);
-           String indexPage = request.getParameter("index");
+        String indexPage = request.getParameter("index");
         int index = 1; 
         if (indexPage != null) {
         index = Integer.parseInt(indexPage);
@@ -47,12 +41,9 @@ public class detailUser extends HttpServlet {
         UserDAO countdao = new UserDAO();
         List<Account> listindb = countdao.pagingUser(index);
         request.setAttribute("listdb", listindb );
-        request.setAttribute("detail", u);
         request.getRequestDispatcher("User_detail.jsp").forward(request, response);
-        
-       
-        }
-    
+
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -78,11 +69,11 @@ public class detailUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String NameSearch =request.getParameter("search");
+        String NameSearch =request.getParameter("search");
          UserDAO dao = new UserDAO();
          List<Account> lis= dao.getSearchUser(NameSearch);
-         request.setAttribute("listdb", lis);
-         request.getRequestDispatcher("User_detail.jsp").forward(request, response);
+         request.setAttribute("listUs", lis);
+         request.getRequestDispatcher("User_list.jsp").forward(request, response);
     }
 
     /** 

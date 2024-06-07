@@ -112,7 +112,7 @@
                     </div>
                     
                     <ul class="sidebar-menu pt-3">
-                        <li><a href="index.html"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
+                        <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
                         <li><a href="appointment.html"><i class="uil uil-user me-2 d-inline-block"></i>Profile</a></li>
 
                         <li class="sidebar-dropdown">
@@ -273,14 +273,8 @@
                     <div class="layout-specing">
                         <div class="d-md-flex justify-content-between">
                            
-                            <div class="user-profile">
-				<div class="user-avatar">
-					<img src="${detail.image}" alt="Maxwell Admin">
-				</div>
-				<h5 class="user-name">${detail.fullname}</h5>
-				<h6 class="user-email">${detail.email}</h6>
-			    </div>  
-
+                
+                               
                             <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                                     <li class="breadcrumb-item"><a href="dboard">DashBoard</a></li>
@@ -288,32 +282,45 @@
                                     <li class="breadcrumb-item active" aria-current="page">Setting Detail</li>
                                 </ul>
                             </nav>
+                                
                         </div>
                         
                         <div class="row">
-                            <div class="col-lg-8 col-lg-7 mt-4">
-                                <div class="card rounded shadow border-0 overflow-hidden">
-                                    <img src="../assets/images/blog/single.jpg" class="img-fluid" alt="">
-                                    
-        
-                                    <div class="p-4">
+                             <div class="col-lg-3 col-md-3 mt-4">
+                                <div class="card border-0 sidebar sticky-bar rounded shadow">
+                                    <div class="card-body">
+                                        <div class="user-avatar" style="text-align: center;">
+					<img src="${detail.image}" alt="Maxwell Admin"style="width: 100px;height: 100px;border-radius: 50px">
+				        </div>
+                               
+                                        <h5 class="user-name"style="text-align: center">${detail.fullname}</h5>
+                                        <h6 class="user-email"style="text-align: center">${detail.email}</h6>
                                         
+                                      
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+                            <div class="col-lg-6 col-lg-6 mt-4">
+                                <div class="card rounded shadow border-0 overflow-hidden"style="display: flex">
+                                   
+                                    <div class="p-4">
+                                      
                                       <form action="editUser" method="POST">
 		<div class="row gutters">
                   
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+<!--			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">-->
                            <input type="hidden"  name="id" value="${detail.id}" readonly required>
 				<div class="form-group">
                                     <label style="color: yellowgreen;font-weight: bold">Full Name</label>
                                         <input value="${detail.fullname}" type="text" class="form-control" name="fullname">
 				</div>
-			</div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+<!--			</div>-->
+<!--                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">-->
 			<div class="form-group">
                            <label style="color: yellowgreen; font-weight: bold">Role</label>
                           <div class="context-gender" style="display: flex;">
     
-    <div style="display: flex; align-items: center;">
+    <div style="display: flex; align-items: center;padding-right: 20px">
         <input ${detail.roleId== 2 ? 'checked' : ''} value="2" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
         Manager
     </div>
@@ -324,14 +331,14 @@
     </div>
 </div>
 </div>
-                        </div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+<!--                        </div>-->
+<!--			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">-->
 				<div class="form-group">
 					<label style="color: yellowgreen;font-weight: bold">Phone</label>
 					<input  value="${detail.phone}"type="text" class="form-control" name="phone" >
 				</div>
-			</div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+<!--			</div>-->
+<!--                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">-->
 			<div class="form-group">
                            <label style="color: yellowgreen; font-weight: bold">Gender</label>
                            <div class="context-gender" style="display: flex;">
@@ -346,14 +353,14 @@
 </div>
                         </div>
 </div>
-                        </div>
+<!--                        </div>-->
                                
                                 
 		</div>
 		
 		<div class="row gutters">
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="text-right"style="margin-left: 360px;display: flex">
+                            <div class="text-right"style="padding-left: 200px;display: flex">
                                 <a href="" class="btn btn-success" style="margin-right: 5px">Cancel</a> 
                                 <button type="submit" name="submit" class="btn btn-primary" style="background: green">Save</button>
                                        
@@ -366,16 +373,16 @@
                                 </div>
                             </div><!--end col-->
         
-                            <div class="col-lg-4 col-md-5 mt-4">
+                            <div class="col-lg-3 col-md-3 mt-4">
                                 <div class="card border-0 sidebar sticky-bar rounded shadow">
                                     <div class="card-body">
                                         <!-- SEARCH -->
                                         <div class="widget mb-4 pb-2">
                                             <h5 class="widget-title">Search</h5>
                                             <div id="search2" class="widget-search mt-4 mb-0">
-                                                <form role="search" method="get" id="searchform1" class="searchform">
+                                                <form action="detailUser" method="post" id="searchform1" class="searchform">
                                                     <div>
-                                                        <input type="text" class="border rounded" name="s" id="s1" placeholder="Search Keywords...">
+                                                        <input type="text" class="border rounded" name="search" id="s1" placeholder="Search Keywords...">
                                                         <input type="submit" id="searchsubmit1" value="Search">
                                                     </div>
                                                 </form>
@@ -385,31 +392,17 @@
             
                                         <!-- RECENT POST -->
                                         <div class="widget mb-4 pb-2">
-                                            <h5 class="widget-title">Recent Post</h5>
+                                            <h5 class="widget-title">Recent User</h5>
                                             <div class="mt-4">
+                                                <c:forEach items="${listdb}" var="lisb">
                                                 <div class="clearfix post-recent">
-                                                    <div class="post-recent-thumb float-start"> <a href="jvascript:void(0)"> <img alt="img" src="../assets/images/blog/07.jpg" class="img-fluid rounded"></a></div>
-                                                    <div class="post-recent-content float-start"><a href="jvascript:void(0)">Consultant Business</a><span class="text-muted mt-2">15th June, 2019</span></div>
+                                                    <div class="post-recent-thumb float-start"> <a href=""> <img alt="img" src="${lisb.image}" class="img-fluid rounded"></a></div>
+                                                    <div class="post-recent-content float-start"><a href="detailUser?uid=${lisb.id}">${lisb.fullname}</a></div>
                                                 </div>
-                                                <div class="clearfix post-recent">
-                                                    <div class="post-recent-thumb float-start"> <a href="jvascript:void(0)"> <img alt="img" src="../assets/images/blog/08.jpg" class="img-fluid rounded"></a></div>
-                                                    <div class="post-recent-content float-start"><a href="jvascript:void(0)">Look On The Glorious Balance</a> <span class="text-muted mt-2">15th June, 2019</span></div>
-                                                </div>
-                                                <div class="clearfix post-recent">
-                                                    <div class="post-recent-thumb float-start"> <a href="jvascript:void(0)"> <img alt="img" src="../assets/images/blog/01.jpg" class="img-fluid rounded"></a></div>
-                                                    <div class="post-recent-content float-start"><a href="jvascript:void(0)">Research Financial.</a> <span class="text-muted mt-2">15th June, 2019</span></div>
-                                                </div>
+                                                </c:forEach>
                                             </div>
                                         </div>
-                                        <!-- RECENT POST -->
-            
-                                        <!-- TAG CLOUDS -->
-                                       
-                                        <!-- TAG CLOUDS -->
-                                        
-                                        <!-- SOCIAL -->
-                                        
-                                        <!-- SOCIAL -->
+                                      
                                     </div>
                                 </div>
                             </div><!--end col-->

@@ -59,13 +59,13 @@
             <nav id="sidebar" class="sidebar-wrapper"style="background: aliceblue;">
                 <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                     <div class="sidebar-brand" style="font-size: 20px;background: white;">
-                        <a style="text-align: center"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
+                        <a style="text-align: center"href="login"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
                        
                         </a>
                     </div>
                     
                     <ul class="sidebar-menu pt-3">
-                        <li><a href="index.html"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
+                        <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
                         <li><a href="appointment.html"><i class="uil uil-user me-2 d-inline-block"></i>Profile</a></li>
 
                         <li class="sidebar-dropdown">
@@ -164,11 +164,11 @@
                         </div>
         
                         <ul class="list-unstyled mb-0">
-                            <li class="list-inline-item mb-0 ms-1">
+<!--                            <li class="list-inline-item mb-0 ms-1">
                                 <a href="login" >
                                     <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="home" class="bx bx-home"></i></div>
                                 </a>
-                            </li>
+                            </li>-->
                             
 
                             <li class="list-inline-item mb-0 ms-1">
@@ -289,18 +289,19 @@
                                                
                                 </div>
                                                     <div class="col-sm-12 col-md-5" style="padding-left: 150px">
-                                <div class="justify-content-md-end">
+                                                        <div class="justify-content-md-end"style="display: flex;padding-left: 30px">
                                     <form action="countUser" method="post" style="display: flex; align-items: center;">
     <div class="search-wrapper" style="position: relative;">
       <input type="text" name="search" placeholder="search here" style="padding-left: 30px;border-radius: 10px;font-size: 15px">
       <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
     </div>
-    <div style="margin-left: 20px">
-      <a href="NewUser.jsp" class="btn btn-secondary" style="background: red;height: 35px;width: 130px">
-          <span>Add New</span>
-      </a>
+                                        </form>
+    <div class="d-grid" style="margin-left: 20px">
+      <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentform"style="height: 35px;width: 130px">ADD NEW</a>
     </div>
-  </form>
+    
+
+  
                                 </div>
                             </div>
                         </div>
@@ -335,9 +336,7 @@
                          
                             <td>
                                  <c:choose>
-                                       <c:when test="${o.roleId == 1}">
-                                          <span class="text-primary">Admin</span>
-                                       </c:when>
+                                      
                                         <c:when test="${o.roleId == 2}">
                                           <span class="text-primary">Manager</span>
                                         </c:when>
@@ -433,9 +432,9 @@
                 <!-- Footer Start -->
                 
                 <!-- End -->
-            </main>
+            
             <!--End page-content" -->
-        </div>
+        
         <!-- page-wrapper -->
 
         <!-- Offcanvas Start -->
@@ -485,100 +484,81 @@
 
         <!-- Modal start -->
         <!-- Add New Appointment Start -->
-        <div class="modal fade" id="appointmentform" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header border-bottom p-3">
-                        <h5 class="modal-title" id="exampleModalLabel">Book an Appointment</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal fade" id="appointmentform" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+             <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content" style="background: aliceblue">
+                    <div class="form-add" style="padding: 20px">
+
+           <form action="add" method="post">
+               <h2 style="text-align: center">Add New User</h2>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label style="color: black;font-size: 18px;"> Name</label>
+                            <input type="text" class="form-control" name="fullname" id="fullname" required="required">
+                        </fieldset>
                     </div>
-                    <div class="modal-body p-3 pt-4">
-                        <form>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Patient Name <span class="text-danger">*</span></label>
-                                        <input name="name" id="name" type="text" class="form-control" placeholder="Patient Name :">
-                                    </div>
-                                </div><!--end col-->
-                                
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Departments</label>
-                                        <select class="form-control department-name select2input">
-                                            <option value="EY">Eye Care</option>
-                                            <option value="GY">Gynecologist</option>
-                                            <option value="PS">Psychotherapist</option>
-                                            <option value="OR">Orthopedic</option>
-                                            <option value="DE">Dentist</option>
-                                            <option value="GA">Gastrologist</option>
-                                            <option value="UR">Urologist</option>
-                                            <option value="NE">Neurologist</option>
-                                        </select>
-                                    </div>
-                                </div><!--end col-->
-                                
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Doctor</label>
-                                        <select class="form-control doctor-name select2input">
-                                            <option value="CA">Dr. Calvin Carlo</option>
-                                            <option value="CR">Dr. Cristino Murphy</option>
-                                            <option value="AL">Dr. Alia Reddy</option>
-                                            <option value="TO">Dr. Toni Kovar</option>
-                                            <option value="JE">Dr. Jessica McFarlane</option>
-                                            <option value="EL">Dr. Elsie Sherman</option>
-                                            <option value="BE">Dr. Bertha Magers</option>
-                                            <option value="LO">Dr. Louis Batey</option>
-                                        </select>
-                                    </div>
-                                </div><!--end col-->
-
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Your Email <span class="text-danger">*</span></label>
-                                        <input name="email" id="email" type="email" class="form-control" placeholder="Your email :">
-                                    </div> 
-                                </div><!--end col-->
-
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Your Phone <span class="text-danger">*</span></label>
-                                        <input name="phone" id="phone" type="tel" class="form-control" placeholder="Your Phone :">
-                                    </div> 
-                                </div><!--end col-->
-
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label"> Date : </label>
-                                        <input name="date" type="text" class="flatpickr flatpickr-input form-control" id="checkin-date">
-                                    </div>
-                                </div><!--end col-->
-
-                                <div class="col-lg-4 col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="input-time">Time : </label>
-                                        <input name="time" type="text" class="form-control timepicker" id="input-time" placeholder="03:30 PM">
-                                    </div> 
-                                </div><!--end col-->
-
-                                <div class="col-lg-12">
-                                    <div class="mb-3">
-                                        <label class="form-label">Comments <span class="text-danger">*</span></label>
-                                        <textarea name="comments" id="comments" rows="4" class="form-control" placeholder="Your Message :"></textarea>
-                                    </div>
-                                </div><!--end col-->
-
-                                <div class="col-lg-12">
-                                    <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">Book An Appointment</button>
-                                    </div>
-                                </div><!--end col-->
-                            </div><!--end row-->
-                        </form>
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label style="color: black;font-size: 18px;"> Email</label>
+                            <input type="text" class="form-control" name="email" id="email" required="required">
+                        </fieldset>
                     </div>
                 </div>
-            </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label style="color: black;font-size: 18px;">Role</label>
+                            <select name="role" id="role" class="form-control">
+                              
+                                <option value="2">Manager</option>
+                                <option value="3">NormalUser</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label style="color: black;font-size: 18px;"> Phone</label>
+                            <input type="text" class="form-control" name="phone" id="phone">
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label style="color: black;font-size: 18px;">Gender</label>
+                            <select name="gender" id="gender" class="form-control">
+                                <option value="1">male</option>
+                                <option value="2">female</option>
+                            </select>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label style="color: black;font-size: 18px;">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="1">active</option>
+                                <option value="2">block</option>
+                              
+                            </select>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                  
+                    <a href="" class="btn" style="background: skyblue;color: white;font-weight: bold">Back</a>
+                    <button type="submit" class="btn btn-success" style="font-weight: bold">Save</button>
+                    <p style="color: red; font-size: 15px">${requestScope.wrongRegister}</p>
+                    <p style="color: green; font-size: 15px">${requestScope.addnew}</p>
+                </div>
+            </form>
+        </div>
+                </div>
+             </div>
         </div>
         <!-- Add New Appointment End -->
 
