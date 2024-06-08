@@ -87,8 +87,10 @@ public class add_Event extends HttpServlet {
         LocalDateTime time = LocalDateTime.parse(Stime);
         String xLocation = request.getParameter("location");
         String xDetail = request.getParameter("details");
+        String xClubId = request.getParameter("clubid");
+        int club_Id = Integer.parseInt(xClubId);
         String imageURL = saveUploadedFile(request);
-        Event e = new Event(0, name, 1, time, xLocation, xDetail,imageURL);
+        Event e = new Event(0, name, club_Id, time, xLocation, xDetail,imageURL);
         EventDAO eDAO = new EventDAO();
         pr.println(xDetail);
         pr.print(eDAO.insert(e));

@@ -60,22 +60,33 @@ public class get_EvenList_ClubId extends HttpServlet {
          response.setContentType("text/html;charset=UTF-8");
          PrintWriter out = response.getWriter();
          int cPage = Integer.parseInt(request.getParameter("cPage"));
+         String sSerach = request.getParameter("search");
+         String club_Id = request.getParameter("clubid");
+         int clubid = Integer.parseInt(club_Id);
+         
          EventDAO eDAO = new EventDAO();
          List<Event> eList = new ArrayList<Event>();
-         eList = eDAO.get_Event_In_Club(1);
-        
-      int nPage = eList.size()/9;
-        if (eList.size()%9 != 0) {
+         eList = eDAO.get_Event_List(clubid, sSerach, cPage);
+       //  out.print(eDAO.get_Event_List(clubid, sSerach, cPage));
+         
+       int numberEvent = eDAO.get_Event_List_Npage(clubid, sSerach);
+         int nPage=numberEvent/9;
+        if (numberEvent%9!=0) {
             nPage++;
         }
-      
-        List<Event> eCList = new ArrayList<Event>();
-         eCList = eDAO.get_Event_Index(cPage);
-        out.print(nPage);
-        out.print(eList.size());
+        ClubDAO cDAO = new ClubDAO();
+        List<Club> cList = new ArrayList<Club> () ;
+        cList = cDAO.getClubs();
+        
+        
+        //out.print(cList.size());
+        request.setAttribute("cClub", club_Id);
+        request.setAttribute("cPage", cPage);
+        request.setAttribute("search", sSerach);
         request.setAttribute("nPage", nPage);
-         request.setAttribute("eList", eCList);
-         request.getRequestDispatcher("eventList.jsp").forward(request, response);
+         request.setAttribute("eList", eList);
+          request.setAttribute("cList", cList);
+        request.getRequestDispatcher("eventList.jsp").forward(request, response);
     } 
 
     /** 

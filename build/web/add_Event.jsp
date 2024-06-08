@@ -31,6 +31,11 @@
     margin-top: 5px;
     margin-bottom: 5px;" type="file" id="image" name="image" accept="image/*" >
   </div>
+            
+    <div>
+    <label for="club">Clud ID:</label>
+    <input type="text" id="clubid" name="clubid" required>
+  </div>        
   
   <div>
     <label for="time">Thời gian:</label>

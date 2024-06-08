@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.*;
+import java.util.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -60,10 +61,14 @@ public class event_Details extends HttpServlet {
        PrintWriter pr  = response.getWriter();
        String SId = request.getParameter("id");
        int id = Integer.parseInt(SId);
-       pr.print(id);
-       EventDAO eDAO = new EventDAO();
+       List<Event> eList = new ArrayList<Event>();
+         EventDAO eDAO = new EventDAO();
        Event e = new Event();
+        eList = eDAO.get_Event_List(0,"", 1);
+       eList.subList(5, 9).clear();      
+       
        e =eDAO.getEvent(id);
+       request.setAttribute("eList", eList);
        request.setAttribute("Event", e);
        request.getRequestDispatcher("event_Details.jsp").forward(request, response);
        
