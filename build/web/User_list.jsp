@@ -59,7 +59,7 @@
             <nav id="sidebar" class="sidebar-wrapper"style="background: aliceblue;">
                 <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                     <div class="sidebar-brand" style="font-size: 20px;background: white;">
-                        <a style="text-align: center"href="login"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
+                        <a style="text-align: center"href="Home"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
                        
                         </a>
                     </div>
@@ -78,13 +78,14 @@
                                 </ul>
                             </div>
                         </li>
+                         <li><a href="MailBox.jsp"><i class="uil uil-envelope me-2 d-inline-block"></i>MailBox</a></li>
 
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-setting me-2 d-inline-block"></i>Setting</a>
                             <div class="sidebar-submenu">
                                 <ul>
-                                    <li><a href="countUser">Setting</a></li>
-                                    <li><a href="detailUser">Setting Detail</a></li>
+                                    <li><a href="countUser">User</a></li>
+                                    <li><a href="detailUser">User Detail</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -239,10 +240,10 @@
                                                 <small class="text-muted">Orthopedic</small>
                                             </div>
                                         </a>
-                                        <a class="dropdown-item text-dark" href="index.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
+                                        
                                         <a class="dropdown-item text-dark" href="dr-profile.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                         <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="lock-screen.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                                        <a class="dropdown-item text-dark" href="logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                     </div>
                                 </div>
                             </li>
@@ -278,7 +279,7 @@
                                                 <div class="mb-0 position-relative">
                                                     <select class="form-control time-during select2input"onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
                                                         <option value=""  data-href="countUser">Role</option>
-                                                        <option value="1" data-href="${pageContext.request.contextPath}/role?xRoleId=1" ${param.xRoleId eq '1' ? 'selected' : ''}>admin</option>
+                                                       
                                                         <option value="2" data-href="${pageContext.request.contextPath}/role?xRoleId=2" ${param.xRoleId eq '2' ? 'selected' : ''}>manager</option>
                                                         <option value="3" data-href="${pageContext.request.contextPath}/role?xRoleId=3" ${param.xRoleId eq '3' ? 'selected' : ''}>normalUser</option>
                                                     </select>
@@ -288,7 +289,7 @@
                                             
                                                
                                 </div>
-                                                    <div class="col-sm-12 col-md-5" style="padding-left: 150px">
+                                                    <div class="col-sm-12 col-md-5" style="padding-left: 460px">
                                                         <div class="justify-content-md-end"style="display: flex;padding-left: 30px">
                                     <form action="countUser" method="post" style="display: flex; align-items: center;">
     <div class="search-wrapper" style="position: relative;">
@@ -486,64 +487,87 @@
         <!-- Add New Appointment Start -->
         <div class="modal fade" id="appointmentform" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
              <div class="modal-dialog modal-lg modal-dialog-centered">
+                 
                 <div class="modal-content" style="background: aliceblue">
                     <div class="form-add" style="padding: 20px">
 
            <form action="add" method="post">
-               <h2 style="text-align: center">Add New User</h2>
+               <h2 style="text-align: center;font-size: 30px">Add New User</h2>
 
                 <div class="row">
                     <div class="col-md-6">
                         <fieldset class="form-group">
-                            <label style="color: black;font-size: 18px;"> Name</label>
+                            <label style="color: black;font-weight: bold"> Name</label>
                             <input type="text" class="form-control" name="fullname" id="fullname" required="required">
                         </fieldset>
                     </div>
+                     <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label style="color: black;font-weight: bold"> Password</label>
+                            <input type="text" class="form-control" name="password" id="password" required="required">
+                        </fieldset>
+                    </div>
+                </div>
+                    <div class="row">
                     <div class="col-md-6">
                         <fieldset class="form-group">
-                            <label style="color: black;font-size: 18px;"> Email</label>
+                            <label style="color: black;font-weight: bold"> Email</label>
                             <input type="text" class="form-control" name="email" id="email" required="required">
                         </fieldset>
                     </div>
-                </div>
-
+                     <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label style="color: black; font-weight: bold">Role</label>
+                          <div class="context-gender" style="display: flex;">
+    
+    <div style="display: flex; align-items: center;padding-right: 20px">
+        <input value="2" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
+        Manager
+    </div>
+    
+    <div style="display: flex; align-items: center;">
+        <input value="3" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
+        NormalUser
+    </div>
+</div>
+                        </fieldset>
+                    </div>
+                    </div>
+                
+                
                 <div class="row">
                     <div class="col-md-6">
                         <fieldset class="form-group">
-                            <label style="color: black;font-size: 18px;">Role</label>
-                            <select name="role" id="role" class="form-control">
-                              
-                                <option value="2">Manager</option>
-                                <option value="3">NormalUser</option>
-                            </select>
+                            <label style="color: black; font-weight: bold">Gender</label>
+                          <div class="context-gender" style="display: flex;">
+    
+    <div style="display: flex; align-items: center;padding-right: 20px">
+        <input  value="1" type="radio"  name="gender" style="font-size: 10px;  margin-right: 10px">
+        Male
+    </div>
+    
+    <div style="display: flex; align-items: center;">
+        <input value="2" type="radio"  name="gender" style="font-size: 10px;  margin-right: 10px">
+        Female
+    </div>
+</div>
                         </fieldset>
                     </div>
                     <div class="col-md-6">
                         <fieldset class="form-group">
-                            <label style="color: black;font-size: 18px;"> Phone</label>
-                            <input type="text" class="form-control" name="phone" id="phone">
-                        </fieldset>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black;font-size: 18px;">Gender</label>
-                            <select name="gender" id="gender" class="form-control">
-                                <option value="1">male</option>
-                                <option value="2">female</option>
-                            </select>
-                        </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black;font-size: 18px;">Status</label>
-                            <select name="status" id="status" class="form-control">
-                                <option value="1">active</option>
-                                <option value="2">block</option>
-                              
-                            </select>
+                             <label style="color: black; font-weight: bold">Status</label>
+                          <div class="context-status" style="display: flex;">
+    
+    <div style="display: flex; align-items: center;padding-right: 20px">
+        <input  value="1" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
+        active
+    </div>
+    
+    <div style="display: flex; align-items: center;">
+        <input  value="2" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
+        block
+    </div>
+</div>
                         </fieldset>
                     </div>
                 </div>

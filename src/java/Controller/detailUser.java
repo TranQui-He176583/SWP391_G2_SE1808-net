@@ -6,6 +6,8 @@
 package Controller;
 
 import Model.Account;
+import Model.Club;
+import Model.ClubDAO;
 import Model.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,18 +36,19 @@ public class detailUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-           PrintWriter pr= response.getWriter();
+//           PrintWriter pr= response.getWriter();
            String id=request.getParameter("uid");
-           
-           UserDAO dao= new UserDAO();
-           Account u= dao.getUser(id);
+           UserDAO countdao = new UserDAO();
+           ClubDAO cdao=new ClubDAO();
+           Account u= countdao.getUser(id);
            String indexPage = request.getParameter("index");
         int index = 1; 
         if (indexPage != null) {
         index = Integer.parseInt(indexPage);
     }
-        UserDAO countdao = new UserDAO();
+        List<Club> listC= cdao.getAllCLubByAccountID(id);
         List<Account> listindb = countdao.pagingUser(index);
+        request.setAttribute("listC", listC );
         request.setAttribute("listdb", listindb );
         request.setAttribute("detail", u);
         request.getRequestDispatcher("User_detail.jsp").forward(request, response);

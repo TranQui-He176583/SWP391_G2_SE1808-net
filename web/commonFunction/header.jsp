@@ -55,7 +55,7 @@
                                         <div style="margin-top: 20px" class="dropdown-menu"> 
                                             <c:if test="${sessionScope.account.roleId == 1}">  
                                           
-                                             <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="countUser">User management</a>
+                                             <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="dboard">Admin</a>
                                          </c:if>
                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
                                     <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>

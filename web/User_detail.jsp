@@ -106,7 +106,7 @@
             <nav id="sidebar" class="sidebar-wrapper"style="background: aliceblue;">
                 <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                     <div class="sidebar-brand" style="font-size: 20px;background: white;">
-                        <a style="text-align: center"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
+                        <a style="text-align: center" href="Home"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
                        
                         </a>
                     </div>
@@ -125,13 +125,13 @@
                                 </ul>
                             </div>
                         </li>
-
+                         <li><a href="MailBox.jsp"><i class="uil uil-envelope me-2 d-inline-block"></i>MailBox</a></li>
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-setting me-2 d-inline-block"></i>Setting</a>
                             <div class="sidebar-submenu">
                                 <ul>
-                                    <li><a href="countUser">Setting</a></li>
-                                    <li><a href="detailUser">Setting Detail</a></li>
+                                    <li><a href="countUser">User</a></li>
+                                    <li><a href="detailUser">User Detail</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -258,10 +258,10 @@
                                                 <small class="text-muted">Orthopedic</small>
                                             </div>
                                         </a>
-                                        <a class="dropdown-item text-dark" href="index.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
+                                        
                                         <a class="dropdown-item text-dark" href="dr-profile.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
                                         <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="lock-screen.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                                        <a class="dropdown-item text-dark" href="logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
                                     </div>
                                 </div>
                             </li>
@@ -273,8 +273,6 @@
                     <div class="layout-specing">
                         <div class="d-md-flex justify-content-between">
                            
-                
-                               
                             <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                                     <li class="breadcrumb-item"><a href="dboard">DashBoard</a></li>
@@ -353,6 +351,28 @@
 </div>
                         </div>
 </div>
+   
+   <div class="form-group">
+    <label style="color: yellowgreen;font-weight: bold">Club</label>
+    <c:forEach items="${listC}" var="lic">
+        <input value="${lic.name}" type="text" class="form-control" name="club" readonly>
+    </c:forEach>
+</div>
+   <div class="form-group">
+                           <label style="color: yellowgreen; font-weight: bold">Status</label>
+                           <div class="context-gender" style="display: flex;">
+                               
+<div style="display: flex; align-items: center;">
+    <input ${detail.gender == 1 ? 'checked' : ''} value="1" type="radio" name="status" style="font-size: 10px;  margin-right: 10px">
+    active
+</div>
+<div style="display: flex; align-items: center; margin-left: 20px;">
+    <input ${detail.gender== 2 ? 'checked' : ''} value="2" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
+    block
+</div>
+                        </div>
+</div>
+
 <!--                        </div>-->
                                
                                 

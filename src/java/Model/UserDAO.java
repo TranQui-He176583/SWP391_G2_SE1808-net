@@ -308,9 +308,10 @@ public class UserDAO extends MyDAO{
      }
     return(t);
     }
- public String EditUser(int roleId,String fullname,String phone,int gender,int id) {
+ public String EditUser(int roleId,int status,String fullname,String phone,int gender,int id) {
      xSql = "UPDATE account \n" +
 "        SET roleId =? ,\n" +
+"         Status = ?,\n" +    
 "         fullname = ?,\n" +
 "        phone = ?,\n" +
 "        gender = ?\n" +
@@ -318,10 +319,11 @@ public class UserDAO extends MyDAO{
      try {         
       ps = con.prepareStatement(xSql);
       ps.setInt(1,roleId);
-      ps.setString(2, fullname);
-      ps.setString(3, phone);
-      ps.setInt(4, gender);
-      ps.setInt(5,id);
+      ps.setInt(2,status);
+      ps.setString(3, fullname);
+      ps.setString(4, phone);
+      ps.setInt(5, gender);
+      ps.setInt(6,id);
       
       ps.executeUpdate();
       ps.close();

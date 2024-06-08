@@ -68,8 +68,10 @@ public class editUser extends HttpServlet {
        int gender =Integer.parseInt(xGender);
        String xRole = request.getParameter("roleId");
        int roleId =Integer.parseInt(xRole);
+       String xStatus = request.getParameter("status");
+       int status =Integer.parseInt(xStatus);
        UserDAO udao = new UserDAO();
-       out.print(udao.EditUser(roleId, xFullName, xPhone, gender, id));
+       out.print(udao.EditUser(roleId, status, xFullName, xPhone, gender, id));
        response.sendRedirect("countUser");
 }
     /** 

@@ -12,7 +12,7 @@ public class MailHandler {
 
     public void SendMail(String toEmail, String subject, String body) throws MessagingException, UnsupportedEncodingException {
         final String fromEmail = "quitdhe176583@fpt.edu.vn";
-        final String password = "otjl jmvw fdnu aokp";
+        final String password = "akaq reye rjpx mdma";
 
         Properties   props = new Properties();
 

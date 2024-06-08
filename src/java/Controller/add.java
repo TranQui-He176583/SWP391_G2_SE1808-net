@@ -74,35 +74,49 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
 
 String xMail = (String) request.getParameter("email");
 String xFullname = request.getParameter("fullname");
-String xPassWord = request.getParameter("password");
-
-UserDAO aDAO = new UserDAO();
+String xPassword = request.getParameter("password");
+ 
+    String phone = request.getParameter("phone");
+    String xstatus = request.getParameter("status");
+    int status = Integer.parseInt(xstatus);
+    String xgender = request.getParameter("gender");
+    int gender = Integer.parseInt(xgender);
+    String image = request.getParameter("image");
+    String xRoleID =request.getParameter("roleId");
+    int roleId = Integer.parseInt(xRoleID);
+    UserDAO aDAO = new UserDAO();
 
 if (aDAO.checkUserExist(xMail)) {
     request.setAttribute("wrongRegister", "This email is registered to another account");
-    request.getRequestDispatcher("NewUser.jsp").forward(request, response);
+    response.sendRedirect("countUser");
 } else {
-    MailHandler mh = new MailHandler();     
+     
+        MailHandler mh = new MailHandler();     
 
     try {
          mh.SendMail(xMail, "Your Registration Information", 
                     "Thank you for registering with our application.\n" +
                     "Here are the details you provided:\n" +
                     "Email: " + xMail + "\n" +
-                    "Full Name: " + xFullname + "\n" +
-                    "Please use this infor to complete your registration at http://localhost:9999/SWP/register.jsp");
+                    "password: " + xPassword + "\n" + 
+                    "Please use this infor to complete your registration at http://localhost:9999/SWP/LoginAccount");
         
         
     } catch (Exception e) {
         out.print(e);
     }
     
-    
+        encodePassword ep = new encodePassword();
+        xPassword = ep.toSHA1(xPassword);
+        int numberUser = aDAO.getNumberUser() + 1;
+        Account u = new Account(numberUser, xPassword, roleId, status, xFullname, xMail, phone, gender, image);
+        out.print(aDAO.add(u));
     request.setAttribute("fullname", xFullname);
-    request.setAttribute("password", xPassWord);
+    request.setAttribute("password", xPassword);
     request.setAttribute("email", xMail);
     request.setAttribute("addnew", "send successfull");
-    request.getRequestDispatcher("NewUser.jsp").forward(request, response);
+    
+    response.sendRedirect("countUser");
 }
     
     
