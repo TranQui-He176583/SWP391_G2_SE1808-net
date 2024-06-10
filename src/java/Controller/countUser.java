@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.Account;
+
 import Model.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,6 +36,7 @@ public class countUser extends HttpServlet {
     response.setContentType("text/html;charset=UTF-8");
     
     String indexPage = request.getParameter("index");
+   
     int index = 1; // Default to page 1
     if (indexPage != null) {
         index = Integer.parseInt(indexPage);
@@ -44,7 +46,8 @@ public class countUser extends HttpServlet {
     int count = countdao.getTotalUser();
     int maxPage = (count / 5) + (count % 5 != 0 ? 1 : 0);
 
-    List<Account> list = countdao.pagingUser(index, 3);
+    List<Account> list = countdao.pagingUser(index);
+
     request.setAttribute("listUs", list);
     request.setAttribute("mPage", maxPage);
     request.setAttribute("tag", index);
@@ -76,8 +79,13 @@ public class countUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String NameSearch =request.getParameter("search");
+         UserDAO dao = new UserDAO();
+         List<Account> lis= dao.getSearchUser(NameSearch);
+         request.setAttribute("listUs", lis);
+         request.getRequestDispatcher("User_list.jsp").forward(request, response);
     }
+    
 
     /** 
      * Returns a short description of the servlet.

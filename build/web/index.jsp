@@ -19,7 +19,6 @@
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
 
         <%@include file="commonFunction/CSS.jsp" %>
-         <%@include file="commonFunction/header.jsp" %>
     </head>
     <body>
         <!-- ? Preloader Start -->
@@ -42,7 +41,7 @@
             </div>
         </div>
         <!-- Preloader Start -->
-       
+        <%@include file="commonFunction/header.jsp" %>
         <main>
           
 

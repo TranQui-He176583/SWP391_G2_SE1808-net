@@ -6,7 +6,7 @@ package Model;
 
 /**
  *
- * @author Duong
+ * @author pc
  */
 public class Club {
     int id;
@@ -55,6 +55,8 @@ public class Club {
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
-    
-    
+
+  
+
+   
 }

@@ -53,5 +53,30 @@ public class ClubDAO extends MyDAO {
     public void displayClub() {
 
     }
+    public List<Club> getAllCLubByAccountID(String AccountID) {
+        List<Club> t = new ArrayList<>();
+        xSql = "select * from account join student_club join club\n"
+                + "        on account.id = student_club.accountID and student_club.clubID=club.id \n"
+                + "        where accountID= ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, AccountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int status = rs.getInt("status");
+                String avatar = rs.getString("email");
+
+                t.add(new Club(id, name, status, avatar));
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
 
 }

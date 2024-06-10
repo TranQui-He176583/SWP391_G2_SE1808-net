@@ -3,14 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/eventList.jsp</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/get_EvenList_ClubId.java</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/event_Details.jsp</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/add_Event.java</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/add_Event.jsp</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/event_Details.java</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Model/Event.java</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Model/EventDAO.java</file>
+            <file>file:/C:/Users/pc/SWP391_G2_SE1808-net/web/User_detail.jsp</file>
+            <file>file:/C:/Users/pc/SWP391_G2_SE1808-net/src/java/Model/ClubDAO.java</file>
         </group>
     </open-files>
 </project-private>

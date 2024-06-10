@@ -31,13 +31,16 @@ public class deleteUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            String uid = request.getParameter("uid");
+         PrintWriter out = response.getWriter();
+            String uid = request.getParameter("id");
+            int id = Integer.parseInt(uid);
+            String xStatus  =request.getParameter("status");
+            int status=Integer.parseInt(xStatus);
             UserDAO dao = new UserDAO();
-            dao.delete(uid);
+            dao.changeStatus(status, id);
             response.sendRedirect("countUser");
-        }
+       
+        
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +67,7 @@ public class deleteUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /** 
