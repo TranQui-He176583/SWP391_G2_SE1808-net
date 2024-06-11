@@ -26,6 +26,9 @@
                                         </li>
                                         
                                         <li><a href="contact.jsp">Contact</a></li>
+                                         <c:if test="${sessionScope.account.roleId == 1}">  
+                                         <li><a href="dboard">Admin</a></li>
+                                         </c:if>
                                     </ul>
                                 </nav>
                             </div>
@@ -53,10 +56,7 @@
                                     </c:if>
                                     
                                         <div style="margin-top: 20px" class="dropdown-menu"> 
-                                            <c:if test="${sessionScope.account.roleId == 1}">  
-                                          
-                                             <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="dboard">Admin</a>
-                                         </c:if>
+                                            
                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
                                     <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>
                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           

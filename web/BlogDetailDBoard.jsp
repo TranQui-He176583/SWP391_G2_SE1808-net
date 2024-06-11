@@ -1,5 +1,11 @@
+<%-- 
+    Document   : BlogDetailDBoard
+    Created on : Jun 10, 2024, 9:16:25 AM
+    Author     : pc
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +18,7 @@
         <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
         <meta name="author" content="Shreethemes" />
         <meta name="email" content="support@shreethemes.in" />
-        <meta name="website" content="../../../index.html" />
+        <meta name="website" content="index.html" />
         <meta name="Version" content="v1.2.0" />
         <!-- favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico.png">
@@ -20,24 +26,18 @@
         <link href="assets/css/bootstrap.min_1.css" rel="stylesheet" type="text/css" />
         <!-- simplebar -->
         <link href="assets/css/simplebar.css" rel="stylesheet" type="text/css" />
-        <!-- Select2 -->
-        <link href="assets/css/select2.min.css" rel="stylesheet" />
         <!-- Icons -->
         <link href="assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
-        <!-- SLIDER -->
-        <link href="assets/css/tiny-slider.css" rel="stylesheet" />
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
     </head>
-   
+
     <body>
         <!-- Loader -->
-        
-        <!-- Loader -->
-
+     
         <div class="page-wrapper doctris-theme toggled">
             <nav id="sidebar" class="sidebar-wrapper"style="background: aliceblue;">
                 <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
@@ -284,233 +284,84 @@
 
                 <div class="container-fluid">
                     <div class="layout-specing">
-                        <h5 class="mb-0">Dashboard</h5>
+                        <div class="d-md-flex justify-content-between">
+                            <div>
+                                <h5 class="mb-0">${detail.name}</h5>
 
-                        <div class="row" style="width: 155%;">
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-user h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">${cUser}</h5>
-                                            <p class="text-muted mb-0">USER</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                            
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-club h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">${cClub}</h5>
-                                            <p class="text-muted mb-0">CLUB</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                            
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-star h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">${cEvent}</h5>
-                                            <p class="text-muted mb-0">EVENT</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                            
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-share h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">16000</h5>
-                                            <p class="text-muted mb-0">SHARE</p>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div><!--end col-->
-                            
-<!--                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-medkit h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">220</h5>
-                                            <p class="text-muted mb-0">Appointment</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>end col-->
-                            
-<!--                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-medical-drip h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">10</h5>
-                                            <p class="text-muted mb-0">Operations</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>end col
-                        </div>end row-->
+                                <ul class="list-unstyled mt-2 mb-0">
+                                    <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i> Calvin Carlo</li>
+                                    <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> 1st January, 2021</li>
+                                </ul>
+                            </div>
 
-<!--                        <div class="row">
-                            <div class="col-xl-8 col-lg-7 mt-4">
-                                <div class="card shadow border-0 p-4">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h6 class="align-items-center mb-0">Patients visit by Gender</h6>
-                                        
-                                        <div class="mb-0 position-relative">
-                                            <select class="form-select form-control" id="yearchart">
-                                                <option selected>2020</option>
-                                                <option value="2019">2019</option>
-                                                <option value="2018">2018</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div id="dashboard" class="apex-chart"></div>
-                                </div>
-                            </div>end col-->
-
-<!--                            <div class="col-xl-4 col-lg-5 mt-4">
-                                <div class="card shadow border-0 p-4">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h6 class="align-items-center mb-0">Patients by Department</h6>
-                                        
-                                        <div class="mb-0 position-relative">
-                                            <select class="form-select form-control" id="dailychart">
-                                                <option selected>Today</option>
-                                                <option value="2019">Yesterday</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div id="department" class="apex-chart"></div>
-                                </div>
-                            </div>end col-->
-                        </div><!--end row-->
-
+                            <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
+                                <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                                    <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
+                                    <li class="breadcrumb-item"><a href="blogs.html">Blogs</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Blog Detail</li>
+                                </ul>
+                            </nav>
+                        </div>
+                        
                         <div class="row">
-                            <div class="col-xl-4 col-lg-6 mt-4">
-                                <div class="card border-0 shadow rounded">
-                                    <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
-                                        <h6 class="mb-0"><i class="uil uil-user me-1 h5"></i>User</h6>
-                                        <div class="clearfix">
-                                        <ul class="pagination justify-content-center" id="pagination" style="font-size: 10px">
-                                                 <li class="page-item ${tag == 1 ? 'disabled' : ''}">
-                                                      <a class="page-link" href="dboard?index=${tag - 1}">&laquo</a>
-                                                 </li>
-                                                
-                                                  <li class="page-item ${tag == mPage ? 'disabled' : ''}">
-                                                    <a class="page-link" href="dboard?index=${tag + 1}">&raquo</a>
-                                                 </li>
-                                               </ul>
-                                            </div>
-                                            
-                                      
-                                    </div>
-                                 
- 
-                                   <c:forEach items="${lisu}" var="lu">
-                                       <ul class="list-unstyled mb-0 p-4">
-                                        <li>                     
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="d-inline-flex">
-                                                    <img src="${lu.image}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                    <div class="ms-3">
-                                                        <h6 class="text-dark mb-0 d-block">${lu.fullname}</h6>
-                                                        <small class="text-muted">${lu.email}</small>
-                                                    </div>
-                                                   
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                      </c:forEach>
-                                </div>
-                            </div><!--end col-->
-
-                           <div class="col-xl-4 col-lg-12 mt-4">
-                                <div class="card border-0 shadow rounded">
-                                    <div class="p-4 border-bottom">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h6 class="mb-0"><i class="uil uil-club me-1 h5"></i> Club</h6>
-                                            
-                                            <div class="mb-0 position-relative">
-                                                <select class="form-select form-control" id="dailypatient">
-                                                    <option selected>New</option>
-                                                    <option value="2019">Old</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  
-                                    <ul class="list-unstyled mb-0 p-4" data-simplebar style="height: 355px;">
-                                        <c:forEach items="${lisc}" var="lc">
-                                            <li class="d-flex align-items-center justify-content-between" style="padding: 10px">
-                                            <div class="d-flex align-items-center">
-                                                <img src="${lc.avatar}" class="avatar avatar-small rounded-circle border shadow" alt="">
-                                                <div class="flex-1 ms-3">
-                                                    <span class="d-block h6 mb-0">${lc.name}</span>
-                                                                
-                                                </div>
-                                            </div>
-
-                                           
-                                        </li>
-                                         </c:forEach>
-                                    </ul>
-                                
-                                </div>
-                            </div><!--end col-->
-
-                            <div class="col-xl-4 col-lg-12 mt-4">
-                                <div class="card border-0 shadow rounded">
-                                    <div class="p-4 border-bottom">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h6 class="mb-0"><i class="uil uil-star me-1 h5"></i> Event</h6>
-                                            
-                                            <div class="mb-0 position-relative">
-                                                <select class="form-select form-control" id="dailypatient">
-                                                    <option selected>New</option>
-                                                    <option value="2019">Old</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                   
-                                    <ul class="list-unstyled mb-0 p-4" data-simplebar style="height: 355px">
-                                        <c:forEach items="${lise}" var="let">
-                                        <li class="d-flex align-items-center justify-content-between" style="padding: 10px">
-                                          <div class="d-flex align-items-center">
-                                              <div class="flex-1 ms-3 text-overflow-ellipsis white-space-nowrap" >
-                                              <span class="d-block h6 mb-0">${let.name}</span>
-                                           </div>
-                                          </div>
-                                              <div class="text-muted text-overflow-ellipsis white-space-nowrap text-end" > ${let.time}</div>
-                                        </li>
-                                       </c:forEach>
-                                    </ul>
+                            <div class="col-lg-8 col-lg-7 mt-4">
+                                <div class="card rounded shadow border-0 overflow-hidden">
+                                    <img src="../assets/images/blog/single.jpg" class="img-fluid" alt="">
+        
+                                    <div class="p-4">
+                                        <!-- <ul class="list-unstyled">
+                                            <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i> Calvin Carlo</li>
+                                            <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> 1st January, 2021</li>
+                                        </ul> -->
+                
+                                        <p class="text-muted">This is required when, for example, the final text is not yet available. Dummy text is also known as 'fill text'. It is said that song composers of the past used dummy texts as lyrics when writing melodies in order to have a 'ready-made' text to sing with the melody. Dummy texts have been in use by typesetters since the 16th century.</p>
+                                        <p class="text-muted">Due to its widespread use as filler text for layouts, non-readability is of great importance: human perception is tuned to recognize certain patterns and repetitions in texts.</p>
+                                        <p class="text-muted mb-0">For this reason, dummy text usually consists of a more or less random series of words or syllables.</p>
                                     
-                                     
+                                        
+                
+                                        
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+        
+                            <div class="col-lg-4 col-md-5 mt-4">
+                                <div class="card border-0 sidebar sticky-bar rounded shadow">
+                                    <div class="card-body">
+                                        <!-- SEARCH -->
+                                        <div class="widget mb-4 pb-2">
+                                            <h5 class="widget-title">Search</h5>
+                                            <div id="search2" class="widget-search mt-4 mb-0">
+                                                <form role="search" method="get" id="searchform1" class="searchform">
+                                                    <div>
+                                                        <input type="text" class="border rounded" name="s" id="s1" placeholder="Search Keywords...">
+                                                        <input type="submit" id="searchsubmit1" value="Search">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- SEARCH -->
+            
+                                        <!-- RECENT POST -->
+                                        <div class="widget mb-4 pb-2">
+                                            <h5 class="widget-title">Recent Post</h5>
+                                            <div class="mt-4">
+                                                <div class="clearfix post-recent">
+                                                    <div class="post-recent-thumb float-start"> <a href="jvascript:void(0)"> <img alt="img" src="../assets/images/blog/07.jpg" class="img-fluid rounded"></a></div>
+                                                    <div class="post-recent-content float-start"><a href="jvascript:void(0)">Consultant Business</a><span class="text-muted mt-2">15th June, 2019</span></div>
+                                                </div>
+                                                <div class="clearfix post-recent">
+                                                    <div class="post-recent-thumb float-start"> <a href="jvascript:void(0)"> <img alt="img" src="../assets/images/blog/08.jpg" class="img-fluid rounded"></a></div>
+                                                    <div class="post-recent-content float-start"><a href="jvascript:void(0)">Look On The Glorious Balance</a> <span class="text-muted mt-2">15th June, 2019</span></div>
+                                                </div>
+                                                <div class="clearfix post-recent">
+                                                    <div class="post-recent-thumb float-start"> <a href="jvascript:void(0)"> <img alt="img" src="../assets/images/blog/01.jpg" class="img-fluid rounded"></a></div>
+                                                    <div class="post-recent-content float-start"><a href="jvascript:void(0)">Research Financial.</a> <span class="text-muted mt-2">15th June, 2019</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
                                 </div>
                             </div><!--end col-->
                         </div><!--end row-->
@@ -539,8 +390,8 @@
         <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header p-4 border-bottom">
                 <h5 id="offcanvasRightLabel" class="mb-0">
-                    <img src="assets/images/logo-dark.png" height="24" class="light-version" alt="">
-                    <img src="assets/images/logo-light.png" height="24" class="dark-version" alt="">
+                    <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                    <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
                 </h5>
                 <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
             </div>
@@ -557,7 +408,7 @@
                                     <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/dark-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
                                     <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/dark-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
                                     <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
-                                    <li class="d-grid"><a href="landing/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Landing Demos</span></a></li>
+                                    <li class="d-grid"><a href="../landing/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Landing Demos</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -574,19 +425,16 @@
                     <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
                     <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
                     <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="../../../index.html" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
                 </ul><!--end icon-->
             </div>
         </div>
         <!-- Offcanvas End -->
-        
+
         <!-- javascript -->
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="assets/js/simplebar.min.js"></script>
-        <!-- Chart -->
-        <script src="assets/js/apexcharts.min.js"></script>
-        <script src="assets/js/columnchart.init.js"></script>
         <!-- Icons -->
         <script src="assets/js/feather.min.js"></script>
         <!-- Main Js -->
@@ -594,6 +442,7 @@
         <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./assets/js/popper.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
+        
     </body>
 
 </html>

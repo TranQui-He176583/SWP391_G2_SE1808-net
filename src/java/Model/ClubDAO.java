@@ -79,5 +79,45 @@ public class ClubDAO extends MyDAO {
      }
     return(t);
     }
+    
+     public int getTotalClub(){
+        xSql = "select count(*)from club";     
+         
+        try {
+           ps = con.prepareStatement(xSql);
+          
+           rs = ps.executeQuery();
+          while(rs.next()) {
+
+            return rs.getInt(1);
+        }
+        }
+        catch(Exception e) {
+        }
+    return 0;
+    }
+    public List<Club> getAllClub() {
+        List<Club> t = new ArrayList<>();
+        xSql = "select * from club";
+       try {
+        ps = con.prepareStatement(xSql);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+        int id = rs.getInt("id");  
+        String name= rs.getString("name"); 
+        int status= rs.getInt("status");  
+        String avatar= rs.getString("avatar");  
+        
+        t.add(new Club(id, name, status, avatar));
+     
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+    }
 
 }

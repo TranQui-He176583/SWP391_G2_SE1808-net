@@ -43,7 +43,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -66,7 +66,7 @@
                     
                     <ul class="sidebar-menu pt-3">
                         <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
-                        <li><a href="appointment.html"><i class="uil uil-user me-2 d-inline-block"></i>Profile</a></li>
+                       
 
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
@@ -78,14 +78,39 @@
                                 </ul>
                             </div>
                         </li>
-                         <li><a href="MailBox.jsp"><i class="uil uil-envelope me-2 d-inline-block"></i>MailBox</a></li>
+                         
 
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-setting me-2 d-inline-block"></i>Setting</a>
                             <div class="sidebar-submenu">
                                 <ul>
-                                    <li><a href="countUser">User</a></li>
-                                    <li><a href="detailUser">User Detail</a></li>
+                                    <li>
+                                        <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i> User</a>
+                                        <div class="sidebar-submenu">
+                                        <ul>
+                                            <li><a href="countUser">User </a></li>
+                                            <li><a href="detailUser">User Detail</a></li>
+                                        </ul>
+                                        </div>
+                                    </li>
+                                  <li>
+                                        <a href="javascript:void(0)"><i class="uil uil-club me-2 d-inline-block"></i>Club</a>
+                                        <div class="sidebar-submenu">
+                                        <ul>
+                                            <li><a href="countUser">Club</a></li>
+                                            <li><a href="detailUser">Club Detail</a></li>
+                                        </ul>
+                                        </div>
+                                   </li>
+                                   <li>
+                                        <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
+                                        <div class="sidebar-submenu">
+                                        <ul>
+                                            <li><a href="blogdb">Blog</a></li>
+                                            <li><a href="blogdetaildb">Blog Detail</a></li>
+                                        </ul>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -113,7 +138,7 @@
                             </div>
                         </li>-->
 
-                        <li class="sidebar-dropdown">
+<!--                        <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
                             <div class="sidebar-submenu">
                                 <ul>
@@ -121,7 +146,7 @@
                                     <li><a href="blog-detail.html">Blog Detail</a></li>
                                 </ul>
                             </div>
-                        </li>
+                        </li>-->
 
                     </ul>
                     <!-- sidebar-menu  -->
@@ -230,22 +255,37 @@
                             </li>
 
                             <li class="list-inline-item mb-0 ms-1">
-                                <div class="dropdown dropdown-primary">
-                                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/doctors/01.jpg" class="avatar avatar-ex-small rounded-circle" alt=""></button>
-                                    <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
-                                        <a class="dropdown-item d-flex align-items-center text-dark" href="https://shreethemes.in/doctris/layouts/admin/profile.html">
-                                            <img src="assets/images/doctors/01.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                            <div class="flex-1 ms-2">
-                                                <span class="d-block mb-1">Calvin Carlo</span>
-                                                <small class="text-muted">Orthopedic</small>
-                                            </div>
-                                        </a>
-                                        
-                                        <a class="dropdown-item text-dark" href="dr-profile.html"><span class="mb-0 d-inline-block me-1"><i class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
-                                        <div class="dropdown-divider border-top"></div>
-                                        <a class="dropdown-item text-dark" href="logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
-                                    </div>
+                              <div class="col-xl-10 col-lg-10 col-md-10">
+                        <div class="menu-main d-flex align-items-center justify-content-end">
+                            <!-- Main-menu -->
+                           
+                            
+                        
+                         <c:if test="${sessionScope.account.roleId != null}">                                  
+                             <div class="image-container">
+                             
+                                 <c:if test="${sessionScope.account.image == null }">  
+                                     
+                                    <img style="width: 28px; margin-top: -10px" src="assets/img/avatar/Avatar1.png" class="img-fluid"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    </c:if>
+                                    
+                                    <c:if test="${sessionScope.account.image != null}">  
+                                       
+                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 20px" src="${sessionScope.account.image}" class="img-fluid"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    </c:if>
+                                    
+                                        <div style="margin-top: 20px" class="dropdown-menu"> 
+                                            
+                                   <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
+                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>
+                                   <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           
                                 </div>
+                            </div>
+                         </c:if>
+                        </div>
+                    </div>   
                             </li>
                         </ul>
                     </div>
@@ -259,7 +299,8 @@
                                 <nav aria-label="breadcrumb" class="d-inline-block mt-2">
                                     <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
                                         <li class="breadcrumb-item"><a href="dboard">Dashboard</a></li>
-                                        <li class="breadcrumb-item active" aria-current="page">Setting List</li>
+                                      
+                                        <li class="breadcrumb-item active" aria-current="page">User</li>
                                     </ul>
                                 </nav>
                             </div><!--end col-->
@@ -708,7 +749,9 @@
         <script src="assets/js/feather.min.js"></script>
         <!-- Main Js -->
         <script src="assets/js/app.js"></script>
-        
+         <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
     </body>
 
 </html>

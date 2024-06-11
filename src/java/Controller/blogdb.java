@@ -5,11 +5,8 @@
 
 package Controller;
 
-import Model.Account;
-import Model.Club;
-import Model.ClubDAO;
-import Model.Event;
-import Model.EventDAO;
+import Model.Blog;
+import Model.BlogDAO;
 import Model.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,8 +21,8 @@ import java.util.List;
  *
  * @author pc
  */
-@WebServlet(name="dboard", urlPatterns={"/dboard"})
-public class dboard extends HttpServlet {
+@WebServlet(name="blogdb", urlPatterns={"/blogdb"})
+public class blogdb extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,31 +33,26 @@ public class dboard extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+         PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter pr= response.getWriter();
-        request.setCharacterEncoding("UTF-8");
-        String indexPage = request.getParameter("index");
-        int index = 1; 
-        if (indexPage != null) {index = Integer.parseInt(indexPage);}
-         UserDAO dao = new UserDAO();
-         ClubDAO lubdao= new ClubDAO();
-         EventDAO edao=new EventDAO();
-         int countUser = dao.getTotalUser();
-         int countUser1 = lubdao.getTotalClub();
-         int countUser2 = edao.getTotalEvent();
-         int maxPage = (countUser / 5) + (countUser % 5 != 0 ? 1 : 0);
-         List<Account> liu= dao.pagingUser(index);
-         List<Club> lub=lubdao.getAllClub();
-         List<Event> lie=edao.getAllEvent();
-         request.setAttribute("cUser", countUser);
-         request.setAttribute("cClub", countUser1);
-         request.setAttribute("cEvent", countUser2);
-         request.setAttribute("lisu", liu);
-         request.setAttribute("lisc", lub);
-         request.setAttribute("lise", lie);
-         request.setAttribute("mPage", maxPage);
-         request.setAttribute("tag", index);
-         request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+         String indexPage = request.getParameter("index");
+   
+    int index = 1; // Default to page 1
+    if (indexPage != null) {
+        index = Integer.parseInt(indexPage);
+    }
+
+    BlogDAO bdao = new BlogDAO();
+    int count = bdao.getTotalBlog();
+    int maxPage = (count / 6) + (count % 6 != 0 ? 1 : 0);
+
+    List<Blog> listBlog = bdao.pagingBlog(index);
+ 
+    request.setAttribute("listBL", listBlog);
+    request.setAttribute("mPage", maxPage);
+    request.setAttribute("tag", index);
+
+    request.getRequestDispatcher("BlogsDBoard.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -87,12 +79,13 @@ public class dboard extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//         request.setCharacterEncoding("UTF-8");
-//         String NameSearch =request.getParameter("search");
-//         DBoardDAO dao = new DBoardDAO();
-//         List<Account> lis= dao.getSearchUser(NameSearch);
-//         request.setAttribute("listUser", lis);
-//         request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+         String Search =request.getParameter("search");
+         BlogDAO bdao = new BlogDAO();
+         List<Blog> list= bdao.getSearchBlogByTitle(Search);
+         List<Blog> lisc= bdao.getSearchBlogByCLub(Search);
+         request.setAttribute("listBL", list);
+         request.setAttribute("listBL", lisc);
+         request.getRequestDispatcher("BlogsDBoard.jsp").forward(request, response);
     }
 
     /** 

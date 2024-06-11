@@ -271,5 +271,56 @@ public class EventDAO extends MyDAO {
      }
     return  event;
     } 
+    public int getTotalEvent(){
+        xSql = "select count(*)from event";     
+         
+        try {
+           ps = con.prepareStatement(xSql);
+          
+           rs = ps.executeQuery();
+          while(rs.next()) {
+
+            return rs.getInt(1);
+        }
+        }
+        catch(Exception e) {
+        }
+    return 0;
+    }
+    public List<Event> getAllEvent() {
+        List<Event> t = new ArrayList<>();
+        xSql = "select * from event";
+       try {
+        ps = con.prepareStatement(xSql);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            int club_id = rs.getInt("club_id");
+            LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+            String location = rs.getString("location");
+            String details = rs.getString("details");
+            String avatar = rs.getString("avatar");
+            
+            
+            Event event = new Event(id, name, club_id, time, location, details,avatar);
+            t.add(event);
+     
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+    }
+    public static void main(String[] args) {
+        EventDAO dao =new EventDAO();
+        List<Event> list= dao.getAllEvent();
+        for(Event a: list){
+            System.out.println(a);
+        }
+    }
     
 }
