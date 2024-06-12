@@ -1,13 +1,11 @@
 <%-- 
-    Document   : Home
-    Created on : May 10, 2024, 9:37:57 PM
+    Document   : ClubDBoard
+    Created on : Jun 11, 2024, 10:38:30 PM
     Author     : pc
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +17,7 @@
         <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
         <meta name="author" content="Shreethemes" />
         <meta name="email" content="support@shreethemes.in" />
-        <meta name="website" content="../../../index.html" />
+        <meta name="website" content="index.html" />
         <meta name="Version" content="v1.2.0" />
         <!-- favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico.png">
@@ -27,58 +25,49 @@
         <link href="assets/css/bootstrap.min_1.css" rel="stylesheet" type="text/css" />
         <!-- simplebar -->
         <link href="assets/css/simplebar.css" rel="stylesheet" type="text/css" />
-        <!-- Select2 -->
-        <link href="assets/css/select2.min.css" rel="stylesheet" />
-        <!-- Date picker -->
-        <link rel="stylesheet" href="assets/css/flatpickr.min.css">
-        <link href="assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <!-- Icons -->
         <link href="assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-  <link rel="stylesheet" href="assets/css/list.css">
 
     </head>
 
     <body>
         <!-- Loader -->
-       
-    
+   
         <div class="page-wrapper doctris-theme toggled">
             <nav id="sidebar" class="sidebar-wrapper"style="background: aliceblue;">
                 <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                     <div class="sidebar-brand" style="font-size: 20px;background: white;">
-                        <a style="text-align: center"href="Home"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
-                       
+                        <a style="text-align: center" href="Home"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
+                  
                         </a>
                     </div>
                     
                     <ul class="sidebar-menu pt-3">
                         <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
-                       
+                    
 
-                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                   
-                                    <li><a href="dr-profile.html">Club</a></li>
-                                    <li><a href="dr-profile.html">Event</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                         
+                       <li class="sidebar-dropdown">
+    <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
+    <div class="sidebar-submenu">
+        <ul>
+            <li>
+                <a href="javascript:void(0)">Club</a>
+                <div class="sidebar-submenu">
+                    <ul>
+                        <li><a href="dr-profile.html">List</a></li>
+                        <li><a href="dr-profile.html">Detail</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="dr-profile.html">Event</a></li>
+        </ul>
+    </div>
+</li>
+                       
 
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-setting me-2 d-inline-block"></i>Setting</a>
@@ -114,6 +103,7 @@
                                 </ul>
                             </div>
                         </li>
+                        
 
 <!--                        <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
@@ -179,9 +169,9 @@
                             </a>
                             <div class="search-bar p-0 d-none d-md-block ms-2">
                                 <div id="search" class="menu-search mb-0">
-                                    <form role="search" method="get" id="searchform" class="searchform">
+                                    <form action="blogdb" method="post" id="searchform" class="searchform">
                                         <div>
-                                            <input type="text" class="form-control border rounded-pill" name="s" id="s" placeholder="Search Keywords...">
+                                            <input type="text" class="form-control border rounded-pill" name="search" id="search" placeholder="Search Keywords...">
                                             <input type="submit" id="searchsubmit" value="Search">
                                         </div>
                                     </form>
@@ -255,7 +245,7 @@
                             </li>
 
                             <li class="list-inline-item mb-0 ms-1">
-                              <div class="col-xl-10 col-lg-10 col-md-10">
+                                                <div class="col-xl-10 col-lg-10 col-md-10">
                         <div class="menu-main d-flex align-items-center justify-content-end">
                             <!-- Main-menu -->
                            
@@ -293,198 +283,114 @@
 
                 <div class="container-fluid">
                     <div class="layout-specing">
-                        <div class="row">
-                            <div class="col-xl-9 col-lg-6 col-md-4">
-                                <h5 class="mb-0">Setting</h5>
-                                <nav aria-label="breadcrumb" class="d-inline-block mt-2">
+                        <div class="d-md-flex justify-content-between">
+                            <div>
+                                <h5 class="mb-0">Blogs</h5>
+
+                                <nav aria-label="breadcrumb" class="d-inline-block mt-1">
                                     <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
-                                        <li class="breadcrumb-item"><a href="dboard">Dashboard</a></li>
-                                      
-                                        <li class="breadcrumb-item active" aria-current="page">User</li>
+                                        <li class="breadcrumb-item"><a href="iblogdb">DashBoard</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Blogs</li>
                                     </ul>
                                 </nav>
-                            </div><!--end col-->
-                            <div class="col-sm-12 col-md-5" style="display: flex">
-                               
-                                <div class="col-sm-12 col-md-5" style="padding-top: 10px">
-                                                <div class="mb-0 position-relative">
-                                                    <select class="form-control time-during select2input" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
-                                                      <option value=""  data-href="countUser">Status</option>
-                                                      <option value="1" data-href="${pageContext.request.contextPath}/status?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
-                                                      <option value="2" data-href="${pageContext.request.contextPath}/status?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                           
-                                             <div class="col-sm-12 col-md-5" style="padding-top: 10px">
-                                                <div class="mb-0 position-relative">
-                                                    <select class="form-control time-during select2input"onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
-                                                        <option value=""  data-href="countUser">Role</option>
-                                                       
-                                                        <option value="2" data-href="${pageContext.request.contextPath}/role?xRoleId=2" ${param.xRoleId eq '2' ? 'selected' : ''}>manager</option>
-                                                        <option value="3" data-href="${pageContext.request.contextPath}/role?xRoleId=3" ${param.xRoleId eq '3' ? 'selected' : ''}>normalUser</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            
-                                            
-                                               
-                                </div>
-                                                    <div class="col-sm-12 col-md-5" style="padding-left: 460px">
-                                                        <div class="justify-content-md-end"style="display: flex;padding-left: 30px">
-                                    <form action="countUser" method="post" style="display: flex; align-items: center;">
-    <div class="search-wrapper" style="position: relative;">
-      <input type="text" name="search" placeholder="search here" style="padding-left: 30px;border-radius: 10px;font-size: 15px">
-      <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
-    </div>
-                                        </form>
-    <div class="d-grid" style="margin-left: 20px">
-      <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentform"style="height: 35px;width: 130px">ADD NEW</a>
-    </div>
-    
-
-  
-                                </div>
                             </div>
+                            <div class="mt-4 mt-sm-0" style="padding-left: 500px">
+                               <select class="form-control time-during select2input" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
+                                    <option value=""  data-href="blogdb">Status</option>
+                                    <option value="1" data-href="${pageContext.request.contextPath}/statusBlog?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
+                                    <option value="2" data-href="${pageContext.request.contextPath}/statusBlog?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
+                                </select>
+                            </div>
+<!--                            <div class="mt-4 mt-sm-0">
+                                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">Add Blog</a>
+                            </div>-->
                         </div>
                         
-        <div class="row">
-        <div class="content-table">
-           
-            <table class="table table-striped table-hover">
-                <thead>
-                   
-                   <tr>
-                        <th>STT</th>	
-                        <th>Name</th>	
-                        <th>Role</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr> 
-                                   
-                </thead> 
-               <tbody>
-                   
-                   <c:if test="${not empty listUs}">
-                      <c:set var="count" value="0" />
-                         <c:forEach items="${listUs}" var="o">
-                            <c:set var="count" value="${count + 1}" />
-                         <tr>
-                            <td>${count}</td>
-                           
-                            <td>${o.fullname}</td>
-                         
-                            <td>
-                                 <c:choose>
-                                      
-                                        <c:when test="${o.roleId == 2}">
-                                          <span class="text-primary">Manager</span>
-                                        </c:when>
-                                        <c:when test="${o.roleId == 3}">
-                                          <span class="text-primary">NormalUser</span>
-                                        </c:when>
-                                    </c:choose>
-                            </td>
-                            <td>${o.email}</td>
-                            <td>${o.phone}</td>
-              
-                        <td>
-    
-    <c:if test="${o.status == 1}">
-        <a href="deleteUser?id=${o.id}&status=2"id="statusBtn" class="btn btn-success btn-sm" 
+                        <div class="row">
+                            <c:forEach items="${listBL}" var="lb">
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4">
+                                <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
+                                    <img src="${lb.image}" class="img-fluid" alt="">
+                                    <div class="card-body p-4">
+                                        <ul class="list-unstyled mb-2">
+                                            <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>${lb.time}</li>
+                                            
+                                        </ul>
+                                        <a href="blogdetaildb?bid=${lb.id}" class="text-dark title h5">${lb.name}</a>
+                                        <div class="post-meta d-flex justify-content-between mt-3">
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="list-inline-item me-2 mb-0">
+                                                    <c:if test="${lb.status == 1}">
+        <a href="deleteBlog?id=${lb.id}&status=2"id="statusBtn" class="btn btn-success btn-sm" 
             style="background-color: green;font-weight: normal;color: black"
             onclick="toggleStatus(this);">active</a>
     </c:if>
-    <c:if test="${o.status == 2}">
-        <a href="deleteUser?id=${o.id}&status=1"id="statusBtn" class="btn btn-danger btn-sm" 
+    <c:if test="${lb.status == 2}">
+        <a href="deleteBlog?id=${lb.id}&status=1"id="statusBtn" class="btn btn-danger btn-sm" 
             style="background-color: red;font-weight: normal;color: black"
             onclick="toggleStatus(this);">block</a>
     </c:if>
-
-   
-</td>
-            <td>
-    <a href="detailUser?uid=${o.id}" class="detail" title="detail" data-toggle="tooltip">
-        <i class="uil uil-eye me-2 d-inline-block"></i>
-    </a>
-</td>
-        </tr>
-                  </c:forEach>
-                 </c:if>
-                    <c:if test="${empty listUs}">
-                        <tr>
-                           <td colspan="7">
-                              <div class="alert alert-danger text-center">There are no users</div>
-                           </td>
-                        </tr>
-                    </c:if>
-                    </tbody>
-            </table>
-          
-             
-            
-            <div class="row text-center" style="">
+                                                </li>
+                       
+                                            </ul>
+                                            <a href="blogdetaildb?bid=${lb.id}" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+                            </c:forEach>
+        
+                        </div><!--end row-->
+        
+                        
+                            <div class="row text-center" style="padding: 20px;">
                             <!-- PAGINATION START -->
                              <div class="clearfix" style="padding-bottom: 10px;
     font-size: 20px;">
   <ul class="pagination justify-content-center" id="pagination">
     <li class="page-item ${tag == 1 ? 'disabled' : ''}">
-      <a class="page-link" href="countUser?index=${tag - 1}">Previous</a>
+      <a class="page-link" href="blogdb?index=${tag - 1}">Previous</a>
     </li>
     <c:forEach begin="1" end="${mPage}" var="i">
       <li class="page-item ${tag == i ? 'active' : ''}">
-        <a class="page-link" href="countUser?index=${i}">${i}</a>
+        <a class="page-link" href="blogdb?index=${i}">${i}</a>
       </li>
     </c:forEach>
     <li class="page-item ${tag == mPage ? 'disabled' : ''}">
-      <a class="page-link" href="countUser?index=${tag + 1}">Next</a>
+      <a class="page-link" href="blogdb?index=${tag + 1}">Next</a>
     </li>
   </ul>
 </div>
                             <!-- PAGINATION END -->
                         </div><!--end row-->
-        </div>
- </div>
-
-
-
-                        </div><!--end row-->
-
-<!--                        <div class="row text-center">
-                             PAGINATION START 
-                            <div class="col-12 mt-4">
-                                <div class="d-md-flex align-items-center text-center justify-content-between">
-                                    <span class="text-muted me-3">Showing 1 - 10 out of 50</span>
-                                    <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Previous">Prev</a></li>
-                                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Next">Next</a></li>
-                                    </ul>
-                                </div>
-                            </div>end col
-                             PAGINATION END 
-                        </div>end row-->
+                        
                     </div>
                 </div><!--end container-->
 
                 <!-- Footer Start -->
-                
+                <footer class="bg-white shadow py-3">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="text-sm-start text-center">
+                                    <p class="mb-0 text-muted"><script>document.write(new Date().getFullYear())</script> © Doctris. Design with <i class="mdi mdi-heart text-danger"></i> by <a href="../../../index.html" target="_blank" class="text-reset">Shreethemes</a>.</p>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end container-->
+                </footer><!--end footer-->
                 <!-- End -->
-            
+            </main>
             <!--End page-content" -->
-        
+        </div>
         <!-- page-wrapper -->
 
         <!-- Offcanvas Start -->
         <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header p-4 border-bottom">
                 <h5 id="offcanvasRightLabel" class="mb-0">
-                    <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
-                    <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
+                    <img src="assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                    <img src="assets/images/logo-light.png" height="24" class="dark-version" alt="">
                 </h5>
                 <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
             </div>
@@ -524,79 +430,57 @@
         </div>
         <!-- Offcanvas End -->
 
-        <!-- Modal start -->
-        <!-- Add New Appointment Start -->
-        <div class="modal fade" id="appointmentform" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-             <div class="modal-dialog modal-lg modal-dialog-centered">
-                 
-                <div class="modal-content" style="background: aliceblue">
-                    <div class="form-add" style="padding: 20px">
+        <!-- Start Modal -->
+<!--        <div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"style="">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
 
-           <form action="add" method="post">
-               <h2 style="text-align: center;font-size: 30px">Add New User</h2>
+                <div class="modal-content">
+                   
+                    <div class="modal-header border-bottom p-3">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Blog</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black;font-weight: bold"> Name</label>
-                            <input type="text" class="form-control" name="fullname" id="fullname" required="required">
-                        </fieldset>
-                    </div>
-                     <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black;font-weight: bold"> Password</label>
-                            <input type="text" class="form-control" name="password" id="password" required="required">
-                        </fieldset>
-                    </div>
-                </div>
-                    <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black;font-weight: bold"> Email</label>
-                            <input type="text" class="form-control" name="email" id="email" required="required">
-                        </fieldset>
-                    </div>
-                     <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black; font-weight: bold">Role</label>
-                          <div class="context-gender" style="display: flex;">
+                    <div class="modal-body p-3 pt-4" style="padding-top: 0px">
+                       
+                        <div class="row">
+                            
+                            <div class="col-md-4">
+                                <form action="addBlogdboard" method="post" enctype="multipart/form-data">
+                                <div class="d-grid">
+                                    
+                                    <p class="text-muted"></p>
+                                    <div class="preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1"></div>
+                                    <input type="file" id="input-file" name="input-file" accept="image/*" />
+                                    
+                              
+                                </div>
+                                </form>
+                            </div>end col
+                           
+
+                            <div class="col-md-8 mt-4 mt-sm-0"style="">
+                                <div class="ms-md-4"style="">
+                                    <form action="addBlogdboard" method="post" style="">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Blog Title <span class="text-danger">*</span></label>
+                                                    <input name="name" id="name" type="text" class="form-control" placeholder="Title :">
+                                                </div>
+                                            </div>end col
     
-    <div style="display: flex; align-items: center;padding-right: 20px">
-        <input value="2" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
-        Manager
-    </div>
+                                       
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label"> Date : </label>
+                                                    <input name="date" type="text" class="form-control" id="date" value="09 January 2021">
+                                                </div>
+                                            </div>end col
     
-    <div style="display: flex; align-items: center;">
-        <input value="3" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
-        NormalUser
-    </div>
-</div>
-                        </fieldset>
-                    </div>
-                    </div>
-                
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black; font-weight: bold">Gender</label>
-                          <div class="context-gender" style="display: flex;">
-    
-    <div style="display: flex; align-items: center;padding-right: 20px">
-        <input  value="1" type="radio"  name="gender" style="font-size: 10px;  margin-right: 10px">
-        Male
-    </div>
-    
-    <div style="display: flex; align-items: center;">
-        <input value="2" type="radio"  name="gender" style="font-size: 10px;  margin-right: 10px">
-        Female
-    </div>
-</div>
-                        </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                        <fieldset class="form-group">
-                             <label style="color: black; font-weight: bold">Status</label>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                     <label class="form-label" style="padding-bottom: 10px">Status</label>
                           <div class="context-status" style="display: flex;">
     
     <div style="display: flex; align-items: center;padding-right: 20px">
@@ -609,149 +493,80 @@
         block
     </div>
 </div>
-                        </fieldset>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                  
-                    <a href="" class="btn" style="background: skyblue;color: white;font-weight: bold">Back</a>
-                    <button type="submit" class="btn btn-success" style="font-weight: bold">Save</button>
-                    <p style="color: red; font-size: 15px">${requestScope.wrongRegister}</p>
-                    <p style="color: green; font-size: 15px">${requestScope.addnew}</p>
-                </div>
-            </form>
+                                                </div>
+                                            </div>end col
+    
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Club</label>
+                                                    <select class="form-control" >
+                                                        <option value="1">Vovinam</option>
+                                                        <option value="2">Teakwondo</option>
+                                                        <option value="3">Street Workout</option>
+                                                        <option value="4">Melody</option>
+                                                        <option value="5">Chinese</option>
+                                                        <option value="6">Cinema Martial Arts</option>
+                                                        <option value="7">Japanese</option> 
+                                                    </select>
+                                                </div>
+                                            </div>end col
+                                            
+    
+                                        <div class="col-lg-12">
+    <div class="mb-3">
+        <label class="form-label">Description <span class="text-danger">*</span></label>
+        <div id="blog-description" class="cke_editable cke_editable_inline cke_contents_ltr" contenteditable="true" spellcheck="false" style="height: 100px;">
         </div>
-                </div>
-             </div>
-        </div>
-        <!-- Add New Appointment End -->
+    </div>
+</div>
 
-        <!-- View Appintment Start -->
-        <div class="modal fade" id="viewappointment" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header border-bottom p-3">
-                        <h5 class="modal-title" id="exampleModalLabel1">Appointment Detail</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body p-3 pt-4">
-                        <div class="d-flex align-items-center">
-                            <img src="../assets/images/client/01.jpg" class="avatar avatar-small rounded-pill" alt="">
-                            <h5 class="mb-0 ms-3">Howard Tanner</h5>
-                        </div>
-                        <ul class="list-unstyled mb-0 d-md-flex justify-content-between mt-4">
-                            <li>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="d-flex">
-                                        <h6>Age:</h6>
-                                        <p class="text-muted ms-2">25 year old</p>
-                                    </li>
+<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('blog-description', {
+//    toolbar: [],
+    height: '100px',
+    resize_enabled: false
+});
+</script>
 
-                                    <li class="d-flex">
-                                        <h6>Gender:</h6>
-                                        <p class="text-muted ms-2">Male</p>
-                                    </li>
-
-                                    <li class="d-flex">
-                                        <h6 class="mb-0">Department:</h6>
-                                        <p class="text-muted ms-2 mb-0">Cardiology</p>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="d-flex">
-                                        <h6>Date:</h6>
-                                        <p class="text-muted ms-2">20th Dec 2020</p>
-                                    </li>
-
-                                    <li class="d-flex">
-                                        <h6>Time:</h6>
-                                        <p class="text-muted ms-2">11:00 AM</p>
-                                    </li>
-
-                                    <li class="d-flex">
-                                        <h6 class="mb-0">Doctor:</h6>
-                                        <p class="text-muted ms-2 mb-0">Dr. Calvin Carlo</p>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- View Appintment End -->
-
-        <!-- Accept Appointment Start -->
-        <div class="modal fade" id="acceptappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body py-5">
-                        <div class="text-center">
-                            <div class="icon d-flex align-items-center justify-content-center bg-soft-success rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                <i class="uil uil-check-circle h1 mb-0"></i>
-                            </div>
-                            <div class="mt-4">
-                                <h4>Accept Appointment</h4>
-                                <p class="para-desc mx-auto text-muted mb-0">Great doctor if you need your family member to get immediate assistance, emergency treatment.</p>
-                                <div class="mt-4">
-                                    <a href="#" class="btn btn-soft-success">Accept</a>
+<style>
+.cke_textarea_inline, .cke_wysiwyg_frame {
+    resize: none !important;
+    height: 100px !important;
+    max-height: 100px !important;
+}
+</style>
+                                            <div class="col-lg-12 text-end">
+                                                <button type="submit" class="btn btn-primary">ADD</button>
+                                            </div>end col
+                                        </div>
+                                    </form>
                                 </div>
-                            </div>
-                        </div>
+                            </div>end col
+                        </div>end row
                     </div>
                 </div>
+               
             </div>
-        </div>
-        <!-- Accept Appointment End -->
+        </div>-->
+        <!-- End modal -->
+        <script>
+CKEDITOR.replace('blog-description', {
+    height: '200px'
+});
+</script>
 
-        <!-- Cancel Appointment Start -->
-        <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body py-5">
-                        <div class="text-center">
-                            <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                <i class="uil uil-times-circle h1 mb-0"></i>
-                            </div>
-                            <div class="mt-4">
-                                <h4>Cancel Appointment</h4>
-                                <p class="para-desc mx-auto text-muted mb-0">Great doctor if you need your family member to get immediate assistance, emergency treatment.</p>
-                                <div class="mt-4">
-                                    <a href="#" class="btn btn-soft-danger">Cancel</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Cancel Appointment End -->
-        <!-- Modal end -->
-        
+<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
         <!-- javascript -->
-        <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="assets/js/simplebar.min.js"></script>
-        <!-- Select2 -->
-        <script src="assets/js/select2.min.js"></script>
-        <script src="assets/js/select2.init.js"></script>
-        <!-- Datepicker -->
-        <script src="assets/js/flatpickr.min.js"></script>
-        <script src="assets/js/flatpickr.init.js"></script>
-        <!-- Datepicker -->
-        <script src="assets/js/jquery.timepicker.min.js"></script> 
-        <script src="assets/js/timepicker.init.js"></script> 
         <!-- Icons -->
         <script src="assets/js/feather.min.js"></script>
         <!-- Main Js -->
         <script src="assets/js/app.js"></script>
-         <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="./assets/js/popper.min.js"></script>
+        <script src="./assets/js/bootstrap.min.js"></script>
     </body>
-
 </html>

@@ -35,20 +35,25 @@ public class blogdetaildb extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String id=request.getParameter("bid");
-           BlogDAO bdao = new BlogDAO();
-           Blog b= bdao.getBlog(id);
-           String indexPage = request.getParameter("index");
-        int index = 1; 
-        if (indexPage != null) {
+        PrintWriter pr =response.getWriter();
+        String id = request.getParameter("bid");
+        String indexPage = request.getParameter("index");
+         int index = 1; // Default to page 1
+         if (indexPage != null) {
         index = Integer.parseInt(indexPage);
     }
-        List<Club> listB= bdao.getCLubByClubID(id);
-        List<Blog> listindb = bdao.pagingBlog(index);
-        request.setAttribute("listB", listB );
-        request.setAttribute("listdb", listindb );
-        request.setAttribute("detail", b);
+        BlogDAO bdao = new BlogDAO();
+        ClubDAO cdao =new ClubDAO();
+        Blog b = bdao.getBlog(id);
+        List<Blog> listBlog= bdao.pagingBlog(index);
+
+        request.setAttribute("detailBlog", b);
+        request.setAttribute("listdb", listBlog);
+       
         request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
+        
+      
+     
         } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -78,7 +83,7 @@ public class blogdetaildb extends HttpServlet {
          String TitleSearch =request.getParameter("search");
          BlogDAO dao = new BlogDAO();
          List<Blog> lis= dao.getSearchBlogByTitle(TitleSearch);
-         request.setAttribute("blogInDb", lis);
+         request.setAttribute("listdb", lis);
          request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
     }
 

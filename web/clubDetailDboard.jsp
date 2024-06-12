@@ -1,12 +1,11 @@
 <%-- 
-    Document   : Home
-    Created on : May 10, 2024, 9:37:57 PM
+    Document   : BlogDetailDBoard
+    Created on : Jun 10, 2024, 9:16:25 AM
     Author     : pc
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +18,7 @@
         <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
         <meta name="author" content="Shreethemes" />
         <meta name="email" content="support@shreethemes.in" />
-        <meta name="website" content="../../../index.html" />
+        <meta name="website" content="index.html" />
         <meta name="Version" content="v1.2.0" />
         <!-- favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico.png">
@@ -27,58 +26,49 @@
         <link href="assets/css/bootstrap.min_1.css" rel="stylesheet" type="text/css" />
         <!-- simplebar -->
         <link href="assets/css/simplebar.css" rel="stylesheet" type="text/css" />
-        <!-- Select2 -->
-        <link href="assets/css/select2.min.css" rel="stylesheet" />
-        <!-- Date picker -->
-        <link rel="stylesheet" href="assets/css/flatpickr.min.css">
-        <link href="assets/css/jquery.timepicker.min.css" rel="stylesheet" type="text/css" />
         <!-- Icons -->
         <link href="assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-  <link rel="stylesheet" href="assets/css/list.css">
 
     </head>
 
     <body>
         <!-- Loader -->
-       
-    
+     
         <div class="page-wrapper doctris-theme toggled">
             <nav id="sidebar" class="sidebar-wrapper"style="background: aliceblue;">
                 <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                     <div class="sidebar-brand" style="font-size: 20px;background: white;">
-                        <a style="text-align: center"href="Home"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
-                       
+                        <a style="text-align: center" href="Home"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
+                  
                         </a>
                     </div>
                     
                     <ul class="sidebar-menu pt-3">
                         <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
-                       
+                    
 
-                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                   
-                                    <li><a href="dr-profile.html">Club</a></li>
-                                    <li><a href="dr-profile.html">Event</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                         
+                       <li class="sidebar-dropdown">
+    <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
+    <div class="sidebar-submenu">
+        <ul>
+            <li>
+                <a href="javascript:void(0)">Club</a>
+                <div class="sidebar-submenu">
+                    <ul>
+                        <li><a href="dr-profile.html">List</a></li>
+                        <li><a href="dr-profile.html">Detail</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li><a href="dr-profile.html">Event</a></li>
+        </ul>
+    </div>
+</li>
+                       
 
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-setting me-2 d-inline-block"></i>Setting</a>
@@ -114,6 +104,7 @@
                                 </ul>
                             </div>
                         </li>
+                        
 
 <!--                        <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
@@ -255,7 +246,7 @@
                             </li>
 
                             <li class="list-inline-item mb-0 ms-1">
-                              <div class="col-xl-10 col-lg-10 col-md-10">
+                                                <div class="col-xl-10 col-lg-10 col-md-10">
                         <div class="menu-main d-flex align-items-center justify-content-end">
                             <!-- Main-menu -->
                            
@@ -293,190 +284,209 @@
 
                 <div class="container-fluid">
                     <div class="layout-specing">
-                        <div class="row">
-                            <div class="col-xl-9 col-lg-6 col-md-4">
-                                <h5 class="mb-0">Setting</h5>
-                                <nav aria-label="breadcrumb" class="d-inline-block mt-2">
-                                    <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
-                                        <li class="breadcrumb-item"><a href="dboard">Dashboard</a></li>
-                                      
-                                        <li class="breadcrumb-item active" aria-current="page">User</li>
-                                    </ul>
-                                </nav>
-                            </div><!--end col-->
-                            <div class="col-sm-12 col-md-5" style="display: flex">
-                               
-                                <div class="col-sm-12 col-md-5" style="padding-top: 10px">
-                                                <div class="mb-0 position-relative">
-                                                    <select class="form-control time-during select2input" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
-                                                      <option value=""  data-href="countUser">Status</option>
-                                                      <option value="1" data-href="${pageContext.request.contextPath}/status?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
-                                                      <option value="2" data-href="${pageContext.request.contextPath}/status?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                           
-                                             <div class="col-sm-12 col-md-5" style="padding-top: 10px">
-                                                <div class="mb-0 position-relative">
-                                                    <select class="form-control time-during select2input"onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
-                                                        <option value=""  data-href="countUser">Role</option>
-                                                       
-                                                        <option value="2" data-href="${pageContext.request.contextPath}/role?xRoleId=2" ${param.xRoleId eq '2' ? 'selected' : ''}>manager</option>
-                                                        <option value="3" data-href="${pageContext.request.contextPath}/role?xRoleId=3" ${param.xRoleId eq '3' ? 'selected' : ''}>normalUser</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            
-                                            
-                                               
-                                </div>
-                                                    <div class="col-sm-12 col-md-5" style="padding-left: 460px">
-                                                        <div class="justify-content-md-end"style="display: flex;padding-left: 30px">
-                                    <form action="countUser" method="post" style="display: flex; align-items: center;">
-    <div class="search-wrapper" style="position: relative;">
-      <input type="text" name="search" placeholder="search here" style="padding-left: 30px;border-radius: 10px;font-size: 15px">
-      <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
-    </div>
-                                        </form>
-    <div class="d-grid" style="margin-left: 20px">
-      <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentform"style="height: 35px;width: 130px">ADD NEW</a>
-    </div>
-    
+                        <div class="d-md-flex justify-content-between">
+                            <div>
+                                <h5 class="mb-0">${detail.name}</h5>
 
-  
-                                </div>
+                                <ul class="list-unstyled mt-2 mb-0">
+                                    <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i>${detailC.name}</li>
+                                    <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i>${detail.time}</li>
+                                </ul>
                             </div>
+
+                            <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
+                                <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                                    <li class="breadcrumb-item"><a href="dboard">DashBoard</a></li>
+                                    <li class="breadcrumb-item"><a href="blogdb">Blogs</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Blog Detail</li>
+                                </ul>
+                            </nav>
                         </div>
                         
-        <div class="row">
-        <div class="content-table">
-           
-            <table class="table table-striped table-hover">
-                <thead>
-                   
-                   <tr>
-                        <th>STT</th>	
-                        <th>Name</th>	
-                        <th>Role</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr> 
-                                   
-                </thead> 
-               <tbody>
-                   
-                   <c:if test="${not empty listUs}">
-                      <c:set var="count" value="0" />
-                         <c:forEach items="${listUs}" var="o">
-                            <c:set var="count" value="${count + 1}" />
-                         <tr>
-                            <td>${count}</td>
-                           
-                            <td>${o.fullname}</td>
-                         
-                            <td>
-                                 <c:choose>
-                                      
-                                        <c:when test="${o.roleId == 2}">
-                                          <span class="text-primary">Manager</span>
-                                        </c:when>
-                                        <c:when test="${o.roleId == 3}">
-                                          <span class="text-primary">NormalUser</span>
-                                        </c:when>
-                                    </c:choose>
-                            </td>
-                            <td>${o.email}</td>
-                            <td>${o.phone}</td>
-              
-                        <td>
-    
-    <c:if test="${o.status == 1}">
-        <a href="deleteUser?id=${o.id}&status=2"id="statusBtn" class="btn btn-success btn-sm" 
-            style="background-color: green;font-weight: normal;color: black"
-            onclick="toggleStatus(this);">active</a>
-    </c:if>
-    <c:if test="${o.status == 2}">
-        <a href="deleteUser?id=${o.id}&status=1"id="statusBtn" class="btn btn-danger btn-sm" 
-            style="background-color: red;font-weight: normal;color: black"
-            onclick="toggleStatus(this);">block</a>
-    </c:if>
-
-   
-</td>
-            <td>
-    <a href="detailUser?uid=${o.id}" class="detail" title="detail" data-toggle="tooltip">
-        <i class="uil uil-eye me-2 d-inline-block"></i>
-    </a>
-</td>
-        </tr>
-                  </c:forEach>
-                 </c:if>
-                    <c:if test="${empty listUs}">
-                        <tr>
-                           <td colspan="7">
-                              <div class="alert alert-danger text-center">There are no users</div>
-                           </td>
-                        </tr>
-                    </c:if>
-                    </tbody>
-            </table>
-          
-             
-            
-            <div class="row text-center" style="">
-                            <!-- PAGINATION START -->
-                             <div class="clearfix" style="padding-bottom: 10px;
-    font-size: 20px;">
-  <ul class="pagination justify-content-center" id="pagination">
-    <li class="page-item ${tag == 1 ? 'disabled' : ''}">
-      <a class="page-link" href="countUser?index=${tag - 1}">Previous</a>
-    </li>
-    <c:forEach begin="1" end="${mPage}" var="i">
-      <li class="page-item ${tag == i ? 'active' : ''}">
-        <a class="page-link" href="countUser?index=${i}">${i}</a>
-      </li>
-    </c:forEach>
-    <li class="page-item ${tag == mPage ? 'disabled' : ''}">
-      <a class="page-link" href="countUser?index=${tag + 1}">Next</a>
-    </li>
-  </ul>
-</div>
-                            <!-- PAGINATION END -->
-                        </div><!--end row-->
-        </div>
- </div>
-
-
-
-                        </div><!--end row-->
-
-<!--                        <div class="row text-center">
-                             PAGINATION START 
-                            <div class="col-12 mt-4">
-                                <div class="d-md-flex align-items-center text-center justify-content-between">
-                                    <span class="text-muted me-3">Showing 1 - 10 out of 50</span>
-                                    <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Previous">Prev</a></li>
-                                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Next">Next</a></li>
-                                    </ul>
+                        <div class="row">
+                            <div class="col-lg-8 col-lg-7 mt-4">
+                                <div class="card rounded shadow border-0 overflow-hidden">
+                                    <img src="${detail.image}" class="img-fluid" alt="">
+        
+                                    <div class="p-4">
+                                        <!-- <ul class="list-unstyled">
+                                            <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i> Calvin Carlo</li>
+                                            <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> 1st January, 2021</li>
+                                        </ul> -->
+                
+                                        <p class="text-muted">${detail.details}</p>
+                                     
+                                    </div>
                                 </div>
-                            </div>end col
-                             PAGINATION END 
-                        </div>end row-->
+                                        <div class="mt-4 mt-sm-0" style="padding-left: 480px;padding-top: 10px">
+                                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">EDIT</a>
+                            </div> 
+                            </div><!--end col-->
+                            
+                            
+                            <div class="col-lg-4 col-md-5 mt-4">
+                                <div class="card border-0 sidebar sticky-bar rounded shadow">
+                                    <div class="card-body">
+                                        <!-- SEARCH -->
+                                        <div class="widget mb-4 pb-2">
+                                            <h5 class="widget-title">Search</h5>
+                                            <div id="search2" class="widget-search mt-4 mb-0">
+                                                <form action="blogdetaildb" method="post" id="searchform1" class="searchform">
+                                                    <div>
+                                                        <input type="text" class="border rounded" name="search" id="search" placeholder="Search Keywords...">
+                                                        <input type="submit" id="searchsubmit1" value="Search">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        
+            
+                                        <!-- RECENT POST -->
+                                        <div class="widget mb-4 pb-2">
+                                            <h5 class="widget-title">Recent Blog</h5>
+                                            <div class="mt-4">
+                                                <c:forEach items="${listdb}" var="ld">
+                                                <div class="clearfix post-recent">
+                                                    <div class="post-recent-thumb float-start"> <a href="blogdetaildb?bid=${ld.id}"> <img alt="img" src="${ld.image}" class="img-fluid rounded"></a></div>
+                                                    <div class="post-recent-content float-start"><a href="blogdetaildb?bid=${ld.id}">${ld.name}</a><span class="text-muted mt-2">${ld.time}</span></div>
+                                                </div>
+                                            </c:forEach>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
                     </div>
                 </div><!--end container-->
+                            <div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"style="">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                <div class="modal-content">
+                   
+                    <div class="modal-header border-bottom p-3">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Blog</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body p-3 pt-4" style="padding-top: 0px">
+                       
+                        <div class="row">
+                            
+                            <div class="col-md-4">
+                                <form action="editBlogdb" method="post" enctype="multipart/form-data">
+                                <div class="d-grid">
+                                    
+                                    <p class="text-muted"></p>
+                                    <div class="preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1"><img src="${detail.image}" class="img-fluid" alt=""></div>
+                                    <input type="file" id="input-file" name="input-file" accept="image/*" />
+                               
+                                </div>
+                                </form>
+                            </div><!--end col-->
+                           
+
+                            <div class="col-md-8 mt-4 mt-sm-0"style="">
+                                <div class="ms-md-4"style="">
+                                    <form action="editBlogdb" method="post" style="">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Blog Title <span class="text-danger">*</span></label>
+                                                    <input name="name" id="name" type="text" class="form-control" value="${detail.name}" >
+                                                </div>
+                                            </div><!--end col-->
+    
+                                       
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label"> Date : </label>
+                                                    <input name="date" type="text" class="form-control" id="date" value="${detail.time}">
+                                                </div>
+                                            </div><!--end col-->
+    
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Status</label>
+                                                    <div class="context-status" style="display: flex;">
+                               
+                                                       <div style="display: flex; align-items: center;">
+                                                          <input ${detail.status == 1 ? 'checked' : ''} value="1" type="radio" name="status" style="font-size: 10px;  margin-right: 10px">
+                                                          active
+                                                       </div>
+                                                       <div style="display: flex; align-items: center; margin-left: 20px;">
+                                                           <input ${detail.status== 2 ? 'checked' : ''} value="2" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
+                                                           block
+                                                       </div>
+                                                    </div>
+                                                </div>
+                                            </div><!--end col-->
+    
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                     <label class="form-label"> Club </label>
+                                                    <input name="date" type="text" class="form-control" id="date" value="${detailC.name}">
+                                                      
+                                                    </select>
+                                                </div>
+                                            </div><!--end col-->
+                                            
+    
+                                        <div class="col-lg-12">
+                                           <div class="mb-3">
+                                           <label class="form-label">Description <span class="text-danger">*</span></label>
+        <div id="blog-description" class="cke_editable cke_editable_inline cke_contents_ltr" contenteditable="true" spellcheck="false" style="height: 100px;">
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+<script>
+CKEDITOR.replace('blog-description', {
+//    toolbar: [],
+    height: '100px',
+    resize_enabled: false
+});
+</script>
+
+<style>
+.cke_textarea_inline, .cke_wysiwyg_frame {
+    resize: none !important;
+    height: 100px !important;
+    max-height: 100px !important;
+}
+</style>
+                                            <div class="col-lg-12 text-end">
+                                                <button type="submit" class="btn btn-primary">SAVE</button>
+                                            </div><!--end col-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div>
+                </div>
+               
+            </div>
+        </div>
 
                 <!-- Footer Start -->
-                
+                <footer class="bg-white shadow py-3">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="text-sm-start text-center">
+                                    <p class="mb-0 text-muted"><script>document.write(new Date().getFullYear())</script> © Doctris. Design with <i class="mdi mdi-heart text-danger"></i> by <a href="../../../index.html" target="_blank" class="text-reset">Shreethemes</a>.</p>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end container-->
+                </footer><!--end footer-->
                 <!-- End -->
-            
+            </main>
             <!--End page-content" -->
-        
+        </div>
         <!-- page-wrapper -->
 
         <!-- Offcanvas Start -->
@@ -509,7 +519,7 @@
                     </div><!--end col-->
                 </div><!--end row-->
             </div>
-
+            
             <div class="offcanvas-footer p-4 border-top text-center">
                 <ul class="list-unstyled social-icon mb-0">
                     <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris-template" target="_blank" class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
@@ -524,234 +534,24 @@
         </div>
         <!-- Offcanvas End -->
 
-        <!-- Modal start -->
-        <!-- Add New Appointment Start -->
-        <div class="modal fade" id="appointmentform" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-             <div class="modal-dialog modal-lg modal-dialog-centered">
-                 
-                <div class="modal-content" style="background: aliceblue">
-                    <div class="form-add" style="padding: 20px">
-
-           <form action="add" method="post">
-               <h2 style="text-align: center;font-size: 30px">Add New User</h2>
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black;font-weight: bold"> Name</label>
-                            <input type="text" class="form-control" name="fullname" id="fullname" required="required">
-                        </fieldset>
-                    </div>
-                     <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black;font-weight: bold"> Password</label>
-                            <input type="text" class="form-control" name="password" id="password" required="required">
-                        </fieldset>
-                    </div>
-                </div>
-                    <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black;font-weight: bold"> Email</label>
-                            <input type="text" class="form-control" name="email" id="email" required="required">
-                        </fieldset>
-                    </div>
-                     <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black; font-weight: bold">Role</label>
-                          <div class="context-gender" style="display: flex;">
-    
-    <div style="display: flex; align-items: center;padding-right: 20px">
-        <input value="2" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
-        Manager
-    </div>
-    
-    <div style="display: flex; align-items: center;">
-        <input value="3" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
-        NormalUser
-    </div>
-</div>
-                        </fieldset>
-                    </div>
-                    </div>
-                
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black; font-weight: bold">Gender</label>
-                          <div class="context-gender" style="display: flex;">
-    
-    <div style="display: flex; align-items: center;padding-right: 20px">
-        <input  value="1" type="radio"  name="gender" style="font-size: 10px;  margin-right: 10px">
-        Male
-    </div>
-    
-    <div style="display: flex; align-items: center;">
-        <input value="2" type="radio"  name="gender" style="font-size: 10px;  margin-right: 10px">
-        Female
-    </div>
-</div>
-                        </fieldset>
-                    </div>
-                    <div class="col-md-6">
-                        <fieldset class="form-group">
-                             <label style="color: black; font-weight: bold">Status</label>
-                          <div class="context-status" style="display: flex;">
-    
-    <div style="display: flex; align-items: center;padding-right: 20px">
-        <input  value="1" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
-        active
-    </div>
-    
-    <div style="display: flex; align-items: center;">
-        <input  value="2" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
-        block
-    </div>
-</div>
-                        </fieldset>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                  
-                    <a href="" class="btn" style="background: skyblue;color: white;font-weight: bold">Back</a>
-                    <button type="submit" class="btn btn-success" style="font-weight: bold">Save</button>
-                    <p style="color: red; font-size: 15px">${requestScope.wrongRegister}</p>
-                    <p style="color: green; font-size: 15px">${requestScope.addnew}</p>
-                </div>
-            </form>
-        </div>
-                </div>
-             </div>
-        </div>
-        <!-- Add New Appointment End -->
-
-        <!-- View Appintment Start -->
-        <div class="modal fade" id="viewappointment" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header border-bottom p-3">
-                        <h5 class="modal-title" id="exampleModalLabel1">Appointment Detail</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body p-3 pt-4">
-                        <div class="d-flex align-items-center">
-                            <img src="../assets/images/client/01.jpg" class="avatar avatar-small rounded-pill" alt="">
-                            <h5 class="mb-0 ms-3">Howard Tanner</h5>
-                        </div>
-                        <ul class="list-unstyled mb-0 d-md-flex justify-content-between mt-4">
-                            <li>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="d-flex">
-                                        <h6>Age:</h6>
-                                        <p class="text-muted ms-2">25 year old</p>
-                                    </li>
-
-                                    <li class="d-flex">
-                                        <h6>Gender:</h6>
-                                        <p class="text-muted ms-2">Male</p>
-                                    </li>
-
-                                    <li class="d-flex">
-                                        <h6 class="mb-0">Department:</h6>
-                                        <p class="text-muted ms-2 mb-0">Cardiology</p>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <ul class="list-unstyled mb-0">
-                                    <li class="d-flex">
-                                        <h6>Date:</h6>
-                                        <p class="text-muted ms-2">20th Dec 2020</p>
-                                    </li>
-
-                                    <li class="d-flex">
-                                        <h6>Time:</h6>
-                                        <p class="text-muted ms-2">11:00 AM</p>
-                                    </li>
-
-                                    <li class="d-flex">
-                                        <h6 class="mb-0">Doctor:</h6>
-                                        <p class="text-muted ms-2 mb-0">Dr. Calvin Carlo</p>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- View Appintment End -->
-
-        <!-- Accept Appointment Start -->
-        <div class="modal fade" id="acceptappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body py-5">
-                        <div class="text-center">
-                            <div class="icon d-flex align-items-center justify-content-center bg-soft-success rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                <i class="uil uil-check-circle h1 mb-0"></i>
-                            </div>
-                            <div class="mt-4">
-                                <h4>Accept Appointment</h4>
-                                <p class="para-desc mx-auto text-muted mb-0">Great doctor if you need your family member to get immediate assistance, emergency treatment.</p>
-                                <div class="mt-4">
-                                    <a href="#" class="btn btn-soft-success">Accept</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Accept Appointment End -->
-
-        <!-- Cancel Appointment Start -->
-        <div class="modal fade" id="cancelappointment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body py-5">
-                        <div class="text-center">
-                            <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
-                                <i class="uil uil-times-circle h1 mb-0"></i>
-                            </div>
-                            <div class="mt-4">
-                                <h4>Cancel Appointment</h4>
-                                <p class="para-desc mx-auto text-muted mb-0">Great doctor if you need your family member to get immediate assistance, emergency treatment.</p>
-                                <div class="mt-4">
-                                    <a href="#" class="btn btn-soft-danger">Cancel</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Cancel Appointment End -->
-        <!-- Modal end -->
-        
         <!-- javascript -->
-        <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="assets/js/simplebar.min.js"></script>
-        <!-- Select2 -->
-        <script src="assets/js/select2.min.js"></script>
-        <script src="assets/js/select2.init.js"></script>
-        <!-- Datepicker -->
-        <script src="assets/js/flatpickr.min.js"></script>
-        <script src="assets/js/flatpickr.init.js"></script>
-        <!-- Datepicker -->
-        <script src="assets/js/jquery.timepicker.min.js"></script> 
-        <script src="assets/js/timepicker.init.js"></script> 
         <!-- Icons -->
         <script src="assets/js/feather.min.js"></script>
         <!-- Main Js -->
         <script src="assets/js/app.js"></script>
-         <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="./assets/js/popper.min.js"></script>
+        <script src="./assets/js/bootstrap.min.js"></script>
+         <script>
+CKEDITOR.replace('blog-description', {
+    height: '200px'
+});
+</script>
+
+<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
     </body>
 
 </html>

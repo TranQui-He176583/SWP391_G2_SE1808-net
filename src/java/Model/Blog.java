@@ -15,19 +15,17 @@ public class Blog {
     String name;
     String details;
     int clubID;
-    LocalDateTime time;
     String image;   
     int status;
 
     public Blog() {
     }
 
-    public Blog(int id, String name, String details, int clubID, LocalDateTime time, String image, int status) {
+    public Blog(int id, String name, String details, int clubID, String image, int status) {
         this.id = id;
         this.name = name;
         this.details = details;
         this.clubID = clubID;
-        this.time = time;
         this.image = image;
         this.status = status;
     }
@@ -64,14 +62,6 @@ public class Blog {
         this.clubID = clubID;
     }
 
-    public LocalDateTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalDateTime time) {
-        this.time = time;
-    }
-
     public String getImage() {
         return image;
     }
@@ -88,6 +78,7 @@ public class Blog {
         this.status = status;
     }
 
+   
     
    
 }

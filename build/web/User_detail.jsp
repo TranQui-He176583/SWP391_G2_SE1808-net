@@ -199,8 +199,8 @@
                                         <a href="javascript:void(0)"><i class="uil uil-club me-2 d-inline-block"></i>Club</a>
                                         <div class="sidebar-submenu">
                                         <ul>
-                                            <li><a href="countUser">Club</a></li>
-                                            <li><a href="detailUser">Club Detail</a></li>
+                                            <li><a href="clubdb">Club</a></li>
+                                            <li><a href="clubdetaildb">Club Detail</a></li>
                                         </ul>
                                         </div>
                                    </li>

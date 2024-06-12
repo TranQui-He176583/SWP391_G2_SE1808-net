@@ -291,7 +291,7 @@
 
                                 <nav aria-label="breadcrumb" class="d-inline-block mt-1">
                                     <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
-                                        <li class="breadcrumb-item"><a href="index.html">Doctris</a></li>
+                                        <li class="breadcrumb-item"><a href="iblogdb">DashBoard</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Blogs</li>
                                     </ul>
                                 </nav>
@@ -303,9 +303,9 @@
                                     <option value="2" data-href="${pageContext.request.contextPath}/statusBlog?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
                                 </select>
                             </div>
-                            <div class="mt-4 mt-sm-0">
+<!--                            <div class="mt-4 mt-sm-0">
                                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">Add Blog</a>
-                            </div>
+                            </div>-->
                         </div>
                         
                         <div class="row">
@@ -313,12 +313,12 @@
                             <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4">
                                 <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
                                     <img src="${lb.image}" class="img-fluid" alt="">
+                                 
                                     <div class="card-body p-4">
                                         <ul class="list-unstyled mb-2">
-                                            <li class="list-inline-item text-muted small me-3"><i class="uil uil-calendar-alt text-dark h6 me-1"></i>${lb.time}</li>
-                                            
+                                        
                                         </ul>
-                                        <a href="blogdetaildb" class="text-dark title h5">${lb.name}</a>
+                                        <a href="blogdetaildb?bid=${lb.id}" class="text-dark title h5">${lb.name}</a>
                                         <div class="post-meta d-flex justify-content-between mt-3">
                                             <ul class="list-unstyled mb-0">
                                                 <li class="list-inline-item me-2 mb-0">
@@ -335,7 +335,7 @@
                                                 </li>
                        
                                             </ul>
-                                            <a href="blogdetaildb" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
+                                            <a href="blogdetaildb?bid=${lb.id}" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -433,7 +433,7 @@
         <!-- Offcanvas End -->
 
         <!-- Start Modal -->
-        <div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"style="">
+<!--        <div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"style="">
             <div class="modal-dialog modal-lg modal-dialog-centered">
 
                 <div class="modal-content">
@@ -458,7 +458,7 @@
                               
                                 </div>
                                 </form>
-                            </div><!--end col-->
+                            </div>end col
                            
 
                             <div class="col-md-8 mt-4 mt-sm-0"style="">
@@ -470,14 +470,15 @@
                                                     <label class="form-label">Blog Title <span class="text-danger">*</span></label>
                                                     <input name="name" id="name" type="text" class="form-control" placeholder="Title :">
                                                 </div>
-                                            </div><!--end col-->
+                                            </div>end col
     
+                                       
                                             <div class="col-md-6">
                                                 <div class="mb-3">
                                                     <label class="form-label"> Date : </label>
                                                     <input name="date" type="text" class="form-control" id="date" value="09 January 2021">
                                                 </div>
-                                            </div><!--end col-->
+                                            </div>end col
     
                                             <div class="col-md-6">
                                                 <div class="mb-3">
@@ -495,7 +496,7 @@
     </div>
 </div>
                                                 </div>
-                                            </div><!--end col-->
+                                            </div>end col
     
                                             <div class="col-md-6">
                                                 <div class="mb-3">
@@ -510,10 +511,10 @@
                                                         <option value="7">Japanese</option> 
                                                     </select>
                                                 </div>
-                                            </div><!--end col-->
+                                            </div>end col
                                             
     
-                                          <div class="col-lg-12">
+                                        <div class="col-lg-12">
     <div class="mb-3">
         <label class="form-label">Description <span class="text-danger">*</span></label>
         <div id="blog-description" class="cke_editable cke_editable_inline cke_contents_ltr" contenteditable="true" spellcheck="false" style="height: 100px;">
@@ -539,17 +540,17 @@ CKEDITOR.replace('blog-description', {
 </style>
                                             <div class="col-lg-12 text-end">
                                                 <button type="submit" class="btn btn-primary">ADD</button>
-                                            </div><!--end col-->
+                                            </div>end col
                                         </div>
                                     </form>
                                 </div>
-                            </div><!--end col-->
-                        </div><!--end row-->
+                            </div>end col
+                        </div>end row
                     </div>
                 </div>
                
             </div>
-        </div>
+        </div>-->
         <!-- End modal -->
         <script>
 CKEDITOR.replace('blog-description', {

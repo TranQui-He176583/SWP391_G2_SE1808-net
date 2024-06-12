@@ -22,7 +22,7 @@ import java.util.List;
  * @author pc
  */
 @WebServlet(name="blogdb", urlPatterns={"/blogdb"})
-public class blogdb extends HttpServlet {
+public class clubdb extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,24 +35,24 @@ public class blogdb extends HttpServlet {
     throws ServletException, IOException {
          PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-         String indexPage = request.getParameter("index");
-   
-    int index = 1; // Default to page 1
-    if (indexPage != null) {
-        index = Integer.parseInt(indexPage);
-    }
-    
-    BlogDAO bdao = new BlogDAO();
-    int count = bdao.getTotalBlog();
-    int maxPage = (count / 6) + (count % 6 != 0 ? 1 : 0);
-
-    List<Blog> listBlog = bdao.pagingBlog(index);
- 
-    request.setAttribute("listBL", listBlog);
-    request.setAttribute("mPage", maxPage);
-    request.setAttribute("tag", index);
-
-    request.getRequestDispatcher("BlogsDBoard.jsp").forward(request, response);
+//         String indexPage = request.getParameter("index");
+//   
+//    int index = 1; // Default to page 1
+//    if (indexPage != null) {
+//        index = Integer.parseInt(indexPage);
+//    }
+//
+//    BlogDAO bdao = new BlogDAO();
+//    int count = bdao.getTotalBlog();
+//    int maxPage = (count / 6) + (count % 6 != 0 ? 1 : 0);
+//
+//    List<Blog> listBlog = bdao.pagingBlog(index);
+// 
+//    request.setAttribute("listBL", listBlog);
+//    request.setAttribute("mPage", maxPage);
+//    request.setAttribute("tag", index);
+//
+//    request.getRequestDispatcher("BlogsDBoard.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

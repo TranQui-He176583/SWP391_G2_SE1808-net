@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.time.LocalDateTime;
@@ -23,13 +24,13 @@ import java.time.LocalDateTime;
  *
  * @author pc
  */
-@WebServlet(name="addBlogdboard", urlPatterns={"/addBlogdboard"})
+@WebServlet(name="editBlogdb", urlPatterns={"/editBlogdb"})
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1MB
         maxFileSize = 1024 * 1024 * 5, // 5MB
         maxRequestSize = 1024 * 1024 * 10 // 10MB
 )
-public class addBlogdboard extends HttpServlet {
+public class editBlogdb extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -46,10 +47,10 @@ public class addBlogdboard extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet addBlogdboard</title>");  
+            out.println("<title>Servlet editBlogdb</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet addBlogdboard at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet editBlogdb at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -77,61 +78,75 @@ public class addBlogdboard extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-      PrintWriter out = response.getWriter();
+   protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+    PrintWriter out = response.getWriter();
+    String xid = request.getParameter("id");
+    int id = Integer.parseInt(xid);
+    String xName = request.getParameter("name");
+    String xDetails = request.getParameter("details");
 
-    String name = request.getParameter("name");
-    String details = request.getParameter("details");
-    String xclubID  = request.getParameter("clubID");
-    int clubID =Integer.parseInt(xclubID);
-    String xtime = request.getParameter("time");
-    LocalDateTime time = LocalDateTime.parse(xtime);
-    String image= request.getParameter("image");
-    String xstatus = request.getParameter("status");
-    int status = Integer.parseInt(xstatus);
-
-    Part imagePart = request.getPart("image");
-    String imageName = getUniqueFileName(imagePart);
-    String imagePath = saveUploadedFile(request, imageName);
-
-    BlogDAO user = new BlogDAO();
+    Part xImage = request.getPart("image");
     
-    int numberUser = user.getNumberBlog()+ 1;
-    Blog b = new Blog(numberUser, name, details, clubID, time, image, status);
-    out.print(user.add(b));
-    response.sendRedirect("blogdb");
+    String xStatus = request.getParameter("status");
+    int status = Integer.parseInt(xStatus);
+    BlogDAO bdao = new BlogDAO();
+    
+    Blog b= bdao.getBlog(xid);
    
+    String imageURL="";
+    if (b != null) {
+        if (xImage != null && xImage.getSize() > 0) { // Check if an image was uploaded
+            imageURL = saveUploadedFile(request);
+            if (b.getImage() != null) {
+                File file = new File("D:\\SWP\\Project\\SWP391_G2_SE1808-net\\Swp\\build\\web\\" + b.getImage());
+                file.delete();
+            }
+        } else {
+            imageURL = b.getImage(); // Use the existing image URL
+        }
+        b.setName(xName);
+        b.setDetails(xDetails);
+        b.setImage(imageURL);
+        b.setStatus(status);
+        bdao.EditBlog(b);
+        request.setAttribute("completeChange", "Change Information Susscess!");
+        response.sendRedirect("blogdb");
+    } else {
+        out.println("<html><body><h1>Error: 'blog' attribute is null</h1></body></html>");
     }
+}
 
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-   String saveUploadedFile(HttpServletRequest request, String fileName) throws IOException, ServletException {
+   
+    
+   String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
     String uploadPath = "assets/img/avatar/";
-    String applicationPath = request.getServletContext().getRealPath("");
-    String absoluteFilePath = applicationPath + File.separator + uploadPath + fileName;
 
     Part part = request.getPart("image");
+    String fileName = getUniqueFileName(part);
+    String filePath = uploadPath + fileName;
+
+    String applicationPath = request.getServletContext().getRealPath("");
+    String absoluteFilePath = applicationPath + File.separator + filePath;
+
     part.write(absoluteFilePath);
 
     File uploadedFile = new File(absoluteFilePath);
     if (uploadedFile.exists()) {
-        return uploadPath + fileName;
+        return filePath;
     } else {
         return "";
     }
 }
-String getUniqueFileName(Part part) {
-    String submittedFileName = part.getSubmittedFileName();
-    String fileExtension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
-    String newFileName = System.currentTimeMillis() + fileExtension;
-    return newFileName;
-}
 
+     String getUniqueFileName(Part part) {
+        String submittedFileName = part.getSubmittedFileName();
+        String fileExtension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
+        String newFileName = System.currentTimeMillis() + fileExtension;
+        return newFileName;
+    }
 }

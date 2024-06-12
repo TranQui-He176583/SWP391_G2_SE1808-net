@@ -7,7 +7,8 @@ package Controller;
 
 import Model.Blog;
 import Model.BlogDAO;
-import Model.UserDAO;
+import Model.Club;
+import Model.ClubDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -21,8 +22,8 @@ import java.util.List;
  *
  * @author pc
  */
-@WebServlet(name="blogdb", urlPatterns={"/blogdb"})
-public class blogdb extends HttpServlet {
+@WebServlet(name="blogdetaildb", urlPatterns={"/blogdetaildb"})
+public class clubdetaildb extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,27 +34,29 @@ public class blogdb extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-         String indexPage = request.getParameter("index");
-   
-    int index = 1; // Default to page 1
-    if (indexPage != null) {
-        index = Integer.parseInt(indexPage);
-    }
-    
-    BlogDAO bdao = new BlogDAO();
-    int count = bdao.getTotalBlog();
-    int maxPage = (count / 6) + (count % 6 != 0 ? 1 : 0);
-
-    List<Blog> listBlog = bdao.pagingBlog(index);
- 
-    request.setAttribute("listBL", listBlog);
-    request.setAttribute("mPage", maxPage);
-    request.setAttribute("tag", index);
-
-    request.getRequestDispatcher("BlogsDBoard.jsp").forward(request, response);
-    } 
+//        PrintWriter pr =response.getWriter();
+//        String id=request.getParameter("bid");
+//       
+//           BlogDAO bdao = new BlogDAO();
+//           ClubDAO cdao =new ClubDAO();
+//   
+//           String indexPage = request.getParameter("index");
+//        int index = 1; 
+//        if (indexPage != null) {
+//        index = Integer.parseInt(indexPage);
+//    }
+//        Blog b= bdao.getBlog(id);
+//        Club c =cdao.getCLubByClubID(id);
+//        List<Blog> listindb = bdao.pagingBlog(index);
+//        pr.print(b);
+//        request.setAttribute("detail", b);
+//        request.setAttribute("detailC", c );
+//    
+//        request.setAttribute("listdb", listindb );
+//
+//        request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
+      } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -79,13 +82,11 @@ public class blogdb extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String Search =request.getParameter("search");
-         BlogDAO bdao = new BlogDAO();
-         List<Blog> list= bdao.getSearchBlogByTitle(Search);
-         List<Blog> lisc= bdao.getSearchBlogByCLub(Search);
-         request.setAttribute("listBL", list);
-         request.setAttribute("listBL", lisc);
-         request.getRequestDispatcher("BlogsDBoard.jsp").forward(request, response);
+         String TitleSearch =request.getParameter("search");
+         BlogDAO dao = new BlogDAO();
+         List<Blog> lis= dao.getSearchBlogByTitle(TitleSearch);
+         request.setAttribute("listdb", lis);
+         request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
     }
 
     /** 

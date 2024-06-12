@@ -119,5 +119,39 @@ public class ClubDAO extends MyDAO {
      }
     return(t);
     }
+    public List<Club> getClubByClubID(String bid) {
+        List<Club> t = new ArrayList<>();
+                xSql = "select * from blog join club\n" +
+"        on club.id = blog.clubID \n" +
+"        where blog.id= ?"; 
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setString(1, bid);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+        int id = rs.getInt("id");  
+        String name= rs.getString("name"); 
+        int status= rs.getInt("status");  
+        String avatar= rs.getString("avatar");  
+        
+        t.add(new Club(id, name, status, avatar));
+     
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+    }
+
+    public static void main(String[] args) {
+        ClubDAO dao =new ClubDAO();
+        List<Club> lits =dao.getClubByClubID("2");
+        for(Club c:  lits){
+        System.out.println(c.getName());
+    }
+    }
 
 }
