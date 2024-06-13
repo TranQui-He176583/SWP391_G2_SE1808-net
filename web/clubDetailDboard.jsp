@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,8 +38,7 @@
 
     <body>
         <!-- Loader -->
-     
-        <div class="page-wrapper doctris-theme toggled">
+   <div class="page-wrapper doctris-theme toggled">
             <nav id="sidebar" class="sidebar-wrapper"style="background: aliceblue;">
                 <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                     <div class="sidebar-brand" style="font-size: 20px;background: white;">
@@ -170,9 +170,9 @@
                             </a>
                             <div class="search-bar p-0 d-none d-md-block ms-2">
                                 <div id="search" class="menu-search mb-0">
-                                    <form role="search" method="get" id="searchform" class="searchform">
+                                    <form action="clubdb" method="post" id="searchform" class="searchform">
                                         <div>
-                                            <input type="text" class="form-control border rounded-pill" name="s" id="s" placeholder="Search Keywords...">
+                                            <input type="text" class="form-control border rounded-pill" name="search" id="search" placeholder="Search Keywords...">
                                             <input type="submit" id="searchsubmit" value="Search">
                                         </div>
                                     </form>
@@ -286,19 +286,19 @@
                     <div class="layout-specing">
                         <div class="d-md-flex justify-content-between">
                             <div>
-                                <h5 class="mb-0">${detail.name}</h5>
+                                <h5 class="mb-0">${detailC.name}</h5>
 
                                 <ul class="list-unstyled mt-2 mb-0">
-                                    <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i>${detailC.name}</li>
-                                    <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i>${detail.time}</li>
+                                    <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i>Manager:</li>
+                                    
                                 </ul>
                             </div>
 
                             <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
-                                    <li class="breadcrumb-item"><a href="dboard">DashBoard</a></li>
-                                    <li class="breadcrumb-item"><a href="blogdb">Blogs</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Blog Detail</li>
+                                    <li class="breadcrumb-item"><a href="idboard">DashBoard</a></li>
+                                    <li class="breadcrumb-item"><a href="clubdb">Club</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Club Detail</li>
                                 </ul>
                             </nav>
                         </div>
@@ -306,7 +306,7 @@
                         <div class="row">
                             <div class="col-lg-8 col-lg-7 mt-4">
                                 <div class="card rounded shadow border-0 overflow-hidden">
-                                    <img src="${detail.image}" class="img-fluid" alt="">
+                                    <img src="${detailC.avatar}" class="img-fluid" alt="">
         
                                     <div class="p-4">
                                         <!-- <ul class="list-unstyled">
@@ -314,16 +314,26 @@
                                             <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> 1st January, 2021</li>
                                         </ul> -->
                 
-                                        <p class="text-muted">${detail.details}</p>
-                                     
+                                        <p class="text-muted">This is required when, for example, the final text is not yet available. Dummy text is also known as 'fill text'. It is said that song composers of the past used dummy texts as lyrics when writing melodies in order to have a 'ready-made' text to sing with the melody. Dummy texts have been in use by typesetters since the 16th century.</p>
+                                        <p class="text-muted">Due to its widespread use as filler text for layouts, non-readability is of great importance: human perception is tuned to recognize certain patterns and repetitions in texts.</p>
+                                        <p class="text-muted mb-0">For this reason, dummy text usually consists of a more or less random series of words or syllables.</p>
+                                    
+                                        
+                
+                                        <ul class="media-list list-unstyled mb-0">
+                                           
+                
+                                            
+                                            
+                                            <li class="mt-4">
+                                             
+                                            </li>
+                                        </ul>
+                                    
                                     </div>
                                 </div>
-                                        <div class="mt-4 mt-sm-0" style="padding-left: 480px;padding-top: 10px">
-                                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">EDIT</a>
-                            </div> 
                             </div><!--end col-->
-                            
-                            
+        
                             <div class="col-lg-4 col-md-5 mt-4">
                                 <div class="card border-0 sidebar sticky-bar rounded shadow">
                                     <div class="card-body">
@@ -331,7 +341,7 @@
                                         <div class="widget mb-4 pb-2">
                                             <h5 class="widget-title">Search</h5>
                                             <div id="search2" class="widget-search mt-4 mb-0">
-                                                <form action="blogdetaildb" method="post" id="searchform1" class="searchform">
+                                                <form action="clubdetaildb" method="post" id="searchform1" class="searchform">
                                                     <div>
                                                         <input type="text" class="border rounded" name="search" id="search" placeholder="Search Keywords...">
                                                         <input type="submit" id="searchsubmit1" value="Search">
@@ -339,137 +349,35 @@
                                                 </form>
                                             </div>
                                         </div>
-                                        
+                                        <!-- SEARCH -->
             
                                         <!-- RECENT POST -->
                                         <div class="widget mb-4 pb-2">
-                                            <h5 class="widget-title">Recent Blog</h5>
+                                            <h5 class="widget-title">Recent Club</h5>
                                             <div class="mt-4">
-                                                <c:forEach items="${listdb}" var="ld">
+                                                <c:forEach items="${listdb}" var="lcdb">
                                                 <div class="clearfix post-recent">
-                                                    <div class="post-recent-thumb float-start"> <a href="blogdetaildb?bid=${ld.id}"> <img alt="img" src="${ld.image}" class="img-fluid rounded"></a></div>
-                                                    <div class="post-recent-content float-start"><a href="blogdetaildb?bid=${ld.id}">${ld.name}</a><span class="text-muted mt-2">${ld.time}</span></div>
+                                                    <div class="post-recent-thumb float-start"> <a href="clubdetaildb?cid=${lcdb.id}"><img alt="img" src="${lcdb.avatar}" class="img-fluid rounded"></a></div>
+                                                    <div class="post-recent-content float-start"><a href="clubdetaildb?cid=${lcdb.id}">${lcdb.name}</a><span class="text-muted mt-2"> Manager:</span></div>
                                                 </div>
-                                            </c:forEach>
+                                                </c:forEach>
                                             </div>
                                         </div>
+                                        <!-- RECENT POST -->
+            
+                                        <!-- TAG CLOUDS -->
+                                       
+                                        <!-- TAG CLOUDS -->
                                         
+                                        <!-- SOCIAL -->
+                                        
+                                        <!-- SOCIAL -->
                                     </div>
                                 </div>
                             </div><!--end col-->
                         </div><!--end row-->
                     </div>
                 </div><!--end container-->
-                            <div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"style="">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-
-                <div class="modal-content">
-                   
-                    <div class="modal-header border-bottom p-3">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Blog</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body p-3 pt-4" style="padding-top: 0px">
-                       
-                        <div class="row">
-                            
-                            <div class="col-md-4">
-                                <form action="editBlogdb" method="post" enctype="multipart/form-data">
-                                <div class="d-grid">
-                                    
-                                    <p class="text-muted"></p>
-                                    <div class="preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1"><img src="${detail.image}" class="img-fluid" alt=""></div>
-                                    <input type="file" id="input-file" name="input-file" accept="image/*" />
-                               
-                                </div>
-                                </form>
-                            </div><!--end col-->
-                           
-
-                            <div class="col-md-8 mt-4 mt-sm-0"style="">
-                                <div class="ms-md-4"style="">
-                                    <form action="editBlogdb" method="post" style="">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Blog Title <span class="text-danger">*</span></label>
-                                                    <input name="name" id="name" type="text" class="form-control" value="${detail.name}" >
-                                                </div>
-                                            </div><!--end col-->
-    
-                                       
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label"> Date : </label>
-                                                    <input name="date" type="text" class="form-control" id="date" value="${detail.time}">
-                                                </div>
-                                            </div><!--end col-->
-    
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Status</label>
-                                                    <div class="context-status" style="display: flex;">
-                               
-                                                       <div style="display: flex; align-items: center;">
-                                                          <input ${detail.status == 1 ? 'checked' : ''} value="1" type="radio" name="status" style="font-size: 10px;  margin-right: 10px">
-                                                          active
-                                                       </div>
-                                                       <div style="display: flex; align-items: center; margin-left: 20px;">
-                                                           <input ${detail.status== 2 ? 'checked' : ''} value="2" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
-                                                           block
-                                                       </div>
-                                                    </div>
-                                                </div>
-                                            </div><!--end col-->
-    
-                                            <div class="col-md-6">
-                                                <div class="mb-3">
-                                                     <label class="form-label"> Club </label>
-                                                    <input name="date" type="text" class="form-control" id="date" value="${detailC.name}">
-                                                      
-                                                    </select>
-                                                </div>
-                                            </div><!--end col-->
-                                            
-    
-                                        <div class="col-lg-12">
-                                           <div class="mb-3">
-                                           <label class="form-label">Description <span class="text-danger">*</span></label>
-        <div id="blog-description" class="cke_editable cke_editable_inline cke_contents_ltr" contenteditable="true" spellcheck="false" style="height: 100px;">
-        </div>
-    </div>
-</div>
-
-<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
-<script>
-CKEDITOR.replace('blog-description', {
-//    toolbar: [],
-    height: '100px',
-    resize_enabled: false
-});
-</script>
-
-<style>
-.cke_textarea_inline, .cke_wysiwyg_frame {
-    resize: none !important;
-    height: 100px !important;
-    max-height: 100px !important;
-}
-</style>
-                                            <div class="col-lg-12 text-end">
-                                                <button type="submit" class="btn btn-primary">SAVE</button>
-                                            </div><!--end col-->
-                                        </div>
-                                    </form>
-                                </div>
-                            </div><!--end col-->
-                        </div><!--end row-->
-                    </div>
-                </div>
-               
-            </div>
-        </div>
 
                 <!-- Footer Start -->
                 <footer class="bg-white shadow py-3">
@@ -519,7 +427,7 @@ CKEDITOR.replace('blog-description', {
                     </div><!--end col-->
                 </div><!--end row-->
             </div>
-            
+
             <div class="offcanvas-footer p-4 border-top text-center">
                 <ul class="list-unstyled social-icon mb-0">
                     <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris-template" target="_blank" class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
@@ -542,16 +450,7 @@ CKEDITOR.replace('blog-description', {
         <script src="assets/js/feather.min.js"></script>
         <!-- Main Js -->
         <script src="assets/js/app.js"></script>
-        <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="./assets/js/popper.min.js"></script>
-        <script src="./assets/js/bootstrap.min.js"></script>
-         <script>
-CKEDITOR.replace('blog-description', {
-    height: '200px'
-});
-</script>
-
-<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+        
     </body>
 
 </html>

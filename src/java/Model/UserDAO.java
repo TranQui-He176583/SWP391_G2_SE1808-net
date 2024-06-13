@@ -333,6 +333,41 @@ public class UserDAO extends MyDAO{
      }
      return "ok";
  }
+ 
+  public Account getUserByClubIDandRoleID(String xRoleID, String xClubID ) {
+      
+        xSql = "SELECT * FROM club join student_club join account \n" +
+"on club.id =student_club.clubID and student_club.accountID= account.id \n" +
+"where  account.roleId=? and club.id=?";
+        try {
+           ps = con.prepareStatement(xSql);
+           ps.setString(1, xRoleID);
+           ps.setString(2, xClubID);
+           rs = ps.executeQuery();
+          while(rs.next()) {
+
+            return new Account(rs.getInt(1), 
+                rs.getString(2), 
+                rs.getInt(3),
+                rs.getInt(4),
+                rs.getString(5), 
+                rs.getString(6), 
+                rs.getString(7), 
+                rs.getInt(8), 
+                rs.getString(9));
+           }
+        }
+        catch(Exception e) {
+            System.out.println(e);
+        }
+    return null;
+    }
+  
+//    public static void main(String[] args) {
+//        UserDAO dao =new UserDAO();
+//        Account a = dao.getUserByClubIDandRoleID("2", "1");
+//        System.out.println(a);
+//    }
     
    
     }

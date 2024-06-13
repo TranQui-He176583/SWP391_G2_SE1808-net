@@ -145,13 +145,129 @@ public class ClubDAO extends MyDAO {
      }
     return(t);
     }
+    public List<Club> pagingClub(int index){
+        List<Club> lst=new ArrayList<>();
+        String xSql = "SELECT * FROM club\n " +
+            "ORDER BY id desc\n " +
+            "LIMIT 4 OFFSET ?";
+         try {
+           ps = con.prepareStatement(xSql);
+           ps.setInt(1, (index-1)*4);
+           rs = ps.executeQuery();
+           
+           while(rs.next()){
+                int id = rs.getInt("id");  
+        String name= rs.getString("name"); 
+        int status= rs.getInt("status");  
+        String avatar= rs.getString("avatar");  
+        
+        lst.add(new Club(id, name, status, avatar));
 
-    public static void main(String[] args) {
-        ClubDAO dao =new ClubDAO();
-        List<Club> lits =dao.getClubByClubID("2");
-        for(Club c:  lits){
-        System.out.println(c.getName());
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(lst);
     }
+     public List<Club> getSearchClubByName(String NameSearch ) {
+        List<Club> t = new ArrayList<>();
+        xSql = "select * from club\n "+"where name like ?";
+        try {
+           ps = con.prepareStatement(xSql);
+           ps.setString(1, "%"+NameSearch+"%");
+           rs = ps.executeQuery();
+          while(rs.next()) {
+                int id = rs.getInt("id");  
+        String name= rs.getString("name"); 
+        int status= rs.getInt("status");  
+        String avatar= rs.getString("avatar");  
+        
+        t.add(new Club(id, name, status, avatar));
+
+     
+      }
+       rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
     }
+     public void changeStatus(int status,int id ) {
+         xSql = "UPDATE club \n" +
+"        SET Status = ?\n" +
+"        WHERE id = ?"; 
+     try {       
+      ps = con.prepareStatement(xSql);
+      ps.setInt(1, status);
+      ps.setInt(2,id);
+      
+      ps.executeUpdate();
+      ps.close();
+     }     
+     catch(Exception e) {
+       
+     }
+     
+     
+ }
+      public List<Club> getAllClubByStatus(String xStatus) {
+        List<Club> t = new ArrayList<>();
+        xSql = "select * from club where Status=?";
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setString(1,xStatus);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+         int id = rs.getInt("id");  
+        String name= rs.getString("name"); 
+        int status= rs.getInt("status");  
+        String avatar= rs.getString("avatar");  
+        
+        t.add(new Club(id, name, status, avatar));
+     
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+      }
+      
+      public Club getClub(String id ) {
+      
+        xSql = "select * from club\n "+"where id=?";
+        try {
+           ps = con.prepareStatement(xSql);
+           ps.setString(1, id);
+           rs = ps.executeQuery();
+          while(rs.next()) {
+
+            return new Club(rs.getInt(1), 
+                rs.getString(2), 
+                rs.getInt(3),
+                rs.getString(4));
+           }
+        }
+        catch(Exception e) {
+        }
+    return null;
+    }
+      
+      
+
+//    public static void main(String[] args) {
+//        ClubDAO dao =new ClubDAO();
+//        List<Club> lits =dao.pagingClub(2);
+//        for(Club c:  lits){
+//        System.out.println(c);
+//    }
+//    }
 
 }

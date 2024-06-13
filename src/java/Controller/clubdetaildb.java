@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author pc
  */
-@WebServlet(name="blogdetaildb", urlPatterns={"/blogdetaildb"})
+@WebServlet(name="clubdetaildb", urlPatterns={"/clubdetaildb"})
 public class clubdetaildb extends HttpServlet {
    
     /** 
@@ -35,27 +35,24 @@ public class clubdetaildb extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter pr =response.getWriter();
-//        String id=request.getParameter("bid");
-//       
-//           BlogDAO bdao = new BlogDAO();
-//           ClubDAO cdao =new ClubDAO();
-//   
-//           String indexPage = request.getParameter("index");
-//        int index = 1; 
-//        if (indexPage != null) {
-//        index = Integer.parseInt(indexPage);
-//    }
-//        Blog b= bdao.getBlog(id);
-//        Club c =cdao.getCLubByClubID(id);
-//        List<Blog> listindb = bdao.pagingBlog(index);
-//        pr.print(b);
-//        request.setAttribute("detail", b);
-//        request.setAttribute("detailC", c );
-//    
-//        request.setAttribute("listdb", listindb );
-//
-//        request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
+        PrintWriter pr =response.getWriter();
+        String id=request.getParameter("cid");
+       
+           ClubDAO cdao =new ClubDAO();
+   
+           String indexPage = request.getParameter("index");
+        int index = 1; 
+        if (indexPage != null) {
+        index = Integer.parseInt(indexPage);
+    }
+        Club c =cdao.getClub(id);
+        List<Club> detailindb = cdao.pagingClub(index);
+       
+        request.setAttribute("detailC", c );
+       
+        request.setAttribute("listdb", detailindb );
+
+        request.getRequestDispatcher("clubDetailDboard.jsp").forward(request, response);
       } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -82,11 +79,11 @@ public class clubdetaildb extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String TitleSearch =request.getParameter("search");
-         BlogDAO dao = new BlogDAO();
-         List<Blog> lis= dao.getSearchBlogByTitle(TitleSearch);
+         String NameSearch =request.getParameter("search");
+         ClubDAO dao = new ClubDAO();
+         List<Club> lis= dao.getSearchClubByName(NameSearch);
          request.setAttribute("listdb", lis);
-         request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
+         request.getRequestDispatcher("clubDetailDboard.jsp").forward(request, response);
     }
 
     /** 
