@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller;
+package Controller.Event;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -84,17 +84,51 @@ public class add_Event extends HttpServlet {
         PrintWriter pr  = response.getWriter();
         String name = request.getParameter("name");
         String Stime = request.getParameter("time");
-        LocalDateTime time = LocalDateTime.parse(Stime);
+        Part xImage = request.getPart("image");
         String xLocation = request.getParameter("location");
         String xDetail = request.getParameter("details");
         String xClubId = request.getParameter("clubid");
+        boolean checkValid =true;
+       if (name.equals("")) {
+           request.setAttribute("invalidName", "Event name cannot be empty!");
+           checkValid= false;
+       } 
+       if (Stime.equals("")) {
+           request.setAttribute("invalidTime", "Event time cannot be empty!");
+           checkValid= false;
+       }
+       if (xLocation.equals("")) {
+           request.setAttribute("invalidLocation", "Event location cannot be empty!");
+           checkValid= false;
+       }
+       if (xDetail.equals("")) {
+           request.setAttribute("invalidDetail", "Event Detail cannot be empty!");
+           checkValid= false;
+       }
+       if (xImage.getSize()==0) {
+           request.setAttribute("invalidImage", "Event Avatar cannot be empty!");
+           checkValid= false;
+       } else {
+            String fileName = xImage.getSubmittedFileName();
+             request.setAttribute("image", fileName);
+       }
+  if (checkValid== false) {
+      request.setAttribute("name", name);
+      request.setAttribute("time", Stime);
+      request.setAttribute("location", xLocation);
+      request.setAttribute("detail", xDetail);
+      request.getRequestDispatcher("add_Event.jsp").forward(request, response);
+  }   else {  
+        LocalDateTime time = LocalDateTime.parse(Stime);
+        
         int club_Id = Integer.parseInt(xClubId);
         String imageURL = saveUploadedFile(request);
         Event e = new Event(0, name, club_Id, time, xLocation, xDetail,imageURL);
         EventDAO eDAO = new EventDAO();
-        pr.println(xDetail);
+       
         pr.print(eDAO.insert(e));
-        pr.print(imageURL);
+       response.sendRedirect("event_Details?id="+eDAO.getId_newEvent());
+  }
     }
 
     /** 
@@ -127,4 +161,5 @@ public class add_Event extends HttpServlet {
         String newFileName = System.currentTimeMillis() + fileExtension;
         return newFileName;
     }
+
 }

@@ -5,14 +5,14 @@
 
 <header style="border-bottom:  dotted #ccc;" >
     <!--? Header Start -->
-    <div style="background: white;" class="header-area header-transparent">
+    <div style="background: #f05123;" class="header-area header-transparent">
         <div class="main-header header-sticky">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <!-- Logo -->
                     <div class="col-xl-2 col-lg-2 col-md-1">
                         <div class="logo">
-                                <a href="Home"><img src="assets/img/logo/banner.png" alt="" width   ="40%" height="40%"></a>
+                            <a  href="Home"><img style="border-radius: 5px" src="assets/img/logo/logofpt.png" alt="" width   ="80%" height="100%"></a>
                         </div>
                     </div>
                     <div class="col-xl-10 col-lg-10 col-md-10">
@@ -24,7 +24,7 @@
                                        
                                         <li><a href="blog.jsp">Blog</a>
                                         </li>
-                                        
+                                        <li><a href="get_EvenList_ClubId?search=&cPage=1&clubid=0">Event</a></li>
                                         <li><a href="contact.jsp">Contact</a></li>
                                     </ul>
                                 </nav>

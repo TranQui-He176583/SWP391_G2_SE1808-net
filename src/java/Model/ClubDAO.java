@@ -50,6 +50,28 @@ public class ClubDAO extends MyDAO {
         return clubs;
     }
 
+      public Club getClub_Id(int id) {
+        
+        String sql = "SELECT * FROM Club where status =1 and id=?;";
+        Club club = new Club();
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                
+                club.setId(rs.getInt("id"));
+                club.setName(rs.getString("name"));
+                club.setStatus(rs.getInt("status"));
+                club.setAvatar(rs.getString("avatar"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); 
+        } 
+        return club;
+    }
+      
+      
     public void displayClub() {
 
     }
@@ -78,6 +100,6 @@ public class ClubDAO extends MyDAO {
         e.printStackTrace();
      }
     return(t);
-    }
+    } 
 
 }

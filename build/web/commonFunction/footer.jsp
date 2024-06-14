@@ -30,8 +30,8 @@
                         <div class="row d-flex align-items-center justify-content-center"> 
                             <div class="col-lg-12">
                                 <div class="footer-copy-right text-center" >
-                                    <p style="color: white">Khu Giáo dục và Đào tạo – Khu Công nghệ cao Hòa Lạc – KM29 Đại lộ Thăng Long, H. Thạch Thất, TP. Hà Nội</p>
-                                    <p style="color: white">Điện thoại: 024 7300 1866 - Email: daihocfpt@fpt.edu.vn</p>
+                                    <p style="color: black">Khu Giáo dục và Đào tạo – Khu Công nghệ cao Hòa Lạc – KM29 Đại lộ Thăng Long, H. Thạch Thất, TP. Hà Nội</p>
+                                    <p style="color: black">Điện thoại: 024 7300 1866 - Email: daihocfpt@fpt.edu.vn</p>
                                 </div>
                             </div>
                         </div>

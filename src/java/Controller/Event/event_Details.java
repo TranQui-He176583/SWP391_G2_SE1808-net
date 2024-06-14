@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller;
+package Controller.Event;
 
+import Controller.*;
 import Model.*;
 import java.util.*;
 import java.io.IOException;
@@ -66,13 +67,16 @@ public class event_Details extends HttpServlet {
        Event e = new Event();
         eList = eDAO.get_Event_List(0,"", 1);
        eList.subList(5, 9).clear();      
-       
        e =eDAO.getEvent(id);
+       Club c = new Club();
+       ClubDAO cDAO = new ClubDAO();
+       c=  cDAO.getClub_Id(e.getClub_id());
+      
+       request.setAttribute("club", c);
        request.setAttribute("eList", eList);
        request.setAttribute("Event", e);
        request.getRequestDispatcher("event_Details.jsp").forward(request, response);
-       
-       
+ 
     } 
 
     /** 

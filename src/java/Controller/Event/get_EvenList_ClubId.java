@@ -3,8 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller;
+package Controller.Event;
 
+import Controller.*;
 import Model.*;
 import java.util.*;
 import java.io.IOException;

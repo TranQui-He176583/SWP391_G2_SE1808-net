@@ -170,78 +170,26 @@ public class EventDAO extends MyDAO {
      }
     return(eList);
     } 
-//  public String get_Event_List(int club_Id,String search ,int cPage) {
-//        List<Event> eList = new ArrayList<>();
-//          cPage = (cPage-1)*9;
-//     if (club_Id ==0 ){
-//        if (search.equals("")) {
-//             xSql = "select * from event LIMIT 9 OFFSET ?";
-//             try{
-//                  ps = con.prepareStatement(xSql);
-//                 ps.setInt(1, cPage);
-//             } catch(Exception e){
-//                 return e.getMessage();
-//             }
-//             
-//        }  else {
-//                 xSql = "SELECT * FROM event WHERE name LIKE ? limit 9 offset ?;";
-//                 try{
-//                     search= "'%" + search +"%'"; 
-//                      ps = con.prepareStatement(xSql);
-//                 ps.setString(1,search);    
-//                 ps.setInt(2, cPage);
-//             } catch(Exception e){
-//                 return e.getMessage();
-//             }
-//        }
-//         
-//     }  else {
-//         if (search.equals("")) {
-//             xSql = "select * from event where club_id =? LIMIT 9 OFFSET ?";
-//             try{
-//                  ps = con.prepareStatement(xSql);
-//                 ps.setInt(1, club_Id);
-//                 ps.setInt(2, cPage);
-//             } catch(Exception e){
-//                  return e.getMessage();
-//             }
-//        } else {
-//             xSql = "SELECT * FROM event WHERE club_id = ? AND name LIKE ? LIMIT 9 OFFSET ?;";
-//             try{
-//                 search= " '%" + search +"%' "; 
-//                  ps = con.prepareStatement(xSql);
-//                 ps.setInt(1, club_Id);  
-//                 ps.setString(2,search);
-//                 ps.setInt(3, cPage);
-//             } catch(Exception e){
-//                  return e.getMessage();
-//             }
-//         }
-//   }    
-//       try {       
-//        rs = ps.executeQuery();
-//        
-//         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//       while(rs.next()) {
-//           Event event = new Event();
-//        event.setId( rs.getInt("id"));
-//        event.setName(rs.getString("name"));
-//        event.setAvatar(rs.getString("avatar"));
-//        event.setClub_id(club_Id);
-//        event.setDate(LocalDateTime.parse(rs.getString("time"),formatter));
-//        event.setLocation(rs.getString("location"));
-//        event.setDetails(rs.getString("details"));
-//        eList.add(event);
-//      }
-//      rs.close();
-//      ps.close();
-//     }
-//     catch(Exception e) {
-//        e.printStackTrace();
-//     }
-//    return("ok");
-//    } 
 
+   public int getId_newEvent () {
+       xSql = "SELECT *  FROM event ORDER BY id DESC LIMIT 1;";
+       try {
+        ps = con.prepareStatement(xSql);
+        rs = ps.executeQuery();
+       
+         
+       if (rs.next()) {
+          return (rs.getInt("id"));      
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception    e) {
+        e.printStackTrace();
+     }
+       return 1;
+   }
+   
     public Event getEvent(int event_Id) {
        
         xSql = "select * from event where id =?";
@@ -270,6 +218,29 @@ public class EventDAO extends MyDAO {
         e.printStackTrace();
      }
     return  event;
+    } 
+    
+        public String updateEvent(Event e) {
+       
+        xSql = "UPDATE Event SET name = ?, avatar = ?, club_id=? ,time=?,location=?,details=? WHERE id = ?;";
+       
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setString(1, e.getName());
+        ps.setString(2,e.getAvatar());
+        ps.setInt(3,e.getClub_id());
+        ps.setObject(4, e.getDate());  
+        ps.setString(5, e.getLocation());
+        ps.setString(6, e.getDetails());
+        ps.setInt(7,e.getId());
+         ps.executeUpdate();
+      rs.close();
+      ps.close();
+     }
+     catch(Exception ex) {
+        return ex.getMessage();
+     }
+    return  "ok";
     } 
     
 }

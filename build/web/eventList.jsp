@@ -27,10 +27,10 @@
     </head>
     <body>
         <div style="position: relative;">
-  <img style="margin-top: 120px; width: 100%" src="assets/img/logo/header.jpg" alt="alt">
+  <img style="margin-top: 113.5px; width: 100%" src="assets/img/logo/header.jpg" alt="alt">
   <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);"></div>
   <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 48px; font-weight: 500;">Event List</div>
-</div>
+        </div>
         <div style="display: flex; margin-top: 3%">
             <div style="margin-left: 10%">
                 <form id="formSearch"action="get_EvenList_ClubId" method="get"> 
@@ -137,4 +137,6 @@
     
     <%}%>
     </div>
+  <%@include file="commonFunction/footer.jsp" %>
 </html>
+
