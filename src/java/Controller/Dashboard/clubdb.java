@@ -1,12 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 
 package Controller;
 
-import Model.Account;
-import Model.UserDAO;
+
+
+import Model.Club;
+import Model.ClubDAO;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,8 +19,8 @@ import java.util.List;
  *
  * @author pc
  */
-@WebServlet(name="dboard", urlPatterns={"/dboard"})
-public class dboard extends HttpServlet {
+@WebServlet(name="clubdb", urlPatterns={"/clubdb"})
+public class clubdb extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,25 +31,25 @@ public class dboard extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+         PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-//        PrintWriter pr= response.getWriter();
-        request.setCharacterEncoding("UTF-8");
-        String indexPage = request.getParameter("index");
-        int index = 1; 
-        if (indexPage != null) {
+         String indexPage = request.getParameter("index");
+   
+    int index = 1; // Default to page 1
+    if (indexPage != null) {
         index = Integer.parseInt(indexPage);
     }
-        
-         String  RoleId = request.getParameter("xRoleId");
-         UserDAO dao = new UserDAO();
-         int countUser = dao.getTotalUser();
-         int maxPage = (countUser / 5) + (countUser % 5 != 0 ? 1 : 0);
-         List<Account> liu= dao.pagingUser(index);
-         request.setAttribute("cUser", countUser);
-         request.setAttribute("lisu", liu);
-         request.setAttribute("mPage", maxPage);
-         request.setAttribute("tag", index);
-         request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+
+    ClubDAO cdao = new ClubDAO();
+    int count = cdao.getTotalClub();
+    int maxPage = (count / 4) + (count % 4 != 0 ? 1 : 0);
+
+    List<Club> listClub = cdao.pagingClub(index);
+    request.setAttribute("listCLB", listClub);
+    request.setAttribute("mPage", maxPage);
+    request.setAttribute("tag", index);
+
+    request.getRequestDispatcher("clubDboard.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -77,12 +76,13 @@ public class dboard extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//         request.setCharacterEncoding("UTF-8");
-//         String NameSearch =request.getParameter("search");
-//         DBoardDAO dao = new DBoardDAO();
-//         List<Account> lis= dao.getSearchUser(NameSearch);
-//         request.setAttribute("listUser", lis);
-//         request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+         String NameSearch =request.getParameter("search");
+         ClubDAO bdao = new ClubDAO();
+         List<Club> list= bdao.getSearchClubByName(NameSearch);
+        
+         request.setAttribute("listCLB", list);
+         
+         request.getRequestDispatcher("clubDboard.jsp").forward(request, response);
     }
 
     /** 

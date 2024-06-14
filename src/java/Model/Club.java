@@ -13,15 +13,17 @@ public class Club {
     String name;
     int status;
     String avatar;
+    String detail;
 
     public Club() {
     }
 
-    public Club(int id, String name, int status, String avatar) {
+    public Club(int id, String name, int status, String avatar, String detail) {
         this.id = id;
         this.name = name;
         this.status = status;
         this.avatar = avatar;
+        this.detail = detail;
     }
 
     public int getId() {
@@ -56,7 +58,14 @@ public class Club {
         this.avatar = avatar;
     }
 
-  
+    public String getDetail() {
+        return detail;
+    }
 
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+   
    
 }

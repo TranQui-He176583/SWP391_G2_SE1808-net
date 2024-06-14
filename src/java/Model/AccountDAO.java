@@ -219,6 +219,10 @@ public class AccountDAO extends MyDAO {
     return firstAtIndex == email.lastIndexOf("@");
     
 }
+    
+     
+    }
+       
   
   
-}
+

@@ -1,5 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- 
+    Document   : clubDboard
+    Created on : Jun 11, 2024, 10:38:30 PM
+    Author     : pc
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,25 +26,18 @@
         <link href="assets/css/bootstrap.min_1.css" rel="stylesheet" type="text/css" />
         <!-- simplebar -->
         <link href="assets/css/simplebar.css" rel="stylesheet" type="text/css" />
-        <!-- Select2 -->
-        <link href="assets/css/select2.min.css" rel="stylesheet" />
         <!-- Icons -->
         <link href="assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
-        <!-- SLIDER -->
-        <link href="assets/css/tiny-slider.css" rel="stylesheet" />
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
 
     </head>
-   
+
     <body>
         <!-- Loader -->
-        
-        <!-- Loader -->
-
-        <div class="page-wrapper doctris-theme toggled">
+    <div class="page-wrapper doctris-theme toggled">
             <nav id="sidebar" class="sidebar-wrapper"style="background: aliceblue;">
                 <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
                     <div class="sidebar-brand" style="font-size: 20px;background: white;">
@@ -170,9 +169,9 @@
                             </a>
                             <div class="search-bar p-0 d-none d-md-block ms-2">
                                 <div id="search" class="menu-search mb-0">
-                                    <form role="search" method="get" id="searchform" class="searchform">
+                                    <form action="clubdb" method="post" id="searchform" class="searchform">
                                         <div>
-                                            <input type="text" class="form-control border rounded-pill" name="s" id="s" placeholder="Search Keywords...">
+                                            <input type="text" class="form-control border rounded-pill" name="search" id="search" placeholder="Search Keywords...">
                                             <input type="submit" id="searchsubmit" value="Search">
                                         </div>
                                     </form>
@@ -284,235 +283,82 @@
 
                 <div class="container-fluid">
                     <div class="layout-specing">
-                        <h5 class="mb-0">Dashboard</h5>
+                        <div class="d-md-flex justify-content-between">
+                            <div>
+                                <h5 class="mb-0">Club</h5>
 
-                        <div class="row" style="width: 155%;">
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-user h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">${cUser}</h5>
-                                            <p class="text-muted mb-0">USER</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                            
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-club h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">${cClub}</h5>
-                                            <p class="text-muted mb-0">CLUB</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                            
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-star h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">${cEvent}</h5>
-                                            <p class="text-muted mb-0">EVENT</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                            
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-share h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">16000</h5>
-                                            <p class="text-muted mb-0">SHARE</p>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div><!--end col-->
-                            
-<!--                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-medkit h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">220</h5>
-                                            <p class="text-muted mb-0">Appointment</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>end col-->
-                            
-<!--                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-medical-drip h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">10</h5>
-                                            <p class="text-muted mb-0">Operations</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>end col
-                        </div>end row-->
-
-<!--                        <div class="row">
-                            <div class="col-xl-8 col-lg-7 mt-4">
-                                <div class="card shadow border-0 p-4">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h6 class="align-items-center mb-0">Patients visit by Gender</h6>
-                                        
-                                        <div class="mb-0 position-relative">
-                                            <select class="form-select form-control" id="yearchart">
-                                                <option selected>2020</option>
-                                                <option value="2019">2019</option>
-                                                <option value="2018">2018</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div id="dashboard" class="apex-chart"></div>
-                                </div>
-                            </div>end col-->
-
-<!--                            <div class="col-xl-4 col-lg-5 mt-4">
-                                <div class="card shadow border-0 p-4">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h6 class="align-items-center mb-0">Patients by Department</h6>
-                                        
-                                        <div class="mb-0 position-relative">
-                                            <select class="form-select form-control" id="dailychart">
-                                                <option selected>Today</option>
-                                                <option value="2019">Yesterday</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div id="department" class="apex-chart"></div>
-                                </div>
-                            </div>end col-->
-                        </div><!--end row-->
-
-                        <div class="row">
-                            <div class="col-xl-4 col-lg-6 mt-4">
-                                <div class="card border-0 shadow rounded">
-                                    <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
-                                        <h6 class="mb-0"><i class="uil uil-user me-1 h5"></i>User</h6>
-                                        <div class="clearfix">
-                                        <ul class="pagination justify-content-center" id="pagination" style="font-size: 10px">
-                                                 <li class="page-item ${tag == 1 ? 'disabled' : ''}">
-                                                      <a class="page-link" href="dboard?index=${tag - 1}">&laquo</a>
-                                                 </li>
-                                                
-                                                  <li class="page-item ${tag == mPage ? 'disabled' : ''}">
-                                                    <a class="page-link" href="dboard?index=${tag + 1}">&raquo</a>
-                                                 </li>
-                                               </ul>
-                                            </div>
-                                            
-                                      
-                                    </div>
-                                 
- 
-                                   <c:forEach items="${lisu}" var="lu">
-                                       <ul class="list-unstyled mb-0 p-4">
-                                        <li>                     
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div class="d-inline-flex">
-                                                    <img src="${lu.image}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
-                                                    <div class="ms-3">
-                                                        <h6 class="text-dark mb-0 d-block">${lu.fullname}</h6>
-                                                        <small class="text-muted">${lu.email}</small>
-                                                    </div>
-                                                   
-                                                </div>
-                                            </div>
-                                        </li>
+                                <nav aria-label="breadcrumb" class="d-inline-block mt-1">
+                                    <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
+                                        <li class="breadcrumb-item"><a href="dboard">DashBoard</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Club</li>
                                     </ul>
-                                      </c:forEach>
-                                </div>
-                            </div><!--end col-->
+                                </nav>
+                            </div>
 
-                           <div class="col-xl-4 col-lg-12 mt-4">
-                                <div class="card border-0 shadow rounded">
-                                    <div class="p-4 border-bottom">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h6 class="mb-0"><i class="uil uil-club me-1 h5"></i> Club</h6>
-                                            
-                                            <div class="mb-0 position-relative">
-                                                <select class="form-select form-control" id="dailypatient">
-                                                    <option selected>New</option>
-                                                    <option value="2019">Old</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                  
-                                    <ul class="list-unstyled mb-0 p-4" data-simplebar style="height: 355px;">
-                                        <c:forEach items="${lisc}" var="lc">
-                                            <li class="d-flex align-items-center justify-content-between" style="padding: 10px">
-                                            <div class="d-flex align-items-center">
-                                                <img src="${lc.avatar}" class="avatar avatar-small rounded-circle border shadow" alt="">
-                                                <div class="flex-1 ms-3">
-                                                    <span class="d-block h6 mb-0">${lc.name}</span>
-                                                                
-                                                </div>
-                                            </div>
+                            <div class="mt-4 mt-sm-0" style="padding-left: 500px">
+                                <select class="form-control time-during select2input" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');" style="background: skyblue">
+                                    <option value=""  data-href="clubdb">Status</option>
+                                    <option value="1" data-href="${pageContext.request.contextPath}/statusClub?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
+                                    <option value="2" data-href="${pageContext.request.contextPath}/statusClub?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
+                                </select>
+                            </div>
+                              <div class="mt-4 mt-sm-0">
+                                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">Add Club</a>
+                            </div>
 
-                                           
-                                        </li>
-                                         </c:forEach>
-                                    </ul>
-                                
-                                </div>
-                            </div><!--end col-->
-
-                            <div class="col-xl-4 col-lg-12 mt-4">
-                                <div class="card border-0 shadow rounded">
-                                    <div class="p-4 border-bottom">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h6 class="mb-0"><i class="uil uil-star me-1 h5"></i> Event</h6>
-                                            
-                                            <div class="mb-0 position-relative">
-                                                <select class="form-select form-control" id="dailypatient">
-                                                    <option selected>New</option>
-                                                    <option value="2019">Old</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                   
-                                    <ul class="list-unstyled mb-0 p-4" data-simplebar style="height: 355px">
-                                        <c:forEach items="${lise}" var="let">
-                                        <li class="d-flex align-items-center justify-content-between" style="padding: 10px">
-                                          <div class="d-flex align-items-center">
-                                              <div class="flex-1 ms-3 text-overflow-ellipsis white-space-nowrap" >
-                                              <span class="d-block h6 mb-0">${let.name}</span>
-                                           </div>
-                                          </div>
-                                              <div class="text-muted text-overflow-ellipsis white-space-nowrap text-end" > ${let.time}</div>
-                                        </li>
-                                       </c:forEach>
-                                    </ul>
-                                    
-                                     
-                                </div>
-                            </div><!--end col-->
+                        </div>
+                        
+               <div class="row">
+    <c:forEach items="${listCLB}" var="lcb">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4">
+            <div class="card blog blog-primary border-0 shadow rounded overflow-hidden h-100">
+                <img src="${lcb.avatar}" class="img-fluid rounded h-100 object-fit-cover" alt="">
+                <div class="card-body p-4 d-flex flex-column">
+                    <div style="text-align: center">
+                        <a href="clubdetaildb?cid=${lcb.id}" class="text-dark title h5 flex-grow-1">${lcb.name}</a>
+                    </div>
+                    <div class="post-meta d-flex justify-content-between mt-3">
+                        <ul class="list-unstyled mb-0">
+                            <li class="list-inline-item me-2 mb-0">
+                                <c:if test="${lcb.status == 1}">
+                                    <a href="deleteClub?id=${lcb.id}&status=0" id="statusBtn" class="btn btn-success btn-sm" 
+                                        style="background-color: green;font-weight: normal;color: black"
+                                        onclick="toggleStatus(this);">active</a>
+                                </c:if>
+                                <c:if test="${lcb.status == 0}">
+                                    <a href="deleteClub?id=${lcb.id}&status=1" id="statusBtn" class="btn btn-danger btn-sm" 
+                                        style="background-color: red;font-weight: normal;color: black"
+                                        onclick="toggleStatus(this);">block</a>
+                                </c:if>
+                            </li>
+                        </ul>
+                        <a href="clubdetaildb?cid=${lcb.id}" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div><!--end col-->
+    </c:forEach>
+</div><!--end row-->
+        
+                       <div class="row text-center" style="padding: 20px;">
+                            <!-- PAGINATION START -->
+                             <div class="clearfix" style="padding-bottom: 10px;
+    font-size: 20px;">
+  <ul class="pagination justify-content-center" id="pagination">
+    <li class="page-item ${tag == 1 ? 'disabled' : ''}">
+      <a class="page-link" href="clubdb?index=${tag - 1}">Previous</a>
+    </li>
+    <c:forEach begin="1" end="${mPage}" var="i">
+      <li class="page-item ${tag == i ? 'active' : ''}">
+        <a class="page-link" href="clubdb?index=${i}">${i}</a>
+      </li>
+    </c:forEach>
+    <li class="page-item ${tag == mPage ? 'disabled' : ''}">
+      <a class="page-link" href="clubdb?index=${tag + 1}">Next</a>
+    </li>
+  </ul>
+</div>
+                            <!-- PAGINATION END -->
                         </div><!--end row-->
                     </div>
                 </div><!--end container-->
@@ -539,8 +385,8 @@
         <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header p-4 border-bottom">
                 <h5 id="offcanvasRightLabel" class="mb-0">
-                    <img src="assets/images/logo-dark.png" height="24" class="light-version" alt="">
-                    <img src="assets/images/logo-light.png" height="24" class="dark-version" alt="">
+                    <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                    <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
                 </h5>
                 <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
             </div>
@@ -557,7 +403,7 @@
                                     <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/dark-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
                                     <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/dark-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
                                     <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
-                                    <li class="d-grid"><a href="landing/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Landing Demos</span></a></li>
+                                    <li class="d-grid"><a href="../landing/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Landing Demos</span></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -566,31 +412,123 @@
                 </div><!--end row-->
             </div>
 
-            <div class="offcanvas-footer p-4 border-top text-center">
-                <ul class="list-unstyled social-icon mb-0">
-                    <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris-template" target="_blank" class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
-                </ul><!--end icon-->
-            </div>
+            
         </div>
         <!-- Offcanvas End -->
-        
+
+        <!-- Start Modal -->
+        <div class="modal fade" id="newblogadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom p-3">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Blog</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body p-3 pt-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="d-grid">
+                                    <p class="text-muted">Upload your blog image here, Please click "Upload Image" Button.</p>
+                                    <div class="preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1"></div>
+                                    <input type="file" id="input-file" name="input-file" accept="image/*" onchange={handleChange()} hidden />
+                                    <label class="btn-upload btn btn-primary mt-4" for="input-file">Upload Image</label>
+                                </div>
+                            </div><!--end col-->
+
+                            <div class="col-md-8 mt-4 mt-sm-0">
+                                <div class="ms-md-4">
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Blog Title <span class="text-danger">*</span></label>
+                                                    <input name="name" id="name" type="text" class="form-control" placeholder="Title :">
+                                                </div>
+                                            </div><!--end col-->
+    
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label"> Date : </label>
+                                                    <input name="date" type="text" class="form-control" id="date" value="09 January 2021">
+                                                </div>
+                                            </div><!--end col-->
+    
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label"> Time to read : </label>
+                                                    <input name="time" type="text" class="form-control" id="time" value="5 min read">
+                                                </div>
+                                            </div><!--end col-->
+    
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Tag</label>
+                                                    <select class="form-control">
+                                                        <option value="EY">Eye Care</option>
+                                                        <option value="GY">Gynecologist</option>
+                                                        <option value="PS">Psychotherapist</option>
+                                                        <option value="OR">Orthopedic</option>
+                                                        <option value="DE">Dentist</option>
+                                                        <option value="GA">Gastrologist</option>
+                                                        <option value="UR">Urologist</option>
+                                                        <option value="NE">Neurologist</option>
+                                                    </select>
+                                                </div>
+                                            </div><!--end col-->
+    
+                                            <div class="col-lg-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Description <span class="text-danger">*</span></label>
+                                                    <textarea name="comments" id="comments" rows="4" class="form-control" placeholder="Blog description :"></textarea>
+                                                </div>
+                                            </div><!--end col-->
+    
+                                            <div class="col-lg-12 text-end">
+                                                <button type="submit" class="btn btn-primary">Add Blog</button>
+                                            </div><!--end col-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End modal -->
+
         <!-- javascript -->
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="assets/js/simplebar.min.js"></script>
-        <!-- Chart -->
-        <script src="assets/js/apexcharts.min.js"></script>
-        <script src="assets/js/columnchart.init.js"></script>
         <!-- Icons -->
         <script src="assets/js/feather.min.js"></script>
         <!-- Main Js -->
         <script src="assets/js/app.js"></script>
+        
+        <script>
+            const handleChange = () => {
+            const fileUploader = document.querySelector('#input-file');
+                const getFile = fileUploader.files;
+                if (getFile.length !== 0) {
+                    const uploadedFile = getFile[0];
+                    readFile(uploadedFile);
+                }
+            };
+
+            const readFile = (uploadedFile) => {
+                if (uploadedFile) {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                    const parent = document.querySelector('.preview-box');
+                    parent.innerHTML = `<img class="preview-content" src=${reader.result} />`;
+                    };
+                    
+                    reader.readAsDataURL(uploadedFile);
+                }
+            };
+        </script>
         <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./assets/js/popper.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
