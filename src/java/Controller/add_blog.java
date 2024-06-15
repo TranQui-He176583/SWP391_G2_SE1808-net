@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.DashBoard;
+package Controller;
 
 import Model.Blog;
 import Model.BlogDAO;
@@ -15,22 +15,22 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.time.LocalDateTime;
 
 /**
  *
- * @author pc
+ * @author Duong
  */
-@WebServlet(name="editBlogdb", urlPatterns={"/editBlogdb"})
+@WebServlet(name="add_blog", urlPatterns={"/add_blog"})
+
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1MB
         maxFileSize = 1024 * 1024 * 5, // 5MB
         maxRequestSize = 1024 * 1024 * 10 // 10MB
 )
-public class editBlogdb extends HttpServlet {
+public class add_blog extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -47,10 +47,10 @@ public class editBlogdb extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet editBlogdb</title>");  
+            out.println("<title>Servlet add_blog</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet editBlogdb at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet add_blog at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -77,77 +77,56 @@ public class editBlogdb extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String UPLOAD_DIR = "assets/img/avatar";
     @Override
-   protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    PrintWriter out = response.getWriter();
-    String xid = request.getParameter("id");
-    int id = Integer.parseInt(xid);
-    String xName = request.getParameter("name");
-    String xDetails = request.getParameter("details");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter pr = response.getWriter();
+        String name = request.getParameter("name");
+        LocalDateTime time = LocalDateTime.now();
+        String xDetail = request.getParameter("details");
+        String imageURL = saveUploadedFile(request);
+        Blog b = new Blog(0, name, xDetail, 0, time, imageURL, 0);
+        BlogDAO bDAO = new BlogDAO();
+        pr.println(xDetail);
+        pr.print(bDAO.addBlog(b));
+        pr.print(imageURL);
+    }
+    
+    String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
+        String uploadPath = "assets/img/blog/";
 
-    Part xImage = request.getPart("image");
-    
-    String xStatus = request.getParameter("status");
-    int status = Integer.parseInt(xStatus);
-    BlogDAO bdao = new BlogDAO();
-    
-    Blog b= bdao.getBlog(xid);
-   
-    String imageURL="";
-    if (b != null) {
-        if (xImage != null && xImage.getSize() > 0) { // Check if an image was uploaded
-            imageURL = saveUploadedFile(request);
-            if (b.getImage() != null) {
-                File file = new File("D:\\SWP\\Project\\SWP391_G2_SE1808-net\\Swp\\build\\web\\" + b.getImage());
-                file.delete();
-            }
+        Part part = request.getPart("image");
+        String fileName = getUniqueFileName(part);
+        String filePath = uploadPath + fileName;
+
+        String applicationPath = request.getServletContext().getRealPath("");
+        String absoluteFilePath = applicationPath + File.separator + filePath;
+
+        part.write(absoluteFilePath);
+
+        File uploadedFile = new File(absoluteFilePath);
+        if (uploadedFile.exists()) {
+            return filePath;
         } else {
-            imageURL = b.getImage(); // Use the existing image URL
+            return "";
         }
-        b.setName(xName);
-        b.setDetails(xDetails);
-        b.setImage(imageURL);
-        b.setStatus(status);
-        bdao.EditBlog(b);
-        request.setAttribute("completeChange", "Change Information Susscess!");
-        response.sendRedirect("blogdb");
-    } else {
-        out.println("<html><body><h1>Error: 'blog' attribute is null</h1></body></html>");
     }
-}
 
-    /** 
-     * Returns a short description of the servlet.
-     * @return a String containing servlet description
-     */
-   
-    
-   String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
-    String uploadPath = "assets/img/avatar/";
-
-    Part part = request.getPart("image");
-    String fileName = getUniqueFileName(part);
-    String filePath = uploadPath + fileName;
-
-    String applicationPath = request.getServletContext().getRealPath("");
-    String absoluteFilePath = applicationPath + File.separator + filePath;
-
-    part.write(absoluteFilePath);
-
-    File uploadedFile = new File(absoluteFilePath);
-    if (uploadedFile.exists()) {
-        return filePath;
-    } else {
-        return "";
-    }
-}
-
-     String getUniqueFileName(Part part) {
+    String getUniqueFileName(Part part) {
         String submittedFileName = part.getSubmittedFileName();
         String fileExtension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
         String newFileName = System.currentTimeMillis() + fileExtension;
         return newFileName;
     }
+
+    /** 
+     * Returns a short description of the servlet.
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
 }

@@ -8,33 +8,36 @@ import java.time.LocalDateTime;
 
 /**
  *
- * @author pc
+ * @author Duong
  */
 public class Blog {
+
     int id;
     String name;
     String details;
     int clubID;
-    String image;   
+    LocalDateTime date;
+    String image;
     int status;
 
     public Blog() {
     }
 
-    public Blog(int id, String name, String details, int clubID, String image, int status) {
+    public Blog(int id, String name, String details, int clubID, LocalDateTime date, String image, int status) {
         this.id = id;
         this.name = name;
         this.details = details;
         this.clubID = clubID;
+        this.date = date;
         this.image = image;
         this.status = status;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 
@@ -62,6 +65,14 @@ public class Blog {
         this.clubID = clubID;
     }
 
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
     public String getImage() {
         return image;
     }
@@ -77,8 +88,6 @@ public class Blog {
     public void setStatus(int status) {
         this.status = status;
     }
-
-   
     
-   
+    
 }

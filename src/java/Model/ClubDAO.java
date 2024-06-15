@@ -32,7 +32,7 @@ public class ClubDAO extends MyDAO {
     public List<Club> getClubs() {
         List<Club> clubs = new ArrayList<>();
         String sql = "SELECT * FROM Club where status =1;";
-        
+
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -45,16 +45,39 @@ public class ClubDAO extends MyDAO {
                 clubs.add(club);
             }
         } catch (SQLException e) {
-            e.printStackTrace(); 
-        } 
+            e.printStackTrace();
+        }
         return clubs;
     }
 
     public void displayClub() {
 
     }
-     public Club getClub_Id(int id) {
-        
+    
+    public Club getClubById(int id) {
+        Club club = null;
+        String sql = "SELECT * FROM Club WHERE id = ? and status = 1";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                club = new Club();
+                club.setId(rs.getInt("id"));
+                club.setName(rs.getString("name"));
+                club.setStatus(rs.getInt("status"));
+                club.setAvatar(rs.getString("avatar"));
+                club.setDetail(rs.getString("detail"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return club;
+    }
+
+    public Club getClub_Id(int id) {
+
         String sql = "SELECT * FROM Club where status =1 and id=?;";
         Club club = new Club();
         try {
@@ -62,258 +85,268 @@ public class ClubDAO extends MyDAO {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                
+
                 club.setId(rs.getInt("id"));
                 club.setName(rs.getString("name"));
                 club.setStatus(rs.getInt("status"));
                 club.setAvatar(rs.getString("avatar"));
             }
         } catch (SQLException e) {
-            e.printStackTrace(); 
-        } 
+            e.printStackTrace();
+        }
         return club;
     }
- public List<Club> getAllCLubByAccountID(String AccountID) {
+
+    public List<Club> getAllCLubByAccountID(String AccountID) {
         List<Club> t = new ArrayList<>();
-                xSql = "select * from account join student_club join club\n" +
-"        on account.id = student_club.accountID and student_club.clubID=club.id \n" +
-"        where accountID= ?"; 
-       try {
-        ps = con.prepareStatement(xSql);
-        ps.setString(1, AccountID);
-        rs = ps.executeQuery();
-       while(rs.next()) {
-        int id = rs.getInt("id");  
-        String name= rs.getString("name"); 
-        int status= rs.getInt("status");  
-        String avatar= rs.getString("email");  
-        String detail=rs.getString("detail");
-        t.add(new Club(id, name, status, avatar,detail));
-     
-      }
-      rs.close();
-      ps.close();
-     }
-     catch(Exception e) {
-        e.printStackTrace();
-     }
-    return(t);
+        xSql = "select * from account join student_club join club\n"
+                + "        on account.id = student_club.accountID and student_club.clubID=club.id \n"
+                + "        where accountID= ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, AccountID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int status = rs.getInt("status");
+                String avatar = rs.getString("email");
+                String detail = rs.getString("detail");
+                t.add(new Club(id, name, status, avatar, detail));
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
     }
     
-     public int getTotalClub(){
-        xSql = "select count(*)from club";     
-         
-        try {
-           ps = con.prepareStatement(xSql);
-          
-           rs = ps.executeQuery();
-          while(rs.next()) {
+    public List<Club> getClubListByUserId(int accountId) {
+        List<Club> clubs = new ArrayList<>();
+        String sql = "SELECT c.* FROM Club c INNER JOIN student_club sc ON c.id = sc.clubID WHERE sc.accountID = ?";
 
-            return rs.getInt(1);
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, accountId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Club club = new Club();
+                club.setId(rs.getInt("id"));
+                club.setName(rs.getString("name"));
+                club.setStatus(rs.getInt("status"));
+                club.setAvatar(rs.getString("avatar"));
+                club.setDetail("detail");
+                clubs.add(club);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        }
-        catch(Exception e) {
-        }
-    return 0;
+        return clubs;
     }
+
+    public int getTotalClub() {
+        xSql = "select count(*)from club";
+
+        try {
+            ps = con.prepareStatement(xSql);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
     public List<Club> getAllClub() {
         List<Club> t = new ArrayList<>();
         xSql = "select * from club";
-       try {
-        ps = con.prepareStatement(xSql);
-        rs = ps.executeQuery();
-       while(rs.next()) {
-        int id = rs.getInt("id");  
-        String name= rs.getString("name"); 
-        int status= rs.getInt("status");  
-        String avatar= rs.getString("avatar");  
-        String detail=rs.getString("detail");
-        t.add(new Club(id, name, status, avatar,detail));
-     
-      }
-      rs.close();
-      ps.close();
-     }
-     catch(Exception e) {
-        e.printStackTrace();
-     }
-    return(t);
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int status = rs.getInt("status");
+                String avatar = rs.getString("avatar");
+                String detail = rs.getString("detail");
+                t.add(new Club(id, name, status, avatar, detail));
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
     }
+
     public List<Club> getClubByClubID(String bid) {
         List<Club> t = new ArrayList<>();
-                xSql = "select * from blog join club\n" +
-"        on club.id = blog.clubID \n" +
-"        where blog.id= ?"; 
-       try {
-        ps = con.prepareStatement(xSql);
-        ps.setString(1, bid);
-        rs = ps.executeQuery();
-       while(rs.next()) {
-        int id = rs.getInt("id");  
-        String name= rs.getString("name"); 
-        int status= rs.getInt("status");  
-        String avatar= rs.getString("avatar");  
-        String detail=rs.getString("detail");
-        t.add(new Club(id, name, status, avatar,detail));
-     
-      }
-      rs.close();
-      ps.close();
-     }
-     catch(Exception e) {
-        e.printStackTrace();
-     }
-    return(t);
-    }
-    public List<Club> pagingClub(int index){
-        List<Club> lst=new ArrayList<>();
-        String xSql = "SELECT * FROM club\n " +
-            "ORDER BY id desc\n " +
-            "LIMIT 4 OFFSET ?";
-         try {
-           ps = con.prepareStatement(xSql);
-           ps.setInt(1, (index-1)*4);
-           rs = ps.executeQuery();
-           
-           while(rs.next()){
-                int id = rs.getInt("id");  
-        String name= rs.getString("name"); 
-        int status= rs.getInt("status");  
-        String avatar= rs.getString("avatar");  
-        String detail=rs.getString("detail");
-        
-        lst.add(new Club(id, name, status, avatar,detail));
-
-      }
-      rs.close();
-      ps.close();
-     }
-     catch(Exception e) {
-        e.printStackTrace();
-     }
-    return(lst);
-    }
-     public List<Club> getSearchClubByName(String NameSearch ) {
-        List<Club> t = new ArrayList<>();
-        xSql = "select * from club\n "+"where name like ?";
+        xSql = "select * from blog join club\n"
+                + "        on club.id = blog.clubID \n"
+                + "        where blog.id= ?";
         try {
-           ps = con.prepareStatement(xSql);
-           ps.setString(1, "%"+NameSearch+"%");
-           rs = ps.executeQuery();
-          while(rs.next()) {
-                int id = rs.getInt("id");  
-        String name= rs.getString("name"); 
-        int status= rs.getInt("status");  
-        String avatar= rs.getString("avatar");  
-        String detail=rs.getString("detail");
-        
-        t.add(new Club(id, name, status, avatar,detail));
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, bid);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int status = rs.getInt("status");
+                String avatar = rs.getString("avatar");
+                String detail = rs.getString("detail");
+                t.add(new Club(id, name, status, avatar, detail));
 
-     
-      }
-       rs.close();
-      ps.close();
-     }
-     catch(Exception e) {
-        e.printStackTrace();
-     }
-    return(t);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
     }
-     public void changeStatus(int status,int id ) {
-         xSql = "UPDATE club \n" +
-"        SET Status = ?\n" +
-"        WHERE id = ?"; 
-     try {       
-      ps = con.prepareStatement(xSql);
-      ps.setInt(1, status);
-      ps.setInt(2,id);
-      
-      ps.executeUpdate();
-      ps.close();
-     }     
-     catch(Exception e) {
-       
-     }
-     
-     
- }
-      public List<Club> getAllClubByStatus(String xStatus) {
+
+    public List<Club> pagingClub(int index) {
+        List<Club> lst = new ArrayList<>();
+        String xSql = "SELECT * FROM club\n "
+                + "ORDER BY id desc\n "
+                + "LIMIT 4 OFFSET ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, (index - 1) * 4);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int status = rs.getInt("status");
+                String avatar = rs.getString("avatar");
+                String detail = rs.getString("detail");
+
+                lst.add(new Club(id, name, status, avatar, detail));
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (lst);
+    }
+
+    public List<Club> getSearchClubByName(String NameSearch) {
+        List<Club> t = new ArrayList<>();
+        xSql = "select * from club\n " + "where name like ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + NameSearch + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int status = rs.getInt("status");
+                String avatar = rs.getString("avatar");
+                String detail = rs.getString("detail");
+
+                t.add(new Club(id, name, status, avatar, detail));
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
+    public void changeStatus(int status, int id) {
+        xSql = "UPDATE club \n"
+                + "        SET Status = ?\n"
+                + "        WHERE id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, status);
+            ps.setInt(2, id);
+
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public List<Club> getAllClubByStatus(String xStatus) {
         List<Club> t = new ArrayList<>();
         xSql = "select * from club where Status=?";
-       try {
-        ps = con.prepareStatement(xSql);
-        ps.setString(1,xStatus);
-        rs = ps.executeQuery();
-       while(rs.next()) {
-         int id = rs.getInt("id");  
-        String name= rs.getString("name"); 
-        int status= rs.getInt("status");  
-        String avatar= rs.getString("avatar");  
-        String detail =rs.getString("detail");
-        
-        t.add(new Club(id, name, status, avatar,detail));
-     
-      }
-      rs.close();
-      ps.close();
-     }
-     catch(Exception e) {
-        e.printStackTrace();
-     }
-    return(t);
-      }
-      
-      public Club getClub(String id ) {
-      
-        xSql = "select * from club\n "+"where id=?";
         try {
-           ps = con.prepareStatement(xSql);
-           ps.setString(1, id);
-           rs = ps.executeQuery();
-          while(rs.next()) {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, xStatus);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int status = rs.getInt("status");
+                String avatar = rs.getString("avatar");
+                String detail = rs.getString("detail");
 
-            return new Club(rs.getInt(1), 
-                rs.getString(2), 
-                rs.getInt(3),
-                rs.getString(4),
-                rs.getString(5));
-           }
+                t.add(new Club(id, name, status, avatar, detail));
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch(Exception e) {
-        }
-    return null;
+        return (t);
     }
-      
-     public void EditClub(Club c) {
-     xSql = "UPDATE club \n" +
-"        SET name =? ,\n" +
-"        status = ?,\n" +    
-"        avatar = ?,\n" +
-"        detail = ?\n" +
-"        WHERE id = ?"; 
-    try {         
-      ps = con.prepareStatement(xSql);
-      ps.setString(1, c.name);
-      ps.setInt(2, c.status);
-      ps.setString(3, c.avatar);
-      ps.setString(4, c.detail);
-      ps.setInt(5, c.id);
-      ps.executeUpdate();
-      ps.close();
-     }     
-     catch(Exception e) {
-        
-     }
-     
-  }
-      
 
-//    public static void main(String[] args) {
-//        ClubDAO dao =new ClubDAO();
-//        List<Club> lits =dao.pagingClub(2);
-//        for(Club c:  lits){
-//        System.out.println(c);
-//    }
-//    }
+    public Club getClub(String id) {
+
+        xSql = "select * from club\n " + "where id=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                return new Club(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public void EditClub(Club c) {
+        xSql = "UPDATE club \n"
+                + "        SET name =? ,\n"
+                + "        status = ?,\n"
+                + "        avatar = ?,\n"
+                + "        detail = ?\n"
+                + "        WHERE id = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, c.name);
+            ps.setInt(2, c.status);
+            ps.setString(3, c.avatar);
+            ps.setString(4, c.detail);
+            ps.setInt(5, c.id);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+
+        }
+
+    }
+
 
 }

@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.DashBoard;
+package Controller;
 
-import Model.UserDAO;
+import Model.Club;
+import Model.ClubDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,13 +14,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
- * @author pc
+ * @author Duong
  */
-@WebServlet(name="deleteUser", urlPatterns={"/deleteUser"})
-public class deleteUser extends HttpServlet {
+@WebServlet(name="getClub", urlPatterns={"/ClubList"})
+public class ClubList extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,16 +34,18 @@ public class deleteUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         PrintWriter out = response.getWriter();
-            String uid = request.getParameter("id");
-            int id = Integer.parseInt(uid);
-            String xStatus  =request.getParameter("status");
-            int status=Integer.parseInt(xStatus);
-            UserDAO dao = new UserDAO();
-            dao.changeStatus(status, id);
-            response.sendRedirect("countUser");
-       
-        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet getClub</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet getClub at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -54,7 +59,13 @@ public class deleteUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter pr = response.getWriter();
+        ClubDAO cDAO = new ClubDAO();
+        List<Club> cList = new ArrayList<Club>();
+        cList = cDAO.getClubs();
+        request.setAttribute("cList", cList);
+        request.getRequestDispatcher("club.jsp").forward(request, response);
     } 
 
     /** 
@@ -67,7 +78,7 @@ public class deleteUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /** 

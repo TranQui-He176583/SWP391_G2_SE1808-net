@@ -14,16 +14,18 @@ public class Contact {
     String subject;
     String details;
     String name;
+    String phonenumber;
 
     public Contact() {
     }
 
-    public Contact(int id, String email, String subject, String details, String name) {
+    public Contact(int id, String email, String subject, String details, String name, String phonenumber) {
         this.id = id;
         this.email = email;
         this.subject = subject;
         this.details = details;
         this.name = name;
+        this.phonenumber = phonenumber;
     }
 
     public int getId() {
@@ -66,5 +68,11 @@ public class Contact {
         this.name = name;
     }
 
+    public String getPhonenumber(){
+        return phonenumber;
+    }
     
+    public void setPhonenumber(String phonenumber){
+        this.phonenumber = phonenumber;
+    }
 }
