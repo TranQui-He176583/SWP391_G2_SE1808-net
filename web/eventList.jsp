@@ -36,7 +36,7 @@
                 <form id="formSearch"action="get_EvenList_ClubId" method="get"> 
                     <label style="border: 1px solid; padding: 5px">
                         <input style="width: 300px; height: 40px; font-size: 15px"  type="text" value="${requestScope.search}" name="search" placeholder="Seach...." >
-                        <input type="hidden" name="cPage" value="${requestScope.cPage}">
+                        <input type="hidden" name="cPage" value="1">
                         <input type="hidden" name="clubid" value="${requestScope.cClub}">
                                                  <span> 
                                      <button style="width: 40px; background: #f05123;border: none;border-radius: 5px;margin-top: -5px;background-color: transparent;">
@@ -48,10 +48,10 @@
                 
             </div>
             <div style="margin-left: 40%; height: 40px; font-size: 18px;">
-                <form  id="selectClub" onchange="submitForm()">
+                <form id="selectClub" onchange="submitForm()">
                      <input type="hidden" name="cPage" value="1">
             <input type="hidden" name ="search"value="${requestScope.search}" >
-                     <label style="border: 1px solid; background:#f05123; border-radius: 5px;width: 120px;height: 40px; padding: 5px " for="options">Select Club:</label>
+                     <label style="border: 1px solid; background:#f05123; border-radius: 5px;width: 120px; height: 40px; padding: 5px " for="options">Select Club:</label>
                      <select style="color:#f05123;height: 40px; padding: 5px" id="options" name="clubid">
             
            <option value="0"> All Club</option> 

@@ -27,7 +27,6 @@
             <input type="hidden" name="id" value="${requestScope.Event.getId()}"     
             
             <div>
-            <br>       
     <label for="name">Tên sự kiện:</label>
     <input type="text" id="name" name="name" value="${requestScope.Event.getName()}" >
     <p style="color: red">${requestScope.invalidName}</p>
