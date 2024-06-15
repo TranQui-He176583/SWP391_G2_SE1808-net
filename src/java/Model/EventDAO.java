@@ -95,7 +95,7 @@ public class EventDAO extends MyDAO {
      catch(Exception e) {
         e.printStackTrace();
      }
-    return count;
+    return count-1;
     }
     
     
@@ -106,7 +106,7 @@ public class EventDAO extends MyDAO {
           cPage = (cPage-1)*9;
      if (club_Id ==0 ){
         if (search.equals("")) {
-             xSql = "select * from event ORDER BY id DESC LIMIT 9 OFFSET ? ";
+             xSql = "select * from event where id>0 ORDER BY id DESC LIMIT 9 OFFSET ? ";
              try{
                   ps = con.prepareStatement(xSql);
                  ps.setInt(1, cPage);
@@ -115,7 +115,7 @@ public class EventDAO extends MyDAO {
              }
              
         }  else {
-                 xSql = "SELECT * FROM event WHERE name LIKE ? ORDER BY id DESC limit 9 offset ?;";
+                 xSql = "SELECT * FROM event WHERE name LIKE ? and id>0 ORDER BY id DESC limit 9 offset ?;";
                  try{
                       ps = con.prepareStatement(xSql);
                  ps.setString(1,"%"+search+"%");    
@@ -127,7 +127,7 @@ public class EventDAO extends MyDAO {
          
      }  else {
          if (search.equals("")) {
-             xSql = "select * from event where club_id =? ORDER BY id DESC LIMIT 9 OFFSET ?";
+             xSql = "select * from event where club_id =? and id>0 ORDER BY id DESC LIMIT 9 OFFSET ?";
              try{
                   ps = con.prepareStatement(xSql);
                  ps.setInt(1, club_Id);
@@ -136,7 +136,7 @@ public class EventDAO extends MyDAO {
                  
              }
         } else {
-             xSql = "SELECT * FROM event WHERE club_id = ? AND name LIKE ? ORDER BY id DESC LIMIT 9 OFFSET ?;";
+             xSql = "SELECT * FROM event WHERE club_id = ? AND name LIKE ? and id>0 ORDER BY id DESC LIMIT 9 OFFSET ?;";
              try{
         ps = con.prepareStatement(xSql);
                  ps.setInt(1, club_Id);  

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : changeEvent
+    Document   : add_Event
     Created on : Jun 1, 2024, 4:01:07 PM
     Author     : quyka
 --%>
@@ -17,55 +17,43 @@
      <div style="position: relative;">
   <img style="margin-top: 110px; width: 100%" src="assets/img/logo/header.jpg" alt="alt">
   <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);"></div>
-  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 48px; font-weight: 500;">
-      Edit Event</div>
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 48px; font-weight: 500;">Add New Task</div>
 </div>
     <body>
                     
         <div  class="login-container">
-        <form action="edit_Event" method="post" enctype="multipart/form-data" >
-            <input type="hidden" name="id" value="${requestScope.Event.getId()}"     
-            
+        <form action="add_Task" method="post" >
             <div>
-            <br>       
-    <label for="name">Tên sự kiện:</label>
-    <input type="text" id="name" name="name" value="${requestScope.Event.getName()}" >
+    <label for="name">Task Name:</label>
+    <input type="text" id="name" name="name" value="${requestScope.name}" >
     <p style="color: red">${requestScope.invalidName}</p>
-  </div>
-  
-  <div>
-  
-      <label style="" for="image">Avatar of Event</label> <br>
-      <input style="font-size: 15px;
-    margin-top: 5px;
-    margin-bottom: 5px;" type="file" id="image" name="image" accept="image/*"" value="${requestScope.image}" >
   </div>
     <p style="color: red">${requestScope.invalidImage}</p>
             
     <div>
-  
-    <input type="hidden" id="clubid" name="clubid" value="${requestScope.Event.getClub_id()}"  >
+    <label for="club">Event ID:</label>
+    <input type="text" id="cid" name="cid"  >
   </div>        
   
   <div>
-    <label for="time">Thời gian:</label>
-    <input type="datetime-local" id="time" name="time" value="${requestScope.Event.getDate()}"  >
+    <label for="time">Start:</label>
+    <input type="datetime-local" id="time" name="start" value="${requestScope.stime}"  >
     <p style="color: red">${requestScope.invalidTime}</p>
   </div>
   
   <div>
-    <label for="location">Địa điểm:</label>
-    <input type="text" id="location" name="location" value="${requestScope.Event.getLocation()}">
-    <p style="color: red">${requestScope.invalidLocation}</p>
+    <label for="time">End:</label>
+    <input type="datetime-local" id="time" name="end" value="${requestScope.etime}"  >
+    <p style="color: red">${requestScope.invalidTime}</p>
   </div>
   
   <div>
     <label for="details">Chi tiết:</label>
-    <textarea  id="details" name="details"  rows="10"  " > ${requestScope.Event.getDetails()} </textarea>
+    <textarea  id="details" name="details"  rows="10"  " > ${requestScope.detail} </textarea>
     <p style="color: red">${requestScope.invalidDetail}</p>
   </div>
   
-  <button style="width: 100%" type="submit">Lưu sự kiện</button>
+  <button type="submit">Lưu sự kiện</button>
    
         </form>
                 </div>

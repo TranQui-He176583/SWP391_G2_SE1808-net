@@ -48,11 +48,11 @@
                 
             </div>
             <div style="margin-left: 40%; height: 40px; font-size: 18px;">
-                <form id="selectClub" onchange="submitForm()">
-                     <input type="hidden" name="cPage" value="${requestScope.cPage}">
+                <form  id="selectClub" onchange="submitForm()">
+                     <input type="hidden" name="cPage" value="1">
             <input type="hidden" name ="search"value="${requestScope.search}" >
-                     <label style="border: 1px solid; background:#f05123; border-radius: 5px;width: 120px " for="options">Select Club:</label>
-                     <select style="color:#f05123" id="options" name="clubid">
+                     <label style="border: 1px solid; background:#f05123; border-radius: 5px;width: 120px;height: 40px; padding: 5px " for="options">Select Club:</label>
+                     <select style="color:#f05123;height: 40px; padding: 5px" id="options" name="clubid">
             
            <option value="0"> All Club</option> 
             <%   for (int i=0;i<(cList.size());i++) { 
