@@ -22,10 +22,10 @@
                                 <nav>
                                     <ul id="navigation">
                                        
-                                        <li><a href="blog.jsp">Blog</a>
-                                        </li>
+                                        <li><a href="blog">Blog</a></li>
+                                        <li><a href="ClubList">Club</a></li>
                                         <li><a href="get_EvenList_ClubId?search=&cPage=1&clubid=0">Event</a></li>
-                                        <li><a href="contact.jsp">Contact</a></li>
+                                        <li><a href="addContact">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -59,6 +59,7 @@
                                          </c:if>
                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
                                     <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>
+                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="task_List">My Task</a>
                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           
                                 </div>
                             </div>

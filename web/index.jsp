@@ -21,7 +21,7 @@
         <%@include file="commonFunction/CSS.jsp" %>
     </head>
     <body>
-        <!-- ? Preloader Start -->
+<!--         ? Preloader Start 
         <style>
             #preloader-active .preloader-img img {
                 max-width: 90%;
@@ -39,17 +39,17 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!-- Preloader Start -->
         <%@include file="commonFunction/header.jsp" %>
         <main>
           
 
 
-            <!--? slider Area Start-->
+<!--            ? slider Area Start
             <div class="slider-area position-relative">
                 <div class="slider-active">
-                    <!-- Single Slider -->
+                     Single Slider 
                     <div class="single-slider slider-height d-flex align-items-center">
                         <div class="container">
                             <div class="row">
@@ -63,7 +63,7 @@
                             </div>
                         </div>          
                     </div>
-                    <!-- Single Slider -->
+                     Single Slider 
                     <div class="single-slider slider-height d-flex align-items-center">
                         <div class="container">
                             <div class="row">
@@ -78,11 +78,11 @@
                         </div>          
                     </div>
                 </div>
-                <!-- Video icon -->
+                 Video icon 
                 <div class="video-icon">
                     <a class="popup-video btn-icon" href="https://www.youtube.com/watch?v=CVQbh6nU5d4"><i class="fas fa-play"></i></a>
                 </div>
-            </div>
+            </div>-->
 
             <!--? About-2 Area Start -->
             <section style="background : white" class="about-area2 testimonial-area section-padding30 fix">

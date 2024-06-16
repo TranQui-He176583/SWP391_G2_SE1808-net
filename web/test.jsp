@@ -1,33 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Header and Main</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .header {
-            padding: 20px;
-            text-align: center;
-            background: #fff;
-            border-bottom: 5px dotted #ccc; /* Gi?i ph�n c�ch d?ng d?u ch?m */
-        }
-
-        .main {
-            padding: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Checkbox List Example</title>
+ 
 </head>
 <body>
-    <div class="header">
-        <h1>Header</h1>
+  <div>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm..." />
+    <div class="checkbox-list">
+       <% for (int i=0;i<100;i++) {%> 
+      <div>
+        <input type="checkbox" id="option1" value="option1">
+        <label for="option1">Tùy chọn <%=i%></label>
+      </div>
+     <%}%>
+      
     </div>
-    <div class="main">
-        <h2>Main Content</h2>
-        <p>d</p>
-    </div>
+  </div>
+
+  <script>
+    const checkboxList = document.querySelector('.checkbox-list');
+    const searchInput = document.getElementById('searchInput');
+    const checkboxes = checkboxList.querySelectorAll('input[type="checkbox"]');
+
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      checkboxes.forEach(checkbox => {
+        const label = checkbox.nextElementSibling.textContent.toLowerCase();
+        const parent = checkbox.parentElement;
+        if (label.includes(searchTerm)) {
+          parent.classList.remove('hidden');
+        } else {
+          parent.classList.add('hidden');
+        }
+      });
+    });
+
+    checkboxList.addEventListener('change', () => {
+      checkboxes.forEach(checkbox => {
+        const parent = checkbox.parentElement;
+        if (checkbox.checked) {
+          parent.classList.remove('hidden');
+        } else {
+          parent.classList.add('hidden');
+        }
+      });
+    });
+  </script>
 </body>
 </html>

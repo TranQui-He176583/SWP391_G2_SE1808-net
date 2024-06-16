@@ -24,18 +24,26 @@
     <body >
         <div class="row" style="margin-top: 180px;">
           <div class="col-9" style="">
+              <c:if test="${requestScope.manager==true}"> 
+              <a href="add_Task?eventid=<%=e.getId()%>&clubid=<%=c.getId()%>">
+                <button style="margin-left: 50px; background: black; margin-bottom: 20px;border-radius: 5px;border: #f05123; width: 60px; height: 40px" >Add Task</button>
+                </a>
+                 </c:if>     
               <div style="margin-left: 50px">
                <div style="display: flex; align-items: center; justify-content: center;">
                     <h1 style="font-family: Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 500; margin-right: 10px;">
                         <%= e.getName()%>
                          </h1>
+                        <c:if test="${requestScope.manager==true}">         
                          <a href="edit_Event?id=<%=e.getId()%>">
                                           <img style="width: 20px;" src="assets/img/logo/edit.jpg" alt="alt" />
                                             </a>
+                                        
+                      </c:if>                    
 </div>
                 <p style="margin-top: 20px;font-weight: bold">Time: <%=e.getDate().toLocalDate()%> At:<%=e.getDate().toLocalTime()%> </p>
                 <p style="font-weight: bold;">Location: <%=e.getLocation()%></p>
-                <a href="//">
+                <a href="club_detail?id=<%=c.getId()%>">
                     <p style="font-weight: bold;"> Club: <%=c.getName()%> </p> 
                 </a>
                 <p><%=e.getDetails()%></p>
@@ -61,7 +69,7 @@
     %>
     <div style="margin-left: 30px;width: 200px">
         <a href="event_Details?id=<%=eList.get(i).getId()%>" style=" width: 150px; height: 100px">
-            <img style="width: 80%; height: 100%" src="<%=eList.get(i).getAvatar()%>" alt="alt"/>
+            <img style="width: 160px; height: 150px" src="<%=eList.get(i).getAvatar()%>" alt="alt"/>
             <p style="width: 100%; font-weight: bold"> <%=eList.get(i).getName()%></p>
             <p style="font-size: 13px; margin-top: -20px"><%=eList.get(i).getDate().toLocalDate()%></p>
             
@@ -74,3 +82,4 @@
         
     </body>
 </html>
+ <%@include file="commonFunction/footer.jsp" %>

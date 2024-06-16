@@ -19,11 +19,11 @@ public class Task {
     String note;
     int event_id;
     String details;
-
+    int club_id;
     public Task() {
     }
 
-    public Task(int id, String name, LocalDateTime startTime, LocalDateTime endTime, boolean status, String note, int event_id, String details) {
+    public Task(int id, String name, LocalDateTime startTime, LocalDateTime endTime, boolean status, String note, int event_id, String details,int club_id) {
         this.id = id;
         this.name = name;
         this.startTime = startTime;
@@ -32,6 +32,7 @@ public class Task {
         this.note = note;
         this.event_id = event_id;
         this.details = details;
+        this.club_id = club_id;
     }
 
     public int getId() {
@@ -96,6 +97,14 @@ public class Task {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public int getClub_id() {
+        return club_id;
+    }
+
+    public void setClub_id(int club_id) {
+        this.club_id = club_id;
     }
     
     

@@ -42,6 +42,7 @@ public class ClubDAO extends MyDAO {
                 club.setName(rs.getString("name"));
                 club.setStatus(rs.getInt("status"));
                 club.setAvatar(rs.getString("avatar"));
+                club.setDetail(rs.getString("details"));
                 clubs.add(club);
             }
         } catch (SQLException e) {
@@ -49,6 +50,26 @@ public class ClubDAO extends MyDAO {
         }
         return clubs;
     }
+    
+    public List<Integer> get_AccountId(int club_id) {
+        List<Integer> iList = new ArrayList<>();
+        String sql = "SELECT * FROM student_club where club_id =? and role_id=0;";
+       
+        try {
+            ps = con.prepareStatement(sql);
+             ps.setInt(1, club_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+               int id = rs.getInt("account_id");
+               iList.add(id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return iList;
+    }
+    
+    
 
     public void displayClub() {
 
@@ -68,7 +89,7 @@ public class ClubDAO extends MyDAO {
                 club.setName(rs.getString("name"));
                 club.setStatus(rs.getInt("status"));
                 club.setAvatar(rs.getString("avatar"));
-                club.setDetail(rs.getString("detail"));
+                club.setDetail(rs.getString("details"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,6 +111,7 @@ public class ClubDAO extends MyDAO {
                 club.setName(rs.getString("name"));
                 club.setStatus(rs.getInt("status"));
                 club.setAvatar(rs.getString("avatar"));
+                club.setDetail(rs.getString("detail"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

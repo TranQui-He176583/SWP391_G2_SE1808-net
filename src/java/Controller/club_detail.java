@@ -34,8 +34,8 @@ public class club_detail extends HttpServlet {
             }
             
             request.setAttribute("club", club);
-            out.print(club.getDetail());
-            request.getRequestDispatcher("/club_detail.jsp").forward(request, response);
+
+            request.getRequestDispatcher("club_detail.jsp").forward(request, response);
             
         } catch (NumberFormatException | ServletException e) {
             // Handle exceptions

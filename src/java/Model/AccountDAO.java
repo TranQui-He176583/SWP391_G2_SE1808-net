@@ -140,6 +140,34 @@ public class AccountDAO extends MyDAO {
         return account;
     }
      
+    public Account getAccount(int id) {
+        xSql = "select *from account where id=?"; 
+        Account account = new Account();
+      
+        try {
+      ps = con.prepareStatement(xSql);   
+      ps.setInt(1, id );
+      rs = ps.executeQuery();           
+      if (rs.next()) {         
+       account.email = rs.getString("email");
+        account.fullname= rs.getString("fullname");
+        account.gender = rs.getInt("gender");
+        account.id = rs.getInt ("id");
+        account.passWord = rs.getString("password");
+        account.phone = rs.getString("phone");
+        account.roleId = rs.getInt("roleId");
+        account.status = rs.getInt("status"); 
+        account.image = rs.getString("image");
+        return account;                   
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {      
+     } 
+        return account;
+    } 
+     
      public Account getAccount(String username) {
         xSql = "select *from account where email=? "; 
         Account account = new Account();

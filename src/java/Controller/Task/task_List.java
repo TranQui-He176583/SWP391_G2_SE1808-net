@@ -5,6 +5,7 @@
 
 package Controller.Task;
 
+import Model.Account;
 import Model.Task.*;
 import Service.Task.getTask;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -62,9 +64,19 @@ public class task_List extends HttpServlet {
         PrintWriter out = response.getWriter();
         getTask gTask = new  getTask();
         List<Task> tList = new ArrayList<>();
-        tList = gTask.gettList(6);
+        HttpSession session = request.getSession();
+       Account a = new Account();
+       a = (Account) session.getAttribute("account");
+       if (a==null) {
+           request.setAttribute("complete", "Please Login!");
+           request.getRequestDispatcher("index.jsp").forward(request, response);
+       } else {
+          tList = gTask.gettList(a.getId());
+         
         request.setAttribute("tList", tList);
-        request.getRequestDispatcher("task_List.jsp").forward(request, response);
+        request.getRequestDispatcher("task_List.jsp").forward(request, response); 
+       }
+        
         
     } 
 

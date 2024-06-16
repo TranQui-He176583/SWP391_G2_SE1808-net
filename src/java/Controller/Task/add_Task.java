@@ -5,7 +5,10 @@
 
 package Controller.Task;
 
+import Model.Account;
+import Model.EventDAO;
 import Model.Task.*;
+import Service.Event.get_aList;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,6 +17,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -57,7 +62,17 @@ public class add_Task extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.sendRedirect("add_Task.jsp");
+        PrintWriter out = response.getWriter();
+        String xeventid = request.getParameter("eventid");
+        String xclubid = request.getParameter("clubid");
+        int club_id = Integer.parseInt(xclubid);
+        get_aList gal = new get_aList();
+        List<Account> aList = new ArrayList<>();
+        aList = gal.gettList(club_id);
+        request.setAttribute("club_id", xclubid);
+        request.setAttribute("event_id", xeventid);
+        request.setAttribute("aList", aList);
+        request.getRequestDispatcher("add_Task.jsp").forward(request, response);
                
     } 
 
@@ -73,11 +88,12 @@ public class add_Task extends HttpServlet {
     throws ServletException, IOException {
         PrintWriter out = response.getWriter();
        String name= request.getParameter("name");
-        String cid= request.getParameter("cid");
-        int cId = Integer.parseInt(cid);
         String sTime = request.getParameter("start");
         String eTime = request.getParameter("end");
         String details = request.getParameter("details");
+        String xeventid = request.getParameter("eventid");
+        String xclubid = request.getParameter("clubid");
+        int club_id = Integer.parseInt(xclubid);
         
          boolean checkValid =true;
        if (name.equals("")) {
@@ -97,15 +113,22 @@ public class add_Task extends HttpServlet {
            checkValid= false;
        }
      if (checkValid == false) {
+         
          request.setAttribute("name", name);
          request.setAttribute("stime", sTime);
          request.setAttribute("etime", eTime);
          request.setAttribute("details", details);
+         get_aList gal = new get_aList();
+        List<Account> aList = new ArrayList<>();
+        aList = gal.gettList(club_id);
+        request.setAttribute("club_id", xclubid);
+        request.setAttribute("event_id", xeventid);
+        request.setAttribute("aList", aList);
          request.getRequestDispatcher("add_Task.jsp").forward(request, response);
      }  else {
           LocalDateTime stime = LocalDateTime.parse(sTime);
           LocalDateTime etime = LocalDateTime.parse(eTime);
-          Task t = new Task(0, name, stime, etime, true, "", cId, details);
+          Task t = new Task(0, name, stime, etime, true, "", club_id, details,1);
           TaskDAO tDAO = new TaskDAO();
           out.print(tDAO.insert(t));
          

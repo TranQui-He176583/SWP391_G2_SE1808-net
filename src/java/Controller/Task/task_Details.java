@@ -3,11 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.Event;
+package Controller.Task;
 
-import Controller.*;
-import Model.*;
-import java.util.*;
+import Model.Account;
+import Model.ClubDAO;
+import Model.EventDAO;
+import Model.Task.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -21,8 +22,8 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author quyka
  */
-@WebServlet(name="event_Details", urlPatterns={"/event_Details"})
-public class event_Details extends HttpServlet {
+@WebServlet(name="task_Details", urlPatterns={"/task_Details"})
+public class task_Details extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,16 +34,16 @@ public class event_Details extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet event_Details</title>");  
+            out.println("<title>Servlet task_Details</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet event_Details at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet task_Details at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,34 +60,42 @@ public class event_Details extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-       PrintWriter pr  = response.getWriter();
-       String SId = request.getParameter("id");
-       int id = Integer.parseInt(SId);
-       List<Event> eList = new ArrayList<Event>();
-         EventDAO eDAO = new EventDAO();
-       Event e = new Event();
-        eList = eDAO.get_Event_List(0,"", 1);
-       eList.subList(5, 9).clear();      
-       e =eDAO.getEvent(id);
-       Club c = new Club();
-       ClubDAO cDAO = new ClubDAO();
-       c=  cDAO.getClub_Id(e.getClub_id());
-       HttpSession session = request.getSession();
-       Account a = new Account();
-       a = (Account) session.getAttribute("account");
-      if (a!=null) {
-          if (eDAO.checkManager(a.getId(), e.getClub_id())) {
-           request.setAttribute("manager", true);
-       }
-      } 
-       
-       
-       request.setAttribute("club", c);
-       request.setAttribute("eList", eList);
-       request.setAttribute("Event", e);
-       request.getRequestDispatcher("event_Details.jsp").forward(request, response);
- 
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        Account a = new Account();
+        a = (Account) session.getAttribute("account");
+     if (a == null) {
+         request.setAttribute("complete", "Please Login!");
+         request.getRequestDispatcher("index.jsp").forward(request, response);
+     } else {   
+         TaskDAO TaskDAO = new TaskDAO();  
+        String xid= request.getParameter("task_id");
+        int id = Integer.parseInt(xid);
+     if (TaskDAO.checkTask(a.getId(), id)==false) {
+         request.setAttribute("complete", "You don't have this task!");
+         request.getRequestDispatcher("index.jsp").forward(request, response);
+     } else {
+             
+        ClubDAO cDAO = new ClubDAO();
+        EventDAO eDAO = new EventDAO();
+        Task t = new Task();
+        t = TaskDAO.getTask(id);
+        if (t.isStatus()) {
+            request.setAttribute("status", "Đang thực hiện");
+        } else {
+            request.setAttribute("status", "Đã Hoàn Thành");
+        }
+        request.setAttribute("name", t.getName());
+        request.setAttribute("eventid", t.getEvent_id());
+        request.setAttribute("clubid", t.getClub_id());
+        request.setAttribute("start", t.getStartTime().toLocalDate()+" at "+t.getStartTime().toLocalTime());
+        request.setAttribute("end", t.getEndTime().toLocalDate()+" at "+t.getEndTime().toLocalTime());
+        request.setAttribute("event", eDAO.getEvent(t.getEvent_id()).getName());
+        request.setAttribute("club", cDAO.getClub_Id(t.getClub_id()).getName());
+        request.setAttribute("details", t.getDetails());
+        request.getRequestDispatcher("task_details.jsp").forward(request, response);
+     }
+     }
     } 
 
     /** 

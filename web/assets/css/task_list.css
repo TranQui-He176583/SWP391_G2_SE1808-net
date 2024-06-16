@@ -1,0 +1,79 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 16, 2024, 12:44:01 PM
+    Author     : quyka
+*/
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .containerr {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 30px;
+      background-color: #fff;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .task-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .task-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      border-bottom: 1px solid #e6e6e6;
+      transition: background-color 0.3s ease;
+    }
+
+    .task-list li:last-child {
+      border-bottom: none;
+    }
+
+    .task-list li:hover {
+      background-color: #f4f4f4;
+    }
+
+    .task-list li .task-name {
+      flex-grow: 1;
+      margin-right: 20px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .task-list li .status {
+      font-weight: 600;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+
+    .task-list li .status.in-progress {
+      background-color: #ffd700;
+      color: #333;
+    }
+
+    .task-list li .status.completed {
+      background-color: #4caf50;
+      color: #fff;
+    }
