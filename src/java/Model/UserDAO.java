@@ -365,7 +365,23 @@ public class UserDAO extends MyDAO{
         return account;
     }
   
-  
+    public boolean checkNameExist(String username) {
+        xSql = "select *from account where fullname=? ";     
+        try {
+      ps = con.prepareStatement(xSql);   
+      ps.setString(1, username );
+     
+      rs = ps.executeQuery();           
+      if (rs.next()) {         
+       return true;                    
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {      
+     } 
+        return false;
+    }
 //    public static void main(String[] args) {
 //        UserDAO dao =new UserDAO();
 //        Account a = dao.getManagerByClubID("2", "1");

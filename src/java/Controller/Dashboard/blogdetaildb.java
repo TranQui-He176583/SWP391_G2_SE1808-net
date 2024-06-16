@@ -3,11 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.DashBoard;
+package Controller.Dashboard;
 
 import Model.Blog;
 import Model.BlogDAO;
-import Model.Club;
 import Model.ClubDAO;
 import java.io.IOException;
 import java.io.PrintWriter;

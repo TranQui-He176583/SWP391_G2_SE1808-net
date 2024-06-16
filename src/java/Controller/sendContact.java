@@ -92,7 +92,7 @@ public class sendContact extends HttpServlet {
         } catch (Exception e) {
             pr.print("Error sending email: " + e.getMessage());
         }
-       // request.getRequestDispatcher("contact.jsp").forward(request, response);
+        request.getRequestDispatcher("contact.jsp").forward(request, response);
     }
 
     @Override

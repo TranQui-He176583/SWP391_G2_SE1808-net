@@ -262,7 +262,7 @@
                                     
                                     <c:if test="${sessionScope.account.image != null}">  
                                        
-                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 20px" src="${sessionScope.account.image}" class="img-fluid"
+                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 30px" src="${sessionScope.account.image}" class="img-fluid"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </c:if>
                                     
@@ -302,9 +302,9 @@
                                     <option value="2" data-href="${pageContext.request.contextPath}/statusClub?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
                                 </select>
                             </div>
-                              <div class="mt-4 mt-sm-0">
+<!--                              <div class="mt-4 mt-sm-0">
                                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">Add Club</a>
-                            </div>
+                            </div>-->
 
                         </div>
                         

@@ -3,11 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.DashBoard;
+package Controller.Dashboard;
 
 import Model.Account;
-import Model.Blog;
-import Model.BlogDAO;
 import Model.Club;
 import Model.ClubDAO;
 import Model.UserDAO;
@@ -50,11 +48,14 @@ public class clubdetaildb extends HttpServlet {
         Club c =cdao.getClub(id);
         Account a = udao.getManagerByClubID("2", id);
         List<Club> detailindb = cdao.pagingClub(index);
+        String wrongName = (String) request.getSession().getAttribute("wrongName");
+        request.getSession().removeAttribute("wrongName");
 //        pr.print(a.getFullname());
         request.setAttribute("detailC", c );
         request.setAttribute("Manager", a );
        
         request.setAttribute("listdb", detailindb );
+        request.setAttribute("wrongName", wrongName);
 
         request.getRequestDispatcher("clubDetailDboard.jsp").forward(request, response);
       } 

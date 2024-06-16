@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.DashBoard;
+package Controller.Dashboard;
 
 import Model.Account;
 import Model.UserDAO;
@@ -23,7 +23,7 @@ import java.util.List;
 @WebServlet(name="status", urlPatterns={"/status"})
 public class status extends HttpServlet {
    
-    /** 
+     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response

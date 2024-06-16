@@ -3,8 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.DashBoard;
-
+package Controller.Dashboard;
 
 import Model.UserDAO;
 import java.io.IOException;
@@ -22,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet(name="editUser", urlPatterns={"/editUser"})
 public class editUser extends HttpServlet {
    
-    /** 
+   /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -84,3 +83,4 @@ public class editUser extends HttpServlet {
     }// </editor-fold>
 
 }
+

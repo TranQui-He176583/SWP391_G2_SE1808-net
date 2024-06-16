@@ -3,10 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.DashBoard;
+package Controller.Dashboard;
 
 import Model.Account;
-
 import Model.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,7 +33,7 @@ public class countUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
-    
+
     String indexPage = request.getParameter("index");
    
     int index = 1; // Default to page 1
@@ -47,11 +46,13 @@ public class countUser extends HttpServlet {
     int maxPage = (count / 5) + (count % 5 != 0 ? 1 : 0);
 
     List<Account> list = countdao.pagingUser(index);
-
+    String wrongRegister = (String) request.getSession().getAttribute("wrongRegister");
+    request.getSession().removeAttribute("wrongRegister");
     request.setAttribute("listUs", list);
     request.setAttribute("mPage", maxPage);
     request.setAttribute("tag", index);
-
+    request.setAttribute("wrongRegister", wrongRegister);
+   
     request.getRequestDispatcher("User_list.jsp").forward(request, response);
 }
 

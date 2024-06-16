@@ -1,11 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 
-package Controller.DashBoard;
-
-
+package Controller.Dashboard;
 
 import Model.Club;
 import Model.ClubDAO;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,7 +23,7 @@ import java.util.List;
 @WebServlet(name="clubdb", urlPatterns={"/clubdb"})
 public class clubdb extends HttpServlet {
    
-    /** 
+   /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -44,8 +45,8 @@ public class clubdb extends HttpServlet {
     int count = cdao.getTotalClub();
     int maxPage = (count / 4) + (count % 4 != 0 ? 1 : 0);
 
-    List<Club> listClub = cdao.pagingClub(index);
-    request.setAttribute("listCLB", listClub);
+    List<Club> litClub = cdao.pagingClub(index);
+    request.setAttribute("listCLB", litClub);
     request.setAttribute("mPage", maxPage);
     request.setAttribute("tag", index);
 

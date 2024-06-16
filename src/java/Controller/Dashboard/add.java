@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.DashBoard;
+package Controller.Dashboard;
 
 import Model.Account;
 import Model.UserDAO;
@@ -16,13 +16,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.http.Part;
-import jakarta.servlet.http.Part;
-import java.io.File;
-import java.util.Random;
+
 /**
  *
  * @author pc
@@ -30,7 +24,7 @@ import java.util.Random;
 @WebServlet(name="add", urlPatterns={"/add"})
 public class add extends HttpServlet {
    
-    /** 
+   /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -87,8 +81,9 @@ String xPassword = request.getParameter("password");
     UserDAO aDAO = new UserDAO();
 
 if (aDAO.checkUserExist(xMail)) {
-    request.setAttribute("wrongRegister", "This email is registered to another account");
+    request.getSession().setAttribute("wrongRegister", "This email is registered to another account");
     response.sendRedirect("countUser");
+    return;
 } else {
      
         MailHandler mh = new MailHandler();     
@@ -114,8 +109,7 @@ if (aDAO.checkUserExist(xMail)) {
     request.setAttribute("fullname", xFullname);
     request.setAttribute("password", xPassword);
     request.setAttribute("email", xMail);
-    request.setAttribute("addnew", "send successfull");
-    
+    request.setAttribute("addnew", "add successfull");
     response.sendRedirect("countUser");
 }
     

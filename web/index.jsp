@@ -21,7 +21,7 @@
         <%@include file="commonFunction/CSS.jsp" %>
     </head>
     <body>
-<!--         ? Preloader Start 
+        <!-- ? Preloader Start -->
         <style>
             #preloader-active .preloader-img img {
                 max-width: 90%;
@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-        </div>-->
+        </div>
         <!-- Preloader Start -->
         <%@include file="commonFunction/header.jsp" %>
         <main>

@@ -263,7 +263,7 @@
                                     
                                     <c:if test="${sessionScope.account.image != null}">  
                                        
-                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 20px" src="${sessionScope.account.image}" class="img-fluid"
+                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 30px" src="${sessionScope.account.image}" class="img-fluid"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </c:if>
                                     
@@ -405,6 +405,9 @@
                                                 <input type="file" id="avatar" name="avatar" accept="image/*" />
 
                                             </div>
+                                            <div>
+                                            <p style="color: red; font-size: 15px">${requestScope.wrongName}</p>
+                                            </div>
                                            
                                         </div><!--end col-->
 
@@ -414,20 +417,26 @@
                                                 
                                                 <div class="row">
                                                     <input type="hidden" name="id" value="${detailC.id}" readonly required>
-                                                    <div class="col-6">
+                                                    <div class="col-6" >
                                                         <div class="mb-3">
                                                             <label class="form-label">Club Name <span class="text-danger">*</span></label>
                                                             <input name="name" id="name" type="text" class="form-control" value="${detailC.name}" >
                                                         </div>
-                                                    </div><!--end col-->
-
-
-                                                    <div class="col-md-6">
-
-                                                    </div><!--end col-->
-
-                                                    <div class="col-md-6">
+                                                        
                                                         <div class="mb-3">
+                                                            <label class="form-label">Manager <span class="text-danger">*</span></label>
+                                                            <input name="name" id="name" type="text" class="form-control" value="${Manager.fullname}" >
+                                                        </div>
+                                                    </div><!--end col-->
+
+
+<!--                                                    <div class="col-md-6">
+
+                                                    </div>end col-->
+
+                                                    <div class="col-md-6">
+                                                        
+                                                       <div class="mb-3">
                                                             <label class="form-label">Status</label>
                                                             <div class="context-status" style="display: flex;">
 
@@ -452,6 +461,7 @@
 
                                                     <div class="col-lg-12 text-end">
                                                         <button type="submit" class="btn btn-primary">SAVE</button>
+                                                    
                                                     </div><!--end col-->
                                                     </div>
                                                        
