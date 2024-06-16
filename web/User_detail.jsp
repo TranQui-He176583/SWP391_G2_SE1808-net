@@ -343,7 +343,7 @@
                                     
                                     <c:if test="${sessionScope.account.image != null}">  
                                        
-                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 20px" src="${sessionScope.account.image}" class="img-fluid"
+                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 30px" src="${sessionScope.account.image}" class="img-fluid"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </c:if>
                                     
@@ -510,8 +510,8 @@
                                             <div class="mt-4">
                                                 <c:forEach items="${listdb}" var="lisb">
                                                 <div class="clearfix post-recent">
-                                                    <div class="post-recent-thumb float-start"> <a href=""> <img alt="img" src="${lisb.image}" class="img-fluid rounded"></a></div>
-                                                    <div class="post-recent-content float-start"><a href="detailUser?uid=${lisb.id}">${lisb.fullname}</a></div>
+                                                    <div class="post-recent-thumb float-start"> <a href=""> <img alt="img" src="${lisb.image}" class="img-fluid rounded" style="width: 50px;height: 50px"></a></div>
+                                                    <div class="post-recent-content float-start" style="padding-top: 10px"><a href="detailUser?uid=${lisb.id}">${lisb.fullname}</a></div>
                                                 </div>
                                                 </c:forEach>
                                             </div>

@@ -84,11 +84,11 @@ public class editClubdb extends HttpServlet {
     String xid = request.getParameter("id");
     int id = Integer.parseInt(xid);
     String xName = request.getParameter("name");
-    String xDetail = request.getParameter("detail");
-   
-    Part xAvatar = request.getPart("avatar");
     String xStatus = request.getParameter("status");
     int status = Integer.parseInt(xStatus);
+    Part xAvatar = request.getPart("avatar");
+    String xDetail = request.getParameter("detail");
+
     ClubDAO cdao = new ClubDAO();
     UserDAO udao = new UserDAO();
     Club c= cdao.getClub(xid);
@@ -109,16 +109,16 @@ public class editClubdb extends HttpServlet {
             imageURL = c.getAvatar(); // Use the existing image URL
         }
         c.setName(xName);
-        c.setDetail(xDetail);
-        c.setAvatar(imageURL);
         c.setStatus(status);
+        c.setAvatar(imageURL);
+        c.setDetail(xDetail);
         cdao.EditClub(c);
         request.setAttribute("completeChange", "Change Information Susscess!");
         response.sendRedirect("clubdb");
     } else {
         out.println("<html><body><h1>Error: 'club' attribute is null</h1></body></html>");
     }
-}
+}   
 
     /** 
      * Returns a short description of the servlet.

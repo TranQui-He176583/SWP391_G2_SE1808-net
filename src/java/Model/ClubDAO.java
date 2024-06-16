@@ -326,7 +326,7 @@ public class ClubDAO extends MyDAO {
         return null;
     }
 
-    public void EditClub(Club c) {
+    public String EditClub(Club c) {
         xSql = "UPDATE club \n"
                 + "        SET name =? ,\n"
                 + "        status = ?,\n"
@@ -335,18 +335,26 @@ public class ClubDAO extends MyDAO {
                 + "        WHERE id = ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setString(1, c.name);
-            ps.setInt(2, c.status);
-            ps.setString(3, c.avatar);
-            ps.setString(4, c.detail);
-            ps.setInt(5, c.id);
+            ps.setString(1, c.getName());
+            ps.setInt(2, c.getStatus());
+            ps.setString(3, c.getAvatar());
+            ps.setString(4, c.getDetail());
+            ps.setInt(5, c.getId());
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
-
+           return e.getMessage();
         }
+       return  "ok";
 
     }
+//    public static void main(String[] args) {
+//        ClubDAO dao = new ClubDAO();
+//        Club c =new Club();
+//        System.out.println( dao.EditClub(c));
+//        
+//        
+//    }
 
 
 }

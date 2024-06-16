@@ -52,6 +52,7 @@ public class dboard extends HttpServlet {
          List<Account> liu= dao.pagingUser(index);
          List<Club> lub=lubdao.getAllClub();
          List<Event> lie=edao.getAllEvent();
+         
          request.setAttribute("cUser", countUser);
          request.setAttribute("cClub", countUser1);
          request.setAttribute("cEvent", countUser2);

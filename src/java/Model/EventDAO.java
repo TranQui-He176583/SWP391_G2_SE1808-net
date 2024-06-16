@@ -345,7 +345,7 @@ public class EventDAO extends MyDAO {
         ps.setString(5, e.getLocation());
         ps.setString(6, e.getDetails());
         ps.setInt(7,e.getId());
-         ps.executeUpdate();
+        ps.executeUpdate();
       rs.close();
       ps.close();
      }
@@ -354,7 +354,14 @@ public class EventDAO extends MyDAO {
      }
     return  "ok";
     } 
-
+//    public static void main(String[] args) {
+//        EventDAO dao =new EventDAO();
+//        List<Event> list = dao.getAllEvent();
+//        for(Event e:list){
+//            System.out.println(e);
+//        }
+//    }
+          
 
 }
 

@@ -263,7 +263,7 @@
                                     
                                     <c:if test="${sessionScope.account.image != null}">  
                                        
-                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 20px" src="${sessionScope.account.image}" class="img-fluid"
+                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 30px" src="${sessionScope.account.image}" class="img-fluid"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </c:if>
                                     
@@ -470,11 +470,10 @@
                                                 <img src="${lc.avatar}" class="avatar avatar-small rounded-circle border shadow" alt="">
                                                 <div class="flex-1 ms-3">
                                                     <span class="d-block h6 mb-0">${lc.name}</span>
-                                                                
+                                            
                                                 </div>
                                             </div>
-
-                                           
+      
                                         </li>
                                          </c:forEach>
                                     </ul>
@@ -497,17 +496,19 @@
                                         </div>
                                     </div>
                                    
-                                    <ul class="list-unstyled mb-0 p-4" data-simplebar style="height: 355px">
-                                        <c:forEach items="${lise}" var="let">
-                                        <li class="d-flex align-items-center justify-content-between" style="padding: 10px">
-                                          <div class="d-flex align-items-center">
-                                              <div class="flex-1 ms-3 text-overflow-ellipsis white-space-nowrap" >
-                                              <span class="d-block h6 mb-0">${let.name}</span>
-                                           </div>
-                                          </div>
-                                              <div class="text-muted text-overflow-ellipsis white-space-nowrap text-end" > ${let.time}</div>
+                                     <ul class="list-unstyled mb-0 p-4" data-simplebar style="height: 355px;">
+                                        <c:forEach items="${lise}" var="lie">
+                                            <li class="d-flex align-items-center justify-content-between" style="padding: 10px">
+                                            <div class="d-flex align-items-center">
+                                                <img src="${lie.avatar}" class="avatar avatar-small rounded-circle border shadow" alt="">
+                                                <div class="flex-1 ms-3">
+                                                    <span class="d-block h6 mb-0">${lie.name}</span>
+                                            
+                                                </div>
+                                            </div>
+     
                                         </li>
-                                       </c:forEach>
+                                         </c:forEach>
                                     </ul>
                                     
                                      

@@ -45,8 +45,8 @@ public class clubdb extends HttpServlet {
     int count = cdao.getTotalClub();
     int maxPage = (count / 4) + (count % 4 != 0 ? 1 : 0);
 
-    List<Club> listClub = cdao.pagingClub(index);
-    request.setAttribute("listCLB", listClub);
+    List<Club> litClub = cdao.pagingClub(index);
+    request.setAttribute("listCLB", litClub);
     request.setAttribute("mPage", maxPage);
     request.setAttribute("tag", index);
 
