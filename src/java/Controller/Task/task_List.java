@@ -63,7 +63,7 @@ public class task_List extends HttpServlet {
          response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         getTask gTask = new  getTask();
-        List<Task> tList = new ArrayList<>();
+        List<Task> tList = new ArrayList<Task>();
         HttpSession session = request.getSession();
        Account a = new Account();
        a = (Account) session.getAttribute("account");
@@ -72,7 +72,7 @@ public class task_List extends HttpServlet {
            request.getRequestDispatcher("index.jsp").forward(request, response);
        } else {
           tList = gTask.gettList(a.getId());
-         
+         Collections.reverse(tList);
         request.setAttribute("tList", tList);
         request.getRequestDispatcher("task_List.jsp").forward(request, response); 
        }

@@ -38,10 +38,9 @@
   </div>
     <p style="color: red">${requestScope.invalidImage}</p>
             
-    <div>
-    <label for="club">Clud ID:</label>
-    <input type="text" id="clubid" name="clubid"  >
-  </div>        
+    
+    <input type="hidden" id="clubid" name="clubid" value="${requestScope.cid}"  >
+        
   
   <div>
     <label for="time">Thời gian:</label>

@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import Model.*;
 import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.time.LocalDate;
@@ -65,7 +66,26 @@ public class add_Event extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession session = request.getSession();
+         String cid = request.getParameter("cid");
+       Account a = new Account();
+       EventDAO eDAO = new EventDAO();
+       a = (Account) session.getAttribute("account");
+      if (a!=null) {
+          if (eDAO.checkManager(a.getId(), Integer.parseInt(cid))==false) {
+           request.setAttribute("complete", "You don't have role to add event!");
+           
+           request.getRequestDispatcher("index.jsp").forward(request, response);
+       } else {
+              request.setAttribute("cid", cid);
        request.getRequestDispatcher("add_Event.jsp").forward(request, response);
+          }} else {
+      request.setAttribute("complete", "Please Login");
+           request.getRequestDispatcher("index.jsp").forward(request, response);
+      }
+       
+       
+      
     } 
 
     /** 

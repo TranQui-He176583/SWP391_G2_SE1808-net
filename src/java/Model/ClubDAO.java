@@ -147,7 +147,7 @@ public class ClubDAO extends MyDAO {
     
     public List<Club> getClubListByUserId(int accountId) {
         List<Club> clubs = new ArrayList<>();
-        String sql = "SELECT c.* FROM Club c INNER JOIN student_club sc ON c.id = sc.clubID WHERE sc.accountID = ?";
+        String sql = "SELECT c.* FROM Club c INNER JOIN student_club sc ON c.id = sc.club_id WHERE sc.account_id = ?";
 
         try {
             ps = con.prepareStatement(sql);
@@ -159,7 +159,7 @@ public class ClubDAO extends MyDAO {
                 club.setName(rs.getString("name"));
                 club.setStatus(rs.getInt("status"));
                 club.setAvatar(rs.getString("avatar"));
-                club.setDetail("detail");
+                club.setDetail("details");
                 clubs.add(club);
             }
         } catch (SQLException e) {

@@ -25,20 +25,35 @@
         <%@include file="commonFunction/header.jsp" %>
 
         <main>
+            
             <div class="container" style="margin-top: 125px">
-                <div class="club-detail" style="display: flex;">
+                
+                
+                <div class="club-detail" style="display: flex; margin-top: 50px">
                     <div class="club-avatar col-3" style="flex: 0 0 25%; max-width: 25%;">
                         <img src="<c:out value="${club.avatar}"/>">
                     </div>
                     <div class="club-info col-9" style="flex: 0 0 75%; max-width: 75%;"> 
                         <h1><c:out value="${club.name}"/></h1>
                         <p><strong>Description:</strong> ${requestScope.club.getDetail()} </p>
+                  <c:if test="${requestScope.manager==true}">       
+                      <a href="add_Event?cid=${requestScope.club.getId()}" >
+                        <button style="width: 70px; height: 40px; border-radius: 5px;
+                                background: #f05123;border: none">Add Event</button>
+                    </a>
+                        
+                      <a href="add_Task?eventid=0&clubid=${requestScope.club.getId()}" style="margin-left: 20px">
+                    <button style="width: 70px; height: 40px; border-radius: 5px;
+                                background: #f05123;border: none">Add Task</button>
+                    </a>
+                     </c:if>         
                     </div>
                 </div>
-            </div>
-
+            </div>  
+                    
         </main>
 
+                    
         <%@include file="commonFunction/footer.jsp" %>
 
         <!-- Scroll Up -->
