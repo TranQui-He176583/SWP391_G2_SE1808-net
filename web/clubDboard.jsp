@@ -302,9 +302,9 @@
                                     <option value="2" data-href="${pageContext.request.contextPath}/statusClub?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
                                 </select>
                             </div>
-                              <div class="mt-4 mt-sm-0">
+<!--                              <div class="mt-4 mt-sm-0">
                                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">Add Club</a>
-                            </div>
+                            </div>-->
 
                         </div>
                         

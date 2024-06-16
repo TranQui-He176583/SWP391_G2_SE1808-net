@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.DashBoard;
+package Controller.Dashboard;
 
 import Model.Blog;
 import Model.BlogDAO;
@@ -15,10 +15,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
-import java.time.LocalDateTime;
 
 /**
  *
@@ -144,7 +142,7 @@ public class editBlogdb extends HttpServlet {
     }
 }
 
-     String getUniqueFileName(Part part) {
+    String getUniqueFileName(Part part) {
         String submittedFileName = part.getSubmittedFileName();
         String fileExtension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
         String newFileName = System.currentTimeMillis() + fileExtension;

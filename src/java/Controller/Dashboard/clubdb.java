@@ -1,11 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 
-package Controller.DashBoard;
-
-
+package Controller.Dashboard;
 
 import Model.Club;
 import Model.ClubDAO;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,7 +23,7 @@ import java.util.List;
 @WebServlet(name="clubdb", urlPatterns={"/clubdb"})
 public class clubdb extends HttpServlet {
    
-    /** 
+   /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response

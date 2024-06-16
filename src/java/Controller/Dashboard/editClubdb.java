@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.DashBoard;
+package Controller.Dashboard;
 
 import Model.Club;
 import Model.ClubDAO;
+import Model.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -86,13 +87,16 @@ public class editClubdb extends HttpServlet {
     String xDetail = request.getParameter("detail");
    
     Part xAvatar = request.getPart("avatar");
-    
     String xStatus = request.getParameter("status");
     int status = Integer.parseInt(xStatus);
     ClubDAO cdao = new ClubDAO();
-    
+    UserDAO udao = new UserDAO();
     Club c= cdao.getClub(xid);
-   
+//    if (udao.checkNameExist(xName)) {
+//       request.getSession().setAttribute("wrongName", "This name does not exist");
+//       response.sendRedirect("clubdetaildb");
+//       return;
+//    }
     String imageURL="";
     if (c != null) {
         if (xAvatar != null && xAvatar.getSize() > 0) {

@@ -95,7 +95,7 @@ public class BlogDAO extends MyDAO {
                 String name = rs.getString("name");
                 String details = rs.getString("details");
                 int clubID = rs.getInt("clubID");
-
+                
                 String image = rs.getString("image");
                 int status = rs.getInt("status");
                 t.add(new Blog(id, name, details, clubID, LocalDateTime.MAX, image, status));
@@ -295,12 +295,12 @@ public class BlogDAO extends MyDAO {
         return blogs;
     }
 
-//    public static void main(String[] args) {
-//        BlogDAO dao = new BlogDAO();
-//        List<Club> list= dao.getCLubByClubID("1");
-//        for(Club c: list){
-//            System.out.println(c.getName());
-//        }
-//        
-//    }
+    public static void main(String[] args) {
+        BlogDAO dao = new BlogDAO();
+        List<Blog> list= dao.getAllBlogs();
+        for(Blog c: list){
+            System.out.println(c.getName());
+        }
+        
+    }
 }

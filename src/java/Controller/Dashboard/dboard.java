@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.DashBoard;
+package Controller.Dashboard;
 
 import Model.Account;
 import Model.Club;
@@ -87,12 +87,7 @@ public class dboard extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-//         request.setCharacterEncoding("UTF-8");
-//         String NameSearch =request.getParameter("search");
-//         DBoardDAO dao = new DBoardDAO();
-//         List<Account> lis= dao.getSearchUser(NameSearch);
-//         request.setAttribute("listUser", lis);
-//         request.getRequestDispatcher("dashboard.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 

@@ -423,7 +423,7 @@
                     </tbody>
             </table>
           
-             
+          
             
             <div class="row text-center" style="">
                             <!-- PAGINATION START -->
@@ -621,6 +621,7 @@
                     <p style="color: green; font-size: 15px">${requestScope.addnew}</p>
                 </div>
             </form>
+                
         </div>
                 </div>
              </div>
