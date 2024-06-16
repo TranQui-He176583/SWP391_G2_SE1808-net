@@ -102,4 +102,60 @@ public class TaskDAO extends MyDAO {
      } 
         return false;
     }
+    public boolean checkManager(int account_id, int club_id) {
+        xSql = "select *from student_club where account_id=? club task_id=?";     
+        try {
+      ps = con.prepareStatement(xSql);   
+      ps.setInt(1,account_id);
+      ps.setInt(2,club_id);
+      rs = ps.executeQuery();           
+      if (rs.next()) {         
+          int role = rs.getInt("role_id");
+          if (role==1) {
+              return true;
+          }
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {      
+     } 
+        return false;
+    }
+  
+  public String insertStudent (int account_id, int task_id) {
+     xSql = "insert into task_account (account_id,task_id) values (?,?)"; 
+     try {    
+    ps = con.prepareStatement(xSql);      
+    ps.setInt(1,account_id);
+    ps.setInt(2,task_id);
+      ps.executeUpdate();
+      ps.close();
+     }     
+     catch(Exception e) {
+        return(e.getMessage());
+     }
+     return("Ok");
+  }
+  
+public int getId() {
+        xSql = "SELECT MAX(id) as id FROM task ";
+       int number =3;
+        try {
+      ps = con.prepareStatement(xSql);   
+      rs = ps.executeQuery();      
+     
+      if (rs.next()) {   
+       number = rs.getInt("id");  
+       return number;
+                             }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+       
+     } 
+        return number;
+    }
+    
 }

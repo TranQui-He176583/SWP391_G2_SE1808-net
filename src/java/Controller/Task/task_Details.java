@@ -64,22 +64,25 @@ public class task_Details extends HttpServlet {
         HttpSession session = request.getSession();
         Account a = new Account();
         a = (Account) session.getAttribute("account");
+        TaskDAO TaskDAO = new TaskDAO(); 
+          
+        String xid= request.getParameter("task_id");
+        int id = Integer.parseInt(xid);
+        Task t = new Task();
+        t = TaskDAO.getTask(id);
      if (a == null) {
          request.setAttribute("complete", "Please Login!");
          request.getRequestDispatcher("index.jsp").forward(request, response);
      } else {   
-         TaskDAO TaskDAO = new TaskDAO();  
-        String xid= request.getParameter("task_id");
-        int id = Integer.parseInt(xid);
-     if (TaskDAO.checkTask(a.getId(), id)==false) {
+        
+     if (TaskDAO.checkTask(a.getId(), id)==false && TaskDAO.checkManager(a.getId(), t.getClub_id())) {
          request.setAttribute("complete", "You don't have this task!");
          request.getRequestDispatcher("index.jsp").forward(request, response);
      } else {
              
         ClubDAO cDAO = new ClubDAO();
         EventDAO eDAO = new EventDAO();
-        Task t = new Task();
-        t = TaskDAO.getTask(id);
+        
         if (t.isStatus()) {
             request.setAttribute("status", "Đang thực hiện");
         } else {

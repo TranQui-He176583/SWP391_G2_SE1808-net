@@ -92,7 +92,9 @@ public class add_Task extends HttpServlet {
         String eTime = request.getParameter("end");
         String details = request.getParameter("details");
         String xeventid = request.getParameter("eventid");
+       int eventid=0;
         String xclubid = request.getParameter("clubid");
+        String[] iList = request.getParameterValues("uid");
         int club_id = Integer.parseInt(xclubid);
         
          boolean checkValid =true;
@@ -123,15 +125,25 @@ public class add_Task extends HttpServlet {
         aList = gal.gettList(club_id);
         request.setAttribute("club_id", xclubid);
         request.setAttribute("event_id", xeventid);
-        request.setAttribute("aList", aList);
+        request.setAttribute("aList", aList);       
          request.getRequestDispatcher("add_Task.jsp").forward(request, response);
      }  else {
+         if (xeventid != null) {
+             eventid= Integer.parseInt(xeventid);
+         }
           LocalDateTime stime = LocalDateTime.parse(sTime);
           LocalDateTime etime = LocalDateTime.parse(eTime);
-          Task t = new Task(0, name, stime, etime, true, "", club_id, details,1);
+          Task t = new Task(0, name, stime, etime, true, "", eventid, details,club_id);
           TaskDAO tDAO = new TaskDAO();
+          
           out.print(tDAO.insert(t));
-         
+          out.print(tDAO.getId());
+         for (int i=0;i<iList.length;i++) { 
+          out.print(tDAO.insertStudent(Integer.parseInt(iList[i]), tDAO.getId()));
+         }
+         response.sendRedirect("task_Details?task_id="+tDAO.getId());
+                 
+                 
      } 
        
     }

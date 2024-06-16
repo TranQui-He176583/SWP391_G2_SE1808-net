@@ -79,7 +79,7 @@
     <div class="checkbox-list">
        <% for (int i=0;i<aList.size();i++) {%> 
       <div>
-        <input type="checkbox" id="option1" value="<%=aList.get(i).getId()%>">
+        <input type="checkbox" id="option1" name="uid" value="<%=aList.get(i).getId()%>">
         <label for="option1"><%=aList.get(i).getEmail()%></label>
       </div>
      <%}%>
