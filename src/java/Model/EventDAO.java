@@ -5,8 +5,6 @@
 package Model;
 
 import Database.MyDAO;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -17,8 +15,7 @@ import java.util.List;
  * @author quyka
  */
 public class EventDAO extends MyDAO {
-    
-    public String insert (Event x) {
+      public String insert (Event x) {
      xSql = "insert into Event (name,club_id,time,location,details,avatar) values (?,?,?,?,?,?)"; 
      try {    
       ps = con.prepareStatement(xSql);      
@@ -276,7 +273,7 @@ public class EventDAO extends MyDAO {
         ps.setString(5, e.getLocation());
         ps.setString(6, e.getDetails());
         ps.setInt(7,e.getId());
-         ps.executeUpdate();
+        ps.executeUpdate();
       rs.close();
       ps.close();
      }
@@ -306,6 +303,4 @@ public class EventDAO extends MyDAO {
      } 
         return false;
     }
-   
 }
-
