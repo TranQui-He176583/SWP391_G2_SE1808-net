@@ -33,7 +33,7 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-
+       
     </head>
 
     <body>
@@ -300,7 +300,7 @@
                                 <select class="form-control time-during select2input" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');" style="background: skyblue">
                                     <option value=""  data-href="blogdb">Status</option>
                                     <option value="1" data-href="${pageContext.request.contextPath}/statusBlog?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
-                                    <option value="2" data-href="${pageContext.request.contextPath}/statusBlog?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
+                                    <option value="0" data-href="${pageContext.request.contextPath}/statusBlog?xStatus=0" ${param.xStatus == '0' ? 'selected' : ''}>block</option>
                                 </select>
                             </div>
 <!--                            <div class="mt-4 mt-sm-0">
@@ -311,10 +311,10 @@
                         <div class="row">
                             <c:forEach items="${listBL}" var="lb">
                             <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4">
-                                <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                                    <img src="${lb.image}" class="img-fluid" alt="">
+                                <div class="card blog blog-primary border-0 shadow rounded overflow-hidden h-100">
+                                    <img src="${lb.image}" class="img-fluid rounded h-100 object-fit-cover" alt=""style="">
                                  
-                                    <div class="card-body p-4">
+                                    <div class="card-body p-4 d-flex flex-column">
                                         <ul class="list-unstyled mb-2">
                                         
                                         </ul>

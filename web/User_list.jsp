@@ -311,7 +311,7 @@
                                                     <select class="form-control time-during select2input" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
                                                       <option value=""  data-href="countUser">Status</option>
                                                       <option value="1" data-href="${pageContext.request.contextPath}/status?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
-                                                      <option value="2" data-href="${pageContext.request.contextPath}/status?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
+                                                      <option value="0" data-href="${pageContext.request.contextPath}/status?xStatus=0" ${param.xStatus == '0' ? 'selected' : ''}>block</option>
                                                     </select>
                                                 </div>
                                             </div>

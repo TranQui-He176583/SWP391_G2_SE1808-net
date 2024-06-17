@@ -16,28 +16,28 @@ public class Blog {
     String name;
     String details;
     int clubID;
-    LocalDateTime date;
     String image;
+    LocalDateTime time;
     int status;
 
     public Blog() {
     }
 
-    public Blog(int id, String name, String details, int clubID, LocalDateTime date, String image, int status) {
+    public Blog(int id, String name, String details, int clubID, String image, LocalDateTime time, int status) {
         this.id = id;
         this.name = name;
         this.details = details;
         this.clubID = clubID;
-        this.date = date;
         this.image = image;
+        this.time = time;
         this.status = status;
     }
 
-    public int getID() {
+    public int getId() {
         return id;
     }
 
-    public void setID(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -65,20 +65,20 @@ public class Blog {
         this.clubID = clubID;
     }
 
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 
     public int getStatus() {

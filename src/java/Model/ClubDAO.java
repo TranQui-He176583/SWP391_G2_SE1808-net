@@ -370,6 +370,32 @@ public class ClubDAO extends MyDAO {
        return  "ok";
 
     }
+    public Club getNameByBlogID(String XblogID){
+        xSql = "select *from club join blog \n" +
+               "on club.id = blog.clubID \n" +
+               "where blog.id=?"; 
+        Club club = new Club();
+      
+        try {
+      ps = con.prepareStatement(xSql);   
+      ps.setString(1, XblogID );
+      rs = ps.executeQuery();           
+      if (rs.next()) {       
+        club.id = rs.getInt ("id");
+        club.name = rs.getString("name");
+        club.status = rs.getInt("status"); 
+        club.avatar= rs.getString("avatar");
+        club.detail= rs.getString("detail");
+        
+        return club;                   
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {      
+     } 
+        return club;
+    }
 //    public static void main(String[] args) {
 //        ClubDAO dao = new ClubDAO();
 //        Club c =new Club();

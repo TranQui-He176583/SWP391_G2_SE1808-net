@@ -112,7 +112,8 @@ public class editClubdb extends HttpServlet {
         c.setStatus(status);
         c.setAvatar(imageURL);
         c.setDetail(xDetail);
-        cdao.EditClub(c);
+//        out.print(c.getId());
+        out.print(cdao.EditClub(c));
         request.setAttribute("completeChange", "Change Information Susscess!");
         response.sendRedirect("clubdb");
     } else {

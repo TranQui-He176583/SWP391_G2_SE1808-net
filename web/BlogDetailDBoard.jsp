@@ -287,12 +287,12 @@
                         <div class="d-md-flex justify-content-between">
                             <div>
                                 <h5 class="mb-0">${detailBlog.name}</h5>
-
+                                
                                 <ul class="list-unstyled mt-2 mb-0">
+                                    <input type="hidden"  name="id" value="${detailBlog.id}" readonly required>
+                                    <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account">${nameClub.name}</i></li>
 
-                                    <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i></li>
-
-                                    <!--                                    <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i></li>-->
+                                    <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check">${detailBlog.time}</i></li>
                                 </ul>
                             </div>
 
@@ -399,11 +399,11 @@
                                                             <label class="form-label">Blog Title <span class="text-danger">*</span></label>
                                                             <input name="name" id="name" type="text" class="form-control" value="${detailBlog.name}" >
                                                         </div>
-                                                    </div><!--end col-->
-
-
-                                                    <div class="col-md-6">
-
+                                                        
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Blog Date <span class="text-danger">*</span></label>
+                                                            <input name="time" id="time" type="text" class="form-control" value="${detailBlog.time}">
+                                                        </div>
                                                     </div><!--end col-->
 
                                                     <div class="col-md-6">
