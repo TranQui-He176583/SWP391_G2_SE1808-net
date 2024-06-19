@@ -14,14 +14,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
  * @author pc
  */
-@WebServlet(name="statusBlog", urlPatterns={"/statusBlog"})
-public class statusBlog extends HttpServlet {
+@WebServlet(name="blogTimeDESC", urlPatterns={"/blogTimeDESC"})
+public class blogTimeDESC extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,15 +35,27 @@ public class statusBlog extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        PrintWriter pr = response.getWriter();
+        PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-        String Status = request.getParameter("xStatus");
-        BlogDAO dao = new BlogDAO();
-        List<Blog> lit = dao.getAllBlogByStatus(Status);
-        request.setAttribute("listBL", lit);
-        request.getRequestDispatcher("BlogsDBoard.jsp").forward(request, response);
-    } 
+         String indexPage = request.getParameter("index1");
    
+    int index1 = 1; // Default to page 1
+    if (indexPage != null) {
+        index1 = Integer.parseInt(indexPage);
+    }
+    BlogDAO bdao = new BlogDAO();
+    int count = bdao.getTotalBlog();
+    int maxPage = (count / 4) + (count % 4 != 0 ? 1 : 0);
+    List<Blog> BlogTime1 = bdao.getAllBlogByTime1(index1);
+   
+//    out.print(listBlog.get(0).getImage());
+    request.setAttribute("listBL", BlogTime1);
+    request.setAttribute("mPage1", maxPage);
+    request.setAttribute("tag1", index1);
+
+    request.getRequestDispatcher("BlogsDBoard1.jsp").forward(request, response);
+    } 
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -66,7 +81,22 @@ public class statusBlog extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+         PrintWriter out = response.getWriter();
+    String Search = request.getParameter("search");
+    BlogDAO bdao = new BlogDAO();
+    List<Blog> listByTitle = bdao.getSearchBlogByTitle(Search);
+    List<Blog> listByClub = bdao.getSearchBlogByCLub(Search);
+
+    // Combine the two lists
+    List<Blog> combinedList = new ArrayList<>(listByTitle);
+    combinedList.addAll(listByClub);
+
+    // Remove duplicates
+    Set<Blog> uniqueBlogs = new HashSet<>(combinedList);
+    combinedList = new ArrayList<>(uniqueBlogs);
+
+    request.setAttribute("listBL", combinedList);
+    request.getRequestDispatcher("BlogsDBoard1.jsp").forward(request, response);
     }
 
     /** 

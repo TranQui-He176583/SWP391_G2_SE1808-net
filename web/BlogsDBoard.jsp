@@ -6,7 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +33,11 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
+       
+       <style>
+       
+       </style>
        
     </head>
 
@@ -57,7 +62,7 @@
     <div class="sidebar-submenu">
         <ul>
             <li>
-                <a href="javascript:void(0)">Club</a>
+                <a href="javascript:void(0)"><i class="uil uil-club me-2 d-inline-block"></i>Club</a>
                 <div class="sidebar-submenu">
                     <ul>
                         <li><a href="dr-profile.html">List</a></li>
@@ -102,6 +107,7 @@
                                         </ul>
                                         </div>
                                     </li>
+                                    
                                 </ul>
                             </div>
                         </li>
@@ -296,7 +302,8 @@
                                     </ul>
                                 </nav>
                             </div>
-                            <div class="mt-4 mt-sm-0" style="padding-left: 500px">
+                            <div style="padding:10px;display: flex">
+                            <div class="mt-4 mt-sm-0" style="">
                                 <select class="form-control time-during select2input" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');" style="background: skyblue">
                                     <option value=""  data-href="blogdb">Status</option>
                                     <option value="1" data-href="${pageContext.request.contextPath}/statusBlog?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
@@ -306,6 +313,15 @@
 <!--                            <div class="mt-4 mt-sm-0">
                                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">Add Blog</a>
                             </div>-->
+                      
+                             <div class="mt-4 mt-sm-0" style="padding-left: 10px">
+                                <select class="form-control time-during select2input" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');" style="background: skyblue">
+                                    <option value=""  data-href="blogdb">Time</option>
+                                    <option value="" data-href="blogTimeDESC">New</option>
+                                    <option value="" data-href="blogTimeASC">Old</option>
+                                </select>
+                            </div>
+                            </div>
                         </div>
                         
                         <div class="row">
@@ -315,8 +331,11 @@
                                     <img src="${lb.image}" class="img-fluid rounded h-100 object-fit-cover" alt=""style="">
                                  
                                     <div class="card-body p-4 d-flex flex-column">
-                                        <ul class="list-unstyled mb-2">
-                                        
+                                        <ul class="list-unstyled mb-2" style="text-align: center">
+                                            <li class="list-inline-item text-muted small me-3">
+                                                <i class="uil uil-calendar-alt text-dark h6 me-1"></i>${lb.time}
+                                            </li>
+
                                         </ul>
                                         <div style="text-align: center">
                                         <a href="blogdetaildb?bid=${lb.id}" class="text-dark title h5">${lb.name}</a>
@@ -345,8 +364,7 @@
                             </c:forEach>
         
                         </div><!--end row-->
-        
-                        
+            
                             <div class="row text-center" style="padding: 20px;">
                             <!-- PAGINATION START -->
                              <div class="clearfix" style="padding-bottom: 10px;
@@ -367,7 +385,9 @@
 </div>
                             <!-- PAGINATION END -->
                         </div><!--end row-->
-                        
+                    
+                         
+                 
                     </div>
                 </div><!--end container-->
 
@@ -559,6 +579,7 @@ CKEDITOR.replace('blog-description', {
     height: '200px'
 });
 </script>
+
 
 <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
         <!-- javascript -->

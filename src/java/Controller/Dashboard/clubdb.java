@@ -14,7 +14,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -77,14 +80,25 @@ public class clubdb extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String NameSearch =request.getParameter("search");
-         ClubDAO bdao = new ClubDAO();
-         List<Club> list= bdao.getSearchClubByName(NameSearch);
-        
-         request.setAttribute("listCLB", list);
-         
-         request.getRequestDispatcher("clubDboard.jsp").forward(request, response);
-    }
+
+           PrintWriter out = response.getWriter();
+    String NameSearch = request.getParameter("search");
+    ClubDAO cdao = new ClubDAO();
+    List<Club> listByName = cdao.getSearchClubByName(NameSearch);
+    List<Club> listByManager = cdao.getSearchClubByManager(NameSearch);
+
+    // Combine the two lists
+    List<Club> combinedList = new ArrayList<>(listByName);
+    combinedList.addAll(listByManager);
+
+    // Remove duplicates
+    Set<Club> uniqueClubs = new HashSet<>(combinedList);
+    combinedList = new ArrayList<>(uniqueClubs);
+   
+    request.setAttribute("listCLB", combinedList);
+     request.getRequestDispatcher("clubDboard.jsp").forward(request, response);
+}
+    
 
     /** 
      * Returns a short description of the servlet.

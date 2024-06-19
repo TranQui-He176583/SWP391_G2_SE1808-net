@@ -285,6 +285,37 @@ public class ClubDAO extends MyDAO {
         }
         return (t);
     }
+    
+     public List<Club> getSearchClubByManager(String ManagerSearch) {
+        List<Club> t = new ArrayList<>();
+        xSql = "SELECT *\n" +
+               "FROM club\n" +
+               "JOIN student_club ON club.id = student_club.club_id\n" +
+               "JOIN account ON account.id = student_club.account_ID \n" +
+               "WHERE account.fullname LIKE ?;";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, "%" + ManagerSearch + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int status = rs.getInt("status");
+                String avatar = rs.getString("avatar");
+                String detail = rs.getString("detail");
+
+                t.add(new Club(id, name, status, avatar, detail));
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
+
+    
 
     public void changeStatus(int status, int id) {
         xSql = "UPDATE club \n"

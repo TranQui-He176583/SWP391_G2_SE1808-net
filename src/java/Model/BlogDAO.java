@@ -298,6 +298,63 @@ public class BlogDAO extends MyDAO {
         }
         return blogs;
     }
+    
+     public List<Blog> getAllBlogByTime1(int index) {
+          List<Blog> lst = new ArrayList<>();
+        String xSql = "SELECT * FROM blog\n "
+                + "ORDER BY time desc\n "
+                + "LIMIT 4 OFFSET ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, (index - 1) * 4);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String details = rs.getString("details");
+                int clubID = rs.getInt("clubID");
+                String image = rs.getString("image");
+                 LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+                int status = rs.getInt("status");
+                lst.add(new Blog(id, name, details, clubID, image, time, status));
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (lst);
+     }
+        public List<Blog> getAllBlogByTime2(int index) {
+        List<Blog> lst = new ArrayList<>();
+        String xSql = "SELECT * FROM blog\n "
+                + "ORDER BY time ASC\n "
+                + "LIMIT 4 OFFSET ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, (index - 1) * 4);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String details = rs.getString("details");
+                int clubID = rs.getInt("clubID");
+                String image = rs.getString("image");
+                 LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+                int status = rs.getInt("status");
+                lst.add(new Blog(id, name, details, clubID, image, time, status));
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (lst);
+    }
+
 
 //    public static void main(String[] args) {
 //        BlogDAO dao = new BlogDAO();

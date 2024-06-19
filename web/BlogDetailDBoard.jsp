@@ -32,7 +32,7 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-
+           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
     </head>
 
     <body>
@@ -290,7 +290,7 @@
                                 
                                 <ul class="list-unstyled mt-2 mb-0">
                                     <input type="hidden"  name="id" value="${detailBlog.id}" readonly required>
-                                    <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account">${nameClub.name}</i></li>
+                                    <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-club">${nameClub.name}</i></li>
 
                                     <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check">${detailBlog.time}</i></li>
                                 </ul>
@@ -348,7 +348,7 @@
                                                 <c:forEach items="${listdb}" var="ld">
                                                     <div class="clearfix post-recent">
                                                         <div class="post-recent-thumb float-start"> <a href="blogdetaildb?bid=${ld.id}"> <img alt="img" src="${ld.image}" class="img-fluid rounded"></a></div>
-                                                        <div class="post-recent-content float-start"><a href="blogdetaildb?bid=${ld.id}">${ld.name}</a><span class="text-muted mt-2"></span></div>
+                                                        <div class="post-recent-content float-start"><a href="blogdetaildb?bid=${ld.id}">${ld.name}</a><span class="text-muted mt-2">${ld.time}</span></div>
                                                     </div>
                                                 </c:forEach>
                                             </div>

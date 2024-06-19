@@ -32,7 +32,7 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
     </head>
 
     <body>

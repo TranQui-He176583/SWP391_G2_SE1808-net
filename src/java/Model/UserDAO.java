@@ -336,8 +336,8 @@ public class UserDAO extends MyDAO{
  
   public Account getManagerByClubID(String XroleID,String XclubID){
         xSql = "select *from student_club join club join account \n" +
-"on account.id = student_club.accountID and club.id = student_club.clubID\n" +
-"where student_club.roleID =? and club.id=?"; 
+"on account.id = student_club.account_ID and club.id = student_club.club_ID\n" +
+"where student_club.role_ID =? and club.id=?"; 
         Account account = new Account();
       
         try {
