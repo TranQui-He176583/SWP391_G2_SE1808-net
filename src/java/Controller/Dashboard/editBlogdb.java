@@ -99,7 +99,7 @@ public class editBlogdb extends HttpServlet {
         if (xImage != null && xImage.getSize() > 0) { // Check if an image was uploaded
             imageURL = saveUploadedFile(request);
             if (b.getImage() != null) {
-                File file = new File("D:\\SWP\\Project\\SWP391_G2_SE1808-net\\Swp\\build\\web\\" + b.getImage());
+                File file = new File("C:\\Users\\pc\\Swp291\\build\\web\\" + b.getImage());
                 file.delete();
             }
         } else {
@@ -125,7 +125,7 @@ public class editBlogdb extends HttpServlet {
    
     
    String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
-    String uploadPath = "assets/img/avatar/";
+    String uploadPath = "assets/img/blog/";
 
     Part part = request.getPart("image");
     String fileName = getUniqueFileName(part);

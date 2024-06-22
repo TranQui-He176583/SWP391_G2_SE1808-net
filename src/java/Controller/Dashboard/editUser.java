@@ -69,10 +69,28 @@ public class editUser extends HttpServlet {
        int roleId =Integer.parseInt(xRole);
        String xStatus = request.getParameter("status");
        int status =Integer.parseInt(xStatus);
+       String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+       String phoneRegex = "^[0-9]{10}$";
+       if (xPhone == null || xPhone.trim().isEmpty()) {
+    
+           response.sendRedirect("detailUser?uid=" + id);
+           return;
+       } else if (!xPhone.matches(phoneRegex)) {
+    
+           request.getSession().setAttribute("wrongFormat", "Invalid phone format");
+           response.sendRedirect("detailUser?uid=" + id);
+           return;
+        }
+       if (!xFullName.matches("[a-zA-Z ]+")) {
+          request.getSession().setAttribute("wrongFormat", "Name should not contain special characters ");
+          response.sendRedirect("detailUser?uid=" + id);
+          return;
+        }
        UserDAO udao = new UserDAO();
        out.print(udao.EditUser(roleId, status, xFullName, xPhone, gender, id));
-       response.sendRedirect("countUser");
-}
+       response.sendRedirect("detailUser?uid=" + id);
+
+   }
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description

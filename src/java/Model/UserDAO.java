@@ -281,10 +281,11 @@ public class UserDAO extends MyDAO{
     }
     public List<Account> getSearchUser(String NameSearch ) {
         List<Account> t = new ArrayList<>();
-        xSql = "select * from account\n "+"where fullname like ?";
+        xSql = "select * from account\n "+"where fullname like ? or email like ?";
         try {
            ps = con.prepareStatement(xSql);
            ps.setString(1, "%"+NameSearch+"%");
+           ps.setString(2, "%"+NameSearch+"%");
            rs = ps.executeQuery();
           while(rs.next()) {
 

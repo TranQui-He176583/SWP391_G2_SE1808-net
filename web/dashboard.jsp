@@ -30,7 +30,7 @@
         <link href="assets/css/tiny-slider.css" rel="stylesheet" />
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-
+           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
     </head>
    
     <body>
@@ -55,16 +55,8 @@
     <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
     <div class="sidebar-submenu">
         <ul>
-            <li>
-                <a href="javascript:void(0)">Club</a>
-                <div class="sidebar-submenu">
-                    <ul>
-                        <li><a href="dr-profile.html">List</a></li>
-                        <li><a href="dr-profile.html">Detail</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li><a href="dr-profile.html">Event</a></li>
+<!--            <li><a href="settingList">Setting</a></li>
+            <li><a href="detailSetting">Setting Detail</a></li>-->
         </ul>
     </div>
 </li>
@@ -190,14 +182,16 @@
 
                             <li class="list-inline-item mb-0 ms-1">
                                 <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                    <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="settings" class="fea icon-sm"></i></div>
+                                   
                                 </a>
                             </li>
 
                             <li class="list-inline-item mb-0 ms-1">
                                 <div class="dropdown dropdown-primary">
-                                    <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail" class="fea icon-sm"></i></button>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4 <span class="visually-hidden">unread mail</span></span>
+                                   <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <i data-feather="bell" class="fea icon-sm"></i>
+                                   </button>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">5 <span class="visually-hidden">unread mail</span></span>
                                     
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 px-2 py-2" data-simplebar style="height: 320px; width: 300px;">
                                         <a href="#" class="d-flex align-items-center justify-content-between py-2">

@@ -12,6 +12,7 @@
         <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
         <meta name="author" content="Shreethemes" />
         <meta name="email" content="support@shreethemes.in" />
+    <a href="User_list.jsp"></a>
         <meta name="website" content="../../../index.html" />
         <meta name="Version" content="v1.2.0" />
         <!-- favicon -->
@@ -26,6 +27,7 @@
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
                     <style>
                 body {
     margin: 0;
@@ -176,8 +178,8 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                    
-                                    <li><a href="dr-profile.html">Club</a></li>
-                                    <li><a href="dr-profile.html">Event</a></li>
+<!--                                    <li><a href="settingList">Setting</a></li>
+                                    <li><a href="detailSetting">Setting Detail</a></li>-->
                                 </ul>
                             </div>
                         </li>
@@ -270,13 +272,15 @@
 
                             <li class="list-inline-item mb-0 ms-1">
                                 <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                    <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="settings" class="fea icon-sm"></i></div>
+                                   
                                 </a>
                             </li>
 
                             <li class="list-inline-item mb-0 ms-1">
                                 <div class="dropdown dropdown-primary">
-                                    <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail" class="fea icon-sm"></i></button>
+                                    <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <i data-feather="bell" class="fea icon-sm"></i>
+                                   </button>
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4 <span class="visually-hidden">unread mail</span></span>
                                     
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 px-2 py-2" data-simplebar style="height: 320px; width: 300px;">
@@ -369,7 +373,7 @@
                             <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
                                     <li class="breadcrumb-item"><a href="dboard">DashBoard</a></li>
-                                    <li class="breadcrumb-item"><a href="countUser">Setting</a></li>
+                                    <li class="breadcrumb-item"><a href="countUser">User</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">User Detail</li>
                                 </ul>
                             </nav>
@@ -390,6 +394,7 @@
                                       
                                     </div>
                                 </div>
+                                <div style="text-align: center"> <p style="color: red; font-size: 15px">${requestScope.wrongFormat}</p></div>
                             </div><!--end col-->
                             <div class="col-lg-6 col-lg-6 mt-4">
                                 <div class="card rounded shadow border-0 overflow-hidden"style="display: flex">
@@ -403,7 +408,7 @@
                            <input type="hidden"  name="id" value="${detail.id}" readonly required>
 				<div class="form-group">
                                     <label style="color: yellowgreen;font-weight: bold">Full Name</label>
-                                        <input value="${detail.fullname}" type="text" class="form-control" name="fullname">
+                                        <input value="${detail.fullname}" type="text" class="form-control" name="fullname"  minlength="1" maxlength="25">
 				</div>
 <!--			</div>-->
 <!--                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">-->
@@ -426,7 +431,7 @@
 <!--			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">-->
 				<div class="form-group">
 					<label style="color: yellowgreen;font-weight: bold">Phone</label>
-					<input  value="${detail.phone}"type="text" class="form-control" name="phone" >
+					<input  value="${detail.phone}"type="text" class="form-control" name="phone" minlength="1" maxlength="10">
 				</div>
 <!--			</div>-->
 <!--                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">-->
@@ -461,7 +466,7 @@
     active
 </div>
 <div style="display: flex; align-items: center; margin-left: 20px;">
-    <input ${detail.status== 2 ? 'checked' : ''} value="2" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
+    <input ${detail.status== 0 ? 'checked' : ''} value="0" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
     block
 </div>
                         </div>
@@ -475,6 +480,7 @@
 		<div class="row gutters">
 			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="text-right"style="padding-left: 200px;display: flex">
+                                
                                 <a href="" class="btn btn-success" style="margin-right: 5px">Cancel</a> 
                                 <button type="submit" name="submit" class="btn btn-primary" style="background: green">Save</button>
                                        

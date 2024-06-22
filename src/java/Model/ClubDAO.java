@@ -263,10 +263,11 @@ public class ClubDAO extends MyDAO {
 
     public List<Club> getSearchClubByName(String NameSearch) {
         List<Club> t = new ArrayList<>();
-        xSql = "select * from club\n " + "where name like ?";
+        xSql = "select * from club\n " + "where name like ? or detail like ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + NameSearch + "%");
+            ps.setString(2, "%" + NameSearch + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");

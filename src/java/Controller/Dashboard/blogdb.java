@@ -45,7 +45,7 @@ public class blogdb extends HttpServlet {
     }
     BlogDAO bdao = new BlogDAO();
     int count = bdao.getTotalBlog();
-    int maxPage = (count / 4) + (count % 4 != 0 ? 1 : 0);
+    int maxPage = (count / 8) + (count % 8 != 0 ? 1 : 0);
     List<Blog> listBlog = bdao.pagingBlog(index);
    
 //    out.print(listBlog.get(0).getImage());

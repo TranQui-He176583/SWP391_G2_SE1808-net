@@ -46,7 +46,7 @@
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="assets/css/list.css">
 
     </head>
@@ -73,8 +73,8 @@
                             <div class="sidebar-submenu">
                                 <ul>
                                    
-                                    <li><a href="dr-profile.html">Club</a></li>
-                                    <li><a href="dr-profile.html">Event</a></li>
+<!--                                    <li><a href="settingList">Setting</a></li>
+                                    <li><a href="detailSetting">Setting Detail</a></li>-->
                                 </ul>
                             </div>
                         </li>
@@ -199,13 +199,15 @@
 
                             <li class="list-inline-item mb-0 ms-1">
                                 <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                    <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="settings" class="fea icon-sm"></i></div>
+                                    
                                 </a>
                             </li>
 
                             <li class="list-inline-item mb-0 ms-1">
                                 <div class="dropdown dropdown-primary">
-                                    <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail" class="fea icon-sm"></i></button>
+                                   <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <i data-feather="bell" class="fea icon-sm"></i>
+                                   </button>
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4 <span class="visually-hidden">unread mail</span></span>
                                     
                                     <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 px-2 py-2" data-simplebar style="height: 320px; width: 300px;">
@@ -539,13 +541,13 @@
                     <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black;font-weight: bold"> Name</label>
-                            <input type="text" class="form-control" name="fullname" id="fullname" required="required">
+                            <input type="text" class="form-control" name="fullname" id="fullname" placeholder="fullname" minlength="1" maxlength="25" required="required" >
                         </fieldset>
                     </div>
                      <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black;font-weight: bold"> Password</label>
-                            <input type="text" class="form-control" name="password" id="password" required="required">
+                            <input type="text" class="form-control" name="password" id="password"  placeholder="password" minlength="6" maxlength="20" required="required">
                         </fieldset>
                     </div>
                 </div>
@@ -553,31 +555,20 @@
                     <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black;font-weight: bold"> Email</label>
-                            <input type="text" class="form-control" name="email" id="email" required="required">
+                            <input type="text" class="form-control" name="email" id="email" placeholder="email" minlength="11" maxlength="30" required="required">
                         </fieldset>
                     </div>
-                     <div class="col-md-6">
+                    <div class="col-md-6">
                         <fieldset class="form-group">
-                            <label style="color: black; font-weight: bold">Role</label>
-                          <div class="context-gender" style="display: flex;">
-    
-    <div style="display: flex; align-items: center;padding-right: 20px">
-        <input value="2" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
-        Manager
-    </div>
-    
-    <div style="display: flex; align-items: center;">
-        <input value="3" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
-        NormalUser
-    </div>
-</div>
+                            <label style="color: black;font-weight: bold"> Phone</label>
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder="phone" minlength="1" maxlength="10">
                         </fieldset>
                     </div>
                     </div>
                 
                 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <fieldset class="form-group">
                             <label style="color: black; font-weight: bold">Gender</label>
                           <div class="context-gender" style="display: flex;">
@@ -594,7 +585,24 @@
 </div>
                         </fieldset>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <fieldset class="form-group">
+                            <label style="color: black; font-weight: bold">Role</label>
+                          <div class="context-gender" style="display: flex;">
+    
+    <div style="display: flex; align-items: center;padding-right: 20px">
+        <input value="2" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
+        Manager
+    </div>
+    
+    <div style="display: flex; align-items: center;">
+        <input value="3" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
+        NormalUser
+    </div>
+</div>
+                        </fieldset>
+                    </div>
+                    <div class="col-md-4">
                         <fieldset class="form-group">
                              <label style="color: black; font-weight: bold">Status</label>
                           <div class="context-status" style="display: flex;">
@@ -618,7 +626,7 @@
                     <a href="" class="btn" style="background: skyblue;color: white;font-weight: bold">Back</a>
                     <button type="submit" class="btn btn-success" style="font-weight: bold">Save</button>
                     <p style="color: red; font-size: 15px">${requestScope.wrongRegister}</p>
-                    <p style="color: green; font-size: 15px">${requestScope.addnew}</p>
+                   
                 </div>
             </form>
                 

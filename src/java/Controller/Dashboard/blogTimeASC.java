@@ -45,7 +45,7 @@ public class blogTimeASC extends HttpServlet {
     }
     BlogDAO bdao = new BlogDAO();
     int count = bdao.getTotalBlog();
-    int maxPage = (count / 4) + (count % 4 != 0 ? 1 : 0);
+    int maxPage = (count / 8) + (count % 8 != 0 ? 1 : 0);
     List<Blog> BlogTime2 = bdao.getAllBlogByTime2(index2);
    
 //    out.print(listBlog.get(0).getImage());

@@ -70,7 +70,7 @@ String xMail = (String) request.getParameter("email");
 String xFullname = request.getParameter("fullname");
 String xPassword = request.getParameter("password");
  
-    String phone = request.getParameter("phone");
+    String xPhone = request.getParameter("phone");
     String xstatus = request.getParameter("status");
     int status = Integer.parseInt(xstatus);
     String xgender = request.getParameter("gender");
@@ -78,13 +78,37 @@ String xPassword = request.getParameter("password");
     String image = request.getParameter("image");
     String xRoleID =request.getParameter("roleId");
     int roleId = Integer.parseInt(xRoleID);
+    String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    String phoneRegex = "^[0-9]{10}$";
     UserDAO aDAO = new UserDAO();
 
 if (aDAO.checkUserExist(xMail)) {
     request.getSession().setAttribute("wrongRegister", "This email is registered to another account");
     response.sendRedirect("countUser");
     return;
-} else {
+}
+if (!xMail.matches(emailRegex)) {
+    request.getSession().setAttribute("wrongRegister", "Invalid email format");
+    response.sendRedirect("countUser");
+    return;
+}
+if (xPhone == null || xPhone.trim().isEmpty()) {
+    
+           response.sendRedirect("countUser");
+           return;
+       } else if (!xPhone.matches(phoneRegex)) {
+    
+           request.getSession().setAttribute("wrongRegister", "Invalid phone format");
+           response.sendRedirect("countUser");
+           return;
+        }
+if (!xFullname.matches("[a-zA-Z ]+")) {
+    request.getSession().setAttribute("wrongRegister", "Name should not contain special characters ");
+    response.sendRedirect("countUser");
+    return;
+}
+
+else {
      
         MailHandler mh = new MailHandler();     
 
@@ -104,7 +128,7 @@ if (aDAO.checkUserExist(xMail)) {
         encodePassword ep = new encodePassword();
         xPassword = ep.toSHA1(xPassword);
         int numberUser = aDAO.getNumberUser() + 1;
-        Account u = new Account(numberUser, xPassword, roleId, status, xFullname, xMail, phone, gender, image);
+        Account u = new Account(numberUser, xPassword, roleId, status, xFullname, xMail, xPhone, gender, image);
         out.print(aDAO.add(u));
     request.setAttribute("fullname", xFullname);
     request.setAttribute("password", xPassword);

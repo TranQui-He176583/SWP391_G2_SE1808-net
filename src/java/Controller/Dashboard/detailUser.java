@@ -47,9 +47,12 @@ public class detailUser extends HttpServlet {
     }
         List<Club> listC= cdao.getAllCLubByAccountID(id);
         List<Account> listindb = countdao.pagingUser(index);
+        String wrongFormat = (String) request.getSession().getAttribute("wrongFormat");
+        request.getSession().removeAttribute("wrongFormat");
         request.setAttribute("listC", listC );
         request.setAttribute("listdb", listindb );
         request.setAttribute("detail", u);
+        request.setAttribute("wrongFormat", wrongFormat);
         request.getRequestDispatcher("User_detail.jsp").forward(request, response);
         
        

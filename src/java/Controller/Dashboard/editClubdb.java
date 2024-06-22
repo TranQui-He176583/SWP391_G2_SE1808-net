@@ -92,17 +92,12 @@ public class editClubdb extends HttpServlet {
     ClubDAO cdao = new ClubDAO();
     UserDAO udao = new UserDAO();
     Club c= cdao.getClub(xid);
-//    if (udao.checkNameExist(xName)) {
-//       request.getSession().setAttribute("wrongName", "This name does not exist");
-//       response.sendRedirect("clubdetaildb");
-//       return;
-//    }
     String imageURL="";
     if (c != null) {
         if (xAvatar != null && xAvatar.getSize() > 0) {
             imageURL = saveUploadedFile(request);
             if (c.getAvatar()!= null) {
-                File file = new File("D:\\SWP\\Project\\SWP391_G2_SE1808-net\\Swp\\build\\web\\" + c.getAvatar());
+                File file = new File("C:\\Users\\pc\\Swp291\\build\\web\\" + c.getAvatar());
                 file.delete();
             }
         } else {
@@ -126,7 +121,7 @@ public class editClubdb extends HttpServlet {
      * @return a String containing servlet description
      */
    String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
-    String uploadPath = "assets/img/avatar/";
+    String uploadPath = "assets/img/anhclb/";
 
     Part part = request.getPart("avatar");
     String fileName = getUniqueFileName(part);

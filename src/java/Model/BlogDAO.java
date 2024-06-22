@@ -86,10 +86,12 @@ public class BlogDAO extends MyDAO {
 
     public List<Blog> getSearchBlogByTitle(String TitleSearch) {
         List<Blog> t = new ArrayList<>();
-        xSql = "select * from blog\n " + "where name like ?";
+       xSql = "select * from blog\n " + "where name like ? or details like ? or time like ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + TitleSearch + "%");
+            ps.setString(2, "%" + TitleSearch + "%");
+            ps.setString(3, "%" + TitleSearch + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");

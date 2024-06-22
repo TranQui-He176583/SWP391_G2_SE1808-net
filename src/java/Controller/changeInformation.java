@@ -116,7 +116,7 @@ public class changeInformation extends HttpServlet {
          } else {
                imageURL = saveUploadedFile(request);
             if (a.getImage() != null) {
-                File file = new File("D:\\SWP\\Project\\SWP391_G2_SE1808-net\\Swp\\build\\web\\"+a.getImage());
+                File file = new File("C:\\Users\\pc\\Swp291\\build\\web\\"+a.getImage());
               file.delete();
                 
             } 
