@@ -57,15 +57,7 @@
                         <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
                     
 
-                      <li class="sidebar-dropdown">
-    <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
-    <div class="sidebar-submenu">
-        <ul>
-<!--            <li><a href="settingList">Setting</a></li>
-            <li><a href="detailSetting">Setting Detail</a></li>-->
-        </ul>
-    </div>
-</li>
+                        <li><a href="listSent"><i class="uil uil-envelope me-2 d-inline-block"></i>MailBox</a></li>
                        
 
                         <li class="sidebar-dropdown">

@@ -23,7 +23,7 @@ public class BlogDAO extends MyDAO {
         String sql = "INSERT INTO blog ( name, details, clubID, image, time) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
-            
+
             ps.setString(1, blog.getName());
             ps.setString(2, blog.getDetails());
             ps.setInt(3, blog.getClubID());
@@ -55,7 +55,7 @@ public class BlogDAO extends MyDAO {
                 String details = rs.getString("details");
                 int clubID = rs.getInt("clubID");
                 String image = rs.getString("image");
-                 LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+                LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
                 int status = rs.getInt("status");
                 lst.add(new Blog(id, name, details, clubID, image, time, status));
 
@@ -66,6 +66,40 @@ public class BlogDAO extends MyDAO {
             e.printStackTrace();
         }
         return (lst);
+    }
+
+    public Blog getBlogByID(int id) {
+        Blog blog = null;
+        try {
+            String sql = "SELECT * FROM blog WHERE id = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                blog = new Blog();
+                blog.setID(rs.getInt("id"));
+                blog.setName(rs.getString("name"));
+                blog.setDetails(rs.getString("details"));
+                blog.setClubID(rs.getInt("clubID"));
+                blog.setImage(rs.getString("image"));
+                blog.setStatus(rs.getInt("status"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return blog;
     }
 
     public int getTotalBlog() {
@@ -86,12 +120,10 @@ public class BlogDAO extends MyDAO {
 
     public List<Blog> getSearchBlogByTitle(String TitleSearch) {
         List<Blog> t = new ArrayList<>();
-       xSql = "select * from blog\n " + "where name like ? or details like ? or time like ?";
+        xSql = "select * from blog\n " + "where name like ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + TitleSearch + "%");
-            ps.setString(2, "%" + TitleSearch + "%");
-            ps.setString(3, "%" + TitleSearch + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -148,12 +180,12 @@ public class BlogDAO extends MyDAO {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
             if (rs.next()) {
-                blog.setId(rs.getInt("id"));
+                blog.setID(rs.getInt("id"));
                 blog.setName(rs.getString("name"));
                 blog.setDetails(rs.getString("details"));
                 blog.setClubID(rs.getInt("clubID"));
                 blog.setImage(rs.getString("image"));
-                blog.setTime(LocalDateTime.parse(rs.getString("time"),formatter));
+                blog.setTime(LocalDateTime.parse(rs.getString("time"), formatter));
                 blog.setStatus(rs.getInt("status"));
             }
             rs.close();
@@ -200,7 +232,6 @@ public class BlogDAO extends MyDAO {
 //        }
 //        return ("OK!");
 //    }
-
     public int getNumberBlog() {
         xSql = "select max(id) as id from blog";
         int number = 3;
@@ -259,7 +290,7 @@ public class BlogDAO extends MyDAO {
             ps.setString(1, b.name);
             ps.setString(2, b.details);
             ps.setString(3, b.image);
-            ps.setObject(4, b.time);  
+            ps.setObject(4, b.time);
             ps.setInt(5, b.status);
             ps.setInt(6, b.id);
             ps.executeUpdate();
@@ -279,7 +310,7 @@ public class BlogDAO extends MyDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Blog blog = new Blog();
-                blog.setId(rs.getInt("id"));
+                blog.setID(rs.getInt("id"));
                 blog.setName(rs.getString("name"));
                 blog.setDetails(rs.getString("details"));
                 blog.setClubID(rs.getInt("clubID"));
@@ -300,9 +331,9 @@ public class BlogDAO extends MyDAO {
         }
         return blogs;
     }
-    
-     public List<Blog> getAllBlogByTime1(int index) {
-          List<Blog> lst = new ArrayList<>();
+
+    public List<Blog> getAllBlogByTime1(int index) {
+        List<Blog> lst = new ArrayList<>();
         String xSql = "SELECT * FROM blog\n "
                 + "ORDER BY time desc\n "
                 + "LIMIT 4 OFFSET ?";
@@ -316,7 +347,7 @@ public class BlogDAO extends MyDAO {
                 String details = rs.getString("details");
                 int clubID = rs.getInt("clubID");
                 String image = rs.getString("image");
-                 LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+                LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
                 int status = rs.getInt("status");
                 lst.add(new Blog(id, name, details, clubID, image, time, status));
 
@@ -327,8 +358,9 @@ public class BlogDAO extends MyDAO {
             e.printStackTrace();
         }
         return (lst);
-     }
-        public List<Blog> getAllBlogByTime2(int index) {
+    }
+
+    public List<Blog> getAllBlogByTime2(int index) {
         List<Blog> lst = new ArrayList<>();
         String xSql = "SELECT * FROM blog\n "
                 + "ORDER BY time ASC\n "
@@ -344,7 +376,7 @@ public class BlogDAO extends MyDAO {
                 String details = rs.getString("details");
                 int clubID = rs.getInt("clubID");
                 String image = rs.getString("image");
-                 LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+                LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
                 int status = rs.getInt("status");
                 lst.add(new Blog(id, name, details, clubID, image, time, status));
 
@@ -357,13 +389,109 @@ public class BlogDAO extends MyDAO {
         return (lst);
     }
 
+    public void addClubNameToBlogs(List<Blog> blogs) {
+        try {
+            String sql = "SELECT club.name FROM club INNER JOIN blog ON club.id = blog.clubID WHERE blog.id = ?";
+            ps = con.prepareStatement(sql);
 
-//    public static void main(String[] args) {
-//        BlogDAO dao = new BlogDAO();
-//        List<Blog> list= dao.pagingBlog(1);
-//        for(Blog c: list){
-//            System.out.println(c);
-//        }
-//        
-//    }
+            for (Blog blog : blogs) {
+                ps.setInt(1, blog.getClubID());
+                rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    String clubName = rs.getString("name");
+                    blog.setNameclub(clubName);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public String getClubNameByClubID(int clubID) {
+        String clubName = null;
+        try {
+            String sql = "SELECT name FROM club WHERE id = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, clubID);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                clubName = rs.getString("name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return clubName;
+    }
+
+    public List<Blog> getBlogsByClubId(int id) {
+        List<Blog> blogs = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM blog WHERE clubID = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Blog blog = new Blog();
+                blog.setID(rs.getInt("id"));
+                blog.setName(rs.getString("name"));
+                blog.setDetails(rs.getString("details"));
+                blog.setClubID(rs.getInt("clubID"));
+                blog.setImage(rs.getString("image"));
+                Timestamp timestamp = rs.getTimestamp("time");
+                if (timestamp != null) {
+                    blog.setDate(timestamp.toLocalDateTime());
+                } else {
+                    blog.setDate(null);
+                }
+                blog.setStatus(rs.getInt("status"));
+                blogs.add(blog);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return blogs;
+    }
+
+    public static void main(String[] args) {
+        BlogDAO dao = new BlogDAO();
+        Blog b = new Blog();
+        b.getClubID();
+    }
+
 }

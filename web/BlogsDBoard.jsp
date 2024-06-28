@@ -57,15 +57,7 @@
                         <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
                     
 
-                       <li class="sidebar-dropdown">
-    <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
-    <div class="sidebar-submenu">
-        <ul>
-<!--            <li><a href="settingList">Setting</a></li>
-            <li><a href="detailSetting">Setting Detail</a></li>-->
-        </ul>
-    </div>
-</li>
+                        <li><a href="listSent"><i class="uil uil-envelope me-2 d-inline-block"></i>MailBox</a></li>
                        
 
                         <li class="sidebar-dropdown">
@@ -171,8 +163,8 @@
                                 <div id="search" class="menu-search mb-0">
                                     <form action="blogdb" method="post" id="searchform" class="searchform">
                                         <div>
-                                            <input type="text" class="form-control border rounded-pill" name="search" id="search" placeholder="Search Keywords...">
-                                            <input type="submit" id="searchsubmit" value="Search">
+                                            <input type="text" class="form-control border rounded-pill" name="search" id="search" placeholder="Search Keywords..." value="${searchBlog}">
+                                            <input type="submit" id="searchsubmit" value="${searchBlog}">
                                         </div>
                                     </form>
                                 </div>
@@ -291,7 +283,7 @@
 
                                 <nav aria-label="breadcrumb" class="d-inline-block mt-1">
                                     <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
-                                        <li class="breadcrumb-item"><a href="iblogdb">DashBoard</a></li>
+                                        <li class="breadcrumb-item"><a href="blogdb">DashBoard</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Blogs</li>
                                     </ul>
                                 </nav>
@@ -319,6 +311,7 @@
                         </div>
                         
                         <div class="row">
+                           <c:if test="${not empty listBL}">
                             <c:forEach items="${listBL}" var="lb">
                             <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4">
                                 <div class="card blog blog-primary border-0 shadow rounded overflow-hidden h-100">
@@ -356,6 +349,14 @@
                                 </div>
                             </div><!--end col-->
                             </c:forEach>
+                           </c:if>
+                            <c:if test="${empty listBL}">
+                        <tr>
+                           <td colspan="7">
+                              <div class="alert alert-danger text-center">There are no Blog</div>
+                           </td>
+                        </tr>
+                              </c:if>
         
                         </div><!--end row-->
             

@@ -93,7 +93,7 @@ public class blogdb extends HttpServlet {
     // Remove duplicates
     Set<Blog> uniqueBlogs = new HashSet<>(combinedList);
     combinedList = new ArrayList<>(uniqueBlogs);
-
+    request.setAttribute("searchBlog", Search);
     request.setAttribute("listBL", combinedList);
     request.getRequestDispatcher("BlogsDBoard.jsp").forward(request, response);
 }

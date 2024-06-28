@@ -5,10 +5,8 @@
 
 package Controller.Dashboard;
 
-import Model.Blog;
-import Model.BlogDAO;
-import Model.Club;
-import Model.ClubDAO;
+import Model.Mail;
+import Model.MailDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,8 +20,8 @@ import java.util.List;
  *
  * @author pc
  */
-@WebServlet(name="blogdetaildb", urlPatterns={"/blogdetaildb"})
-public class blogdetaildb extends HttpServlet {
+@WebServlet(name="listSent", urlPatterns={"/listSent"})
+public class listSent extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,31 +32,22 @@ public class blogdetaildb extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter pr =response.getWriter();
-        String id = request.getParameter("bid");
+       response.setContentType("text/html;charset=UTF-8");
+        PrintWriter pr= response.getWriter();
+        request.setCharacterEncoding("UTF-8");
         String indexPage = request.getParameter("index");
-         int index = 1; // Default to page 1
-         if (indexPage != null) {
-        index = Integer.parseInt(indexPage);
-    }
-        BlogDAO bdao = new BlogDAO();
-        ClubDAO cdao =new ClubDAO();
-        Blog b = bdao.getBlog(id);
-        List<Blog> listBlog= bdao.pagingBlog(index);
-        Club c = cdao.getNameByBlogID(id);
-        String wrongFormat = (String) request.getSession().getAttribute("wrongFormat");
-        request.getSession().removeAttribute("wrongFormat");
-        request.setAttribute("detailBlog", b);
-        request.setAttribute("nameClub", c);
-        request.setAttribute("listdb", listBlog);
-        request.setAttribute("completeChange", wrongFormat);
+        int index = 1; 
+        if (indexPage != null) {index = Integer.parseInt(indexPage);}
+        MailDAO mdao = new MailDAO();
+         
+        int countUser = mdao.getTotalSent();
+        int maxPage = (countUser / 10) + (countUser % 10 != 0 ? 1 : 0);
+        List<Mail> mlis= mdao.pagingSent(index);
+        pr.print(mlis.get(0).getName());
+        request.setAttribute("sentlis", mlis);
+        request.getRequestDispatcher("MailBox.jsp").forward(request, response);
        
-        request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
-        
-      
-     
-        } 
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -84,11 +73,11 @@ public class blogdetaildb extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String TitleSearch =request.getParameter("search");
-         BlogDAO dao = new BlogDAO();
-         List<Blog> lis= dao.getSearchBlogByTitle(TitleSearch);
-         request.setAttribute("listdb", lis);
-         request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
+       String NameSearch =request.getParameter("search");
+         MailDAO dao = new MailDAO();
+         List<Mail> lis= dao.getSearchMail(NameSearch);
+         request.setAttribute("sentlis", lis);
+         request.getRequestDispatcher("MailBox.jsp").forward(request, response);
     }
 
     /** 

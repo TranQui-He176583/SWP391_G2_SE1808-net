@@ -51,15 +51,7 @@
                         <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
 
 
-                       <li class="sidebar-dropdown">
-    <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
-    <div class="sidebar-submenu">
-        <ul>
-<!--            <li><a href="settingList">Setting</a></li>
-            <li><a href="detailSetting">Setting Detail</a></li>-->
-        </ul>
-    </div>
-</li>
+                        <li><a href="listSent"><i class="uil uil-envelope me-2 d-inline-block"></i>MailBox</a></li>
 
                         <li class="sidebar-dropdown">
                             <a href="javascript:void(0)"><i class="uil uil-setting me-2 d-inline-block"></i>Setting</a>
@@ -310,10 +302,11 @@
 
                                     </div>
                                 </div>
-                                <p style="color: green; font-size: 15px">${requestScope.completeChange}</p>
-                                <div class="mt-4 mt-sm-0" style="padding-left: 480px">
+                               
+                                <div class="d-flex justify-content-between mt-4 mt-sm-0">
+                                    <p style="color: green; font-size: 15px">${requestScope.completeChange}</p>
                                     <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">EDIT</a>
-                                </div> 
+                                </div>
                             </div><!--end col-->
 
 
@@ -378,6 +371,8 @@
                                                 <input type="file" id="input-file" name="image" accept="image/*" />
 
                                             </div>
+                                            <div style="text-align: center"> <p style="color: red; font-size: 15px">${requestScope.wrongFormat}</p></div>
+                                            
                                             <!--                                </form>-->
                                         </div><!--end col-->
 

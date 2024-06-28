@@ -93,7 +93,11 @@ public class editBlogdb extends HttpServlet {
     BlogDAO bdao = new BlogDAO();
     
     Blog b= bdao.getBlog(xid);
-   
+   if (xName.length() < 2 || xName.length() > 30) {
+    request.getSession().setAttribute("wrongFormat", "Title must be between 2 and 30 characters");
+    response.sendRedirect("blogdetaildb?bid="+xid);
+    return;
+}
     String imageURL="";
     if (b != null) {
         if (xImage != null && xImage.getSize() > 0) { // Check if an image was uploaded
@@ -111,8 +115,9 @@ public class editBlogdb extends HttpServlet {
         b.setStatus(status);
         b.setTime(xTime);
         bdao.EditBlog(b);
-        request.setAttribute("completeChange", "Change Information Susscess!");
-        response.sendRedirect("blogdb");
+   
+        request.getSession().setAttribute("completeChange", "Change Information Susscess!");
+        response.sendRedirect("blogdetaildb?bid="+xid);
     } else {
         out.println("<html><body><h1>Error: 'blog' attribute is null</h1></body></html>");
     }

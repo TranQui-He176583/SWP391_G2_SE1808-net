@@ -51,16 +51,7 @@
                         <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
                     
 
-                       <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                   
-<!--                                    <li><a href="settingList">Setting</a></li>
-                                    <li><a href="detailSetting">Setting Detail</a></li>-->
-                                </ul>
-                            </div>
-                        </li>
+                        <li><a href="listSent"><i class="uil uil-envelope me-2 d-inline-block"></i>MailBox</a></li>
                        
 
                         <li class="sidebar-dropdown">
@@ -476,7 +467,7 @@
                         <div class="row align-items-center">
                             <div class="col">
                                 <div class="text-sm-start text-center">
-                                    <p class="mb-0 text-muted"><script>document.write(new Date().getFullYear())</script> © Doctris. Design with <i class="mdi mdi-heart text-danger"></i> by <a href="../../../index.html" target="_blank" class="text-reset">Shreethemes</a>.</p>
+                                    <p class="mb-0 text-muted"><script>document.write(new Date().getFullYear()),</script> © Doctris. Design with <i class="mdi mdi-heart text-danger"></i> by <a href="../../../index.html" target="_blank" class="text-reset">Shreethemes</a>.</p>
                                 </div>
                             </div><!--end col-->
                         </div><!--end row-->
@@ -530,6 +521,7 @@
 <script>
     CKEDITOR.replace('detail');
 </script>
+
     </body>
 
 </html>

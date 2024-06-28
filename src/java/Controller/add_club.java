@@ -4,10 +4,7 @@
  */
 package Controller;
 
-import Model.Account;
-import Model.Blog;
-import Model.BlogDAO;
-import Model.EventDAO;
+import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,23 +13,21 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
-import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *
  * @author Duong
  */
-@WebServlet(name = "add_blog", urlPatterns = {"/add_blog"})
-
+@WebServlet(name = "add_club", urlPatterns = {"/add_club"})
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1MB
         maxFileSize = 1024 * 1024 * 5, // 5MB
         maxRequestSize = 1024 * 1024 * 10 // 10MB
 )
-public class add_blog extends HttpServlet {
+public class add_club extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,10 +46,10 @@ public class add_blog extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet add_blog</title>");
+            out.println("<title>Servlet add_club</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet add_blog at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet add_club at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,24 +67,7 @@ public class add_blog extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        String cid = request.getParameter("cid");
-        Account a = new Account();
-        EventDAO eDAO = new EventDAO();
-        a = (Account) session.getAttribute("account");
-        if (a != null) {
-            if (eDAO.checkManager(a.getId(), Integer.parseInt(cid)) == false) {
-                request.setAttribute("complete", "You don't have role to add event!");
-
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            } else {
-                request.setAttribute("cid", cid);
-                request.getRequestDispatcher("add_blog.jsp").forward(request, response);
-            }
-        } else {
-            request.setAttribute("complete", "Please Login");
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        }
+        request.getRequestDispatcher("add_club.jsp").forward(request, response);
     }
 
     /**
@@ -100,51 +78,80 @@ public class add_blog extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        PrintWriter pr = response.getWriter();
         String name = request.getParameter("name");
-        String details = request.getParameter("details");
-        Part imagePart = request.getPart("image");
-        boolean isValid = true;
+        Part xAvatar = request.getPart("avatar");
+        String xDetail = request.getParameter("detail");
+        String category = request.getParameter("category");
+        String specialCharPattern = "^[a-zA-Z0-9 ]+$";
+        boolean checkValid = true;
 
-        if (name == null || name.isEmpty()) {
-            request.setAttribute("invalidName", "Blog name cannot be empty!");
-            isValid = false;
+        if (name.equals("")) {
+            request.setAttribute("invalidName", "Club name cannot be empty!");
+            checkValid = false;
+        } else if (name.length() > 500) {
+            request.setAttribute("invalidName", "Club name cannot exceed 500 characters!");
+            checkValid = false;
+        } else if (!name.matches(specialCharPattern)) {
+        request.setAttribute("invalidName", "Club name cannot contain special characters!");
+        checkValid = false;
+    }
+
+        ClubDAO cDAO = new ClubDAO();
+        List<Club> existingClubs = cDAO.getClubs();
+        for (Club club : existingClubs) {
+            if (club.getName().equalsIgnoreCase(name)) {
+                request.setAttribute("invalidName", "Club name already exists!");
+                checkValid = false;
+                break;
+            }
+        }
+        
+        if (xDetail.equals("")) {
+            request.setAttribute("invalidDetail", "Club Detail cannot be empty!");
+            checkValid = false;
+        } else if (xDetail.length() > 20) {
+            request.setAttribute("invalidDetail", "Club Detail cannot exceed 20 characters!");
+            checkValid = false;
         }
 
-        if (details == null || details.isEmpty()) {
-            request.setAttribute("invalidDetail", "Blog Detail cannot be empty!");
-            isValid = false;
-        }
-
-        if (imagePart == null || imagePart.getSize() == 0) {
-            request.setAttribute("invalidImage", "Blog Avatar cannot be empty!");
-            isValid = false;
-        }
-
-        if (!isValid) {
-            request.setAttribute("name", name);
-            request.setAttribute("details", details);
-            request.getRequestDispatcher("add_blog.jsp").forward(request, response);
+        if (xAvatar == null || xAvatar.getSize() == 0) {
+            request.setAttribute("invalidImage", "Club Avatar cannot be empty!");
+            checkValid = false;
         } else {
-            String imageURL = saveBlogImage(request); // Changed method name to saveBlogImage
-            LocalDateTime time = LocalDateTime.now();
-            Blog blog = new Blog(0, name, details, 0, imageURL, time, 0);
+            String fileName = xAvatar.getSubmittedFileName();
+            request.setAttribute("avatar", fileName);
+        }
 
-            BlogDAO blogDAO = new BlogDAO();
-            blogDAO.addBlog(blog);
-            response.sendRedirect("index.jsp");
+        if(category.equals("")){
+            request.setAttribute("invalidCategory", "Category must be choose");
+            checkValid = false;
+        }
+        if (checkValid == false) {
+            request.setAttribute("name", name);
+            request.setAttribute("detail", xDetail);
+            request.getRequestDispatcher("add_club.jsp").forward(request, response);
+        } else {
+            String imageURL = saveUploadedFile(request);
+            Club c = new Club(0, name, 0, imageURL, xDetail, category);
+            cDAO.addClub(c);
+            response.sendRedirect("ClubList");
         }
     }
 
-    String saveBlogImage(HttpServletRequest request) throws IOException, ServletException {
-        String uploadPath = "assets/img/blog/";
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
+        String uploadPath = "assets/img/anhclb/";
 
-        Part part = request.getPart("image");
+        Part part = request.getPart("avatar");
         String fileName = getUniqueFileName(part);
         String filePath = uploadPath + fileName;
 
@@ -168,11 +175,6 @@ public class add_blog extends HttpServlet {
         return newFileName;
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

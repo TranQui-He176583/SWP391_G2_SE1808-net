@@ -19,7 +19,23 @@ public class Blog {
     String image;
     LocalDateTime time;
     int status;
+    String nameclub;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNameclub() {
+        return nameclub;
+    }
+
+    public void setNameclub(String nameclub) {
+        this.nameclub = nameclub;
+    }
     public Blog() {
     }
 
@@ -33,11 +49,11 @@ public class Blog {
         this.status = status;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 
@@ -89,5 +105,12 @@ public class Blog {
         this.status = status;
     }
     
+    public LocalDateTime getDate() {
+        return time;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.time = date;
+    }
     
 }
