@@ -240,10 +240,10 @@ public class ClubDAO extends MyDAO {
         List<Club> lst = new ArrayList<>();
         String xSql = "SELECT * FROM club\n "
                 + "ORDER BY id desc\n "
-                + "LIMIT 4 OFFSET ?";
+                + "LIMIT 8 OFFSET ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, (index - 1) * 4);
+            ps.setInt(1, (index - 1) * 8);
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -266,10 +266,11 @@ public class ClubDAO extends MyDAO {
 
     public List<Club> getSearchClubByName(String NameSearch) {
         List<Club> t = new ArrayList<>();
-        xSql = "select * from club\n " + "where name like ?";
+        xSql = "select * from club\n " + "where name like ? or detail like ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + NameSearch + "%");
+            ps.setString(2, "%" + NameSearch + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");

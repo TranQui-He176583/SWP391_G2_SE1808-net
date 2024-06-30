@@ -43,10 +43,10 @@ public class BlogDAO extends MyDAO {
         List<Blog> lst = new ArrayList<>();
         String xSql = "SELECT * FROM blog\n "
                 + "ORDER BY id desc\n "
-                + "LIMIT 4 OFFSET ?";
+                + "LIMIT 8 OFFSET ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, (index - 1) * 4);
+            ps.setInt(1, (index - 1) * 8);
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -120,10 +120,12 @@ public class BlogDAO extends MyDAO {
 
     public List<Blog> getSearchBlogByTitle(String TitleSearch) {
         List<Blog> t = new ArrayList<>();
-        xSql = "select * from blog\n " + "where name like ?";
+        xSql = "select * from blog\n " + "where name like ? or details like ? or time like ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + TitleSearch + "%");
+            ps.setString(2, "%" + TitleSearch + "%");
+            ps.setString(3, "%" + TitleSearch + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");

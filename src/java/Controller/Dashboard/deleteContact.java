@@ -5,8 +5,7 @@
 
 package Controller.Dashboard;
 
-import Model.Account;
-import Model.UserDAO;
+import Model.ContactDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,14 +13,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
  * @author pc
  */
-@WebServlet(name="countUser", urlPatterns={"/countUser"})
-public class countUser extends HttpServlet {
+@WebServlet(name="deleteContact", urlPatterns={"/deleteContact"})
+public class deleteContact extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -31,30 +29,18 @@ public class countUser extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-
-    String indexPage = request.getParameter("index");
-   
-    int index = 1; // Default to page 1
-    if (indexPage != null) {
-        index = Integer.parseInt(indexPage);
-    }
-
-    UserDAO countdao = new UserDAO();
-    int count = countdao.getTotalUser();
-    int maxPage = (count / 5) + (count % 5 != 0 ? 1 : 0);
-
-    List<Account> list = countdao.pagingUser(index);
-    String wrongRegister = (String) request.getSession().getAttribute("wrongRegister");
-    request.getSession().removeAttribute("wrongRegister");
-    request.setAttribute("listUs", list);
-    request.setAttribute("mPage", maxPage);
-    request.setAttribute("tag", index);
-    request.setAttribute("wrongRegister", wrongRegister);
-   
-    request.getRequestDispatcher("User_list.jsp").forward(request, response);
-}
+    throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+            String ctid = request.getParameter("id");
+            int id = Integer.parseInt(ctid);
+            String xStatus  =request.getParameter("status");
+            int status=Integer.parseInt(xStatus);
+            ContactDAO ctdao = new ContactDAO();
+            ctdao.changeStatus(status, id);
+            response.sendRedirect("contactdb");
+       
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -80,14 +66,8 @@ public class countUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String NameSearch =request.getParameter("search");
-         UserDAO dao = new UserDAO();
-         List<Account> lis= dao.getSearchUser(NameSearch);
-         request.setAttribute("listUs", lis);
-         request.setAttribute("NameSearch", NameSearch);
-         request.getRequestDispatcher("User_list.jsp").forward(request, response);
+        processRequest(request, response);
     }
-    
 
     /** 
      * Returns a short description of the servlet.

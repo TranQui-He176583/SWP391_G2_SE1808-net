@@ -58,7 +58,7 @@
 
                             <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
                                 <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
-                                    <li class="breadcrumb-item"><a href="idboard">DashBoard</a></li>
+                                    <li class="breadcrumb-item"><a href="dboard">DashBoard</a></li>
                                     <li class="breadcrumb-item"><a href="clubdb">Club</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Club Detail</li>
                                 </ul>
@@ -251,36 +251,7 @@
             </main>
             <!--End page-content" -->
         </div>
-        <!-- page-wrapper -->
-
-        <!-- Offcanvas Start -->
-        <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-            <div class="offcanvas-header p-4 border-bottom">
-                <h5 id="offcanvasRightLabel" class="mb-0">
-                    <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
-                    <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
-                </h5>
-                <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
-            </div>
-            <div class="offcanvas-body p-4 px-md-5">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- Style switcher -->
-                        <div id="style-switcher">
-                            <div>
-                                
-                            </div>
-                        </div>
-                        <!-- end Style switcher -->
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div>
-
-            
-        </div>
-        <!-- Offcanvas End -->
-
-        <!-- javascript -->
+        
         <script src="assets/js/bootstrap.bundle.min.js"></script>
         <!-- simplebar -->
         <script src="assets/js/simplebar.min.js"></script>

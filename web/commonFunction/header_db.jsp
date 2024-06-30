@@ -36,6 +36,10 @@
                                         <a href="blogdb"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
                                         
                                     </li>
+                                    <li>
+                                        <a href="contactdb"><i class="uil uil-link-alt me-2 d-inline-block"></i>Contacts</a>
+                  
+                                   </li>
                                 </ul>
                             </div>
                         </li>

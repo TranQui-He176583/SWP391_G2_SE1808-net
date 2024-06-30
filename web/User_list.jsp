@@ -37,6 +37,7 @@
         <link href="assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -48,7 +49,19 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="assets/css/list.css">
-
+  <style>
+      .select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+}
+  </style>
     </head>
 
     <body>
@@ -64,7 +77,7 @@
                     <div class="layout-specing">
                         <div class="row">
                             <div class="col-xl-9 col-lg-6 col-md-4">
-                                <h5 class="mb-0">Setting</h5>
+                                <h5 class="mb-0">User List</h5>
                                 <nav aria-label="breadcrumb" class="d-inline-block mt-2">
                                     <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
                                         <li class="breadcrumb-item"><a href="dboard">Dashboard</a></li>
@@ -81,7 +94,9 @@
                                                       <option value=""  data-href="countUser">Status</option>
                                                       <option value="1" data-href="${pageContext.request.contextPath}/status?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
                                                       <option value="0" data-href="${pageContext.request.contextPath}/status?xStatus=0" ${param.xStatus == '0' ? 'selected' : ''}>block</option>
+                                                      
                                                     </select>
+                                                      <div class="select-arrow"></div>
                                                 </div>
                                             </div>
                                            
@@ -89,10 +104,12 @@
                                                 <div class="mb-0 position-relative">
                                                     <select class="form-control time-during select2input"onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
                                                         <option value=""  data-href="countUser">Role</option>
-                                                       
+                                                        <option value="1" data-href="${pageContext.request.contextPath}/role?xRoleId=1" ${param.xRoleId eq '1' ? 'selected' : ''}>Admin</option>
                                                         <option value="2" data-href="${pageContext.request.contextPath}/role?xRoleId=2" ${param.xRoleId eq '2' ? 'selected' : ''}>manager</option>
                                                         <option value="3" data-href="${pageContext.request.contextPath}/role?xRoleId=3" ${param.xRoleId eq '3' ? 'selected' : ''}>normalUser</option>
+                                                        
                                                     </select>
+                                                        <div class="select-arrow"></div>
                                                 </div>
                                             </div>
                                             
