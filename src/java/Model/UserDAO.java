@@ -53,7 +53,8 @@ public class UserDAO extends MyDAO{
         String phone= rs.getString("phone");  
         int gender= rs.getInt("gender");  
         String image= rs.getString("image");  
-        t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image));
+        String note= rs.getString("note");  
+        t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image, note));
      
       }
       rs.close();
@@ -82,8 +83,9 @@ public class UserDAO extends MyDAO{
         String email= rs.getString("email");  
         String phone= rs.getString("phone");  
         int gender= rs.getInt("gender");  
-        String image= rs.getString("image");  
-        t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image));
+        String image= rs.getString("image"); 
+        String note= rs.getString("note");  
+        t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image,note));
      
       }
       rs.close();
@@ -139,7 +141,8 @@ public class UserDAO extends MyDAO{
         String phone= rs.getString("phone");  
         int gender= rs.getInt("gender");  
         String image= rs.getString("image");  
-        t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image));
+        String note= rs.getString("note");  
+        t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image,note));
      
       }
       rs.close();
@@ -168,7 +171,8 @@ public class UserDAO extends MyDAO{
                 rs.getString(6), 
                 rs.getString(7), 
                 rs.getInt(8), 
-                rs.getString(9));
+                rs.getString(9),
+                rs.getString(10));
            }
         }
         catch(Exception e) {
@@ -247,7 +251,38 @@ public class UserDAO extends MyDAO{
         }
     return 0;
     }
-   
+    public int getTotalUserByStatus1(){
+        xSql = "select count(*)from account where status = 1";     
+         
+        try {
+           ps = con.prepareStatement(xSql);
+          
+           rs = ps.executeQuery();
+          while(rs.next()) {
+
+            return rs.getInt(1);
+        }
+        }
+        catch(Exception e) {
+        }
+    return 0;
+    }
+    public int getTotalUserByStatus0(){
+        xSql = "select count(*)from account where status = 0";     
+         
+        try {
+           ps = con.prepareStatement(xSql);
+          
+           rs = ps.executeQuery();
+          while(rs.next()) {
+
+            return rs.getInt(1);
+        }
+        }
+        catch(Exception e) {
+        }
+    return 0;
+    }
     public List<Account> pagingUser(int index){
         List<Account> lst=new ArrayList<>();
         String xSql = "SELECT * FROM account\n " +
@@ -268,7 +303,8 @@ public class UserDAO extends MyDAO{
               String phone= rs.getString("phone");  
               int gender= rs.getInt("gender");  
               String image= rs.getString("image");  
-        lst.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image));
+              String note= rs.getString("note");  
+              lst.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image,note));
 
       }
       rs.close();
@@ -298,7 +334,8 @@ public class UserDAO extends MyDAO{
             String phone= rs.getString("phone");  
             int gender= rs.getInt("gender");  
             String image= rs.getString("image");  
-            t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image));
+            String note= rs.getString("note");  
+            t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image,note));
      
       }
       rs.close();
@@ -309,13 +346,14 @@ public class UserDAO extends MyDAO{
      }
     return(t);
     }
- public String EditUser(int roleId,int status,String fullname,String phone,int gender,int id) {
+ public String EditUser(int roleId,int status,String fullname,String phone,int gender, String note, int id) {
      xSql = "UPDATE account \n" +
 "        SET roleId =? ,\n" +
 "         Status = ?,\n" +    
 "         fullname = ?,\n" +
 "        phone = ?,\n" +
-"        gender = ?\n" +
+"        gender = ?,\n" +
+"        note = ?\n" +
 "        WHERE id = ?"; 
      try {         
       ps = con.prepareStatement(xSql);
@@ -324,7 +362,8 @@ public class UserDAO extends MyDAO{
       ps.setString(3, fullname);
       ps.setString(4, phone);
       ps.setInt(5, gender);
-      ps.setInt(6,id);
+      ps.setString(6, note);
+      ps.setInt(7,id);
       
       ps.executeUpdate();
       ps.close();
@@ -356,6 +395,7 @@ public class UserDAO extends MyDAO{
         account.phone = rs.getString("phone");
         account.gender = rs.getInt("gender");
         account.image = rs.getString("image");
+        account.note = rs.getString("note");
         return account;                   
       }
       rs.close();

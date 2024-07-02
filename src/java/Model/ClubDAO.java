@@ -122,8 +122,8 @@ public class ClubDAO extends MyDAO {
     public List<Club> getAllCLubByAccountID(String AccountID) {
         List<Club> t = new ArrayList<>();
         xSql = "select * from account join student_club join club\n"
-                + "        on account.id = student_club.accountID and student_club.clubID=club.id \n"
-                + "        where accountID= ?";
+                + "        on account.id = student_club.account_ID and student_club.club_ID=club.id \n"
+                + "        where account_ID= ?";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, AccountID);
@@ -171,6 +171,70 @@ public class ClubDAO extends MyDAO {
 
     public int getTotalClub() {
         xSql = "select count(*)from club";
+
+        try {
+            ps = con.prepareStatement(xSql);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
+    public int getTotalClubByVoThuat() {
+        xSql =  "SELECT COUNT(*) FROM club WHERE category LIKE '%Võ thuật%'";
+
+        try {
+            ps = con.prepareStatement(xSql);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
+    public int getTotalClubByHocThuat() {
+        xSql =  "SELECT COUNT(*) FROM club WHERE category LIKE '%Học thuật%'";
+
+        try {
+            ps = con.prepareStatement(xSql);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
+    public int getTotalClubByNgheThuat() {
+        xSql =  "SELECT COUNT(*) FROM club WHERE category LIKE '%Nghệ thuật%'";
+
+        try {
+            ps = con.prepareStatement(xSql);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
+    public int getTotalClubByCongDong() {
+        xSql =  "SELECT COUNT(*) FROM club WHERE category LIKE '%Cộng đồng%'";
 
         try {
             ps = con.prepareStatement(xSql);
@@ -479,13 +543,41 @@ public class ClubDAO extends MyDAO {
     }
     return clubs;
 }
+    
+    public List<Club> getAllClubByCategory(String xCategory) {
+        List<Club> t = new ArrayList<>();
+        xSql = "select * from club WHERE category = ? \n"
+                +"ORDER BY id desc\n "
+                + "LIMIT 5";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, xCategory);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int status = rs.getInt("status");
+                String avatar = rs.getString("avatar");
+                String detail = rs.getString("detail");
+                String category = rs.getString("category");
+                t.add(new Club(id, name, status, avatar, detail, category));
+
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
 
 //    public static void main(String[] args) {
 //        ClubDAO dao = new ClubDAO();
-//        Club c =new Club();
-//        System.out.println( dao.EditClub(c));
+//        List<Club> list= dao.getAllCLubByAccountID("2");
+//        for(Club c: list){
+//           System.out.println( c);
 //        
 //        
 //    }
-
+ //  }
 }

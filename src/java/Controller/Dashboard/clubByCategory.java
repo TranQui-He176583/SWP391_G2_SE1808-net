@@ -25,8 +25,8 @@ import java.util.List;
  *
  * @author pc
  */
-@WebServlet(name="dboard", urlPatterns={"/dboard"})
-public class dboard extends HttpServlet {
+@WebServlet(name="clubByCategory", urlPatterns={"/clubByCategory"})
+public class clubByCategory extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +38,9 @@ public class dboard extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter pr= response.getWriter();
-        request.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
         String indexPage = request.getParameter("index");
-       
+        String xCategory = request.getParameter("category");
         int index = 1; 
         if (indexPage != null) {index = Integer.parseInt(indexPage);}
          UserDAO dao = new UserDAO();
@@ -61,10 +60,11 @@ public class dboard extends HttpServlet {
          int countEvent1 = edao.getTotalEventByStatus1();
          int countEvent2 = edao.getTotalEventByStatus2();
          int countBlog = bdao.getTotalBlog();
-         int maxPage = (countUser / 5) + (countUser % 5 != 0 ? 1 : 0);
+        int maxPage = (countUser / 5) + (countUser % 5 != 0 ? 1 : 0);
          List<Account> liu= dao.pagingUser(index);
-         List<Club> lub=lubdao.getAllClub();
          List<Event> lie=edao.getAllEvent();
+         List<Club> lsClub = lubdao.getAllClubByCategory(xCategory);
+         request.setAttribute("lisc", lsClub);
          request.setAttribute("cBlog", countBlog);
          request.setAttribute("cUser", countUser);
          request.setAttribute("cUser0", countUserStatus0);
@@ -79,12 +79,13 @@ public class dboard extends HttpServlet {
          request.setAttribute("cHadHappened", countEvent1);
          request.setAttribute("cCanceled", countEvent2);
          request.setAttribute("lisu", liu);
-         request.setAttribute("lisc", lub);
+         request.setAttribute("lisc", lsClub);
          request.setAttribute("lise", lie);
          request.setAttribute("mPage", maxPage);
          request.setAttribute("tag", index);
          request.getRequestDispatcher("dashboard.jsp").forward(request, response);
     } 
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

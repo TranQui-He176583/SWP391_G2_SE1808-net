@@ -50,6 +50,7 @@ public class detailUser extends HttpServlet {
       
         String wrongFormat = (String) request.getSession().getAttribute("wrongFormat");
         request.getSession().removeAttribute("wrongFormat");
+        
         request.setAttribute("listC", listC );
         request.setAttribute("listdb", listindb );
         request.setAttribute("detail", u);

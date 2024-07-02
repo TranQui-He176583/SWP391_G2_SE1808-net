@@ -69,6 +69,7 @@ public class editUser extends HttpServlet {
        int roleId =Integer.parseInt(xRole);
        String xStatus = request.getParameter("status");
        int status =Integer.parseInt(xStatus);
+       String xNote = request.getParameter("note");
        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
        String phoneRegex = "^[0-9]{10}$";
        if (xPhone == null || xPhone.trim().isEmpty()) {
@@ -81,13 +82,13 @@ public class editUser extends HttpServlet {
            response.sendRedirect("detailUser?uid=" + id);
            return;
         }
-       if (!xFullName.matches("[a-zA-Z ]+")) {
+       if (!xFullName.matches("[^<>&0-9@/\\?+%#!*()_-]+")) {
           request.getSession().setAttribute("wrongFormat", "Name should not contain special characters ");
           response.sendRedirect("detailUser?uid=" + id);
           return;
         }
        UserDAO udao = new UserDAO();
-       out.print(udao.EditUser(roleId, status, xFullName, xPhone, gender, id));
+       out.print(udao.EditUser(roleId, status, xFullName, xPhone, gender,xNote, id));
        response.sendRedirect("detailUser?uid=" + id);
 
    }

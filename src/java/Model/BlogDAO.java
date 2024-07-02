@@ -490,10 +490,10 @@ public class BlogDAO extends MyDAO {
         return blogs;
     }
 
-    public static void main(String[] args) {
-        BlogDAO dao = new BlogDAO();
-        Blog b = new Blog();
-        b.getClubID();
-    }
+//    public static void main(String[] args) {
+//        BlogDAO dao = new BlogDAO();
+//        Blog b = new Blog();
+//        b.getClubID();
+//    }
 
 }

@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/pc/SWP391_G2_SE1808-net/web/contactList.jsp</file>
-            <file>file:/C:/Users/pc/SWP391_G2_SE1808-net/web/SortContact_1.jsp</file>
-            <file>file:/C:/Users/pc/SWP391_G2_SE1808-net/web/SortContact_2.jsp</file>
+            <file>file:/C:/Users/pc/SWP391_G2_SE1808-net/web/dashboard.jsp</file>
+            <file>file:/C:/Users/pc/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/dboard.java</file>
+            <file>file:/C:/Users/pc/SWP391_G2_SE1808-net/src/java/Model/EventDAO.java</file>
+            <file>file:/C:/Users/pc/SWP391_G2_SE1808-net/web/eventList.jsp</file>
+            <file>file:/C:/Users/pc/SWP391_G2_SE1808-net/src/java/Controller/Event/get_EvenList_ClubId.java</file>
         </group>
     </open-files>
 </project-private>

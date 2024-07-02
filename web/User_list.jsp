@@ -296,17 +296,7 @@
                 </div><!--end row-->
             </div>
 
-            <div class="offcanvas-footer p-4 border-top text-center">
-                <ul class="list-unstyled social-icon mb-0">
-                    <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris-template" target="_blank" class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="../../../index.html" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
-                </ul><!--end icon-->
-            </div>
+           
         </div>
         <!-- Offcanvas End -->
 
@@ -319,8 +309,11 @@
                     <div class="form-add" style="padding: 20px">
 
            <form action="add" method="post">
-               <h2 style="text-align: center;font-size: 30px">Add New User</h2>
-
+               <div class="modal-header border-bottom p-3">
+                    <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
                 <div class="row">
                     <div class="col-md-6">
                         <fieldset class="form-group">
@@ -352,28 +345,15 @@
                 
                 
                 <div class="row">
-                    <div class="col-md-4">
-                        <fieldset class="form-group">
-                            <label style="color: black; font-weight: bold">Gender</label>
-                          <div class="context-gender" style="display: flex;">
-    
-    <div style="display: flex; align-items: center;padding-right: 20px">
-        <input  value="1" type="radio"  name="gender" style="font-size: 10px;  margin-right: 10px">
-        Male
-    </div>
-    
-    <div style="display: flex; align-items: center;">
-        <input value="2" type="radio"  name="gender" style="font-size: 10px;  margin-right: 10px">
-        Female
-    </div>
-</div>
-                        </fieldset>
-                    </div>
-                    <div class="col-md-4">
+                  
+                    <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black; font-weight: bold">Role</label>
                           <div class="context-gender" style="display: flex;">
-    
+    <div style="display: flex; align-items: center;padding-right: 20px">
+        <input value="1" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
+        Admin
+    </div>
     <div style="display: flex; align-items: center;padding-right: 20px">
         <input value="2" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
         Manager
@@ -386,13 +366,13 @@
 </div>
                         </fieldset>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <fieldset class="form-group">
                              <label style="color: black; font-weight: bold">Status</label>
                           <div class="context-status" style="display: flex;">
     
     <div style="display: flex; align-items: center;padding-right: 20px">
-        <input  value="1" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
+        <input  value="1" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px" checked>
         active
     </div>
     
@@ -404,14 +384,12 @@
                         </fieldset>
                     </div>
                 </div>
-
-                <div class="text-center">
-                  
-                    <a href="" class="btn" style="background: skyblue;color: white;font-weight: bold">Back</a>
-                    <button type="submit" class="btn btn-success" style="font-weight: bold">Save</button>
-                    <p style="color: red; font-size: 15px">${requestScope.wrongRegister}</p>
-                   
-                </div>
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+    <p style="color: red; font-size: 15px">${requestScope.wrongRegister}</p>
+    <div class="text-center">
+        <button type="submit" class="btn btn-success" style="font-weight: bold">ADD</button>
+    </div>
+</div>
             </form>
                 
         </div>

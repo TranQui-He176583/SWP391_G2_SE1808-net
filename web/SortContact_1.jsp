@@ -83,9 +83,9 @@
                                             <div class="col-sm-12 col-md-3" style="padding-top: 10px;padding-left: 10px">
                                                 <div class="mb-0 position-relative">
                                                     <select class="form-control time-during select2input"onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
-                                                        <option data-href="">Sort</option>
-                                                        <option data-href="contactASC" >ASC</option>
-                                                        <option data-href="contactDESC" >DESC</option>
+                                                        <option value="Sort" data-href="">Sort</option>
+                                                        <option value="ASC" data-href="contactASC" >ASC</option>
+                                                        <option value="DESC" data-href="contactDESC" >DESC</option>
                                                     </select>
                                                     <div class="select-arrow"></div>
                                                 </div>

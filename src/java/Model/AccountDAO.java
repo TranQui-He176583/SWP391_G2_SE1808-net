@@ -130,6 +130,7 @@ public class AccountDAO extends MyDAO {
         account.roleId = rs.getInt("roleId");
         account.status = rs.getInt("status"); 
         account.image = rs.getString("image");
+        account.note = rs.getString("note");
         return account;                   
       }
       rs.close();
@@ -158,6 +159,7 @@ public class AccountDAO extends MyDAO {
         account.roleId = rs.getInt("roleId");
         account.status = rs.getInt("status"); 
         account.image = rs.getString("image");
+        account.note = rs.getString("note");
         return account;                   
       }
       rs.close();
@@ -187,6 +189,7 @@ public class AccountDAO extends MyDAO {
         account.roleId = rs.getInt("roleId");
         account.status = rs.getInt("status"); 
         account.image = rs.getString("image");
+        account.note = rs.getString("note");
         return account;                   
       }
       rs.close();

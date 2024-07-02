@@ -85,8 +85,8 @@ public class get_EvenList_ClubId extends HttpServlet {
         request.setAttribute("cPage", cPage);
         request.setAttribute("search", sSerach);
         request.setAttribute("nPage", nPage);
-         request.setAttribute("eList", eList);
-          request.setAttribute("cList", cList);
+        request.setAttribute("eList", eList);
+        request.setAttribute("cList", cList);
         request.getRequestDispatcher("eventList.jsp").forward(request, response);
     } 
 

@@ -31,8 +31,40 @@
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
+           <style>
+               .card-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.card-wrapper:hover {
+    transform: rotateY(180deg);
+}
+.card-back .flex-1 p.text-muted {
+    color: #FFB6C1 !important;
+}
+.card-front .flex-1 p.text-muted {
+    color: #90EE90 !important;
+}
+
+           </style>
     </head>
-   
+    
     <body>
         <!-- Loader -->
         
@@ -46,129 +78,100 @@
                     <div class="layout-specing">
                         <h5 class="mb-0">Dashboard</h5>
 
-                        <div class="row" style="width: 155%;">
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-user h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">${cUser}</h5>
-                                            <p class="text-muted mb-0">USER</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
+                        <div class="row" style="">
+                           <div class="col-xl-3 col-lg-4 col-md-4 mt-4">
+    <div class="card-wrapper">
+        <div class="card features feature-primary rounded border-0 shadow p-4 card-front">
+            <div class="d-flex align-items-center">
+                <div class="icon text-center rounded-md">
+                    <i class="uil uil-user h3 mb-0"></i>
+                </div>
+                <div class="flex-1 ms-2">
+                    <h5 class="mb-0">${cUser1}</h5>
+                    <p class="text-muted mb-0">USER ACTIVE</p>
+                </div>
+            </div>
+        </div>
+        <div class="card features feature-primary rounded border-0 shadow p-4 card-back">
+            <div class="d-flex align-items-center">
+                <div class="icon text-center rounded-md">
+                    <i class="uil uil-user h3 mb-0"></i>
+                </div>
+                <div class="flex-1 ms-2">
+                    <h5 class="mb-0">${cUser0}</h5>
+                    <p class="text-muted mb-0">USER BLOCK</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--end col-->
                             
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                            
+                            <div class="col-xl-3 col-lg-4 col-md-4 mt-4">
                                 <div class="card features feature-primary rounded border-0 shadow p-4">
                                     <div class="d-flex align-items-center">
                                         <div class="icon text-center rounded-md">
                                             <i class="uil uil-club h3 mb-0"></i>
                                         </div>
                                         <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">${cClub}</h5>
-                                            <p class="text-muted mb-0">CLUB</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                            
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-star h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">${cEvent}</h5>
-                                            <p class="text-muted mb-0">EVENT</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                            
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-share h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">16000</h5>
-                                            <p class="text-muted mb-0">SHARE</p>
+                                          <h5 class="mb-0" id="cClub">${cClub}</h5>
+                                          <h5 class="mb-0" id="cVoThuat"></h5>
+                                          <h5 class="mb-0" id="cHocThuat"></h5>
+                                          <h5 class="mb-0" id="cNgheThuat"></h5>
+                                          <h5 class="mb-0" id="cCongDong"></h5>
+                                          <select class="form-select select-box" aria-label="Default select example" style="width: 135px" onchange="updateValues(this)">
+                                              <option value="CLUB" data-quantity="${cClub}">CLUB</option>
+                                              <option value="Võ Thuật" data-quantity="${cVoThuat}">Võ Thuật</option>
+                                              <option value="Học Thuật" data-quantity="${cHocThuat}">Học Thuật</option>
+                                              <option value="Nghệ Thuật" data-quantity="${cNgheThuat}">Nghệ Thuật</option>
+                                              <option value="Cộng Đồng" data-quantity="${cCongDong}">Cộng Đồng</option>
+                                          </select>
+       
                                         </div>
                                     </div>
                                     
                                 </div>
                             </div><!--end col-->
                             
-<!--                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                            <div class="col-xl-3 col-lg-4 col-md-4 mt-4">
                                 <div class="card features feature-primary rounded border-0 shadow p-4">
                                     <div class="d-flex align-items-center">
                                         <div class="icon text-center rounded-md">
-                                            <i class="uil uil-medkit h3 mb-0"></i>
+                                            <i class="uil uil-star h3 mb-0"></i>
                                         </div>
                                         <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">220</h5>
-                                            <p class="text-muted mb-0">Appointment</p>
+                                            <h5 class="mb-0" id="cEvent">${cEvent}</h5>
+                                            <h5 class="mb-0" id="cNotHappened"></h5>
+                                            <h5 class="mb-0" id="cHadHappened"></h5>
+                                            <h5 class="mb-0" id="cCanceled"></h5>
+                                            <select class="form-select select-box" aria-label="Default select example" style="width: 135px" onchange="updateValues1(this)">
+                                              <option value="EVENT" data-quantity="${cEvent}">EVENT</option>
+                                              <option value="Not Happened" data-quantity="${cNotHappened}">Not Happened</option>
+                                              <option value="Had Happened" data-quantity="${cHadHappened}">Had Happened</option>
+                                              <option value="Canceled" data-quantity="${cCanceled}">Canceled</option>
+                                  
+                                          </select>
                                         </div>
                                     </div>
                                 </div>
-                            </div>end col-->
+                            </div><!--end col-->
                             
-<!--                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                            <div class="col-xl-3 col-lg-4 col-md-4 mt-4">
                                 <div class="card features feature-primary rounded border-0 shadow p-4">
                                     <div class="d-flex align-items-center">
                                         <div class="icon text-center rounded-md">
-                                            <i class="uil uil-medical-drip h3 mb-0"></i>
+                                            <i class="uil uil-newspaper h3 mb-0"></i>
                                         </div>
                                         <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">10</h5>
-                                            <p class="text-muted mb-0">Operations</p>
+                                            <h5 class="mb-0">${cBlog}</h5>
+                                            <p class="text-muted mb-0">BLOG</p>
                                         </div>
                                     </div>
+                                    
                                 </div>
-                            </div>end col
-                        </div>end row-->
-
-<!--                        <div class="row">
-                            <div class="col-xl-8 col-lg-7 mt-4">
-                                <div class="card shadow border-0 p-4">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h6 class="align-items-center mb-0">Patients visit by Gender</h6>
-                                        
-                                        <div class="mb-0 position-relative">
-                                            <select class="form-select form-control" id="yearchart">
-                                                <option selected>2020</option>
-                                                <option value="2019">2019</option>
-                                                <option value="2018">2018</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div id="dashboard" class="apex-chart"></div>
-                                </div>
-                            </div>end col-->
-
-<!--                            <div class="col-xl-4 col-lg-5 mt-4">
-                                <div class="card shadow border-0 p-4">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h6 class="align-items-center mb-0">Patients by Department</h6>
-                                        
-                                        <div class="mb-0 position-relative">
-                                            <select class="form-select form-control" id="dailychart">
-                                                <option selected>Today</option>
-                                                <option value="2019">Yesterday</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div id="department" class="apex-chart"></div>
-                                </div>
-                            </div>end col-->
-                        </div><!--end row-->
-
-                        <div class="row">
+                            </div><!--end col-->
+                   
+                            <div class="row">
                             <div class="col-xl-4 col-lg-6 mt-4">
                                 <div class="card border-0 shadow rounded">
                                     <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
@@ -215,9 +218,13 @@
                                             <h6 class="mb-0"><i class="uil uil-club me-1 h5"></i> Club</h6>
                                             
                                             <div class="mb-0 position-relative">
-                                                <select class="form-select form-control" id="dailypatient">
-                                                    <option selected>New</option>
-                                                    <option value="2019">Old</option>
+                                                <select class="form-select form-control" id="dailypatient" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
+                                                    <option value="ALL" data-href="dboard" >All Club</option>
+                                                    <option value="Võ Thuật" data-href="${pageContext.request.contextPath}/clubByCategory?category=Võ%20Thuật" ${param.category eq 'Võ Thuật' ? 'selected' : ''}>Võ thuật</option>
+                                                    <option value="Học Thuật" data-href="${pageContext.request.contextPath}/clubByCategory?category=Học%20Thuật" ${param.category eq 'Học Thuật' ? 'selected' : ''}>Học Thuật</option>
+                                                    <option value="Nghệ Thuật" data-href="${pageContext.request.contextPath}/clubByCategory?category=Nghệ%20Thuật" ${param.category eq 'Nghệ Thuật' ? 'selected' : ''}>Nghệ Thuật</option>
+                                                    <option value="Cộng Đồng" data-href="${pageContext.request.contextPath}/clubByCategory?category=Cộng%20Đồng" ${param.category eq 'Cộng Đồng' ? 'selected' : ''}>Cộng Đồng</option>
+                                                    
                                                 </select>
                                             </div>
                                         </div>
@@ -246,12 +253,23 @@
                                     <div class="p-4 border-bottom">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <h6 class="mb-0"><i class="uil uil-star me-1 h5"></i> Event</h6>
-                                            
-                                            <div class="mb-0 position-relative">
-                                                <select class="form-select form-control" id="dailypatient">
-                                                    <option selected>New</option>
-                                                    <option value="2019">Old</option>
+                           
+                                           <div class="mb-0 position-relative">
+          
+                                               <select class="form-select form-control" id="dailypatient" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
+                                                    <option value="0" data-href="dboard" >All Event</option>
+                                                    <option value="1" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=1" ${param.club_Id eq '1' ? 'selected' : ''}>Vovinam</option>
+                                                    <option value="2" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=2" ${param.club_Id eq '2' ? 'selected' : ''}>Teakwondo</option>
+                                                    <option value="3" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=3" ${param.club_Id eq '3' ? 'selected' : ''}>Street Workout</option>
+                                                    <option value="4" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=4" ${param.club_Id eq '4' ? 'selected' : ''}>Melody</option>
+                                                    <option value="5" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=5" ${param.club_Id eq '5' ? 'selected' : ''}>Chinese</option>
+                                                    <option value="6" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=6" ${param.club_Id eq '6' ? 'selected' : ''}>Cinema Martial</option>
+                                                    <option value="7" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=7" ${param.club_Id eq '7' ? 'selected' : ''}>Japanese</option>
+                                                    <option value="8" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=8" ${param.club_Id eq '8' ? 'selected' : ''}>Tình Nguyện</option>
+                                                    <option value="9" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=9" ${param.club_Id eq '9' ? 'selected' : ''}>Tiếng Anh</option>
+                                                    <option value="10" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=10" ${param.club_Id eq '10' ? 'selected' : ''}>Cầu lông</option>
                                                 </select>
+                                          
                                             </div>
                                         </div>
                                     </div>
@@ -263,7 +281,7 @@
                                                 <img src="${lie.avatar}" class="avatar avatar-small rounded-circle border shadow" alt="">
                                                 <div class="flex-1 ms-3">
                                                     <span class="d-block h6 mb-0">${lie.name}</span>
-                                            
+                         
                                                 </div>
                                             </div>
      
@@ -355,6 +373,33 @@
         <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./assets/js/popper.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
+        <script>
+           function updateValues(select) {
+    const selectedValue = select.value;
+    const selectedQuantity = select.options[select.selectedIndex].getAttribute('data-quantity');
+
+    document.getElementById('cClub').textContent = selectedValue === 'CLUB' ? selectedQuantity : '';
+    document.getElementById('cVoThuat').textContent = selectedValue === 'Võ Thuật' ? selectedQuantity : '';
+    document.getElementById('cHocThuat').textContent = selectedValue === 'Học Thuật' ? selectedQuantity : '';
+    document.getElementById('cNgheThuat').textContent = selectedValue === 'Nghệ Thuật' ? selectedQuantity : '';
+    document.getElementById('cCongDong').textContent = selectedValue === 'Cộng Đồng' ? selectedQuantity : '';
+  }
+        </script>
+        
+        <script>
+           function updateValues1(select) {
+    const selectedValue = select.value;
+    const selectedQuantity = select.options[select.selectedIndex].getAttribute('data-quantity');
+
+    document.getElementById('cEvent').textContent = selectedValue === 'EVENT' ? selectedQuantity : '';
+    document.getElementById('cNotHappened').textContent = selectedValue === 'Not Happened' ? selectedQuantity : '';
+    document.getElementById('cHadHappened').textContent = selectedValue === 'Had Happened' ? selectedQuantity : '';
+    document.getElementById('cCanceled').textContent = selectedValue === 'Canceled' ? selectedQuantity : '';
+   
+  }
+        </script>
+        
+        
     </body>
 
 </html>
