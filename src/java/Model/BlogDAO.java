@@ -120,7 +120,9 @@ public class BlogDAO extends MyDAO {
 
     public List<Blog> getSearchBlogByTitle(String TitleSearch) {
         List<Blog> t = new ArrayList<>();
-        xSql = "select * from blog\n " + "where name like ? or details like ? or time like ?";
+        xSql = "select * from blog\n " + "where name like ? or details like ? or time like ?"
+                + "ORDER BY id desc\n "
+                + "LIMIT 5";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + TitleSearch + "%");
@@ -402,7 +404,7 @@ public class BlogDAO extends MyDAO {
 
                 if (rs.next()) {
                     String clubName = rs.getString("name");
-                    blog.setNameclub(clubName);
+//                    blog.setNameclub(clubName);
                 }
             }
         } catch (SQLException e) {

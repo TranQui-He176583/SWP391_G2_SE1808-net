@@ -157,14 +157,17 @@
                       <c:set var="count" value="0" />
                          <c:forEach items="${listUs}" var="o">
                             <c:set var="count" value="${count + 1}" />
-                         <tr>
-                            <td>${count}</td>
+               
+                            <tr>
+                            <td class="py-4">${count}</td>
                            
-                            <td>${o.fullname}</td>
+                            <td class="py-4">${o.fullname}</td>
                          
-                            <td>
+                            <td class="py-4">
                                  <c:choose>
-                                      
+                                        <c:when test="${o.roleId == 1}">
+                                          <span class="text-primary">Admin</span>
+                                        </c:when>
                                         <c:when test="${o.roleId == 2}">
                                           <span class="text-primary">Manager</span>
                                         </c:when>
@@ -173,30 +176,26 @@
                                         </c:when>
                                     </c:choose>
                             </td>
-                            <td>${o.email}</td>
-                            <td>${o.phone}</td>
+                            <td class="py-4">${o.email}</td>
+                            <td class="py-4">${o.phone}</td>
               
-                        <td>
+                        
+                                               <c:if test="${o.status == 1}">
+                                                   <td class="py-3"><span class="badge bg-soft-success fs-6" style="margin-top: 5px">active</span></td>
+                                                </c:if>
+                                                <c:if test="${o.status == 0}">
+                                                    <td class="py-3"><span class="badge bg-soft-danger fs-6" style="margin-top: 5px">block</span></td>
+                                                </c:if>
+                                                    <td class="text-end py-3" style="display: flex;">
+                                                    
+                                                    <a href="detailUser?uid=${o.id}" class="btn btn-icon btn-pills btn-soft-primary"><i class="uil uil-eye"></i> </a>
+                                                    <a href="deleteUser?id=${o.id}&status=1" class="btn btn-icon btn-pills btn-soft-success" style="margin: 0px 5px"><i class="uil uil-check-circle text"></i></a>
+                                                    <a href="deleteUser?id=${o.id}&status=0" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-multiply text"></i></a>
+                                                  
+                                                </td>
     
-    <c:if test="${o.status == 1}">
-        <a href="deleteUser?id=${o.id}&status=0"id="statusBtn" class="btn btn-success btn-sm" 
-            style="background-color: green;font-weight: normal;color: black"
-            onclick="toggleStatus(this);">active</a>
-    </c:if>
-    <c:if test="${o.status == 0}">
-        <a href="deleteUser?id=${o.id}&status=1"id="statusBtn" class="btn btn-danger btn-sm" 
-            style="background-color: red;font-weight: normal;color: black"
-            onclick="toggleStatus(this);">block</a>
-    </c:if>
-
-   
-</td>
-            <td>
-    <a href="detailUser?uid=${o.id}" class="detail" title="detail" data-toggle="tooltip">
-        <i class="uil uil-eye me-2 d-inline-block"></i>
-    </a>
-</td>
         </tr>
+               
                   </c:forEach>
                  </c:if>
                     <c:if test="${empty listUs}">

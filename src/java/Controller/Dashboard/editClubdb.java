@@ -97,7 +97,7 @@ public class editClubdb extends HttpServlet {
         if (xAvatar != null && xAvatar.getSize() > 0) {
             imageURL = saveUploadedFile(request);
             if (c.getAvatar()!= null) {
-                File file = new File("C:\\Users\\pc\\Swp291\\build\\web\\" + c.getAvatar());
+                File file = new File("C:\\Users\\pc\\SWP391_G2_SE1808-net\\build\\web\\" + c.getAvatar());
                 file.delete();
             }
         } else {

@@ -317,7 +317,9 @@ public class UserDAO extends MyDAO{
     }
     public List<Account> getSearchUser(String NameSearch ) {
         List<Account> t = new ArrayList<>();
-        xSql = "select * from account\n "+"where fullname like ? or email like ?";
+        xSql = "select * from account\n "+"where fullname like ? or email like ?\n"
+               +"ORDER BY id desc\n " 
+               +"LIMIT 5";
         try {
            ps = con.prepareStatement(xSql);
            ps.setString(1, "%"+NameSearch+"%");

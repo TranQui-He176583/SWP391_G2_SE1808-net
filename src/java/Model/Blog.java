@@ -19,7 +19,7 @@ public class Blog {
     String image;
     LocalDateTime time;
     int status;
-    String nameclub;
+//    String nameclub;
 
     public int getId() {
         return id;
@@ -29,13 +29,13 @@ public class Blog {
         this.id = id;
     }
 
-    public String getNameclub() {
-        return nameclub;
-    }
-
-    public void setNameclub(String nameclub) {
-        this.nameclub = nameclub;
-    }
+//    public String getNameclub() {
+//        return nameclub;
+//    }
+//
+//    public void setNameclub(String nameclub) {
+//        this.nameclub = nameclub;
+//    }
     public Blog() {
     }
 

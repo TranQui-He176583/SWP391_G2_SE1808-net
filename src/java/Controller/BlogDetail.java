@@ -24,7 +24,7 @@ public class BlogDetail extends HttpServlet {
             if (blog != null) {
                 
                 String clubName = blogDAO.getClubNameByClubID(blog.getClubID());
-                blog.setNameclub(clubName); 
+//                blog.setNameclub(clubName); 
 
                 request.setAttribute("blog", blog);
                 request.getRequestDispatcher("blog_details.jsp").forward(request, response);

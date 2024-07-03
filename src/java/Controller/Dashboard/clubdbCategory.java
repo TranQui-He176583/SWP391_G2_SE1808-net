@@ -14,19 +14,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  *
  * @author pc
  */
-@WebServlet(name="clubdb", urlPatterns={"/clubdb"})
-public class clubdb extends HttpServlet {
+@WebServlet(name="clubdbCategory", urlPatterns={"/clubdbCategory"})
+public class clubdbCategory extends HttpServlet {
    
-   /** 
+    /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
@@ -35,24 +32,22 @@ public class clubdb extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
         String indexPage = request.getParameter("index");
-        
+        String xCategory = request.getParameter("category");
     int index = 1; // Default to page 1
     if (indexPage != null) {
         index = Integer.parseInt(indexPage);
     }
-
-    ClubDAO cdao = new ClubDAO();
-    int count = cdao.getTotalClub();
+    ClubDAO lubdao= new ClubDAO();
+    int count = lubdao.getTotalClubByCategory(xCategory);
     int maxPage = (count / 5) + (count % 5 != 0 ? 1 : 0);
-    List<Club> litClub = cdao.pagingClub(index);
-    request.setAttribute("listCLB", litClub);
-    request.setAttribute("mPage", maxPage);
-    request.setAttribute("tag", index);
-
-    request.getRequestDispatcher("clubDboard.jsp").forward(request, response);
+     
+        List<Club> clubcategory = lubdao.getClubByCategories(xCategory,index);
+        request.setAttribute("listCLB", clubcategory);
+        request.setAttribute("mPage", maxPage);
+        request.setAttribute("tag", index);
+        request.getRequestDispatcher("clubDboard.jsp").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,25 +74,8 @@ public class clubdb extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-
-           PrintWriter out = response.getWriter();
-    String NameSearch = request.getParameter("search");
-    ClubDAO cdao = new ClubDAO();
-    List<Club> listByName = cdao.getSearchClubByName(NameSearch);
-    List<Club> listByManager = cdao.getSearchClubByManager(NameSearch);
-
-    // Combine the two lists
-    List<Club> combinedList = new ArrayList<>(listByName);
-    combinedList.addAll(listByManager);
-
-    // Remove duplicates
-    Set<Club> uniqueClubs = new HashSet<>(combinedList);
-    combinedList = new ArrayList<>(uniqueClubs);
-    request.setAttribute("NameSearch", NameSearch);
-    request.setAttribute("listCLB", combinedList);
-     request.getRequestDispatcher("clubDboard.jsp").forward(request, response);
-}
-    
+        processRequest(request, response);
+    }
 
     /** 
      * Returns a short description of the servlet.

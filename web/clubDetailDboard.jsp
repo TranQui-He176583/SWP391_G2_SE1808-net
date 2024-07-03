@@ -155,79 +155,63 @@
                                 <div class="modal-body p-3 pt-4" style="padding-top: 0px">
 
                                     <div class="row">
-
-                                        <div class="col-md-4">
-                                           
-                                            <div class="d-grid">
-
-                                                <p class="text-muted"></p>
-                                                <div class="preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1"><img src="${detailC.avatar}" class="img-fluid" alt=""></div>
-                                                <input type="file" id="avatar" name="avatar" accept="image/*" />
-
-                                            </div>
-                                            <div>
-                                            <p style="color: red; font-size: 15px">${requestScope.wrongName}</p>
-                                            </div>
-                                           
-                                        </div><!--end col-->
-
-
-                                        <div class="col-md-8 mt-4 mt-sm-0"style="">
-                                            <div class="ms-md-4"style="">
-                                                
-                                                <div class="row">
-                                                    <input type="hidden" name="id" value="${detailC.id}" readonly required>
-                                                    <div class="col-6" >
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Club Name <span class="text-danger">*</span></label>
-                                                            <input name="name" id="name" type="text" class="form-control" value="${detailC.name}" >
-                                                        </div>
-                                                        
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Manager <span class="text-danger">*</span></label>
-                                                            <input name="name" id="name" type="text" class="form-control" value="${Manager.fullname}" >
-                                                        </div>
-                                                    </div><!--end col-->
-
-
-<!--                                                    <div class="col-md-6">
-
-                                                    </div>end col-->
-
-                                                    <div class="col-md-6">
-                                                        
-                                                       <div class="mb-3">
-                                                            <label class="form-label">Status</label>
-                                                            <div class="context-status" style="display: flex;">
-
-                                                                <div style="display: flex; align-items: center;">
-                                                                    <input ${detailC.status == 1 ? 'checked' : ''} value="1" type="radio" name="status" style="font-size: 10px;  margin-right: 10px">
-                                                                    active
-                                                                </div>
-                                                                <div style="display: flex; align-items: center; margin-left: 20px;">
-                                                                    <input ${detailC.status== 0 ? 'checked' : ''} value="0" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
-                                                                    block
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div><!--end col-->
-        
-                                                    <div class="col-lg-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Description <span class="text-danger">*</span></label>
-                                                            <textarea name="detail" id="comments" rows="4" class="form-control" placeholder=" description :"> ${detailC.detail} </textarea>
-                                                        </div>
-                                                   </div><!--end col-->
-
-                                                    <div class="col-lg-12 text-end">
-                                                        <button type="submit" class="btn btn-primary">SAVE</button>
-                                                    
-                                                    </div><!--end col-->
-                                                    </div>
-                                                       
-                                                    </div>
-                                                </div><!--end col-->
-                                            </div><!--end row-->
+    <div class="col-md-6">
+        <div class="ms-md-4">
+            <div class="row">
+                <input type="hidden" name="id" value="${detailC.id}" readonly required>
+                <div class="col-12">
+                    <div class="d-grid">
+                        <p class="text-muted"></p>
+                        <div class="preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1"><img src="${detailC.avatar}" class="img-fluid" alt=""></div>
+                        <input type="file" id="avatar" name="avatar" accept="image/*" />
+                    </div>
+                    
+                </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label">Club Name <span class="text-danger">*</span></label>
+                        <input name="name" id="name" type="text" class="form-control" value="${detailC.name}">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label">Manager <span class="text-danger">*</span></label>
+                        <input name="name" id="name" type="text" class="form-control" value="${Manager.fullname}">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <div class="context-status" style="display: flex;">
+                            <div style="display: flex; align-items: center;">
+                                <input ${detailC.status == 1 ? 'checked' : ''} value="1" type="radio" name="status" style="font-size: 10px; margin-right: 10px">
+                                active
+                            </div>
+                            <div style="display: flex; align-items: center; margin-left: 20px;">
+                                <input ${detailC.status== 0 ? 'checked' : ''} value="0" type="radio" name="status" style="font-size: 10px; margin-right: 10px">
+                                block
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="mb-3">
+            <label class="form-label">Description <span class="text-danger">*</span></label>
+            <textarea name="detail" id="comments" rows="4" class="form-control" placeholder=" description :"> ${detailC.detail} </textarea>
+        </div>
+        <div>
+            <p style="color: red; font-size: 15px">${requestScope.wrongName}</p>
+        </div>
+    </div>
+    
+    <div class="col-lg-12 text-end">
+        <button type="submit" class="btn btn-primary">SAVE</button>
+    </div>
+</div>
                                         </div>
                                     </div>
 

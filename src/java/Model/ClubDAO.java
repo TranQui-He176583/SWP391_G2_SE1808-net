@@ -303,11 +303,11 @@ public class ClubDAO extends MyDAO {
     public List<Club> pagingClub(int index) {
         List<Club> lst = new ArrayList<>();
         String xSql = "SELECT * FROM club\n "
-                + "ORDER BY id desc\n "
-                + "LIMIT 8 OFFSET ?";
+                + "ORDER BY id \n "
+                + "LIMIT 5 OFFSET ?";
         try {
             ps = con.prepareStatement(xSql);
-            ps.setInt(1, (index - 1) * 8);
+            ps.setInt(1, (index - 1) * 5);
             rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -330,7 +330,9 @@ public class ClubDAO extends MyDAO {
 
     public List<Club> getSearchClubByName(String NameSearch) {
         List<Club> t = new ArrayList<>();
-        xSql = "select * from club\n " + "where name like ? or detail like ?";
+        xSql = "select * from club\n " + "where name like ? or detail like ?"
+                 + "ORDER BY id desc\n "
+                 + "LIMIT 5";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, "%" + NameSearch + "%");
@@ -544,6 +546,48 @@ public class ClubDAO extends MyDAO {
     return clubs;
 }
     
+    public List<Club> getClubByCategories(String xCategory, int index) {
+    List<Club> clubs = new ArrayList<>();
+    String sql = "SELECT * FROM Club WHERE category = ?"
+                 + "ORDER BY id desc \n "
+                 + "LIMIT 5 OFFSET ?";
+
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setString(1, xCategory);
+        ps.setInt(2, (index - 1) * 5);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            Club club = new Club();
+            club.setId(rs.getInt("id"));
+            club.setName(rs.getString("name"));
+            club.setStatus(rs.getInt("status"));
+            club.setAvatar(rs.getString("avatar"));
+            club.setDetail(rs.getString("detail"));
+            club.setCategory(rs.getString("category"));
+            clubs.add(club);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return clubs;
+}
+    public int getTotalClubByCategory(String xCategory) {
+        xSql = "select count(*)from club where category =?";
+
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, xCategory);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
     public List<Club> getAllClubByCategory(String xCategory) {
         List<Club> t = new ArrayList<>();
         xSql = "select * from club WHERE category = ? \n"
@@ -573,11 +617,10 @@ public class ClubDAO extends MyDAO {
 
 //    public static void main(String[] args) {
 //        ClubDAO dao = new ClubDAO();
-//        List<Club> list= dao.getAllCLubByAccountID("2");
-//        for(Club c: list){
-//           System.out.println( c);
+//        
+//           System.out.println( dao.getTotalClubByCategory("Cộng Đồng"));
 //        
 //        
 //    }
- //  }
+   
 }
