@@ -34,6 +34,22 @@
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
+           <style>
+               .preview-box {
+  width: 180px;
+  height: 180px;
+  margin-left: 80px;
+  background-color: #f8f9fa;
+  border-radius: 100%; /* Add this line to round the corners */
+}
+
+#preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100%; /* Add this line to round the corners of the image */
+}
+           </style>
     </head>
 
     <body>
@@ -93,9 +109,11 @@
                                     
                                     </div>
                                 </div>
-                                    <div class="mt-4 mt-sm-0" style="padding-left: 480px;padding-top: 5px">
-                                <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newclubadd">EDIT</a>
-                            </div> 
+                                   
+                                    <div class="d-flex justify-content-between mt-4 mt-sm-0"style="padding: 10px">
+                                    <p style="color: green; font-size: 15px">${requestScope.completeChange}</p>
+                                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newclubadd">EDIT</a>
+                                </div>  
                             </div><!--end col-->
         
                             <div class="col-lg-4 col-md-5 mt-4">
@@ -160,15 +178,17 @@
             <div class="row">
                 <input type="hidden" name="id" value="${detailC.id}" readonly required>
                 <div class="col-12">
-                    <div class="d-grid">
-                        <p class="text-muted"></p>
-                        <div class="preview-box d-block justify-content-center rounded shadow overflow-hidden bg-light p-1"><img src="${detailC.avatar}" class="img-fluid" alt=""></div>
-                        <input type="file" id="avatar" name="avatar" accept="image/*" />
-                    </div>
+                   <div class="d-grid">
+    <p class="text-muted"></p>
+    <div class="preview-box d-block bg-light p-1">
+    <img id="preview-image" src="${detailC.avatar}" class="img-fluid" alt="">
+</div>
+    <input type="file" id="avatar" name="avatar" accept="image/*" onchange="previewImage(this)">
+</div>
                     
                 </div>
                 <div class="col-12">
-                    <div class="mb-3">
+                    <div class="mb-3" style="padding-top: 10px">
                         <label class="form-label">Club Name <span class="text-danger">*</span></label>
                         <input name="name" id="name" type="text" class="form-control" value="${detailC.name}">
                     </div>
@@ -250,7 +270,17 @@
 <script>
     CKEDITOR.replace('detail');
 </script>
-
+<script>
+    function previewImage(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#preview-image').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
     </body>
 
 </html>

@@ -47,13 +47,15 @@ public class blogdetaildb extends HttpServlet {
         Blog b = bdao.getBlog(id);
         List<Blog> listBlog= bdao.pagingBlog(index);
         Club c = cdao.getNameByBlogID(id);
-        String wrongFormat = (String) request.getSession().getAttribute("wrongFormat");
-        request.getSession().removeAttribute("wrongFormat");
+        
+        String completeChange = (String) request.getSession().getAttribute("completeChange");
+        request.getSession().removeAttribute("completeChange");
         request.setAttribute("detailBlog", b);
         request.setAttribute("nameClub", c);
         request.setAttribute("listdb", listBlog);
-        request.setAttribute("completeChange", wrongFormat);
        
+        request.setAttribute("completeChange", completeChange);
+        
         request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
         
       

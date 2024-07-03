@@ -109,8 +109,8 @@ public class editClubdb extends HttpServlet {
         c.setDetail(xDetail);
 //        out.print(c.getId());
         out.print(cdao.EditClub(c));
-        request.setAttribute("completeChange", "Change Information Susscess!");
-        response.sendRedirect("clubdb");
+        request.getSession().setAttribute("completeChange", "Change Information Susscess!");
+        response.sendRedirect("clubdetaildb?cid="+xid);
     } else {
         out.println("<html><body><h1>Error: 'club' attribute is null</h1></body></html>");
     }

@@ -32,8 +32,9 @@
         <link href="assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
        
        <style>
        
@@ -61,9 +62,11 @@
                                     </ul>
                                 </nav>
                             </div>
-                            <div style="padding:10px;display: flex">
-                            <div class="mt-4 mt-sm-0" style="">
-                                <select class="form-control time-during select2input" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');" style="background: skyblue">
+                        </div>
+                            <div style="display: flex">
+                            <div style="display: flex; padding-top: 20px" >
+                            <div class="mt-4 mt-sm-0" style="margin-right: 10px;">
+                                <select class="form-select form-control" id="dailypatient" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');" style="border: 2px solid skyblue;">
                                     <option value=""  data-href="blogdb">Status</option>
                                     <option value="1" data-href="${pageContext.request.contextPath}/statusBlog?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
                                     <option value="0" data-href="${pageContext.request.contextPath}/statusBlog?xStatus=0" ${param.xStatus == '0' ? 'selected' : ''}>block</option>
@@ -74,62 +77,96 @@
                             </div>-->
                       
                              <div class="mt-4 mt-sm-0" style="padding-left: 10px">
-                                <select class="form-control time-during select2input" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');" style="background: skyblue">
-                                    <option value=""  data-href="blogdb">Time</option>
-                                    <option value="" data-href="blogTimeDESC">New</option>
-                                    <option value="" data-href="blogTimeASC">Old</option>
+                                <select class="form-select form-control" id="dailypatient" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');" style="border: 2px solid skyblue;">
+                                    <option value="0" data-href="blogdb" >All Event</option>
+                                    <option value="1" data-href="${pageContext.request.contextPath}/blogByClub?clubID=1" ${param.clubID eq '1' ? 'selected' : ''}>Vovinam</option>
+                                    <option value="2" data-href="${pageContext.request.contextPath}/blogByClub?clubID=2" ${param.clubID eq '2' ? 'selected' : ''}>Teakwondo</option>
+                                    <option value="3" data-href="${pageContext.request.contextPath}/blogByClub?clubID=3" ${param.clubID eq '3' ? 'selected' : ''}>Street Workout</option>
+                                    <option value="4" data-href="${pageContext.request.contextPath}/blogByClub?clubID=4" ${param.clubID eq '4' ? 'selected' : ''}>Melody</option>
+                                    <option value="5" data-href="${pageContext.request.contextPath}/blogByClub?clubID=5" ${param.clubID eq '5' ? 'selected' : ''}>Chinese</option>
+                                    <option value="6" data-href="${pageContext.request.contextPath}/blogByClub?clubID=6" ${param.clubID eq '6' ? 'selected' : ''}>Cinema Martial</option>
+                                    <option value="7" data-href="${pageContext.request.contextPath}/blogByClub?clubID=7" ${param.clubID eq '7' ? 'selected' : ''}>Japanese</option>
+                                    <option value="8" data-href="${pageContext.request.contextPath}/blogByClub?clubID=8" ${param.clubID eq '8' ? 'selected' : ''}>Tình Nguyện</option>
+                                    <option value="9" data-href="${pageContext.request.contextPath}/blogByClub?clubID=9" ${param.clubID eq '9' ? 'selected' : ''}>Tiếng Anh</option>
+                                    <option value="10" data-href="${pageContext.request.contextPath}/blogByClub?clubID=10" ${param.clubID eq '10' ? 'selected' : ''}>Cầu lông</option>
                                 </select>
                             </div>
                             </div>
+                            <div class="col-sm-12 col-md-3" style="padding-left: 600px;padding-right: 20px">
+                                                        <div class="justify-content-md-end"style="display: flex;padding-left: 30px">
+                                    <form action="blogdb" method="post" style="display: flex; align-items: center;">
+    <div class="search-wrapper" style="position: relative;">
+        <input value="${searchBlog}" type="text" name="search" placeholder="search here" style="padding-left: 30px;border-radius:20px;font-size: 15px">
+      <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
+    </div>
+                                            </form>
+    <div class="d-grid" style="margin-left: 20px">
+      <a href="add_blog" class="btn btn-primary" style="height: 35px;width: 130px">ADD NEW</a>
+    </div>
+    
+
+  
+                                </div>
+                            </div>    
                         </div>
                         
                         <div class="row">
-                           <c:if test="${not empty listBL}">
-                            <c:forEach items="${listBL}" var="lb">
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4">
-                                <div class="card blog blog-primary border-0 shadow rounded overflow-hidden h-100">
-                                    <img src="${lb.image}" class="img-fluid rounded h-100 object-fit-cover" alt=""style="">
-                                 
-                                    <div class="card-body p-4 d-flex flex-column">
-                                        <ul class="list-unstyled mb-2" style="text-align: center">
-                                            <li class="list-inline-item text-muted small me-3">
-                                                <i class="uil uil-calendar-alt text-dark h6 me-1"></i>${lb.time}
-                                            </li>
-
-                                        </ul>
-                                        <div style="text-align: center">
-                                        <a href="blogdetaildb?bid=${lb.id}" class="text-dark title h5">${lb.name}</a>
-                                        </div>
-                                        <div class="post-meta d-flex justify-content-between mt-3">
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="list-inline-item me-2 mb-0">
-                                                    <c:if test="${lb.status == 1}">
-        <a href="deleteBlog?id=${lb.id}&status=0"id="statusBtn" class="btn btn-success btn-sm" 
-            style="background-color: green;font-weight: normal;color: black"
-            onclick="toggleStatus(this);">active</a>
-    </c:if>
-    <c:if test="${lb.status == 0}">
-        <a href="deleteBlog?id=${lb.id}&status=1"id="statusBtn" class="btn btn-danger btn-sm" 
-            style="background-color: red;font-weight: normal;color: black"
-            onclick="toggleStatus(this);">block</a>
-    </c:if>
-                                                </li>
-                       
-                                            </ul>
-                                            <a href="blogdetaildb?bid=${lb.id}" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                            </c:forEach>
-                           </c:if>
-                            <c:if test="${empty listBL}">
+                                    <div class="col-12 mt-4">
+                                <div class="table-responsive shadow rounded">
+                                    <table class="table table-center bg-white mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom p-3" style="min-width: 50px;">Id</th>
+                                                <th class="border-bottom p-3" style="min-width: 100px;">Name</th>
+                                                <th class="border-bottom p-3">Time</th>
+                                                <th class="border-bottom p-3">Status</th>
+                                                <th class="border-bottom p-3" style="min-width: 50px;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:if test="${not empty listBL}">
+                                            <c:forEach items="${listBL}" var="lb">
+                                            <tr>
+                                                <th class="p-3">${lb.id}</th>
+                                                <td class="py-3">
+                                                    <a href="" class="text-dark">
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="${lb.image}" class="avatar avatar-md-sm rounded-circle shadow">
+                                                            <span class="ms-2">${lb.name}</span>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                               <td class="p-3">${lb.time}</td>
+                                                
+</td>
+                                                <c:if test="${lb.status == 1}">
+                                                    <td class="p-3"><span class="badge bg-soft-success">active</span></td>
+                                                </c:if>
+                                                <c:if test="${lb.status == 0}">
+                                                    <td class="p-3"><span class="badge bg-soft-danger">block</span></td>
+                                                </c:if>
+                                                    <td class="text-end p-3" >
+                                                    
+                                                    <a href="blogdetaildb?bid=${lb.id}" class="btn btn-icon btn-pills btn-soft-primary"><i class="uil uil-eye"></i> </a>
+                                                    <a href="deleteBlog?id=${lb.id}&status=1" class="btn btn-icon btn-pills btn-soft-success" style="margin: 0px 10px"><i class="uil uil-check-circle text"></i></a>
+                                                    <a href="deleteBlog?id=${lb.id}&status=0" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-multiply text"></i></a>
+                                                  
+                                                </td>
+                                            </tr>
+                                            </c:forEach>
+                                            </c:if>
+                                                                        <c:if test="${empty listBL}">
                         <tr>
                            <td colspan="7">
                               <div class="alert alert-danger text-center">There are no Blog</div>
                            </td>
                         </tr>
                               </c:if>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
         
                         </div><!--end row-->
             
