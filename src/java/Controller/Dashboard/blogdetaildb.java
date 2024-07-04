@@ -5,6 +5,7 @@
 
 package Controller.Dashboard;
 
+import Model.Account;
 import Model.Blog;
 import Model.BlogDAO;
 import Model.Club;
@@ -16,6 +17,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -36,6 +38,10 @@ public class blogdetaildb extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter pr =response.getWriter();
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+
+    if (account != null && account.getRoleId() == 1) {
         String id = request.getParameter("bid");
         String indexPage = request.getParameter("index");
          int index = 1; // Default to page 1
@@ -57,10 +63,12 @@ public class blogdetaildb extends HttpServlet {
         request.setAttribute("completeChange", completeChange);
         
         request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
-        
-      
      
-        } 
+        } else {
+          request.setAttribute("complete", "You do not have the right to access this page.");
+          request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

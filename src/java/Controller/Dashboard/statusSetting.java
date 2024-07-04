@@ -5,6 +5,7 @@
 
 package Controller.Dashboard;
 
+import Model.Account;
 import Model.Setting;
 import Model.SettingDAO;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -33,12 +35,20 @@ public class statusSetting extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+
+    if (account != null && account.getRoleId() == 1) {
         String Status = request.getParameter("xStatus");
         SettingDAO dao = new SettingDAO();
         List<Setting> lit = dao.getAllSettingByStatus(Status);
         request.setAttribute("listSE", lit);
         request.getRequestDispatcher("setting.jsp").forward(request, response);
-    } 
+    } else {
+        request.setAttribute("complete", "You do not have the right to access this page.");
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

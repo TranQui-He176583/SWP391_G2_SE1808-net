@@ -5,6 +5,7 @@
 
 package Controller.Dashboard;
 
+import Model.Account;
 import Model.Contact;
 import Model.ContactDAO;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -32,6 +34,10 @@ public class detailContact extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+       HttpSession session = request.getSession();
+       Account account = (Account) session.getAttribute("account");
+
+    if (account != null && account.getRoleId() == 1) {
        String id =request.getParameter("ctid");
        ContactDAO dao = new ContactDAO();
        Contact ct = dao.getContact(id);
@@ -44,7 +50,11 @@ public class detailContact extends HttpServlet {
        request.setAttribute("wrongFormat", wrongFormat);
        request.setAttribute("complete", complete);
        request.getRequestDispatcher("ContactDetail.jsp").forward(request, response);
-    } 
+    } else {
+        request.setAttribute("complete", "You do not have the right to access this page.");
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
