@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class EventDAO extends MyDAO {
       public String insert (Event x) {
-     xSql = "insert into Event (name,club_id,time,location,details,avatar) values (?,?,?,?,?,?)"; 
+     xSql = "insert into Event (name,club_id,time,location,details,avatar,status) values (?,?,?,?,?,?,?)"; 
      try {    
       ps = con.prepareStatement(xSql);      
       ps.setString(1,x.getName());
@@ -25,6 +25,7 @@ public class EventDAO extends MyDAO {
       ps.setString(4, x.getLocation());
       ps.setString(5, x.getDetails());
       ps.setString(6,x.getAvatar());
+      ps.setBoolean(7, x.isStatus());
       ps.executeUpdate();
       ps.close();
      }     
@@ -33,13 +34,27 @@ public class EventDAO extends MyDAO {
      }
      return("Ok");
   }
+            public String delete_Event (int event_id) {
+     xSql = " update event set status = 0 where id = ?"; 
+     try {    
+      ps = con.prepareStatement(xSql);      
+      ps.setInt(1, event_id);
+      ps.executeUpdate();
+      ps.close();
+     }     
+     catch(Exception e) {
+        return(e.getMessage());
+     }
+     return("Ok");
+  }
+      
     
        public int get_Event_List_Npage(int club_Id,String search ) {
       
          int count =0;
      if (club_Id ==0 ){
         if (search.equals("")) {
-             xSql = "select * from event  ";
+             xSql = "select * from event where status =1 ";
              try{
                   ps = con.prepareStatement(xSql);
                  
@@ -48,10 +63,11 @@ public class EventDAO extends MyDAO {
              }
              
         }  else {
-                 xSql = "SELECT * FROM event WHERE name LIKE ? ";
+                 xSql = "SELECT * FROM event WHERE (name LIKE ? or time like ? ) and status =1 ";
                  try{
                       ps = con.prepareStatement(xSql);
                  ps.setString(1,"%"+search+"%");    
+                 ps.setString(2,"%"+search+"%");
                
              } catch(Exception e){
                 
@@ -60,7 +76,7 @@ public class EventDAO extends MyDAO {
          
      }  else {
          if (search.equals("")) {
-             xSql = "select * from event where club_id =? ";
+             xSql = "select * from event where club_id =? and status =1 ";
              try{
                   ps = con.prepareStatement(xSql);
                  ps.setInt(1, club_Id);
@@ -69,11 +85,12 @@ public class EventDAO extends MyDAO {
                  
              }
         } else {
-             xSql = "SELECT * FROM event WHERE club_id = ? AND name LIKE ? ";
+             xSql = "SELECT * FROM event WHERE club_id = ? AND ( name LIKE ? or time like ?) and status =1 ";
              try{
         ps = con.prepareStatement(xSql);
                  ps.setInt(1, club_Id);  
                  ps.setString(2,"%"+search+"%");
+                 ps.setString(3,"%"+search+"%");
                 
              } catch(Exception e){
                  
@@ -82,8 +99,6 @@ public class EventDAO extends MyDAO {
    }    
        try {       
         rs = ps.executeQuery();
-        
-         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
        while(rs.next()) {
           count++;
       }
@@ -121,7 +136,7 @@ public class EventDAO extends MyDAO {
           cPage = (cPage-1)*9;
      if (club_Id ==0 ){
         if (search.equals("")) {
-             xSql = "select * from event where club_id >0 ORDER BY id DESC LIMIT 9 OFFSET ? ";
+             xSql = "select * from event where status=1 ORDER BY id DESC LIMIT 9 OFFSET ? ";
              try{
                   ps = con.prepareStatement(xSql);
                  ps.setInt(1, cPage);
@@ -130,11 +145,12 @@ public class EventDAO extends MyDAO {
              }
              
         }  else {
-                 xSql = "SELECT * FROM event WHERE name LIKE ? and club_id>0 ORDER BY id DESC limit 9 offset ?;";
+                 xSql = "SELECT * FROM event WHERE ( name LIKE ? or time like ?) and status=1 ORDER BY id DESC limit 9 offset ?;";
                  try{
                       ps = con.prepareStatement(xSql);
                  ps.setString(1,"%"+search+"%");    
-                 ps.setInt(2, cPage);
+                 ps.setString(2,"%"+search+"%");
+                 ps.setInt(3, cPage);
              } catch(Exception e){
                 
              }
@@ -142,7 +158,7 @@ public class EventDAO extends MyDAO {
          
      }  else {
          if (search.equals("")) {
-             xSql = "select * from event where club_id =? ORDER BY id DESC LIMIT 9 OFFSET ?";
+             xSql = "select * from event where club_id =? and status=1 ORDER BY id DESC LIMIT 9 OFFSET ?";
              try{
                   ps = con.prepareStatement(xSql);
                  ps.setInt(1, club_Id);
@@ -151,12 +167,13 @@ public class EventDAO extends MyDAO {
                  
              }
         } else {
-             xSql = "SELECT * FROM event WHERE club_id = ? AND name LIKE ? ORDER BY id DESC LIMIT 9 OFFSET ?;";
+             xSql = "SELECT * FROM event WHERE club_id = ? AND (name LIKE ? or time like ?) and status =1 ORDER BY id DESC LIMIT 9 OFFSET ?;";
              try{
         ps = con.prepareStatement(xSql);
                  ps.setInt(1, club_Id);  
                  ps.setString(2,"%"+search+"%");
-                 ps.setInt(3, cPage);
+                 ps.setString(3,"%"+search+"%");
+                 ps.setInt(4, cPage);
              } catch(Exception e){
                  
              }
@@ -175,6 +192,7 @@ public class EventDAO extends MyDAO {
         e.setDate(LocalDateTime.parse(rs.getString("time"),formatter));
         e.setLocation(rs.getString("location"));
         e.setDetails(rs.getString("details"));
+        e.setStatus(rs.getBoolean("status"));
         eList.add(e);
       }
       rs.close();
@@ -189,7 +207,7 @@ public class EventDAO extends MyDAO {
 
     public Event getEvent(int event_Id) {
        
-        xSql = "select * from event where id =?";
+        xSql = "select * from event where id =? and status =1";
          Event event = new Event();
        try {
         ps = con.prepareStatement(xSql);
@@ -206,7 +224,7 @@ public class EventDAO extends MyDAO {
         event.setDate(LocalDateTime.parse(rs.getString("time"),formatter));
         event.setLocation(rs.getString("location"));
         event.setDetails(rs.getString("details"));
-        
+        event.setStatus(rs.getBoolean("status"));
       }
       rs.close();
       ps.close();
@@ -246,9 +264,9 @@ public class EventDAO extends MyDAO {
             String location = rs.getString("location");
             String details = rs.getString("details");
             String avatar = rs.getString("avatar");
+            boolean status = rs.getBoolean("status");
             
-            
-            Event event = new Event(id, name, club_id, time, location, details,avatar);
+            Event event = new Event(id, name, club_id, time, location, details,avatar,status);
             t.add(event);
      
       }
@@ -262,7 +280,7 @@ public class EventDAO extends MyDAO {
     }
     public String updateEvent(Event e) {
        
-        xSql = "UPDATE Event SET name = ?, avatar = ?, club_id=? ,time=?,location=?,details=? WHERE id = ?;";
+        xSql = "UPDATE Event SET name = ?, avatar = ?, club_id=? ,time=?,location=?,details=?,status=? WHERE id = ?;";
        
        try {
         ps = con.prepareStatement(xSql);
@@ -273,6 +291,7 @@ public class EventDAO extends MyDAO {
         ps.setString(5, e.getLocation());
         ps.setString(6, e.getDetails());
         ps.setInt(7,e.getId());
+        ps.setBoolean(8, e.isStatus());
         ps.executeUpdate();
       rs.close();
       ps.close();

@@ -14,6 +14,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.time.LocalDateTime;
@@ -86,6 +87,7 @@ public class edit_Event extends HttpServlet {
     throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
          EventDAO eDAO = new EventDAO();
+         
         PrintWriter pr  = response.getWriter();
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
@@ -95,6 +97,13 @@ public class edit_Event extends HttpServlet {
         String xLocation = request.getParameter("location");
         String xDetail = request.getParameter("details");
         String xClubId = request.getParameter("clubid");
+//      HttpSession session = request.getSession();
+//       Account a = new Account();
+//       a = (Account) session.getAttribute("account");
+//      if (a!=null) {
+//          if (eDAO.checkManager(a.getId(), xClubId)) {
+//           request.setAttribute("complete", "You don't have role to update this event!");
+//       }  
         Event getE = eDAO.getEvent(id);
         boolean checkValid =true;
        if (name.equals("")) {
@@ -130,7 +139,7 @@ public class edit_Event extends HttpServlet {
   }   else {  
         LocalDateTime time = LocalDateTime.parse(Stime);        
         int club_Id = Integer.parseInt(xClubId);        
-        Event e = new Event(id, name, club_Id, time, xLocation, xDetail,imageURL);       
+        Event e = new Event(id, name, club_Id, time, xLocation, xDetail,imageURL,true);       
         pr.print(eDAO.updateEvent(e));
         pr.print(e.getName());
       response.sendRedirect("event_Details?id="+id);

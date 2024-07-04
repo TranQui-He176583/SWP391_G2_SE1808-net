@@ -12,7 +12,7 @@
 
 <body>
     
-    <div class="login-container">
+    <div style="margin-top: 30px" class="login-container">
         <h2 style="font-size: 50px;" >Login</h2>
         <form action="login" method="post">
             <input type="text" placeholder="Username" name="username" value="${requestScope.email}" required>
@@ -40,6 +40,8 @@
 &approval_prompt=force">
                 Login With Google            
             </a>
+        
+        
 
                     
 

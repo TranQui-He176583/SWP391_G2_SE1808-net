@@ -5,9 +5,7 @@
 
 package Controller.Event;
 
-import Controller.*;
-import Model.*;
-import java.util.*;
+import Model.EventDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,14 +13,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author quyka
  */
-@WebServlet(name="event_Details", urlPatterns={"/event_Details"})
-public class event_Details extends HttpServlet {
+@WebServlet(name="event_Delete", urlPatterns={"/event_Delete"})
+public class event_Delete extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,16 +30,16 @@ public class event_Details extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet event_Details</title>");  
+            out.println("<title>Servlet event_Delete</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet event_Details at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet event_Delete at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,32 +56,7 @@ public class event_Details extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-       PrintWriter pr  = response.getWriter();
-       String SId = request.getParameter("id");
-       int id = Integer.parseInt(SId);
-       List<Event> eList = new ArrayList<Event>();
-         EventDAO eDAO = new EventDAO();
-       Event e = new Event();
-        eList = eDAO.get_Event_List(0,"", 1);
-       eList.subList(5, 9).clear();      
-       e =eDAO.getEvent(id);
-       Club c = new Club();
-       ClubDAO cDAO = new ClubDAO();
-       c=  cDAO.getClub_Id(e.getClub_id());
-       HttpSession session = request.getSession();
-       Account a = new Account();
-       a = (Account) session.getAttribute("account");
-      if (a!=null) {
-          if (eDAO.checkManager(a.getId(), e.getClub_id())) {
-           request.setAttribute("manager", true);
-       }
-      }       
-       request.setAttribute("club", c);
-       request.setAttribute("eList", eList);
-       request.setAttribute("Event", e);
-       request.getRequestDispatcher("event_Details.jsp").forward(request, response);
- 
+        processRequest(request, response);
     } 
 
     /** 
@@ -97,7 +69,11 @@ public class event_Details extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+       PrintWriter out = response.getWriter();
+       int event_id = Integer.parseInt(request.getParameter("event_id"));
+       EventDAO eDAO = new EventDAO();
+       out.print(eDAO.delete_Event(event_id));
+       response.sendRedirect("get_EvenList_ClubId?search=&cPage=1&clubid=0");
     }
 
     /** 

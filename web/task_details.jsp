@@ -21,9 +21,9 @@
     </head>
     <body>
         <div style="margin-top: 20px; margin-left: 260px;">
-  <a href="task_List">
-    <button style="font-size: 16px; padding: 8px 16px; background: #f05123;border-radius: 5px;border: #f05123">Back</button>
-  </a>
+  <a href="javascript:history.back()">
+  <button style="font-size: 16px; padding: 8px 16px; background: #f05123;border-radius: 5px;border: #f05123">Back</button>
+</a>
 </div>
   <div class="containerr">
    

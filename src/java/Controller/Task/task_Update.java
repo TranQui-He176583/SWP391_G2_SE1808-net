@@ -8,9 +8,10 @@ package Controller.Task;
 import Model.Account;
 import Model.AccountDAO;
 import Model.EventDAO;
-import Model.Task.*;
+import Model.Task.Task;
+import Model.Task.TaskDAO;
 import Service.Event.get_aList;
-     
+import Service.Task.getTask;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -18,6 +19,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,8 +30,8 @@ import java.util.Map;
  *
  * @author quyka
  */
-@WebServlet(name="add_Task", urlPatterns={"/add_Task"})
-public class add_Task extends HttpServlet {
+@WebServlet(name="task_Update", urlPatterns={"/task_Update"})
+public class task_Update extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -46,10 +48,10 @@ public class add_Task extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet add_Task</title>");  
+            out.println("<title>Servlet task_Update</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet add_Task at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet task_Update at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -66,20 +68,47 @@ public class add_Task extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        String xeventid = request.getParameter("eventid");
-        String xclubid = request.getParameter("clubid");
-        int club_id = Integer.parseInt(xclubid);
-        get_aList gal = new get_aList();
+       PrintWriter out = response.getWriter();
+      int task_id =   Integer.parseInt(request.getParameter("task_id"));
+        TaskDAO tDAO = new TaskDAO();
+        Task t = new Task ();
+       t = tDAO.getTask(task_id); 
+       EventDAO eDAO = new EventDAO();
+        HttpSession session = request.getSession();     
+       Account a = new Account();
+       a = (Account) session.getAttribute("account");
+      if (a==null) {
+          request.setAttribute("complete","You don't have role to update this task!");
+           request.getRequestDispatcher("index.jsp").forward(request, response);
+      }  else {
+       if (eDAO.checkManager(a.getId(), t.getClub_id()) ==false) {
+           request.setAttribute("complete","You don't have role to update this task!");
+           request.getRequestDispatcher("index.jsp").forward(request, response);
+       } else {
         List<Account> aList = new ArrayList<>();
-        aList = gal.gettList(club_id);
-        Map<String, Boolean> aMap = new HashMap<>(); 
-        request.setAttribute("aMap", aMap);
-        request.setAttribute("club_id", xclubid);
-        request.setAttribute("event_id", xeventid);
-        request.setAttribute("aList", aList);
-        request.getRequestDispatcher("add_Task.jsp").forward(request, response);
-               
+        Map<String, Boolean> aMap = new HashMap<>();      
+        getTask gTask = new getTask();
+        aMap = gTask.gettList(task_id);        
+        
+        get_aList gal = new get_aList();
+        aList = gal.gettList(t.getClub_id());
+       for (int i=0;i<aList.size();i++) {
+           out.print(aList.get(i).getEmail());
+           out.println();
+       } 
+     request.setAttribute("task_id", task_id);
+     request.setAttribute("name", t.getName());
+     request.setAttribute("stime", t.getStartTime());
+     request.setAttribute("etime", t.getEndTime());     
+     request.setAttribute("details", t.getDetails());
+     request.setAttribute("club_id", t.getClub_id());
+     request.setAttribute("event_id", t.getEvent_id());
+     request.setAttribute("aList", aList);     
+     request.setAttribute("aMap", aMap);
+     
+     request.getRequestDispatcher("task_Update.jsp").forward(request, response);
+      }
+      }
     } 
 
     /** 
@@ -91,7 +120,7 @@ public class add_Task extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+    throws ServletException, IOException {      
         PrintWriter out = response.getWriter();
          Map<String, Boolean> aMap = new HashMap<>(); 
          AccountDAO aDAO = new AccountDAO();
@@ -100,11 +129,11 @@ public class add_Task extends HttpServlet {
         String eTime = request.getParameter("end");
         String details = request.getParameter("details");
         String xeventid = request.getParameter("eventid");
+       int task_id =   Integer.parseInt(request.getParameter("task_id")); 
        int eventid=0;
         String xclubid = request.getParameter("clubid");
         String[] iList = request.getParameterValues("uid");
-        int club_id = Integer.parseInt(xclubid);
-        
+        int club_id = Integer.parseInt(xclubid);        
          boolean checkValid =true;
          if (iList == null) {
              request.setAttribute("invalidMember", "Please choose member do this task!");
@@ -138,6 +167,8 @@ public class add_Task extends HttpServlet {
              aMap.put(a.getEmail(), true);
          }
          }
+         
+         request.setAttribute("task_id", task_id);
          request.setAttribute("aMap", aMap);
          request.setAttribute("name", name);
          request.setAttribute("stime", sTime);
@@ -149,26 +180,23 @@ public class add_Task extends HttpServlet {
         request.setAttribute("club_id", xclubid);
         request.setAttribute("event_id", xeventid);
         request.setAttribute("aList", aList);       
-         request.getRequestDispatcher("add_Task.jsp").forward(request, response);
+         request.getRequestDispatcher("task_Update.jsp").forward(request, response);
      }  else {
          if (xeventid != null) {
              eventid= Integer.parseInt(xeventid);
          }
           LocalDateTime stime = LocalDateTime.parse(sTime);
           LocalDateTime etime = LocalDateTime.parse(eTime);
-          Task t = new Task(0, name, stime, etime, true, "", eventid, details,club_id);
-          TaskDAO tDAO = new TaskDAO();
-          
-          out.print(tDAO.insert(t));
-          out.print(tDAO.getId());
+          Task t = new Task(task_id, name, stime, etime, true, "", eventid, details,club_id);
+          TaskDAO tDAO = new TaskDAO();  
+          tDAO.delete_taskAccount(task_id);
+          out.print(tDAO.update(t));
          for (int i=0;i<iList.length;i++) { 
-          out.print(tDAO.insertStudent(Integer.parseInt(iList[i]), tDAO.getId()));
+          tDAO.insertStudent(Integer.parseInt(iList[i]), task_id);
          }
-         response.sendRedirect("task_Details?task_id="+tDAO.getId());
+         response.sendRedirect("task_Details?task_id="+task_id);
                  
-                 
-     } 
-       
+    }
     }
 
     /** 

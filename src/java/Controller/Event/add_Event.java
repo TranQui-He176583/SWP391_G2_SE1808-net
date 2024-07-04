@@ -109,10 +109,16 @@ public class add_Event extends HttpServlet {
         String xDetail = request.getParameter("details");
         String xClubId = request.getParameter("clubid");
         boolean checkValid =true;
-       if (name.equals("")) {
-           request.setAttribute("invalidName", "Event name cannot be empty!");
-           checkValid= false;
-       } 
+      
+       if (name.length()<15) {
+            request.setAttribute("invalidlName", "Event Name length <15 chars");
+            checkValid= false;
+       }
+       
+       if (name.length()>150) {
+            request.setAttribute("invalidlName", "Event name has a maximum length of 150 characters");
+            checkValid= false;
+       }
        if (Stime.equals("")) {
            request.setAttribute("invalidTime", "Event time cannot be empty!");
            checkValid= false;
@@ -120,6 +126,14 @@ public class add_Event extends HttpServlet {
        if (xLocation.equals("")) {
            request.setAttribute("invalidLocation", "Event location cannot be empty!");
            checkValid= false;
+       }
+       if (xLocation.length()>100) {
+            request.setAttribute("invalidlLocation", "Event location has a maximum length of 100 characters");
+            checkValid= false;
+       }
+       if (xLocation.length()<5) {
+            request.setAttribute("invalidlLocation", "Event location length <5 chars");
+            checkValid= false;
        }
        if (xDetail.equals("")) {
            request.setAttribute("invalidDetail", "Event Detail cannot be empty!");
@@ -143,7 +157,7 @@ public class add_Event extends HttpServlet {
         
         int club_Id = Integer.parseInt(xClubId);
         String imageURL = saveUploadedFile(request);
-        Event e = new Event(0, name, club_Id, time, xLocation, xDetail,imageURL);
+        Event e = new Event(0, name, club_Id, time, xLocation, xDetail,imageURL,true);
         EventDAO eDAO = new EventDAO();
        
         pr.print(eDAO.insert(e));

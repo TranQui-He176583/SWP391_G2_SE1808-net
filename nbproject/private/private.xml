@@ -3,15 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/event_Details.jsp</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/myclublist.java</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Model/ClubDAO.java</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/add_Event.jsp</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/Task/task_List.java</file>
+            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/Task/task_Update.java</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/Event/add_Event.java</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/club_detail.jsp</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/club_detail.java</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/MyCList.jsp</file>
+            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/Task/add_Task.java</file>
+            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/Event/get_EvenList_ClubId.java</file>
+            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/Event/event_Delete.java</file>
         </group>
     </open-files>
 </project-private>

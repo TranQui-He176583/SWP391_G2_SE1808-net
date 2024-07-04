@@ -58,7 +58,7 @@
                                         </c:if>
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="myclublist">My Club List</a>
-                                        <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="task_List">My Task</a>
+                                        <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="task_List?search=&cPage=1">My Task</a>
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>                                       
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           
                                     </div>

@@ -62,6 +62,15 @@ public class task_List extends HttpServlet {
     throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+       
+        String search = request.getParameter("search");
+        int cPage = Integer.parseInt(request.getParameter("cPage"));
+        
+        if (search==null) {
+            search = "";
+        }
+       
+        
         getTask gTask = new  getTask();
         List<Task> tList = new ArrayList<Task>();
         HttpSession session = request.getSession();
@@ -71,10 +80,17 @@ public class task_List extends HttpServlet {
            request.setAttribute("complete", "Please Login!");
            request.getRequestDispatcher("index.jsp").forward(request, response);
        } else {
-          tList = gTask.gettList(a.getId());
-         Collections.reverse(tList);
+          tList = gTask.gettList(a.getId(),search,cPage);
+          int nPage= gTask.gett_nPage(a.getId(), search);      
+        
         request.setAttribute("tList", tList);
+        request.setAttribute("search", search);
+   
+         request.setAttribute("nPage", nPage);
+         request.setAttribute("cPage", cPage);
+         request.setAttribute("typeSearch", false);
         request.getRequestDispatcher("task_List.jsp").forward(request, response); 
+        
        }
         
         
@@ -90,7 +106,30 @@ public class task_List extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        String xClub_id = request.getParameter("club_id");
+        String search = request.getParameter("search");
+        int cPage = Integer.parseInt(request.getParameter("cPage"));
+        
+        if (search==null) {
+            search = "";
+        }
+        int club_id = Integer.parseInt(xClub_id);
+        List<Task> tList = new ArrayList<Task>();
+        TaskDAO tDAO = new TaskDAO();
+       tList=  tDAO.get_TaskList(club_id,search,cPage);
+       
+       int nPage = tDAO.get_numberTask(club_id, search);
+       out.print(nPage);
+       
+        request.setAttribute("search", search);
+        request.setAttribute("club_id", club_id);
+         request.setAttribute("tList", tList);
+         request.setAttribute("nPage", nPage);
+         request.setAttribute("cPage", cPage);
+          request.setAttribute("typeSearch", true);
+        request.getRequestDispatcher("task_List.jsp").forward(request, response); 
+        
     }
 
     /** 

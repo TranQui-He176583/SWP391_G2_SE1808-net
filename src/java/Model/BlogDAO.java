@@ -18,6 +18,47 @@ import java.util.List;
  * @author pc
  */
 public class BlogDAO extends MyDAO {
+    public List<Blog> getBlogsByClubId(int id) {
+        List<Blog> blogs = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM blog WHERE clubID = ?";
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Blog blog = new Blog();
+                blog.setID(rs.getInt("id"));
+                blog.setName(rs.getString("name"));
+                blog.setDetails(rs.getString("details"));
+                blog.setClubID(rs.getInt("clubID"));
+                blog.setImage(rs.getString("image"));
+                Timestamp timestamp = rs.getTimestamp("time");
+                if (timestamp != null) {
+                    blog.setDate(timestamp.toLocalDateTime());
+                } else {
+                    blog.setDate(null);
+                }
+                blog.setStatus(rs.getInt("status"));
+                blogs.add(blog);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return blogs;
+    }
+
 
     public String addBlog(Blog blog) {
         String sql = "INSERT INTO blog (id, name, details, clubID, image, time) VALUES (?, ?, ?, ?, ?, ?)";

@@ -24,11 +24,7 @@
     <body >
         <div class="row" style="margin-top: 180px;">
           <div class="col-9" style="">
-              <c:if test="${requestScope.manager==true}"> 
-              <a href="add_Task?eventid=<%=e.getId()%>&clubid=<%=c.getId()%>">
-                <button style="margin-left: 50px; background: black; margin-bottom: 20px;border-radius: 5px;border: #f05123; width: 60px; height: 40px" >Add Task</button>
-                </a>
-                 </c:if>     
+                  
               <div style="margin-left: 50px">
                <div style="display: flex; align-items: center; justify-content: center;">
                     <h1 style="font-family: Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 500; margin-right: 10px;">
@@ -50,6 +46,35 @@
             </div>
          </div>
   <div class="col-3">
+      <c:if test="${requestScope.manager==true}"> 
+          <div style="display: flex">
+              <a href="add_Task?eventid=<%=e.getId()%>&clubid=<%=c.getId()%>">
+                <button style=" background: white; color: black; margin-bottom: 20px;
+                        border-radius: 5px;border: 2px  solid #f05123; width: 60px; height: 40px" >Add Task</button>
+                </a>
+                
+              <a style="margin-left: 5%" href="edit_Event?id=<%=e.getId()%>">
+                <button style=" background: white; color: black; margin-bottom: 20px;
+                        border-radius: 5px;border: 2px  solid #f05123; width: 60px; height: 40px" >Update</button>
+                </a>
+                 <form style="margin-left: 5%" id="delete-form" method="post" action="event_Delete">
+                     <input type="hidden" id="record-id" name="event_id" value="<%=e.getId()%>">  
+  <button type="button" onclick="confirmDelete(1, 'Bản ghi 1')" style=" background: white; color: black; margin-bottom: 20px;
+                        border-radius: 5px;border: 2px  solid #f05123; width: 60px; height: 40px" >Delete</button>
+                    </form>
+             </div>    
+   <script>
+function confirmDelete(recordId, recordName) {
+  if (confirm("Bạn có chắc chắn muốn xóa Event này không?")) {
+    document.getElementById('delete-form').submit();
+  } else {
+    console.log("Hủy bỏ thao tác xóa");
+  }
+}
+</script>             
+                
+                 </c:if>
+      
      <form id="formSearch"action="get_EvenList_ClubId" method="get"> 
                     <label style="border: 1px solid; padding: 5px">
                         <input style="width: 200px; height: 40px; font-size: 15px"  type="text" value="${requestScope.search}" name="search" placeholder="Seach...." >

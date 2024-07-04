@@ -27,6 +27,7 @@
     <label for="name">Tên sự kiện:</label>
     <input type="text" id="name" name="name" value="${requestScope.name}" >
     <p style="color: red">${requestScope.invalidName}</p>
+    <p style="color: red">${requestScope.invalidlName}</p>
   </div>
   
   <div>
@@ -52,6 +53,7 @@
     <label for="location">Địa điểm:</label>
     <input type="text" id="location" name="location" value="${requestScope.location}">
     <p style="color: red">${requestScope.invalidLocation}</p>
+    <p style="color: red">${requestScope.invalidlLocation}</p>
   </div>
   
   <div>

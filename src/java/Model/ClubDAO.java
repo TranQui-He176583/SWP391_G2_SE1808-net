@@ -195,7 +195,7 @@ public class ClubDAO extends MyDAO {
                 String name = rs.getString("name");
                 int status = rs.getInt("status");
                 String avatar = rs.getString("avatar");
-                String detail = rs.getString("detail");
+                String detail = rs.getString("details");
                 t.add(new Club(id, name, status, avatar, detail));
 
             }

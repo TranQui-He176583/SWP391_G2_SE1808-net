@@ -21,69 +21,9 @@
         <%@include file="commonFunction/CSS.jsp" %>
     </head>
     <body>
-        <!-- ? Preloader Start -->
-        <style>
-            #preloader-active .preloader-img img {
-                max-width: 90%;
-                max-height: 100%;
-                width: auto;
-                height: auto;
-            }
-        </style>
-        <div id="preloader-active">
-            <div class="preloader d-flex align-items-center justify-content-center">
-                <div class="preloader-inner position-relative">
-                    <div class="preloader-circle"></div>
-                    <div class="preloader-img pere-text">
-                        <img src="assets/img/logo/logofpt.png" alt="" >
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Preloader Start -->
+
         <%@include file="commonFunction/header.jsp" %>
         <main>
-          
-
-
-<!--            ? slider Area Start
-            <div class="slider-area position-relative">
-                <div class="slider-active">
-                     Single Slider 
-                    <div class="single-slider slider-height d-flex align-items-center">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xl-7 col-lg-9 col-md-8 col-sm-9">
-                                    <div class="hero__caption">
-                                        <span data-animation="fadeInLeft" data-delay="0.1s">CLB Vovinam</span>
-                                        <h1 style="font:inherit; font-size:25px" data-animation="fadeInLeft" data-delay="0.4s" >Câu lạc bộ Vovinam FPT University là nơi thú vị để rèn luyện sức khỏe và kỹ năng võ thuật cho sinh viên.</h1>
-                                        <a href="https://www.facebook.com/fvchn" class="btn hero-btn" target="_blank" data-animation="fadeInLeft" data-delay="0.8s">Fanpage</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>          
-                    </div>
-                     Single Slider 
-                    <div class="single-slider slider-height d-flex align-items-center">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xl-7 col-lg-9 col-md-8 col-sm-9">
-                                    <div class="hero__caption">
-                                        <span data-animation="fadeInLeft" data-delay="0.1s">Vovinam club</span>
-                                        <h1 style="font:inherit; font-size:25px" data-animation="fadeInLeft" data-delay="0.4s">Vovinam FPT University Club is an interesting place to practice health and martial arts skills for students.</h1>
-                                        <a href="https://www.facebook.com/fvchn" class="btn hero-btn" target="_blank" data-animation="fadeInLeft" data-delay="0.8s">Fanpage</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>          
-                    </div>
-                </div>
-                 Video icon 
-                <div class="video-icon">
-                    <a class="popup-video btn-icon" href="https://www.youtube.com/watch?v=CVQbh6nU5d4"><i class="fas fa-play"></i></a>
-                </div>
-            </div>-->
-
             <!--? About-2 Area Start -->
             <section style="background : white" class="about-area2 testimonial-area section-padding30 fix">
                 <div class="container">

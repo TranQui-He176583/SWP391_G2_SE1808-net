@@ -17,6 +17,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     }
 
     .containerr {
+      border: 5px solid lightblue;
       max-width: 1000px;
       margin: 60px auto;
       padding: 30px;
@@ -37,16 +38,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     }
 
     .task-list li {
+       
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 20px;
-      border-bottom: 1px solid #e6e6e6;
+      border-bottom: 2px solid #f05123;
       transition: background-color 0.3s ease;
     }
 
     .task-list li:last-child {
-      border-bottom: none;
+      border-bottom: 1px solid #f05123;
     }
 
     .task-list li:hover {
@@ -54,12 +56,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     }
 
     .task-list li .task-name {
-      flex-grow: 1;
+       width: 35%;
       margin-right: 20px;
       font-size: 16px;
       font-weight: 600;
       color: #333;
     }
+  
 
     .task-list li .status {
       font-weight: 600;

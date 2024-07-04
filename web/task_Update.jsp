@@ -11,6 +11,7 @@
 <%@include file="commonFunction/header.jsp" %>
 <%@page import = "Model.*" %>
 <%@page import = "java.util.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
      List<Account> aList = (List<Account>) request.getAttribute("aList");
      Map<String, Boolean> aMap = (Map<String, Boolean>) request.getAttribute("aMap");
@@ -42,16 +43,14 @@
     <body>
                     
         <div  class="login-container">
-        <form action="add_Task" method="post" >
+        <form action="task_Update" method="post" >
             <div>
+                <input type="hidden" name ="task_id" value="${requestScope.task_id}">
     <label for="name">Task Name:</label>
     <input type="text" id="name" name="name" value="${requestScope.name}" >
     <p style="color: red">${requestScope.invalidName}</p>
     <p style="color: red">${requestScope.invalidlName}</p>
-  </div>
-    <p style="color: red">${requestScope.invalidImage}</p>
-            
- 
+  </div> 
     <input type="hidden" id="cid" name="clubid" value="${requestScope.club_id}"  >
     <input type="hidden" id="eid" name="eventid" value="${requestScope.event_id}"  > 
   
@@ -69,12 +68,12 @@
   
   <div>
     <label for="details">Chi tiết:</label>
-    <textarea  id="details" name="details"  rows="10"  " > ${requestScope.detail} </textarea>
+    <textarea  id="details" name="details"  rows="10"  " > ${requestScope.details} </textarea>
     <p style="color: red">${requestScope.invalidDetail}</p>
   </div>
   
   
- <div>
+  <div>
       <label for="details">Member:</label>
     <input type="text" id="searchInput" placeholder="Tìm kiếm..." />
  

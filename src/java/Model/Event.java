@@ -17,10 +17,11 @@ public class Event {
     String location;
     String details;
     String avatar;
+    boolean status;
     public Event() {
     }
 
-    public Event(int id, String name, int club_id, LocalDateTime date, String location, String details,String avatar) {
+    public Event(int id, String name, int club_id, LocalDateTime date, String location, String details,String avatar,boolean status) {
         this.id = id;
         this.name = name;
         this.club_id = club_id;
@@ -28,6 +29,7 @@ public class Event {
         this.location = location;
         this.details = details;
         this.avatar=avatar;
+        this.status=status;
     }
 
     public int getId() {
@@ -84,6 +86,16 @@ public class Event {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
     
 }
