@@ -37,6 +37,7 @@
         <link href="assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -46,9 +47,21 @@
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
   <link rel="stylesheet" href="assets/css/list.css">
-
+  <style>
+      .select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+}
+  </style>
     </head>
 
     <body>
@@ -56,246 +69,15 @@
        
     
         <div class="page-wrapper doctris-theme toggled">
-            <nav id="sidebar" class="sidebar-wrapper"style="background: aliceblue;">
-                <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
-                    <div class="sidebar-brand" style="font-size: 20px;background: white;">
-                        <a style="text-align: center"href="Home"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
-                       
-                        </a>
-                    </div>
-                    
-                    <ul class="sidebar-menu pt-3">
-                        <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
-                       
-
-                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                   
-                                    <li><a href="dr-profile.html">Club</a></li>
-                                    <li><a href="dr-profile.html">Event</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                         
-
-                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-setting me-2 d-inline-block"></i>Setting</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i> User</a>
-                                        <div class="sidebar-submenu">
-                                        <ul>
-                                            <li><a href="countUser">User </a></li>
-                                            <li><a href="detailUser">User Detail</a></li>
-                                        </ul>
-                                        </div>
-                                    </li>
-                                  <li>
-                                        <a href="javascript:void(0)"><i class="uil uil-club me-2 d-inline-block"></i>Club</a>
-                                        <div class="sidebar-submenu">
-                                        <ul>
-                                            <li><a href="clubdb">Club</a></li>
-                                            <li><a href="clubdetaildb">Club Detail</a></li>
-                                        </ul>
-                                        </div>
-                                   </li>
-                                   <li>
-                                        <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
-                                        <div class="sidebar-submenu">
-                                        <ul>
-                                            <li><a href="blogdb">Blog</a></li>
-                                            <li><a href="blogdetaildb">Blog Detail</a></li>
-                                        </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-<!--                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li><a href="chat.html">Chat</a></li>
-                                    <li><a href="email.html">Email</a></li>
-                                    <li><a href="calendar.html">Calendar</a></li>
-                                </ul>
-                            </div>
-                        </li>-->
-
-<!--                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-shopping-cart me-2 d-inline-block"></i>Pharmacy</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="product-detail.html">Shop Detail</a></li>
-                                    <li><a href="shopcart.html">Shopcart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                </ul>
-                            </div>
-                        </li>-->
-
-<!--                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li><a href="blogs.html">Blogs</a></li>
-                                    <li><a href="blog-detail.html">Blog Detail</a></li>
-                                </ul>
-                            </div>
-                        </li>-->
-
-                    </ul>
-                    <!-- sidebar-menu  -->
-                </div>
-                <!-- sidebar-content  -->
-<!--                <ul class="sidebar-footer list-unstyled mb-0">
-                    <li class="list-inline-item mb-0 ms-1">
-                        <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
-                            <i class="uil uil-comment icons"></i>
-                        </a>
-                    </li>
-                </ul>-->
-            </nav>
-            <!-- sidebar-wrapper  -->
-
-            <!-- Start Page Content -->
+         <%@include file="commonFunction/header_db.jsp"%>
             <main class="page-content bg-light">
-                <div class="top-header">
-                    <div class="header-bar d-flex justify-content-between border-bottom"style="background: aliceblue;">
-                        <div class="d-flex align-items-center">
-                            <a href="#" class="logo-icon">
-                                <img src="assets/images/logo-icon.png" height="30" class="small" alt="">
-                                <span class="big">
-                                    <img src="assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                    <img src="assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
-                                </span>
-                            </a>
-                            <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
-                                <i class="uil uil-bars"></i>
-                            </a>
-                            <div class="search-bar p-0 d-none d-md-block ms-2">
-                                <div id="search" class="menu-search mb-0">
-                                    <form role="search" method="get" id="searchform" class="searchform">
-                                        <div>
-                                            <input type="text" class="form-control border rounded-pill" name="s" id="s" placeholder="Search Keywords...">
-                                            <input type="submit" id="searchsubmit" value="Search">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <ul class="list-unstyled mb-0">
-<!--                            <li class="list-inline-item mb-0 ms-1">
-                                <a href="login" >
-                                    <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="home" class="bx bx-home"></i></div>
-                                </a>
-                            </li>-->
-                            
-
-                            <li class="list-inline-item mb-0 ms-1">
-                                <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                    <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="settings" class="fea icon-sm"></i></div>
-                                </a>
-                            </li>
-
-                            <li class="list-inline-item mb-0 ms-1">
-                                <div class="dropdown dropdown-primary">
-                                    <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail" class="fea icon-sm"></i></button>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4 <span class="visually-hidden">unread mail</span></span>
-                                    
-                                    <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 px-2 py-2" data-simplebar style="height: 320px; width: 300px;">
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/02.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Janalia</b> <small class="text-muted fw-normal d-inline-block">1 hour ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/Codepen.svg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>codepen</b>  <small class="text-muted fw-normal d-inline-block">4 hour ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/03.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Cristina</b> <small class="text-muted fw-normal d-inline-block">5 hour ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/dribbble.svg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Dribbble</b> <small class="text-muted fw-normal d-inline-block">24 hour ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/06.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Donald Aghori</b> <small class="text-muted fw-normal d-inline-block">1 day ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/07.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Calvin</b> <small class="text-muted fw-normal d-inline-block">2 day ago</small></small>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="list-inline-item mb-0 ms-1">
-                              <div class="col-xl-10 col-lg-10 col-md-10">
-                        <div class="menu-main d-flex align-items-center justify-content-end">
-                            <!-- Main-menu -->
-                           
-                            
-                        
-                         <c:if test="${sessionScope.account.roleId != null}">                                  
-                             <div class="image-container">
-                             
-                                 <c:if test="${sessionScope.account.image == null }">  
-                                     
-                                    <img style="width: 28px; margin-top: -10px" src="assets/img/avatar/Avatar1.png" class="img-fluid"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </c:if>
-                                    
-                                    <c:if test="${sessionScope.account.image != null}">  
-                                       
-                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 30px" src="${sessionScope.account.image}" class="img-fluid"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </c:if>
-                                    
-                                        <div style="margin-top: 20px" class="dropdown-menu"> 
-                                            
-                                   <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
-                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>
-                                   <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           
-                                </div>
-                            </div>
-                         </c:if>
-                        </div>
-                    </div>   
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <%@include file="commonFunction/header_db_1.jsp"%>
 
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="row">
                             <div class="col-xl-9 col-lg-6 col-md-4">
-                                <h5 class="mb-0">Setting</h5>
+                                <h5 class="mb-0">User List</h5>
                                 <nav aria-label="breadcrumb" class="d-inline-block mt-2">
                                     <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
                                         <li class="breadcrumb-item"><a href="dboard">Dashboard</a></li>
@@ -311,8 +93,10 @@
                                                     <select class="form-control time-during select2input" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
                                                       <option value=""  data-href="countUser">Status</option>
                                                       <option value="1" data-href="${pageContext.request.contextPath}/status?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
-                                                      <option value="2" data-href="${pageContext.request.contextPath}/status?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
+                                                      <option value="0" data-href="${pageContext.request.contextPath}/status?xStatus=0" ${param.xStatus == '0' ? 'selected' : ''}>block</option>
+                                                      
                                                     </select>
+                                                      <div class="select-arrow"></div>
                                                 </div>
                                             </div>
                                            
@@ -320,10 +104,12 @@
                                                 <div class="mb-0 position-relative">
                                                     <select class="form-control time-during select2input"onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
                                                         <option value=""  data-href="countUser">Role</option>
-                                                       
+                                                        <option value="1" data-href="${pageContext.request.contextPath}/role?xRoleId=1" ${param.xRoleId eq '1' ? 'selected' : ''}>Admin</option>
                                                         <option value="2" data-href="${pageContext.request.contextPath}/role?xRoleId=2" ${param.xRoleId eq '2' ? 'selected' : ''}>manager</option>
                                                         <option value="3" data-href="${pageContext.request.contextPath}/role?xRoleId=3" ${param.xRoleId eq '3' ? 'selected' : ''}>normalUser</option>
+                                                        
                                                     </select>
+                                                        <div class="select-arrow"></div>
                                                 </div>
                                             </div>
                                             
@@ -371,14 +157,17 @@
                       <c:set var="count" value="0" />
                          <c:forEach items="${listUs}" var="o">
                             <c:set var="count" value="${count + 1}" />
-                         <tr>
-                            <td>${count}</td>
+               
+                            <tr>
+                            <td class="py-4">${count}</td>
                            
-                            <td>${o.fullname}</td>
+                            <td class="py-4">${o.fullname}</td>
                          
-                            <td>
+                            <td class="py-4">
                                  <c:choose>
-                                      
+                                        <c:when test="${o.roleId == 1}">
+                                          <span class="text-primary">Admin</span>
+                                        </c:when>
                                         <c:when test="${o.roleId == 2}">
                                           <span class="text-primary">Manager</span>
                                         </c:when>
@@ -387,30 +176,26 @@
                                         </c:when>
                                     </c:choose>
                             </td>
-                            <td>${o.email}</td>
-                            <td>${o.phone}</td>
+                            <td class="py-4">${o.email}</td>
+                            <td class="py-4">${o.phone}</td>
               
-                        <td>
+                        
+                                               <c:if test="${o.status == 1}">
+                                                   <td class="py-3"><span class="badge bg-soft-success fs-6" style="margin-top: 5px">active</span></td>
+                                                </c:if>
+                                                <c:if test="${o.status == 0}">
+                                                    <td class="py-3"><span class="badge bg-soft-danger fs-6" style="margin-top: 5px">block</span></td>
+                                                </c:if>
+                                                    <td class="text-end py-3" style="display: flex;">
+                                                    
+                                                    <a href="detailUser?uid=${o.id}" class="btn btn-icon btn-pills btn-soft-primary"><i class="uil uil-eye"></i> </a>
+                                                    <a href="deleteUser?id=${o.id}&status=1" class="btn btn-icon btn-pills btn-soft-success" style="margin: 0px 5px"><i class="uil uil-check-circle text"></i></a>
+                                                    <a href="deleteUser?id=${o.id}&status=0" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-multiply text"></i></a>
+                                                  
+                                                </td>
     
-    <c:if test="${o.status == 1}">
-        <a href="deleteUser?id=${o.id}&status=0"id="statusBtn" class="btn btn-success btn-sm" 
-            style="background-color: green;font-weight: normal;color: black"
-            onclick="toggleStatus(this);">active</a>
-    </c:if>
-    <c:if test="${o.status == 0}">
-        <a href="deleteUser?id=${o.id}&status=1"id="statusBtn" class="btn btn-danger btn-sm" 
-            style="background-color: red;font-weight: normal;color: black"
-            onclick="toggleStatus(this);">block</a>
-    </c:if>
-
-   
-</td>
-            <td>
-    <a href="detailUser?uid=${o.id}" class="detail" title="detail" data-toggle="tooltip">
-        <i class="uil uil-eye me-2 d-inline-block"></i>
-    </a>
-</td>
         </tr>
+               
                   </c:forEach>
                  </c:if>
                     <c:if test="${empty listUs}">
@@ -510,17 +295,7 @@
                 </div><!--end row-->
             </div>
 
-            <div class="offcanvas-footer p-4 border-top text-center">
-                <ul class="list-unstyled social-icon mb-0">
-                    <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris-template" target="_blank" class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
-                    <li class="list-inline-item mb-0"><a href="../../../index.html" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
-                </ul><!--end icon-->
-            </div>
+           
         </div>
         <!-- Offcanvas End -->
 
@@ -533,19 +308,22 @@
                     <div class="form-add" style="padding: 20px">
 
            <form action="add" method="post">
-               <h2 style="text-align: center;font-size: 30px">Add New User</h2>
-
+               <div class="modal-header border-bottom p-3">
+                    <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                
                 <div class="row">
                     <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black;font-weight: bold"> Name</label>
-                            <input type="text" class="form-control" name="fullname" id="fullname" required="required">
+                            <input type="text" class="form-control" name="fullname" id="fullname" placeholder="fullname" minlength="1" maxlength="25" required="required" >
                         </fieldset>
                     </div>
                      <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black;font-weight: bold"> Password</label>
-                            <input type="text" class="form-control" name="password" id="password" required="required">
+                            <input type="text" class="form-control" name="password" id="password"  placeholder="password" minlength="6" maxlength="20" required="required">
                         </fieldset>
                     </div>
                 </div>
@@ -553,14 +331,28 @@
                     <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black;font-weight: bold"> Email</label>
-                            <input type="text" class="form-control" name="email" id="email" required="required">
+                            <input type="text" class="form-control" name="email" id="email" placeholder="email" minlength="11" maxlength="30" required="required">
                         </fieldset>
                     </div>
-                     <div class="col-md-6">
+                    <div class="col-md-6">
+                        <fieldset class="form-group">
+                            <label style="color: black;font-weight: bold"> Phone</label>
+                            <input type="text" class="form-control" name="phone" id="phone" placeholder="phone" minlength="1" maxlength="10">
+                        </fieldset>
+                    </div>
+                    </div>
+                
+                
+                <div class="row">
+                  
+                    <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black; font-weight: bold">Role</label>
                           <div class="context-gender" style="display: flex;">
-    
+    <div style="display: flex; align-items: center;padding-right: 20px">
+        <input value="1" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
+        Admin
+    </div>
     <div style="display: flex; align-items: center;padding-right: 20px">
         <input value="2" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
         Manager
@@ -573,34 +365,13 @@
 </div>
                         </fieldset>
                     </div>
-                    </div>
-                
-                
-                <div class="row">
-                    <div class="col-md-6">
-                        <fieldset class="form-group">
-                            <label style="color: black; font-weight: bold">Gender</label>
-                          <div class="context-gender" style="display: flex;">
-    
-    <div style="display: flex; align-items: center;padding-right: 20px">
-        <input  value="1" type="radio"  name="gender" style="font-size: 10px;  margin-right: 10px">
-        Male
-    </div>
-    
-    <div style="display: flex; align-items: center;">
-        <input value="2" type="radio"  name="gender" style="font-size: 10px;  margin-right: 10px">
-        Female
-    </div>
-</div>
-                        </fieldset>
-                    </div>
                     <div class="col-md-6">
                         <fieldset class="form-group">
                              <label style="color: black; font-weight: bold">Status</label>
                           <div class="context-status" style="display: flex;">
     
     <div style="display: flex; align-items: center;padding-right: 20px">
-        <input  value="1" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
+        <input  value="1" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px" checked>
         active
     </div>
     
@@ -612,14 +383,12 @@
                         </fieldset>
                     </div>
                 </div>
-
-                <div class="text-center">
-                  
-                    <a href="" class="btn" style="background: skyblue;color: white;font-weight: bold">Back</a>
-                    <button type="submit" class="btn btn-success" style="font-weight: bold">Save</button>
-                    <p style="color: red; font-size: 15px">${requestScope.wrongRegister}</p>
-                    <p style="color: green; font-size: 15px">${requestScope.addnew}</p>
-                </div>
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+    <p style="color: red; font-size: 15px">${requestScope.wrongRegister}</p>
+    <div class="text-center">
+        <button type="submit" class="btn btn-success" style="font-weight: bold">ADD</button>
+    </div>
+</div>
             </form>
                 
         </div>

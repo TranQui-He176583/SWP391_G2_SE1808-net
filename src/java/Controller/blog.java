@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Blog;
 import Model.BlogDAO;
+import Model.ClubDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -37,9 +38,26 @@ public class blog extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int page = 1;
+        if (request.getParameter("page") != null) {
+            page = Integer.parseInt(request.getParameter("page"));
+        }
+
         BlogDAO blogDAO = new BlogDAO();
-        List<Blog> blogs = blogDAO.getAllBlogs();
+        List<Blog> allBlogs = blogDAO.getAllBlogs();
+        int totalBlogs = allBlogs.size();
+        int totalPages = (int) Math.ceil((double) totalBlogs / 3);
+
+        int start = (page - 1) * 3;
+        int end = Math.min(start + 3, totalBlogs);
+
+        // Làm gì đó với clubName, ví dụ: đưa vào thuộc tính của blog
+        List<Blog> blogs = allBlogs.subList(start, end);
+        blogDAO.addClubNameToBlogs(blogs);
         request.setAttribute("blogs", blogs);
+        request.setAttribute("currentPage", page);
+        request.setAttribute("totalPages", totalPages);
+
         request.getRequestDispatcher("blog.jsp").forward(request, response);
     }
 

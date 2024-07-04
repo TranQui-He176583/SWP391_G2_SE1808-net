@@ -35,7 +35,7 @@ public class detailUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//           PrintWriter pr= response.getWriter();
+           PrintWriter pr= response.getWriter();
            String id=request.getParameter("uid");
            UserDAO countdao = new UserDAO();
            ClubDAO cdao=new ClubDAO();
@@ -47,9 +47,14 @@ public class detailUser extends HttpServlet {
     }
         List<Club> listC= cdao.getAllCLubByAccountID(id);
         List<Account> listindb = countdao.pagingUser(index);
+      
+        String wrongFormat = (String) request.getSession().getAttribute("wrongFormat");
+        request.getSession().removeAttribute("wrongFormat");
+        
         request.setAttribute("listC", listC );
         request.setAttribute("listdb", listindb );
         request.setAttribute("detail", u);
+        request.setAttribute("wrongFormat", wrongFormat);
         request.getRequestDispatcher("User_detail.jsp").forward(request, response);
         
        

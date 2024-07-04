@@ -16,7 +16,9 @@ import java.util.List;
  */
 public class get_aList {
 
-    public List<Account> gettList(int club_id) {
+
+     public List<Account> gettList(int club_id) {
+
         List<Account> aList = new ArrayList<>();
        List<Integer> iList = new ArrayList<>();
        ClubDAO cDAO = new ClubDAO();
@@ -28,6 +30,7 @@ public class get_aList {
            aList.add(a);
        }
         return aList;
-    }
+   }
     
-}
+
+ }

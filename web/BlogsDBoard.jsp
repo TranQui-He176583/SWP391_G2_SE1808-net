@@ -6,7 +6,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,257 +32,23 @@
         <link href="assets/css/remixicon.css" rel="stylesheet" type="text/css" />
         <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
         <!-- Css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+       
+       <style>
+       
+       </style>
+       
     </head>
 
     <body>
         <!-- Loader -->
    
         <div class="page-wrapper doctris-theme toggled">
-            <nav id="sidebar" class="sidebar-wrapper"style="background: aliceblue;">
-                <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
-                    <div class="sidebar-brand" style="font-size: 20px;background: white;">
-                        <a style="text-align: center" href="Home"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
-                  
-                        </a>
-                    </div>
-                    
-                    <ul class="sidebar-menu pt-3">
-                        <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
-                    
-
-                       <li class="sidebar-dropdown">
-    <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
-    <div class="sidebar-submenu">
-        <ul>
-            <li>
-                <a href="javascript:void(0)">Club</a>
-                <div class="sidebar-submenu">
-                    <ul>
-                        <li><a href="dr-profile.html">List</a></li>
-                        <li><a href="dr-profile.html">Detail</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li><a href="dr-profile.html">Event</a></li>
-        </ul>
-    </div>
-</li>
-                       
-
-                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-setting me-2 d-inline-block"></i>Setting</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i> User</a>
-                                        <div class="sidebar-submenu">
-                                        <ul>
-                                            <li><a href="countUser">User </a></li>
-                                            <li><a href="detailUser">User Detail</a></li>
-                                        </ul>
-                                        </div>
-                                    </li>
-                                  <li>
-                                        <a href="javascript:void(0)"><i class="uil uil-club me-2 d-inline-block"></i>Club</a>
-                                        <div class="sidebar-submenu">
-                                        <ul>
-                                            <li><a href="clubdb">Club</a></li>
-                                            <li><a href="clubdetaildb">Club Detail</a></li>
-                                        </ul>
-                                        </div>
-                                   </li>
-                                   <li>
-                                        <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
-                                        <div class="sidebar-submenu">
-                                        <ul>
-                                            <li><a href="blogdb">Blog</a></li>
-                                            <li><a href="blogdetaildb">Blog Detail</a></li>
-                                        </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        
-
-<!--                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li><a href="chat.html">Chat</a></li>
-                                    <li><a href="email.html">Email</a></li>
-                                    <li><a href="calendar.html">Calendar</a></li>
-                                </ul>
-                            </div>
-                        </li>-->
-
-<!--                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-shopping-cart me-2 d-inline-block"></i>Pharmacy</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="product-detail.html">Shop Detail</a></li>
-                                    <li><a href="shopcart.html">Shopcart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                </ul>
-                            </div>
-                        </li>-->
-
-<!--                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li><a href="blogs.html">Blogs</a></li>
-                                    <li><a href="blog-detail.html">Blog Detail</a></li>
-                                </ul>
-                            </div>
-                        </li>-->
-
-                    </ul>
-                    <!-- sidebar-menu  -->
-                </div>
-                <!-- sidebar-content  -->
-<!--                <ul class="sidebar-footer list-unstyled mb-0">
-                    <li class="list-inline-item mb-0 ms-1">
-                        <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
-                            <i class="uil uil-comment icons"></i>
-                        </a>
-                    </li>
-                </ul>-->
-            </nav>
-            <!-- sidebar-wrapper  -->
-
-            <!-- Start Page Content -->
+          <%@include file="commonFunction/header_db.jsp"%>
             <main class="page-content bg-light">
-                <div class="top-header">
-                    <div class="header-bar d-flex justify-content-between border-bottom"style="background: aliceblue;">
-                        <div class="d-flex align-items-center">
-                            <a href="#" class="logo-icon">
-                                <img src="assets/images/logo-icon.png" height="30" class="small" alt="">
-                                <span class="big">
-                                    <img src="assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                    <img src="assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
-                                </span>
-                            </a>
-                            <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
-                                <i class="uil uil-bars"></i>
-                            </a>
-                            <div class="search-bar p-0 d-none d-md-block ms-2">
-                                <div id="search" class="menu-search mb-0">
-                                    <form action="blogdb" method="post" id="searchform" class="searchform">
-                                        <div>
-                                            <input type="text" class="form-control border rounded-pill" name="search" id="search" placeholder="Search Keywords...">
-                                            <input type="submit" id="searchsubmit" value="Search">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <ul class="list-unstyled mb-0">
-<!--                            <li class="list-inline-item mb-0 ms-1">
-                                <a href="login" >
-                                    <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="home" class="bx bx-home"></i></div>
-                                </a>
-                            </li>-->
-                            
-
-                            <li class="list-inline-item mb-0 ms-1">
-                                <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                    <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="settings" class="fea icon-sm"></i></div>
-                                </a>
-                            </li>
-
-                            <li class="list-inline-item mb-0 ms-1">
-                                <div class="dropdown dropdown-primary">
-                                    <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail" class="fea icon-sm"></i></button>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4 <span class="visually-hidden">unread mail</span></span>
-                                    
-                                    <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 px-2 py-2" data-simplebar style="height: 320px; width: 300px;">
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/02.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Janalia</b> <small class="text-muted fw-normal d-inline-block">1 hour ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/Codepen.svg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>codepen</b>  <small class="text-muted fw-normal d-inline-block">4 hour ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/03.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Cristina</b> <small class="text-muted fw-normal d-inline-block">5 hour ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/dribbble.svg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Dribbble</b> <small class="text-muted fw-normal d-inline-block">24 hour ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/06.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Donald Aghori</b> <small class="text-muted fw-normal d-inline-block">1 day ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/07.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Calvin</b> <small class="text-muted fw-normal d-inline-block">2 day ago</small></small>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="list-inline-item mb-0 ms-1">
-                                                <div class="col-xl-10 col-lg-10 col-md-10">
-                        <div class="menu-main d-flex align-items-center justify-content-end">
-                            <!-- Main-menu -->
-                           
-                            
-                        
-                         <c:if test="${sessionScope.account.roleId != null}">                                  
-                             <div class="image-container">
-                             
-                                 <c:if test="${sessionScope.account.image == null }">  
-                                     
-                                    <img style="width: 28px; margin-top: -10px" src="assets/img/avatar/Avatar1.png" class="img-fluid"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </c:if>
-                                    
-                                    <c:if test="${sessionScope.account.image != null}">  
-                                       
-                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 30px" src="${sessionScope.account.image}" class="img-fluid"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </c:if>
-                                    
-                                        <div style="margin-top: 20px" class="dropdown-menu"> 
-                                            
-                                   <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
-                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>
-                                   <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           
-                                </div>
-                            </div>
-                         </c:if>
-                        </div>
-                    </div>   
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
+                <%@include file="commonFunction/header_db_1.jsp"%>
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <div class="d-md-flex justify-content-between">
@@ -291,62 +57,119 @@
 
                                 <nav aria-label="breadcrumb" class="d-inline-block mt-1">
                                     <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
-                                        <li class="breadcrumb-item"><a href="iblogdb">DashBoard</a></li>
+                                        <li class="breadcrumb-item"><a href="blogdb">DashBoard</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Blogs</li>
                                     </ul>
                                 </nav>
                             </div>
-                            <div class="mt-4 mt-sm-0" style="padding-left: 500px">
-                                <select class="form-control time-during select2input" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');" style="background: skyblue">
+                        </div>
+                            <div style="display: flex">
+                            <div style="display: flex; padding-top: 20px" >
+                            <div class="mt-4 mt-sm-0" style="margin-right: 10px;">
+                                <select class="form-select form-control" id="dailypatient" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');" style="border: 2px solid skyblue;">
                                     <option value=""  data-href="blogdb">Status</option>
                                     <option value="1" data-href="${pageContext.request.contextPath}/statusBlog?xStatus=1" ${param.xStatus == '1' ? 'selected' : ''}>active</option>
-                                    <option value="2" data-href="${pageContext.request.contextPath}/statusBlog?xStatus=2" ${param.xStatus == '2' ? 'selected' : ''}>block</option>
+                                    <option value="0" data-href="${pageContext.request.contextPath}/statusBlog?xStatus=0" ${param.xStatus == '0' ? 'selected' : ''}>block</option>
                                 </select>
                             </div>
 <!--                            <div class="mt-4 mt-sm-0">
                                 <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newblogadd">Add Blog</a>
                             </div>-->
+                      
+                             <div class="mt-4 mt-sm-0" style="padding-left: 10px">
+                                <select class="form-select form-control" id="dailypatient" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');" style="border: 2px solid skyblue;">
+                                    <option value="0" data-href="blogdb" >All Event</option>
+                                    <option value="1" data-href="${pageContext.request.contextPath}/blogByClub?clubID=1" ${param.clubID eq '1' ? 'selected' : ''}>Vovinam</option>
+                                    <option value="2" data-href="${pageContext.request.contextPath}/blogByClub?clubID=2" ${param.clubID eq '2' ? 'selected' : ''}>Teakwondo</option>
+                                    <option value="3" data-href="${pageContext.request.contextPath}/blogByClub?clubID=3" ${param.clubID eq '3' ? 'selected' : ''}>Street Workout</option>
+                                    <option value="4" data-href="${pageContext.request.contextPath}/blogByClub?clubID=4" ${param.clubID eq '4' ? 'selected' : ''}>Melody</option>
+                                    <option value="5" data-href="${pageContext.request.contextPath}/blogByClub?clubID=5" ${param.clubID eq '5' ? 'selected' : ''}>Chinese</option>
+                                    <option value="6" data-href="${pageContext.request.contextPath}/blogByClub?clubID=6" ${param.clubID eq '6' ? 'selected' : ''}>Cinema Martial</option>
+                                    <option value="7" data-href="${pageContext.request.contextPath}/blogByClub?clubID=7" ${param.clubID eq '7' ? 'selected' : ''}>Japanese</option>
+                                    <option value="8" data-href="${pageContext.request.contextPath}/blogByClub?clubID=8" ${param.clubID eq '8' ? 'selected' : ''}>Tình Nguyện</option>
+                                    <option value="9" data-href="${pageContext.request.contextPath}/blogByClub?clubID=9" ${param.clubID eq '9' ? 'selected' : ''}>Tiếng Anh</option>
+                                    <option value="10" data-href="${pageContext.request.contextPath}/blogByClub?clubID=10" ${param.clubID eq '10' ? 'selected' : ''}>Cầu lông</option>
+                                </select>
+                            </div>
+                            </div>
+                            <div class="col-sm-12 col-md-3" style="padding-left: 600px;padding-right: 20px">
+                                                        <div class="justify-content-md-end"style="display: flex;padding-left: 30px">
+                                    <form action="blogdb" method="post" style="display: flex; align-items: center;">
+    <div class="search-wrapper" style="position: relative;">
+        <input value="${searchBlog}" type="text" name="search" placeholder="search here" style="padding-left: 30px;border-radius:20px;font-size: 15px">
+      <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
+    </div>
+                                            </form>
+    <div class="d-grid" style="margin-left: 20px">
+      <a href="add_blog" class="btn btn-primary" style="height: 35px;width: 130px">ADD NEW</a>
+    </div>
+    
+
+  
+                                </div>
+                            </div>    
                         </div>
                         
                         <div class="row">
-                            <c:forEach items="${listBL}" var="lb">
-                            <div class="col-xl-3 col-lg-4 col-md-6 col-12 mt-4">
-                                <div class="card blog blog-primary border-0 shadow rounded overflow-hidden">
-                                    <img src="${lb.image}" class="img-fluid" alt="">
-                                 
-                                    <div class="card-body p-4">
-                                        <ul class="list-unstyled mb-2">
-                                        
-                                        </ul>
-                                        <div style="text-align: center">
-                                        <a href="blogdetaildb?bid=${lb.id}" class="text-dark title h5">${lb.name}</a>
-                                        </div>
-                                        <div class="post-meta d-flex justify-content-between mt-3">
-                                            <ul class="list-unstyled mb-0">
-                                                <li class="list-inline-item me-2 mb-0">
-                                                    <c:if test="${lb.status == 1}">
-        <a href="deleteBlog?id=${lb.id}&status=0"id="statusBtn" class="btn btn-success btn-sm" 
-            style="background-color: green;font-weight: normal;color: black"
-            onclick="toggleStatus(this);">active</a>
-    </c:if>
-    <c:if test="${lb.status == 0}">
-        <a href="deleteBlog?id=${lb.id}&status=1"id="statusBtn" class="btn btn-danger btn-sm" 
-            style="background-color: red;font-weight: normal;color: black"
-            onclick="toggleStatus(this);">block</a>
-    </c:if>
-                                                </li>
-                       
-                                            </ul>
-                                            <a href="blogdetaildb?bid=${lb.id}" class="link">Read More <i class="mdi mdi-chevron-right align-middle"></i></a>
-                                        </div>
-                                    </div>
+                                    <div class="col-12 mt-4">
+                                <div class="table-responsive shadow rounded">
+                                    <table class="table table-center bg-white mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom p-3" style="min-width: 50px;">Id</th>
+                                                <th class="border-bottom p-3" style="min-width: 100px;">Name</th>
+                                                <th class="border-bottom p-3">Time</th>
+                                                <th class="border-bottom p-3">Status</th>
+                                                <th class="border-bottom p-3" style="min-width: 50px;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:if test="${not empty listBL}">
+                                            <c:forEach items="${listBL}" var="lb">
+                                            <tr>
+                                                <th class="p-3">${lb.id}</th>
+                                                <td class="py-3">
+                                                    <a href="" class="text-dark">
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="${lb.image}" class="avatar avatar-md-sm rounded-circle shadow">
+                                                            <span class="ms-2">${lb.name}</span>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                               <td class="p-3">${lb.time}</td>
+                                                
+</td>
+                                                <c:if test="${lb.status == 1}">
+                                                    <td class="p-3"><span class="badge bg-soft-success">active</span></td>
+                                                </c:if>
+                                                <c:if test="${lb.status == 0}">
+                                                    <td class="p-3"><span class="badge bg-soft-danger">block</span></td>
+                                                </c:if>
+                                                    <td class="text-end p-3" >
+                                                    
+                                                    <a href="blogdetaildb?bid=${lb.id}" class="btn btn-icon btn-pills btn-soft-primary"><i class="uil uil-eye"></i> </a>
+                                                    <a href="deleteBlog?id=${lb.id}&status=1" class="btn btn-icon btn-pills btn-soft-success" style="margin: 0px 10px"><i class="uil uil-check-circle text"></i></a>
+                                                    <a href="deleteBlog?id=${lb.id}&status=0" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-multiply text"></i></a>
+                                                  
+                                                </td>
+                                            </tr>
+                                            </c:forEach>
+                                            </c:if>
+                                                                        <c:if test="${empty listBL}">
+                        <tr>
+                           <td colspan="7">
+                              <div class="alert alert-danger text-center">There are no Blog</div>
+                           </td>
+                        </tr>
+                              </c:if>
+
+                                        </tbody>
+                                    </table>
                                 </div>
-                            </div><!--end col-->
-                            </c:forEach>
+                            </div>
         
                         </div><!--end row-->
-        
-                        
+            
                             <div class="row text-center" style="padding: 20px;">
                             <!-- PAGINATION START -->
                              <div class="clearfix" style="padding-bottom: 10px;
@@ -367,7 +190,9 @@
 </div>
                             <!-- PAGINATION END -->
                         </div><!--end row-->
-                        
+                    
+                         
+                 
                     </div>
                 </div><!--end container-->
 
@@ -559,6 +384,7 @@ CKEDITOR.replace('blog-description', {
     height: '200px'
 });
 </script>
+
 
 <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
         <!-- javascript -->

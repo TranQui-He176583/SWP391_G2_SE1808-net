@@ -13,19 +13,22 @@ public class Contact {
     String email;
     String subject;
     String details;
-    String name;
     String phonenumber;
+    String name;
+    int status;
+    
 
     public Contact() {
     }
 
-    public Contact(int id, String email, String subject, String details, String name, String phonenumber) {
+    public Contact(int id, String email, String subject, String details, String phonenumber, String name, int status) {
         this.id = id;
         this.email = email;
         this.subject = subject;
         this.details = details;
-        this.name = name;
         this.phonenumber = phonenumber;
+        this.name = name;
+        this.status = status;
     }
 
     public int getId() {
@@ -60,6 +63,14 @@ public class Contact {
         this.details = details;
     }
 
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
     public String getName() {
         return name;
     }
@@ -68,11 +79,13 @@ public class Contact {
         this.name = name;
     }
 
-    public String getPhonenumber(){
-        return phonenumber;
+    public int getStatus() {
+        return status;
     }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     
-    public void setPhonenumber(String phonenumber){
-        this.phonenumber = phonenumber;
-    }
 }

@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -81,10 +82,10 @@ public class editBlogdb extends HttpServlet {
         throws ServletException, IOException {
     PrintWriter out = response.getWriter();
     String xid = request.getParameter("id");
-    int id = Integer.parseInt(xid);
+   
     String xName = request.getParameter("name");
     String xDetails = request.getParameter("details");
-
+    LocalDateTime xTime =  LocalDateTime.now();
     Part xImage = request.getPart("image");
     
     String xStatus = request.getParameter("status");
@@ -98,7 +99,7 @@ public class editBlogdb extends HttpServlet {
         if (xImage != null && xImage.getSize() > 0) { // Check if an image was uploaded
             imageURL = saveUploadedFile(request);
             if (b.getImage() != null) {
-                File file = new File("D:\\SWP\\Project\\SWP391_G2_SE1808-net\\Swp\\build\\web\\" + b.getImage());
+                File file = new File("C:\\Users\\pc\\Swp291\\build\\web\\" + b.getImage());
                 file.delete();
             }
         } else {
@@ -108,9 +109,11 @@ public class editBlogdb extends HttpServlet {
         b.setDetails(xDetails);
         b.setImage(imageURL);
         b.setStatus(status);
+        b.setTime(xTime);
         bdao.EditBlog(b);
-        request.setAttribute("completeChange", "Change Information Susscess!");
-        response.sendRedirect("blogdb");
+   
+        request.getSession().setAttribute("completeChange", "Change Information Susscess!");
+        response.sendRedirect("blogdetaildb?bid="+xid);
     } else {
         out.println("<html><body><h1>Error: 'blog' attribute is null</h1></body></html>");
     }
@@ -123,7 +126,7 @@ public class editBlogdb extends HttpServlet {
    
     
    String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
-    String uploadPath = "assets/img/avatar/";
+    String uploadPath = "assets/img/blog/";
 
     Part part = request.getPart("image");
     String fileName = getUniqueFileName(part);

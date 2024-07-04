@@ -2,11 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package Controller;
 
+import Model.Account;
 import Model.Blog;
 import Model.BlogDAO;
+import Model.EventDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -15,6 +16,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.time.LocalDateTime;
@@ -23,7 +25,7 @@ import java.time.LocalDateTime;
  *
  * @author Duong
  */
-@WebServlet(name="add_blog", urlPatterns={"/add_blog"})
+@WebServlet(name = "add_blog", urlPatterns = {"/add_blog"})
 
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1MB
@@ -31,34 +33,37 @@ import java.time.LocalDateTime;
         maxRequestSize = 1024 * 1024 * 10 // 10MB
 )
 public class add_blog extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet add_blog</title>");  
+            out.println("<title>Servlet add_blog</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet add_blog at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet add_blog at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -66,34 +71,77 @@ public class add_blog extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
-    } 
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String cid = request.getParameter("cid");
+        Account a = new Account();
+        EventDAO eDAO = new EventDAO();
+        a = (Account) session.getAttribute("account");
+        if (a != null) {
+            if (eDAO.checkManager(a.getId(), Integer.parseInt(cid)) == false) {
+                request.setAttribute("complete", "You don't have role to add event!");
 
-    /** 
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else {
+                request.setAttribute("cid", cid);
+                request.getRequestDispatcher("add_blog.jsp").forward(request, response);
+            }
+        } else {
+            request.setAttribute("complete", "Please Login");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
+    }
+
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter pr = response.getWriter();
+
         String name = request.getParameter("name");
-        LocalDateTime time = LocalDateTime.now();
-        String xDetail = request.getParameter("details");
-        String imageURL = saveUploadedFile(request);
-        Blog b = new Blog(0, name, xDetail, 0, time, imageURL, 0);
-        BlogDAO bDAO = new BlogDAO();
-        pr.println(xDetail);
-        pr.print(bDAO.addBlog(b));
-        pr.print(imageURL);
+        String details = request.getParameter("details");
+        Part imagePart = request.getPart("image");
+        boolean isValid = true;
+
+        if (name == null || name.isEmpty()) {
+            request.setAttribute("invalidName", "Blog name cannot be empty!");
+            isValid = false;
+        }
+
+        if (details == null || details.isEmpty()) {
+            request.setAttribute("invalidDetail", "Blog Detail cannot be empty!");
+            isValid = false;
+        }
+
+        if (imagePart == null || imagePart.getSize() == 0) {
+            request.setAttribute("invalidImage", "Blog Avatar cannot be empty!");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            request.setAttribute("name", name);
+            request.setAttribute("details", details);
+            request.getRequestDispatcher("add_blog.jsp").forward(request, response);
+        } else {
+            String imageURL = saveBlogImage(request); // Changed method name to saveBlogImage
+            LocalDateTime time = LocalDateTime.now();
+            Blog blog = new Blog(0, name, details, 0, imageURL, time, 0);
+
+            BlogDAO blogDAO = new BlogDAO();
+            blogDAO.addBlog(blog);
+            response.sendRedirect("index.jsp");
+        }
     }
-    
-    String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
+
+    String saveBlogImage(HttpServletRequest request) throws IOException, ServletException {
         String uploadPath = "assets/img/blog/";
 
         Part part = request.getPart("image");
@@ -120,8 +168,9 @@ public class add_blog extends HttpServlet {
         return newFileName;
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override

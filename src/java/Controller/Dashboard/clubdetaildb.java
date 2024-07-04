@@ -48,14 +48,13 @@ public class clubdetaildb extends HttpServlet {
         Club c =cdao.getClub(id);
         Account a = udao.getManagerByClubID("2", id);
         List<Club> detailindb = cdao.pagingClub(index);
-        String wrongName = (String) request.getSession().getAttribute("wrongName");
-        request.getSession().removeAttribute("wrongName");
-//        pr.print(a.getFullname());
+        String completeChange = (String) request.getSession().getAttribute("completeChange");
+        request.getSession().removeAttribute("completeChange");
         request.setAttribute("detailC", c );
         request.setAttribute("Manager", a );
        
         request.setAttribute("listdb", detailindb );
-        request.setAttribute("wrongName", wrongName);
+        request.setAttribute("completeChange", completeChange);
 
         request.getRequestDispatcher("clubDetailDboard.jsp").forward(request, response);
       } 

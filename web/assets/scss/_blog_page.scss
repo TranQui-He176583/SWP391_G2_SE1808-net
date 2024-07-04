@@ -771,13 +771,10 @@
 
 .blog_right_sidebar {
 
-    // border: 1px solid #eeeeee;
-    // background: #fafaff;
-    // padding: 30px;
+    
     .widget_title {
         font-size: 20px;
         margin-bottom: 40px;
-        // color: $title-color;
 
         &::after {
             content: "";
@@ -789,7 +786,6 @@
 
     .single_sidebar_widget {
         background: #fbf9ff;
-        padding: 30px;
         margin-bottom: 30px;
         .btn_1{
             margin-top: 0px;

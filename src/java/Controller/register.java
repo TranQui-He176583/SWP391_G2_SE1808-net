@@ -77,12 +77,13 @@ public class register extends HttpServlet {
         String xEmail = (String) request.getAttribute("email");
         String xFullname = (String)request.getAttribute("fullname");
         String xPassWord =(String) request.getAttribute("password");
+        String xNote =(String) request.getAttribute("note");
         HttpSession session = request.getSession();
         AccountDAO  aDAO = new AccountDAO();
         encodePassword ep = new encodePassword();
        xPassWord = ep.toSHA1(xPassWord);  
        int numberAccount = aDAO.getNumberAccount()+1;
-        Account account = new Account(numberAccount, xPassWord, 3, 0, xFullname, xEmail, "", 0,null);
+       Account account = new Account(numberAccount, xPassWord, 3, 0, xFullname, xEmail, "", 0,null,xNote);
        out.print(aDAO.insert(account));
        
         session.setAttribute("account", account);

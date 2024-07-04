@@ -9,21 +9,25 @@ package Model;
  * @author pc
  */
 public class Club {
+
     int id;
     String name;
     int status;
     String avatar;
     String detail;
+    String category;
 
     public Club() {
     }
 
-    public Club(int id, String name, int status, String avatar, String detail) {
+    public Club(int id, String name, int status, String avatar, String detail, String category) {
         this.id = id;
         this.name = name;
         this.status = status;
         this.avatar = avatar;
         this.detail = detail;
+        this.category = category;
+
     }
 
     public int getId() {
@@ -66,6 +70,12 @@ public class Club {
         this.detail = detail;
     }
 
-   
-   
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 }

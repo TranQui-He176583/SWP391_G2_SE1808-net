@@ -30,385 +30,148 @@
         <link href="assets/css/tiny-slider.css" rel="stylesheet" />
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
+           <style>
+               .card-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
 
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.card-wrapper:hover {
+    transform: rotateY(180deg);
+}
+.card-back .flex-1 p.text-muted {
+    color: #FFB6C1 !important;
+}
+.card-front .flex-1 p.text-muted {
+    color: #90EE90 !important;
+}
+
+           </style>
     </head>
-   
+    
     <body>
         <!-- Loader -->
         
         <!-- Loader -->
 
         <div class="page-wrapper doctris-theme toggled">
-            <nav id="sidebar" class="sidebar-wrapper"style="background: aliceblue;">
-                <div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
-                    <div class="sidebar-brand" style="font-size: 20px;background: white;">
-                        <a style="text-align: center" href="Home"><img src="assets/img/logo/logofpt.png" alt="" width ="50%" height="50%">
-                  
-                        </a>
-                    </div>
-                    
-                    <ul class="sidebar-menu pt-3">
-                        <li><a href="dboard"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
-                    
-
-                       <li class="sidebar-dropdown">
-    <a href="javascript:void(0)"><i class="uil uil-table me-2 d-inline-block"></i>Table</a>
-    <div class="sidebar-submenu">
-        <ul>
-            <li>
-                <a href="javascript:void(0)">Club</a>
-                <div class="sidebar-submenu">
-                    <ul>
-                        <li><a href="dr-profile.html">List</a></li>
-                        <li><a href="dr-profile.html">Detail</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li><a href="dr-profile.html">Event</a></li>
-        </ul>
-    </div>
-</li>
-                       
-
-                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-setting me-2 d-inline-block"></i>Setting</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i> User</a>
-                                        <div class="sidebar-submenu">
-                                        <ul>
-                                            <li><a href="countUser">User </a></li>
-                                            <li><a href="detailUser">User Detail</a></li>
-                                        </ul>
-                                        </div>
-                                    </li>
-                                  <li>
-                                        <a href="javascript:void(0)"><i class="uil uil-club me-2 d-inline-block"></i>Club</a>
-                                        <div class="sidebar-submenu">
-                                        <ul>
-                                            <li><a href="clubdb">Club</a></li>
-                                            <li><a href="clubdetaildb">Club Detail</a></li>
-                                        </ul>
-                                        </div>
-                                   </li>
-                                   <li>
-                                        <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
-                                        <div class="sidebar-submenu">
-                                        <ul>
-                                            <li><a href="blogdb">Blog</a></li>
-                                            <li><a href="blogdetaildb">Blog Detail</a></li>
-                                        </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        
-
-<!--                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-apps me-2 d-inline-block"></i>Apps</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li><a href="chat.html">Chat</a></li>
-                                    <li><a href="email.html">Email</a></li>
-                                    <li><a href="calendar.html">Calendar</a></li>
-                                </ul>
-                            </div>
-                        </li>-->
-
-<!--                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-shopping-cart me-2 d-inline-block"></i>Pharmacy</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="product-detail.html">Shop Detail</a></li>
-                                    <li><a href="shopcart.html">Shopcart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                </ul>
-                            </div>
-                        </li>-->
-
-<!--                        <li class="sidebar-dropdown">
-                            <a href="javascript:void(0)"><i class="uil uil-flip-h me-2 d-inline-block"></i>Blogs</a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li><a href="blogs.html">Blogs</a></li>
-                                    <li><a href="blog-detail.html">Blog Detail</a></li>
-                                </ul>
-                            </div>
-                        </li>-->
-
-                    </ul>
-                    <!-- sidebar-menu  -->
-                </div>
-                <!-- sidebar-content  -->
-<!--                <ul class="sidebar-footer list-unstyled mb-0">
-                    <li class="list-inline-item mb-0 ms-1">
-                        <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
-                            <i class="uil uil-comment icons"></i>
-                        </a>
-                    </li>
-                </ul>-->
-            </nav>
-            <!-- sidebar-wrapper  -->
-
-            <!-- Start Page Content -->
+            <%@include file="commonFunction/header_db.jsp"%>
             <main class="page-content bg-light">
-                <div class="top-header">
-                    <div class="header-bar d-flex justify-content-between border-bottom"style="background: aliceblue;">
-                        <div class="d-flex align-items-center">
-                            <a href="#" class="logo-icon">
-                                <img src="assets/images/logo-icon.png" height="30" class="small" alt="">
-                                <span class="big">
-                                    <img src="assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
-                                    <img src="assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
-                                </span>
-                            </a>
-                            <a id="close-sidebar" class="btn btn-icon btn-pills btn-soft-primary ms-2" href="#">
-                                <i class="uil uil-bars"></i>
-                            </a>
-                            <div class="search-bar p-0 d-none d-md-block ms-2">
-                                <div id="search" class="menu-search mb-0">
-                                    <form role="search" method="get" id="searchform" class="searchform">
-                                        <div>
-                                            <input type="text" class="form-control border rounded-pill" name="s" id="s" placeholder="Search Keywords...">
-                                            <input type="submit" id="searchsubmit" value="Search">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <ul class="list-unstyled mb-0">
-<!--                            <li class="list-inline-item mb-0 ms-1">
-                                <a href="login" >
-                                    <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="home" class="bx bx-home"></i></div>
-                                </a>
-                            </li>-->
-                            
-
-                            <li class="list-inline-item mb-0 ms-1">
-                                <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                    <div class="btn btn-icon btn-pills btn-soft-primary"><i data-feather="settings" class="fea icon-sm"></i></div>
-                                </a>
-                            </li>
-
-                            <li class="list-inline-item mb-0 ms-1">
-                                <div class="dropdown dropdown-primary">
-                                    <button type="button" class="btn btn-icon btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="mail" class="fea icon-sm"></i></button>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4 <span class="visually-hidden">unread mail</span></span>
-                                    
-                                    <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow rounded border-0 mt-3 px-2 py-2" data-simplebar style="height: 320px; width: 300px;">
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/02.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Janalia</b> <small class="text-muted fw-normal d-inline-block">1 hour ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/Codepen.svg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>codepen</b>  <small class="text-muted fw-normal d-inline-block">4 hour ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/03.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Cristina</b> <small class="text-muted fw-normal d-inline-block">5 hour ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/dribbble.svg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Dribbble</b> <small class="text-muted fw-normal d-inline-block">24 hour ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/06.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Donald Aghori</b> <small class="text-muted fw-normal d-inline-block">1 day ago</small></small>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="d-flex align-items-center justify-content-between py-2 border-top">
-                                            <div class="d-inline-flex position-relative overflow-hidden">
-                                                <img src="assets/images/client/07.jpg" class="avatar avatar-md-sm rounded-circle shadow" alt="">
-                                                <small class="text-dark mb-0 d-block text-truncat ms-3">You received a new email from <b>Calvin</b> <small class="text-muted fw-normal d-inline-block">2 day ago</small></small>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="list-inline-item mb-0 ms-1">
-                                                <div class="col-xl-10 col-lg-10 col-md-10">
-                        <div class="menu-main d-flex align-items-center justify-content-end">
-                            <!-- Main-menu -->
-                           
-                            
-                        
-                         <c:if test="${sessionScope.account.roleId != null}">                                  
-                             <div class="image-container">
-                             
-                                 <c:if test="${sessionScope.account.image == null }">  
-                                     
-                                    <img style="width: 28px; margin-top: -10px" src="assets/img/avatar/Avatar1.png" class="img-fluid"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </c:if>
-                                    
-                                    <c:if test="${sessionScope.account.image != null}">  
-                                       
-                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 30px" src="${sessionScope.account.image}" class="img-fluid"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    </c:if>
-                                    
-                                        <div style="margin-top: 20px" class="dropdown-menu"> 
-                                            
-                                   <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
-                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>
-                                   <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           
-                                </div>
-                            </div>
-                         </c:if>
-                        </div>
-                    </div>   
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
+                <%@include file="commonFunction/header_db_1.jsp"%>
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <h5 class="mb-0">Dashboard</h5>
 
-                        <div class="row" style="width: 155%;">
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-user h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">${cUser}</h5>
-                                            <p class="text-muted mb-0">USER</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
+                        <div class="row" style="">
+                           <div class="col-xl-3 col-lg-4 col-md-4 mt-4">
+    <div class="card-wrapper">
+        <div class="card features feature-primary rounded border-0 shadow p-4 card-front">
+            <div class="d-flex align-items-center">
+                <div class="icon text-center rounded-md">
+                    <i class="uil uil-user h3 mb-0"></i>
+                </div>
+                <div class="flex-1 ms-2">
+                    <h5 class="mb-0">${cUser1}</h5>
+                    <p class="text-muted mb-0">USER ACTIVE</p>
+                </div>
+            </div>
+        </div>
+        <div class="card features feature-primary rounded border-0 shadow p-4 card-back">
+            <div class="d-flex align-items-center">
+                <div class="icon text-center rounded-md">
+                    <i class="uil uil-user h3 mb-0"></i>
+                </div>
+                <div class="flex-1 ms-2">
+                    <h5 class="mb-0">${cUser0}</h5>
+                    <p class="text-muted mb-0">USER BLOCK</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!--end col-->
                             
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                            
+                            <div class="col-xl-3 col-lg-4 col-md-4 mt-4">
                                 <div class="card features feature-primary rounded border-0 shadow p-4">
                                     <div class="d-flex align-items-center">
                                         <div class="icon text-center rounded-md">
                                             <i class="uil uil-club h3 mb-0"></i>
                                         </div>
                                         <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">${cClub}</h5>
-                                            <p class="text-muted mb-0">CLUB</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                            
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-star h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">${cEvent}</h5>
-                                            <p class="text-muted mb-0">EVENT</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!--end col-->
-                            
-                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
-                                <div class="card features feature-primary rounded border-0 shadow p-4">
-                                    <div class="d-flex align-items-center">
-                                        <div class="icon text-center rounded-md">
-                                            <i class="uil uil-share h3 mb-0"></i>
-                                        </div>
-                                        <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">16000</h5>
-                                            <p class="text-muted mb-0">SHARE</p>
+                                          <h5 class="mb-0" id="cClub">${cClub}</h5>
+                                          <h5 class="mb-0" id="cVoThuat"></h5>
+                                          <h5 class="mb-0" id="cHocThuat"></h5>
+                                          <h5 class="mb-0" id="cNgheThuat"></h5>
+                                          <h5 class="mb-0" id="cCongDong"></h5>
+                                          <select class="form-select select-box" aria-label="Default select example" style="width: 135px" onchange="updateValues(this)">
+                                              <option value="CLUB" data-quantity="${cClub}">CLUB</option>
+                                              <option value="Võ Thuật" data-quantity="${cVoThuat}">Võ Thuật</option>
+                                              <option value="Học Thuật" data-quantity="${cHocThuat}">Học Thuật</option>
+                                              <option value="Nghệ Thuật" data-quantity="${cNgheThuat}">Nghệ Thuật</option>
+                                              <option value="Cộng Đồng" data-quantity="${cCongDong}">Cộng Đồng</option>
+                                          </select>
+       
                                         </div>
                                     </div>
                                     
                                 </div>
                             </div><!--end col-->
                             
-<!--                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                            <div class="col-xl-3 col-lg-4 col-md-4 mt-4">
                                 <div class="card features feature-primary rounded border-0 shadow p-4">
                                     <div class="d-flex align-items-center">
                                         <div class="icon text-center rounded-md">
-                                            <i class="uil uil-medkit h3 mb-0"></i>
+                                            <i class="uil uil-star h3 mb-0"></i>
                                         </div>
                                         <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">220</h5>
-                                            <p class="text-muted mb-0">Appointment</p>
+                                            <h5 class="mb-0" id="cEvent">${cEvent}</h5>
+                                            <h5 class="mb-0" id="cNotHappened"></h5>
+                                            <h5 class="mb-0" id="cHadHappened"></h5>
+                                            <h5 class="mb-0" id="cCanceled"></h5>
+                                            <select class="form-select select-box" aria-label="Default select example" style="width: 135px" onchange="updateValues1(this)">
+                                              <option value="EVENT" data-quantity="${cEvent}">EVENT</option>
+                                              <option value="Not Happened" data-quantity="${cNotHappened}">Not Happened</option>
+                                              <option value="Had Happened" data-quantity="${cHadHappened}">Had Happened</option>
+                                              <option value="Canceled" data-quantity="${cCanceled}">Canceled</option>
+                                  
+                                          </select>
                                         </div>
                                     </div>
                                 </div>
-                            </div>end col-->
+                            </div><!--end col-->
                             
-<!--                            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+                            <div class="col-xl-3 col-lg-4 col-md-4 mt-4">
                                 <div class="card features feature-primary rounded border-0 shadow p-4">
                                     <div class="d-flex align-items-center">
                                         <div class="icon text-center rounded-md">
-                                            <i class="uil uil-medical-drip h3 mb-0"></i>
+                                            <i class="uil uil-newspaper h3 mb-0"></i>
                                         </div>
                                         <div class="flex-1 ms-2">
-                                            <h5 class="mb-0">10</h5>
-                                            <p class="text-muted mb-0">Operations</p>
+                                            <h5 class="mb-0">${cBlog}</h5>
+                                            <p class="text-muted mb-0">BLOG</p>
                                         </div>
                                     </div>
+                                    
                                 </div>
-                            </div>end col
-                        </div>end row-->
-
-<!--                        <div class="row">
-                            <div class="col-xl-8 col-lg-7 mt-4">
-                                <div class="card shadow border-0 p-4">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h6 class="align-items-center mb-0">Patients visit by Gender</h6>
-                                        
-                                        <div class="mb-0 position-relative">
-                                            <select class="form-select form-control" id="yearchart">
-                                                <option selected>2020</option>
-                                                <option value="2019">2019</option>
-                                                <option value="2018">2018</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div id="dashboard" class="apex-chart"></div>
-                                </div>
-                            </div>end col-->
-
-<!--                            <div class="col-xl-4 col-lg-5 mt-4">
-                                <div class="card shadow border-0 p-4">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h6 class="align-items-center mb-0">Patients by Department</h6>
-                                        
-                                        <div class="mb-0 position-relative">
-                                            <select class="form-select form-control" id="dailychart">
-                                                <option selected>Today</option>
-                                                <option value="2019">Yesterday</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div id="department" class="apex-chart"></div>
-                                </div>
-                            </div>end col-->
-                        </div><!--end row-->
-
-                        <div class="row">
+                            </div><!--end col-->
+                   
+                            <div class="row">
                             <div class="col-xl-4 col-lg-6 mt-4">
                                 <div class="card border-0 shadow rounded">
                                     <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
@@ -455,9 +218,13 @@
                                             <h6 class="mb-0"><i class="uil uil-club me-1 h5"></i> Club</h6>
                                             
                                             <div class="mb-0 position-relative">
-                                                <select class="form-select form-control" id="dailypatient">
-                                                    <option selected>New</option>
-                                                    <option value="2019">Old</option>
+                                                <select class="form-select form-control" id="dailypatient" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
+                                                    <option value="ALL" data-href="dboard" >All Club</option>
+                                                    <option value="Võ Thuật" data-href="${pageContext.request.contextPath}/clubByCategory?category=Võ%20Thuật" ${param.category eq 'Võ Thuật' ? 'selected' : ''}>Võ thuật</option>
+                                                    <option value="Học Thuật" data-href="${pageContext.request.contextPath}/clubByCategory?category=Học%20Thuật" ${param.category eq 'Học Thuật' ? 'selected' : ''}>Học Thuật</option>
+                                                    <option value="Nghệ Thuật" data-href="${pageContext.request.contextPath}/clubByCategory?category=Nghệ%20Thuật" ${param.category eq 'Nghệ Thuật' ? 'selected' : ''}>Nghệ Thuật</option>
+                                                    <option value="Cộng Đồng" data-href="${pageContext.request.contextPath}/clubByCategory?category=Cộng%20Đồng" ${param.category eq 'Cộng Đồng' ? 'selected' : ''}>Cộng Đồng</option>
+                                                    
                                                 </select>
                                             </div>
                                         </div>
@@ -486,12 +253,23 @@
                                     <div class="p-4 border-bottom">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <h6 class="mb-0"><i class="uil uil-star me-1 h5"></i> Event</h6>
-                                            
-                                            <div class="mb-0 position-relative">
-                                                <select class="form-select form-control" id="dailypatient">
-                                                    <option selected>New</option>
-                                                    <option value="2019">Old</option>
+                           
+                                           <div class="mb-0 position-relative">
+          
+                                               <select class="form-select form-control" id="dailypatient" onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
+                                                    <option value="0" data-href="dboard" >All Event</option>
+                                                    <option value="1" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=1" ${param.club_Id eq '1' ? 'selected' : ''}>Vovinam</option>
+                                                    <option value="2" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=2" ${param.club_Id eq '2' ? 'selected' : ''}>Teakwondo</option>
+                                                    <option value="3" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=3" ${param.club_Id eq '3' ? 'selected' : ''}>Street Workout</option>
+                                                    <option value="4" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=4" ${param.club_Id eq '4' ? 'selected' : ''}>Melody</option>
+                                                    <option value="5" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=5" ${param.club_Id eq '5' ? 'selected' : ''}>Chinese</option>
+                                                    <option value="6" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=6" ${param.club_Id eq '6' ? 'selected' : ''}>Cinema Martial</option>
+                                                    <option value="7" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=7" ${param.club_Id eq '7' ? 'selected' : ''}>Japanese</option>
+                                                    <option value="8" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=8" ${param.club_Id eq '8' ? 'selected' : ''}>Tình Nguyện</option>
+                                                    <option value="9" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=9" ${param.club_Id eq '9' ? 'selected' : ''}>Tiếng Anh</option>
+                                                    <option value="10" data-href="${pageContext.request.contextPath}/eventByClubID?club_Id=10" ${param.club_Id eq '10' ? 'selected' : ''}>Cầu lông</option>
                                                 </select>
+                                          
                                             </div>
                                         </div>
                                     </div>
@@ -503,7 +281,7 @@
                                                 <img src="${lie.avatar}" class="avatar avatar-small rounded-circle border shadow" alt="">
                                                 <div class="flex-1 ms-3">
                                                     <span class="d-block h6 mb-0">${lie.name}</span>
-                                            
+                         
                                                 </div>
                                             </div>
      
@@ -595,6 +373,33 @@
         <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./assets/js/popper.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
+        <script>
+           function updateValues(select) {
+    const selectedValue = select.value;
+    const selectedQuantity = select.options[select.selectedIndex].getAttribute('data-quantity');
+
+    document.getElementById('cClub').textContent = selectedValue === 'CLUB' ? selectedQuantity : '';
+    document.getElementById('cVoThuat').textContent = selectedValue === 'Võ Thuật' ? selectedQuantity : '';
+    document.getElementById('cHocThuat').textContent = selectedValue === 'Học Thuật' ? selectedQuantity : '';
+    document.getElementById('cNgheThuat').textContent = selectedValue === 'Nghệ Thuật' ? selectedQuantity : '';
+    document.getElementById('cCongDong').textContent = selectedValue === 'Cộng Đồng' ? selectedQuantity : '';
+  }
+        </script>
+        
+        <script>
+           function updateValues1(select) {
+    const selectedValue = select.value;
+    const selectedQuantity = select.options[select.selectedIndex].getAttribute('data-quantity');
+
+    document.getElementById('cEvent').textContent = selectedValue === 'EVENT' ? selectedQuantity : '';
+    document.getElementById('cNotHappened').textContent = selectedValue === 'Not Happened' ? selectedQuantity : '';
+    document.getElementById('cHadHappened').textContent = selectedValue === 'Had Happened' ? selectedQuantity : '';
+    document.getElementById('cCanceled').textContent = selectedValue === 'Canceled' ? selectedQuantity : '';
+   
+  }
+        </script>
+        
+        
     </body>
 
 </html>

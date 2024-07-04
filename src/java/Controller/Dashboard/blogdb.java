@@ -14,7 +14,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -40,13 +43,12 @@ public class blogdb extends HttpServlet {
     if (indexPage != null) {
         index = Integer.parseInt(indexPage);
     }
-    
     BlogDAO bdao = new BlogDAO();
     int count = bdao.getTotalBlog();
-    int maxPage = (count / 6) + (count % 6 != 0 ? 1 : 0);
-
+    int maxPage = (count / 5) + (count % 5 != 0 ? 1 : 0);
     List<Blog> listBlog = bdao.pagingBlog(index);
- 
+   
+//    out.print(listBlog.get(0).getImage());
     request.setAttribute("listBL", listBlog);
     request.setAttribute("mPage", maxPage);
     request.setAttribute("tag", index);
@@ -78,14 +80,23 @@ public class blogdb extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String Search =request.getParameter("search");
-         BlogDAO bdao = new BlogDAO();
-         List<Blog> list= bdao.getSearchBlogByTitle(Search);
-         List<Blog> lisc= bdao.getSearchBlogByCLub(Search);
-         request.setAttribute("listBL", list);
-         request.setAttribute("listBL", lisc);
-         request.getRequestDispatcher("BlogsDBoard.jsp").forward(request, response);
-    }
+    PrintWriter out = response.getWriter();
+    String Search = request.getParameter("search");
+    BlogDAO bdao = new BlogDAO();
+    List<Blog> listByTitle = bdao.getSearchBlogByTitle(Search);
+    List<Blog> listByClub = bdao.getSearchBlogByCLub(Search);
+
+    // Combine the two lists
+    List<Blog> combinedList = new ArrayList<>(listByTitle);
+    combinedList.addAll(listByClub);
+
+    // Remove duplicates
+    Set<Blog> uniqueBlogs = new HashSet<>(combinedList);
+    combinedList = new ArrayList<>(uniqueBlogs);
+    request.setAttribute("searchBlog", Search);
+    request.setAttribute("listBL", combinedList);
+    request.getRequestDispatcher("BlogsDBoard.jsp").forward(request, response);
+}
 
     /** 
      * Returns a short description of the servlet.

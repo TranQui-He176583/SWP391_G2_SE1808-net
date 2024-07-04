@@ -250,6 +250,58 @@ public class EventDAO extends MyDAO {
         }
     return 0;
     }
+    
+    public int getTotalEventByStatus0(){
+        xSql = "select count(*)from event where status =0";     
+         
+        try {
+           ps = con.prepareStatement(xSql);
+          
+           rs = ps.executeQuery();
+          while(rs.next()) {
+
+            return rs.getInt(1);
+        }
+        }
+        catch(Exception e) {
+        }
+    return 0;
+    }
+    
+    public int getTotalEventByStatus1(){
+        xSql = "select count(*)from event where status =1";     
+         
+        try {
+           ps = con.prepareStatement(xSql);
+          
+           rs = ps.executeQuery();
+          while(rs.next()) {
+
+            return rs.getInt(1);
+        }
+        }
+        catch(Exception e) {
+        }
+    return 0;
+    }
+    
+    public int getTotalEventByStatus2(){
+        xSql = "select count(*)from event where status =2";     
+         
+        try {
+           ps = con.prepareStatement(xSql);
+          
+           rs = ps.executeQuery();
+          while(rs.next()) {
+
+            return rs.getInt(1);
+        }
+        }
+        catch(Exception e) {
+        }
+    return 0;
+    }
+    
     public List<Event> getAllEvent() {
         List<Event> t = new ArrayList<>();
         xSql = "select * from event";
@@ -322,4 +374,34 @@ public class EventDAO extends MyDAO {
      } 
         return false;
     }
+    public List<Event> getAllEventByClubID(String ClubID){
+         List<Event> t = new ArrayList<>();
+         xSql = "select * from event where club_id =? ORDER BY id DESC LIMIT 5";
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setString(1, ClubID);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            int club_id = rs.getInt("club_id");
+            LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+            String location = rs.getString("location");
+            String details = rs.getString("details");
+            String avatar = rs.getString("avatar");
+            boolean status = rs.getBoolean("status");
+            Event event = new Event(id, name, club_id, time, location, details,avatar,status);
+            t.add(event);
+     
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+    }
+     
+     
 }

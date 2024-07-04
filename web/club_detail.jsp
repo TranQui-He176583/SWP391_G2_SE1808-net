@@ -15,7 +15,7 @@
             .myclub-list {
                 position: fixed;
                 right: 0;
-                top: 120px;
+                top: 200px;
                 width: 100px;
                 display: flex;
                 flex-direction: column;
@@ -62,10 +62,19 @@
                     <div class="club-info col-9" style="flex: 0 0 75%; max-width: 75%;"> 
                         <h1><c:out value="${club.name}"/></h1>
                         <p>${requestScope.club.getDetail()} </p>
-                        <c:if test="${requestScope.manager==true}">       
-                <div style="display: flex; justify-content: flex-start; align-items: center; margin-left:">
-                    <a href="add_Event?cid=${requestScope.club.getId()}" >
+                    </div>
+                </div>
+            </div>
+
+            <c:if test="${requestScope.manager==true}">       
+                <div style="display: flex; justify-content: flex-start; align-items: center; margin-left: 30%">
+                    <a href="add_blog?cid=${requestScope.club.getId()}" >
                         <button style="width: 70px; height: 40px; border-radius: 5px;
+                                background: #f05123;border: none">Add Blog</button>
+                    </a>
+                    
+                    <a href="add_Event?cid=${requestScope.club.getId()}" >
+                        <button style="width: 70px; height: 40px; border-radius: 5px ; margin-left: 20px;
                                 background: #f05123;border: none">Add Event</button>
                     </a>
                     <a href="add_Task?eventid=0&clubid=${requestScope.club.getId()}" style="margin-left: 20px">
@@ -80,14 +89,10 @@
                                     background: #f05123;border: none">Task List</button>
                         </form>
                     </a>
+                    
                 </div>
 
             </c:if>
-                    </div>
-                    
-                </div>
-            </div>
-
             
             <div class="myclub-list">
 

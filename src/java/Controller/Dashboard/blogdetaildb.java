@@ -7,6 +7,7 @@ package Controller.Dashboard;
 
 import Model.Blog;
 import Model.BlogDAO;
+import Model.Club;
 import Model.ClubDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -45,10 +46,16 @@ public class blogdetaildb extends HttpServlet {
         ClubDAO cdao =new ClubDAO();
         Blog b = bdao.getBlog(id);
         List<Blog> listBlog= bdao.pagingBlog(index);
-
+        Club c = cdao.getNameByBlogID(id);
+        
+        String completeChange = (String) request.getSession().getAttribute("completeChange");
+        request.getSession().removeAttribute("completeChange");
         request.setAttribute("detailBlog", b);
+        request.setAttribute("nameClub", c);
         request.setAttribute("listdb", listBlog);
        
+        request.setAttribute("completeChange", completeChange);
+        
         request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
         
       

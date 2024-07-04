@@ -18,10 +18,13 @@ public class Account {
     String phone;
     int gender;
     String image;
+    String note;
 
-    public Account(int id,  String passWord, int roleId, int status, String fullname, String email, String phone, int gender,String image) {
+    public Account() {
+    }
+
+    public Account(int id, String passWord, int roleId, int status, String fullname, String email, String phone, int gender, String image, String note) {
         this.id = id;
-    
         this.passWord = passWord;
         this.roleId = roleId;
         this.status = status;
@@ -30,9 +33,7 @@ public class Account {
         this.phone = phone;
         this.gender = gender;
         this.image = image;
-    }
-
-    public Account() {
+        this.note = note;
     }
 
     public int getId() {
@@ -106,5 +107,14 @@ public class Account {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
     
 }

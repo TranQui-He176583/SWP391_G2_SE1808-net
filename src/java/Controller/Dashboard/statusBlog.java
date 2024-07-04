@@ -32,6 +32,7 @@ public class statusBlog extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        PrintWriter pr = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
         String Status = request.getParameter("xStatus");
         BlogDAO dao = new BlogDAO();

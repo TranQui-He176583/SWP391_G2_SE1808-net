@@ -14,7 +14,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -34,8 +37,8 @@ public class clubdb extends HttpServlet {
     throws ServletException, IOException {
          PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
-         String indexPage = request.getParameter("index");
-   
+        String indexPage = request.getParameter("index");
+        
     int index = 1; // Default to page 1
     if (indexPage != null) {
         index = Integer.parseInt(indexPage);
@@ -43,8 +46,7 @@ public class clubdb extends HttpServlet {
 
     ClubDAO cdao = new ClubDAO();
     int count = cdao.getTotalClub();
-    int maxPage = (count / 4) + (count % 4 != 0 ? 1 : 0);
-
+    int maxPage = (count / 5) + (count % 5 != 0 ? 1 : 0);
     List<Club> litClub = cdao.pagingClub(index);
     request.setAttribute("listCLB", litClub);
     request.setAttribute("mPage", maxPage);
@@ -77,14 +79,25 @@ public class clubdb extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String NameSearch =request.getParameter("search");
-         ClubDAO bdao = new ClubDAO();
-         List<Club> list= bdao.getSearchClubByName(NameSearch);
-        
-         request.setAttribute("listCLB", list);
-         
-         request.getRequestDispatcher("clubDboard.jsp").forward(request, response);
-    }
+
+           PrintWriter out = response.getWriter();
+    String NameSearch = request.getParameter("search");
+    ClubDAO cdao = new ClubDAO();
+    List<Club> listByName = cdao.getSearchClubByName(NameSearch);
+    List<Club> listByManager = cdao.getSearchClubByManager(NameSearch);
+
+    // Combine the two lists
+    List<Club> combinedList = new ArrayList<>(listByName);
+    combinedList.addAll(listByManager);
+
+    // Remove duplicates
+    Set<Club> uniqueClubs = new HashSet<>(combinedList);
+    combinedList = new ArrayList<>(uniqueClubs);
+    request.setAttribute("NameSearch", NameSearch);
+    request.setAttribute("listCLB", combinedList);
+     request.getRequestDispatcher("clubDboard.jsp").forward(request, response);
+}
+    
 
     /** 
      * Returns a short description of the servlet.

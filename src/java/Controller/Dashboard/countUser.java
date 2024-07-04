@@ -84,6 +84,7 @@ public class countUser extends HttpServlet {
          UserDAO dao = new UserDAO();
          List<Account> lis= dao.getSearchUser(NameSearch);
          request.setAttribute("listUs", lis);
+         request.setAttribute("NameSearch", NameSearch);
          request.getRequestDispatcher("User_list.jsp").forward(request, response);
     }
     
