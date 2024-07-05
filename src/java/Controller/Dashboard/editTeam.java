@@ -5,9 +5,8 @@
 
 package Controller.Dashboard;
 
-import Model.Club;
-import Model.ClubDAO;
-import Model.UserDAO;
+import Model.Team;
+import Model.TeamDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -23,13 +22,14 @@ import java.io.File;
  *
  * @author pc
  */
-@WebServlet(name="editClubdb", urlPatterns={"/editClubdb"})
+@WebServlet(name="editTeam", urlPatterns={"/editTeam"})
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1MB
         maxFileSize = 1024 * 1024 * 5, // 5MB
         maxRequestSize = 1024 * 1024 * 10 // 10MB
 )
-public class editClubdb extends HttpServlet {
+
+public class editTeam extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -46,10 +46,10 @@ public class editClubdb extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet editClubdb</title>");  
+            out.println("<title>Servlet editTeam</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet editClubdb at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet editTeam at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -76,54 +76,54 @@ public class editClubdb extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String UPLOAD_DIR = "assets/img/anhclb";
+    private static final String UPLOAD_DIR = "assets/img/team";
     @Override
-     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    PrintWriter out = response.getWriter();
-    String xid = request.getParameter("id");
-    int id = Integer.parseInt(xid);
-    String xName = request.getParameter("name");
-    String xStatus = request.getParameter("status");
-    int status = Integer.parseInt(xStatus);
-    Part xAvatar = request.getPart("avatar");
-    String xDetail = request.getParameter("detail");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+                PrintWriter out = response.getWriter();
+         String xid = request.getParameter("id");
+         int id = Integer.parseInt(xid);
+         String xName = request.getParameter("name");
+         String xStatus = request.getParameter("status");
+         int status = Integer.parseInt(xStatus);
+         Part xImage = request.getPart("image");
+         String xDetails = request.getParameter("details");
 
-    ClubDAO cdao = new ClubDAO();
-    UserDAO udao = new UserDAO();
-    Club c= cdao.getClub(xid);
+    TeamDAO tdao = new TeamDAO();
+    Team t= tdao.getTeam(xid);
     String imageURL="";
-    if (c != null) {
-        if (xAvatar != null && xAvatar.getSize() > 0) {
+    if (t != null) {
+        if (xImage != null && xImage.getSize() > 0) {
             imageURL = saveUploadedFile(request);
-            if (c.getAvatar()!= null) {
-                File file = new File("C:\\Users\\pc\\SWP391_G2_SE1808-net\\build\\web\\" + c.getAvatar());
+            if (t.getImage()!= null) {
+                File file = new File("C:\\Users\\pc\\SWP391_G2_SE1808-net\\build\\web\\" + t.getImage());
                 file.delete();
             }
         } else {
-            imageURL = c.getAvatar(); // Use the existing image URL
+            imageURL = t.getImage(); // Use the existing image URL
         }
-        c.setName(xName);
-        c.setStatus(status);
-        c.setAvatar(imageURL);
-        c.setDetail(xDetail);
-//        out.print(c.getId());
-        out.print(cdao.EditClub(c));
+        t.setName(xName);
+        t.setImage(imageURL);
+        t.setDetails(xDetails);
+        t.setStatus(status);
+//        out.print(t.getName());
+       out.print(tdao.EdiTeam(t));
         request.getSession().setAttribute("completeChange", "Change Information Susscess!");
-        response.sendRedirect("clubdetaildb?cid="+xid);
+        response.sendRedirect("detailTeam?tid="+xid);
     } else {
-        out.println("<html><body><h1>Error: 'club' attribute is null</h1></body></html>");
+        out.println("<html><body><h1>Error: 'Team' attribute is null</h1></body></html>");
     }
 }   
+
 
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */
-   String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
-    String uploadPath = "assets/img/anhclb/";
+        String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
+    String uploadPath = "assets/img/team/";
 
-    Part part = request.getPart("avatar");
+    Part part = request.getPart("image");
     String fileName = getUniqueFileName(part);
     String filePath = uploadPath + fileName;
 
@@ -147,3 +147,4 @@ public class editClubdb extends HttpServlet {
         return newFileName;
     }
 }
+

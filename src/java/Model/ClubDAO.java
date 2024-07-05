@@ -132,7 +132,7 @@ public class ClubDAO extends MyDAO {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 int status = rs.getInt("status");
-                String avatar = rs.getString("email");
+                String avatar = rs.getString("avatar");
                 String detail = rs.getString("detail");
                 String category = rs.getString("category");
                 t.add(new Club(id, name, status, avatar, detail, category));

@@ -8,9 +8,6 @@ package Controller.Dashboard;
 import Model.Account;
 import Model.Club;
 import Model.ClubDAO;
-import Model.Team;
-import Model.TeamDAO;
-import Model.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -25,8 +22,8 @@ import java.util.List;
  *
  * @author pc
  */
-@WebServlet(name="clubdetaildb", urlPatterns={"/clubdetaildb"})
-public class clubdetaildb extends HttpServlet {
+@WebServlet(name="get_ClubById", urlPatterns={"/get_ClubById"})
+public class get_ClubById extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,41 +35,21 @@ public class clubdetaildb extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter pr =response.getWriter();
-         HttpSession session = request.getSession();
-         Account account = (Account) session.getAttribute("account");
+        PrintWriter pr = response.getWriter();
+        HttpSession session = request.getSession();
+       Account account = (Account) session.getAttribute("account");
 
     if (account != null && account.getRoleId() == 1) {
-        String id=request.getParameter("cid");
+        ClubDAO dao = new ClubDAO();
+        List<Club> listClub = dao.getAllClub();
+        request.setAttribute("listClub", listClub);
+        request.getRequestDispatcher("clubDboard.jsp").forward(request, response);
         
-           ClubDAO cdao =new ClubDAO();
-           UserDAO udao = new UserDAO();
-           TeamDAO tdao= new TeamDAO();
-           String indexPage = request.getParameter("index");
-        int index = 1; 
-        if (indexPage != null) {
-        index = Integer.parseInt(indexPage);
-    }
-        int count = tdao.getTotalTeamByClubID(id);
-        Club c =cdao.getClub(id);
-        Account a = udao.getManagerByClubID("2", id);
-        List<Club> detailindb = cdao.pagingClub(index);
-        List<Team> teamClub = tdao.getAllCLubByClubID(id);
-        String completeChange = (String) request.getSession().getAttribute("completeChange");
-        request.getSession().removeAttribute("completeChange");
-        request.setAttribute("detailC", c );
-        request.setAttribute("Manager", a );
-        request.setAttribute("cTeam", count );
-        request.setAttribute("listdb", detailindb );
-        request.setAttribute("listTeam", teamClub );
-        request.setAttribute("completeChange", completeChange);
-
-        request.getRequestDispatcher("clubDetailDboard.jsp").forward(request, response);
-      } else {
+    } else {
         request.setAttribute("complete", "You do not have the right to access this page.");
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
-}
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -98,11 +75,7 @@ public class clubdetaildb extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String NameSearch =request.getParameter("search");
-         ClubDAO dao = new ClubDAO();
-         List<Club> lis= dao.getSearchClubByName(NameSearch);
-         request.setAttribute("listdb", lis);
-         request.getRequestDispatcher("clubDetailDboard.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 

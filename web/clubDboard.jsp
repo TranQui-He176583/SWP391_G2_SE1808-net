@@ -34,6 +34,11 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <style>
+            .dropdown-item:hover {
+    color: #007bff !important;
+  }
+        </style>
     </head>
 
     <body>
@@ -88,11 +93,17 @@
     </div>
                                             </form>
     <div class="d-grid" style="margin-left: 20px">
-      <a href="add_club" class="btn btn-primary" style="height: 35px;width: 130px">ADD NEW</a>
-    </div>
-    
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="height: 35px;width: 130px">
+      ADD NEW
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <li><a class="dropdown-item" href="add_club" style="color: inherit; transition: color 0.3s;">Add Club</a></li>
+      <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#newteamadd" style="color: inherit; transition: color 0.3s;">Add Team</a></li>
+    </ul>
+  </div>
+</div>
 
-  
                                 </div>
                             </div>    
                         </div>
@@ -177,7 +188,97 @@
                     </div>
                 </div><!--end container-->
 
-                <!-- Footer Start -->
+                 <form action="editClubdb" method="post" enctype="multipart/form-data">
+                    <input type="hidden"  name="id" value="${detailC.id}" readonly required>
+                    <div class="modal fade" id="newteamadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"style="">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                            <div class="modal-content">
+
+                                <div class="modal-header border-bottom p-3">
+                                    <h5 class="modal-title" id="exampleModalLabel">ADD TEAM</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body p-3 pt-4" style="padding-top: 0px">
+
+                                    <div class="row">
+    <div class="col-md-6">
+        <div class="ms-md-4">
+            <div class="row">
+                <input type="hidden" name="id" value="${detailC.id}" readonly required>
+                <div class="col-12">
+                   <div class="d-grid">
+    <p class="text-muted"></p>
+    <div class="preview-box d-block bg-light p-1">
+    <img id="preview-image" src="${detailC.avatar}" class="img-fluid" alt="">
+</div>
+    <input type="file" id="avatar" name="avatar" accept="image/*" onchange="previewImage(this)">
+</div>
+                    
+                </div>
+                <div class="col-12">
+                    <div class="mb-3" style="padding-top: 10px">
+                        <label class="form-label">Team Name <span class="text-danger"></span></label>
+                        <input name="name" id="name" type="text" class="form-control" value="">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label">Team Leader <span class="text-danger"></span></label>
+                        <input name="name" id="name" type="text" class="form-control" value="">
+                    </div>
+                </div>
+                <div class="col-12">
+    <div class="mb-3">
+        <label class="form-label">Club<span class="text-danger"></span></label>
+        <select name="club_id" class="form-control">
+            <c:forEach items="${listClub}" var="club">
+                <option value="${club.id}">${club.name}</option>
+            </c:forEach>
+        </select>
+    </div>
+</div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <div class="context-status" style="display: flex;">
+                            <div style="display: flex; align-items: center;">
+                                <input ${detailC.status == 1 ? 'checked' : ''} value="1" type="radio" name="status" style="font-size: 10px; margin-right: 10px" checked="">
+                                active
+                            </div>
+                            <div style="display: flex; align-items: center; margin-left: 20px;">
+                                <input ${detailC.status== 0 ? 'checked' : ''} value="0" type="radio" name="status" style="font-size: 10px; margin-right: 10px">
+                                block
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="mb-3">
+            <label class="form-label">Description <span class="text-danger">*</span></label>
+            <textarea name="detail" id="comments" rows="4" class="form-control" placeholder=" description :"> ${detailC.detail} </textarea>
+        </div>
+        <div>
+            <p style="color: red; font-size: 15px">${requestScope.wrongName}</p>
+        </div>
+    </div>
+    
+    <div class="col-lg-12 text-end">
+        <button type="submit" class="btn btn-primary">ADD</button>
+    </div>
+</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            </form>
+
                 <footer class="bg-white shadow py-3">
                     <div class="container-fluid">
                         <div class="row align-items-center">
@@ -210,6 +311,21 @@
         <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./assets/js/popper.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('detail');
+</script>
+        <script>
+    function previewImage(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#preview-image').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
     </body>
 
 </html>

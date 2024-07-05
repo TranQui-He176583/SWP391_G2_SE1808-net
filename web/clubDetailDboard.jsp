@@ -34,7 +34,11 @@
         <!-- Css -->
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
+           
            <style>
+               .team-option:hover .team-name {
+  color: blue;
+}
                .preview-box {
   width: 180px;
   height: 180px;
@@ -63,11 +67,23 @@
                         <div class="d-md-flex justify-content-between">
                             <div>
                                 <h5 class="mb-0">${detailC.name}</h5>
-                                <div>
+                                <div style="display: flex">
                                 <input type="hidden"  name="id" value="${detailC.id}" readonly required>
                                 <ul class="list-unstyled mt-2 mb-0">
-                                    <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i>Manager:${Manager.fullname}</li>
+                                    <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i>Manager: ${Manager.fullname}</li>
                                 </ul>  
+                              <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ${cTeam} Team
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <c:forEach items="${listTeam}" var="lte">
+                                        <a class="dropdown-item team-option" href="detailTeam?tid=${lte.id}" data-href="" style="color: inherit;">
+                                          <span class="team-name">${lte.name}</span>
+                                        </a>
+                                    </c:forEach>
+                                </div>
+                              </div>
                                 </div>
                                 
                             </div>
@@ -94,14 +110,8 @@
                 
                                         <p class="text-muted">${detailC.detail}</p>
                                        
-                                    
-                                        
-                
                                         <ul class="media-list list-unstyled mb-0">
-                                           
-                
-                                            
-                                            
+                                         
                                             <li class="mt-4">
                                              
                                             </li>
