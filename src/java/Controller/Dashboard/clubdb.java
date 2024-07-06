@@ -44,7 +44,11 @@ public class clubdb extends HttpServlet {
 
     if (account != null && account.getRoleId() == 1) {
         String indexPage = request.getParameter("index");
-        
+        String invalidName = request.getParameter("invalidName");
+        String invalidDetail = request.getParameter("invalidDetail");
+        String invalidImage = request.getParameter("invalidImage");
+        String name = request.getParameter("name");
+        String detail = request.getParameter("detail");
     int index = 1; // Default to page 1
     if (indexPage != null) {
         index = Integer.parseInt(indexPage);
@@ -54,10 +58,16 @@ public class clubdb extends HttpServlet {
     int count = cdao.getTotalClub();
     int maxPage = (count / 5) + (count % 5 != 0 ? 1 : 0);
     List<Club> litClub = cdao.pagingClub(index);
+    List<Club> lisClub = cdao.getAllClub();
     request.setAttribute("listCLB", litClub);
+    request.setAttribute("CLB", lisClub);
     request.setAttribute("mPage", maxPage);
     request.setAttribute("tag", index);
-
+    request.setAttribute("invalidName", invalidName);
+    request.setAttribute("invalidDetail", invalidDetail);
+    request.setAttribute("invalidImage", invalidImage);
+    request.setAttribute("name", name);
+    request.setAttribute("detail", detail);
     request.getRequestDispatcher("clubDboard.jsp").forward(request, response);
     } else {
         request.setAttribute("complete", "You do not have the right to access this page.");

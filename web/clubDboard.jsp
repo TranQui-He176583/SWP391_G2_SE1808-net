@@ -38,6 +38,20 @@
             .dropdown-item:hover {
     color: #007bff !important;
   }
+               .preview-box {
+  width: 180px;
+  height: 180px;
+  margin-left: 80px;
+  background-color: #f8f9fa;
+  border-radius: 100%; /* Add this line to round the corners */
+}
+
+#preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100%; /* Add this line to round the corners of the image */
+}
         </style>
     </head>
 
@@ -188,8 +202,8 @@
                     </div>
                 </div><!--end container-->
 
-                 <form action="editClubdb" method="post" enctype="multipart/form-data">
-                    <input type="hidden"  name="id" value="${detailC.id}" readonly required>
+                 <form action="addTeam" method="post" enctype="multipart/form-data">
+                    
                     <div class="modal fade" id="newteamadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"style="">
                         <div class="modal-dialog modal-lg modal-dialog-centered">
 
@@ -206,34 +220,37 @@
     <div class="col-md-6">
         <div class="ms-md-4">
             <div class="row">
-                <input type="hidden" name="id" value="${detailC.id}" readonly required>
                 <div class="col-12">
                    <div class="d-grid">
     <p class="text-muted"></p>
     <div class="preview-box d-block bg-light p-1">
-    <img id="preview-image" src="${detailC.avatar}" class="img-fluid" alt="">
+    <img id="preview-image" src="${image}" class="img-fluid" alt="">
 </div>
-    <input type="file" id="avatar" name="avatar" accept="image/*" onchange="previewImage(this)">
+    <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(this)">
 </div>
                     
                 </div>
+<p style="color: red">${requestScope.invalidImage}</p>
+
                 <div class="col-12">
                     <div class="mb-3" style="padding-top: 10px">
                         <label class="form-label">Team Name <span class="text-danger"></span></label>
-                        <input name="name" id="name" type="text" class="form-control" value="">
+                        <input name="name" id="name" type="text" class="form-control" value="${name}" minlength="2" maxlength="40">
+                         <p style="color: red">${requestScope.invalidName}</p>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="mb-3">
                         <label class="form-label">Team Leader <span class="text-danger"></span></label>
-                        <input name="name" id="name" type="text" class="form-control" value="">
+                        <input name="leader" id="leader" type="text" class="form-control" value="">
                     </div>
                 </div>
+             <input type="hidden" id="clubID" name="clubID" value="${clubID}">
                 <div class="col-12">
     <div class="mb-3">
         <label class="form-label">Club<span class="text-danger"></span></label>
-        <select name="club_id" class="form-control">
-            <c:forEach items="${listClub}" var="club">
+        <select name="clubID" class="form-control">
+            <c:forEach items="${CLB}" var="club">
                 <option value="${club.id}">${club.name}</option>
             </c:forEach>
         </select>
@@ -244,11 +261,11 @@
                         <label class="form-label">Status</label>
                         <div class="context-status" style="display: flex;">
                             <div style="display: flex; align-items: center;">
-                                <input ${detailC.status == 1 ? 'checked' : ''} value="1" type="radio" name="status" style="font-size: 10px; margin-right: 10px" checked="">
+                                <input value="1" type="radio" name="status" style="font-size: 10px; margin-right: 10px" checked="">
                                 active
                             </div>
                             <div style="display: flex; align-items: center; margin-left: 20px;">
-                                <input ${detailC.status== 0 ? 'checked' : ''} value="0" type="radio" name="status" style="font-size: 10px; margin-right: 10px">
+                                <input value="0" type="radio" name="status" style="font-size: 10px; margin-right: 10px">
                                 block
                             </div>
                         </div>
@@ -261,11 +278,10 @@
     <div class="col-md-6">
         <div class="mb-3">
             <label class="form-label">Description <span class="text-danger">*</span></label>
-            <textarea name="detail" id="comments" rows="4" class="form-control" placeholder=" description :"> ${detailC.detail} </textarea>
+            <textarea name="details" id="details" rows="4" class="form-control" minlength="1" maxlength="500"> ${details} </textarea>
+            <p style="color: red">${requestScope.invalidDetail}</p>
         </div>
-        <div>
-            <p style="color: red; font-size: 15px">${requestScope.wrongName}</p>
-        </div>
+        
     </div>
     
     <div class="col-lg-12 text-end">
@@ -313,7 +329,7 @@
         <script src="./assets/js/bootstrap.min.js"></script>
         <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace('detail');
+    CKEDITOR.replace('details');
 </script>
         <script>
     function previewImage(input) {

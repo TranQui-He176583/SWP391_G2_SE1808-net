@@ -376,7 +376,7 @@
     </div>
     
     <div style="display: flex; align-items: center;">
-        <input  value="2" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
+        <input  value="0" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px">
         block
     </div>
 </div>

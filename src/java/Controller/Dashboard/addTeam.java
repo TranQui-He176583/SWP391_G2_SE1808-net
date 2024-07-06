@@ -3,33 +3,32 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.Event;
+package Controller.Dashboard;
 
+import Model.Team;
+import Model.TeamDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.time.LocalDateTime;
-import Model.*;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
-import java.time.LocalDate;
+
 /**
  *
- * @author quyka
+ * @author pc
  */
-@WebServlet(name="add_Event", urlPatterns={"/add_Event"})
+@WebServlet(name="addTeam", urlPatterns={"/addTeam"})
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1MB
         maxFileSize = 1024 * 1024 * 5, // 5MB
         maxRequestSize = 1024 * 1024 * 10 // 10MB
 )
-public class add_Event extends HttpServlet {
+public class addTeam extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -46,10 +45,10 @@ public class add_Event extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet add_Event</title>");  
+            out.println("<title>Servlet addTeam</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet add_Event at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet addTeam at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -66,26 +65,7 @@ public class add_Event extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
-         String cid = request.getParameter("cid");
-       Account a = new Account();
-       EventDAO eDAO = new EventDAO();
-       a = (Account) session.getAttribute("account");
-      if (a!=null) {
-          if (eDAO.checkManager(a.getId(), Integer.parseInt(cid))==false) {
-           request.setAttribute("complete", "You don't have role to add event!");
-           
-           request.getRequestDispatcher("index.jsp").forward(request, response);
-       } else {
-              request.setAttribute("cid", cid);
-       request.getRequestDispatcher("add_Event.jsp").forward(request, response);
-          }} else {
-      request.setAttribute("complete", "Please Login");
-           request.getRequestDispatcher("index.jsp").forward(request, response);
-      }
-       
-       
-      
+        processRequest(request, response);
     } 
 
     /** 
@@ -95,73 +75,49 @@ public class add_Event extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-     private static final String UPLOAD_DIR = "assets/img/eventlogo";
+    private static final String UPLOAD_DIR = "assets/img/team";
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter pr  = response.getWriter();
+       PrintWriter pr  = response.getWriter();
         String name = request.getParameter("name");
-        String Stime = request.getParameter("time");
         Part xImage = request.getPart("image");
-        String xLocation = request.getParameter("location");
         String xDetail = request.getParameter("details");
-        String xClubId = request.getParameter("clubid");
+        String xStatus = request.getParameter("status");
+        int status = Integer.parseInt(xStatus);
+        String xClubId = request.getParameter("clubID");
         boolean checkValid =true;
-      
-       if (name.length()<15) {
-            request.setAttribute("invalidlName", "Event Name length <15 chars");
-            checkValid= false;
-       }
-       
-       if (name.length()>150) {
-            request.setAttribute("invalidlName", "Event name has a maximum length of 150 characters");
-            checkValid= false;
-       }
-       if (Stime.equals("")) {
-           request.setAttribute("invalidTime", "Event time cannot be empty!");
+        if (name.equals("")) {
+           request.setAttribute("invalidName", "Team Name cannot be empty!");
            checkValid= false;
        }
-       if (xLocation.equals("")) {
-           request.setAttribute("invalidLocation", "Event location cannot be empty!");
-           checkValid= false;
-       }
-       if (xLocation.length()>100) {
-            request.setAttribute("invalidlLocation", "Event location has a maximum length of 100 characters");
-            checkValid= false;
-       }
-       if (xLocation.length()<5) {
-            request.setAttribute("invalidlLocation", "Event location length <5 chars");
-            checkValid= false;
-       }
+       else if (name.matches(".*<.*>.*")) {
+           request.setAttribute("invalidName", "Team Name cannot contain HTML tags!");
+           checkValid = false;
+        }
        if (xDetail.equals("")) {
-           request.setAttribute("invalidDetail", "Event Detail cannot be empty!");
+           request.setAttribute("invalidDetail", "Team Detail cannot be empty!");
            checkValid= false;
        }
        if (xImage.getSize()==0) {
-           request.setAttribute("invalidImage", "Event Avatar cannot be empty!");
+           request.setAttribute("invalidImage", "Team Avatar cannot be empty!");
            checkValid= false;
        } else {
             String fileName = xImage.getSubmittedFileName();
-             request.setAttribute("image", fileName);
+            request.setAttribute("image", fileName);
        }
-  if (checkValid== false) {
+       if (checkValid== false) {
       request.setAttribute("name", name);
-      request.setAttribute("time", Stime);
-      request.setAttribute("location", xLocation);
       request.setAttribute("detail", xDetail);
-      request.getRequestDispatcher("add_Event.jsp").forward(request, response);
+      response.sendRedirect("clubdb");
   }   else {  
-        LocalDateTime time = LocalDateTime.parse(Stime);
-        
-        int club_Id = Integer.parseInt(xClubId);
+        int clubID = Integer.parseInt(xClubId);
         String imageURL = saveUploadedFile(request);
-        Event e = new Event(0, name, club_Id, time, xLocation, xDetail,imageURL,true);
-        EventDAO eDAO = new EventDAO();
+        Team t = new Team(0, name, imageURL, xDetail, status, clubID);
+        TeamDAO tdao = new TeamDAO();
        
-        pr.print(eDAO.insert(e));
-        response.sendRedirect("event_Details?id="+eDAO.getId_newEvent());
+        pr.print(tdao.add(t));
+        response.sendRedirect("clubdetaildb?cid="+xClubId);
   }
     }
 
@@ -170,7 +126,7 @@ public class add_Event extends HttpServlet {
      * @return a String containing servlet description
      */
     String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
-    String uploadPath = "assets/img/eventlogo/";
+    String uploadPath = "assets/img/team/";
 
     Part part = request.getPart("image");
     String fileName = getUniqueFileName(part);

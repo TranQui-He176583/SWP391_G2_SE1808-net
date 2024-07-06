@@ -13,6 +13,24 @@ import java.util.List;
  * @author pc
  */
 public class TeamDAO extends MyDAO{
+    public String add (Team t ) {
+     xSql = "insert into team (id,name,image,details,status,clubID) values (?,?,?,?,?,?)"; 
+     try {    
+      ps = con.prepareStatement(xSql);
+      ps.setInt(1,t.getId());
+      ps.setString( 2, t.getName());
+      ps.setString(3,t.getImage());
+      ps.setString(4,t.getDetails());
+      ps.setInt(5, t.getStatus());
+      ps.setInt(6,t.getClubID());
+      ps.executeUpdate();
+      ps.close();
+     }     
+     catch(Exception e) {
+        return(e.getMessage());
+     }
+     return("OK!");
+  }
      public List<Team> getAllCLubByClubID(String ClubID) {
         List<Team> t = new ArrayList<>();
         xSql = "select * from team \n"
