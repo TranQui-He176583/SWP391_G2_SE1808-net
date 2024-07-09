@@ -85,7 +85,7 @@ public class addTeam extends HttpServlet {
         String xDetail = request.getParameter("details");
         String xStatus = request.getParameter("status");
         int status = Integer.parseInt(xStatus);
-        String xClubId = request.getParameter("clubID");
+        String xClubID = request.getParameter("clubID");
         boolean checkValid =true;
         if (name.equals("")) {
            request.setAttribute("invalidName", "Team Name cannot be empty!");
@@ -107,17 +107,17 @@ public class addTeam extends HttpServlet {
             request.setAttribute("image", fileName);
        }
        if (checkValid== false) {
-      request.setAttribute("name", name);
-      request.setAttribute("detail", xDetail);
-      response.sendRedirect("clubdb");
-  }   else {  
-        int clubID = Integer.parseInt(xClubId);
+           request.setAttribute("name", name);
+           request.setAttribute("detail", xDetail);
+           response.sendRedirect("clubdetaildb?cid="+xClubID);
+       }  else {  
+        int clubID = Integer.parseInt(xClubID);
         String imageURL = saveUploadedFile(request);
         Team t = new Team(0, name, imageURL, xDetail, status, clubID);
         TeamDAO tdao = new TeamDAO();
        
         pr.print(tdao.add(t));
-        response.sendRedirect("clubdetaildb?cid="+xClubId);
+        response.sendRedirect("clubdetaildb?cid="+xClubID);
   }
     }
 

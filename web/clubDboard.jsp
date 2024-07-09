@@ -107,16 +107,8 @@
     </div>
                                             </form>
     <div class="d-grid" style="margin-left: 20px">
-  <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="height: 35px;width: 130px">
-      ADD NEW
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <li><a class="dropdown-item" href="add_club" style="color: inherit; transition: color 0.3s;">Add Club</a></li>
-      <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#newteamadd" style="color: inherit; transition: color 0.3s;">Add Team</a></li>
-    </ul>
-  </div>
-</div>
+        <a href="add_club" class="btn btn-primary" style="height: 35px;width: 130px">ADD NEW</a>
+    </div>
 
                                 </div>
                             </div>    
@@ -201,99 +193,6 @@
                         </div><!--end row-->
                     </div>
                 </div><!--end container-->
-
-                 <form action="addTeam" method="post" enctype="multipart/form-data">
-                    
-                    <div class="modal fade" id="newteamadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"style="">
-                        <div class="modal-dialog modal-lg modal-dialog-centered">
-
-                            <div class="modal-content">
-
-                                <div class="modal-header border-bottom p-3">
-                                    <h5 class="modal-title" id="exampleModalLabel">ADD TEAM</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-
-                                <div class="modal-body p-3 pt-4" style="padding-top: 0px">
-
-                                    <div class="row">
-    <div class="col-md-6">
-        <div class="ms-md-4">
-            <div class="row">
-                <div class="col-12">
-                   <div class="d-grid">
-    <p class="text-muted"></p>
-    <div class="preview-box d-block bg-light p-1">
-    <img id="preview-image" src="${image}" class="img-fluid" alt="">
-</div>
-    <input type="file" id="image" name="image" accept="image/*" onchange="previewImage(this)">
-</div>
-                    
-                </div>
-<p style="color: red">${requestScope.invalidImage}</p>
-
-                <div class="col-12">
-                    <div class="mb-3" style="padding-top: 10px">
-                        <label class="form-label">Team Name <span class="text-danger"></span></label>
-                        <input name="name" id="name" type="text" class="form-control" value="${name}" minlength="2" maxlength="40">
-                         <p style="color: red">${requestScope.invalidName}</p>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="mb-3">
-                        <label class="form-label">Team Leader <span class="text-danger"></span></label>
-                        <input name="leader" id="leader" type="text" class="form-control" value="">
-                    </div>
-                </div>
-             <input type="hidden" id="clubID" name="clubID" value="${clubID}">
-                <div class="col-12">
-    <div class="mb-3">
-        <label class="form-label">Club<span class="text-danger"></span></label>
-        <select name="clubID" class="form-control">
-            <c:forEach items="${CLB}" var="club">
-                <option value="${club.id}">${club.name}</option>
-            </c:forEach>
-        </select>
-    </div>
-</div>
-                <div class="col-12">
-                    <div class="mb-3">
-                        <label class="form-label">Status</label>
-                        <div class="context-status" style="display: flex;">
-                            <div style="display: flex; align-items: center;">
-                                <input value="1" type="radio" name="status" style="font-size: 10px; margin-right: 10px" checked="">
-                                active
-                            </div>
-                            <div style="display: flex; align-items: center; margin-left: 20px;">
-                                <input value="0" type="radio" name="status" style="font-size: 10px; margin-right: 10px">
-                                block
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                 
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="mb-3">
-            <label class="form-label">Description <span class="text-danger">*</span></label>
-            <textarea name="details" id="details" rows="4" class="form-control" minlength="1" maxlength="500"> ${details} </textarea>
-            <p style="color: red">${requestScope.invalidDetail}</p>
-        </div>
-        
-    </div>
-    
-    <div class="col-lg-12 text-end">
-        <button type="submit" class="btn btn-primary">ADD</button>
-    </div>
-</div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            </form>
 
                 <footer class="bg-white shadow py-3">
                     <div class="container-fluid">

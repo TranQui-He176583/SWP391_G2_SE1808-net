@@ -53,6 +53,12 @@
   object-fit: cover;
   border-radius: 100%; /* Add this line to round the corners of the image */
 }
+#preview-image1 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100%; /* Add this line to round the corners of the image */
+}
            </style>
     </head>
 
@@ -84,7 +90,11 @@
                                     </c:forEach>
                                 </div>
                               </div>
+                                <div style="margin-left: 20px">
+                                   <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newteamadd" style="">ADD TEAM</a>
                                 </div>
+                                </div>
+                                
                                 
                             </div>
 
@@ -103,11 +113,7 @@
                                     <img src="${detailC.avatar}" class="img-fluid" alt="">
         
                                     <div class="p-4">
-                                        <!-- <ul class="list-unstyled">
-                                            <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i> Calvin Carlo</li>
-                                            <li class="list-inline-item date text-muted"><i class="mdi mdi-calendar-check"></i> 1st January, 2021</li>
-                                        </ul> -->
-                
+                                      
                                         <p class="text-muted">${detailC.detail}</p>
                                        
                                         <ul class="media-list list-unstyled mb-0">
@@ -249,6 +255,89 @@
                             </div>
                             </form>
 
+        <form action="addTeam" method="post" enctype="multipart/form-data">
+                    
+                    <div class="modal fade" id="newteamadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"style="">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                            <div class="modal-content">
+
+                                <div class="modal-header border-bottom p-3">
+                                    <h5 class="modal-title" id="exampleModalLabel">ADD TEAM</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body p-3 pt-4" style="padding-top: 0px">
+
+                                    <div class="row">
+    <div class="col-md-6">
+        <div class="ms-md-4">
+            <div class="row">
+                <div class="col-12">
+                   <div class="d-grid">
+    <p class="text-muted"></p>
+    <div class="preview-box d-block bg-light p-1">
+    <img id="preview-image1" src="${image}" class="img-fluid" alt="">
+</div>
+    <input type="file" id="image" name="image" accept="image/*" onchange="previewImage1(this)">
+</div>
+                    
+                </div>
+<p style="color: red">${requestScope.invalidImage}</p>
+<input type="hidden" id="clubID" name="clubID" value="${cid}">
+                <div class="col-12">
+                    <div class="mb-3" style="padding-top: 10px">
+                        <label class="form-label">Team Name <span class="text-danger"></span></label>
+                        <input name="name" id="name" type="text" class="form-control" value="${name}" minlength="2" maxlength="40">
+                         <p style="color: red">${requestScope.invalidName}</p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label">Team Leader <span class="text-danger"></span></label>
+                        <input name="leader" id="leader" type="text" class="form-control" value="">
+                    </div>
+                </div>
+            
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <div class="context-status" style="display: flex;">
+                            <div style="display: flex; align-items: center;">
+                                <input value="1" type="radio" name="status" style="font-size: 10px; margin-right: 10px" checked="">
+                                active
+                            </div>
+                            <div style="display: flex; align-items: center; margin-left: 20px;">
+                                <input value="0" type="radio" name="status" style="font-size: 10px; margin-right: 10px">
+                                block
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="mb-3">
+            <label class="form-label">Description <span class="text-danger">*</span></label>
+            <textarea name="details" id="details" rows="4" class="form-control" minlength="1" maxlength="500"> ${details} </textarea>
+            <p style="color: red">${requestScope.invalidDetail}</p>
+        </div>
+        
+    </div>
+    
+    <div class="col-lg-12 text-end">
+        <button type="submit" class="btn btn-primary">ADD</button>
+    </div>
+</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            </form>
+
                 <!-- Footer Start -->
                 <footer class="bg-white shadow py-3">
                     <div class="container-fluid">
@@ -279,6 +368,7 @@
         <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
 <script>
     CKEDITOR.replace('detail');
+    CKEDITOR.replace('details');
 </script>
 <script>
     function previewImage(input) {
@@ -286,6 +376,17 @@
         var reader = new FileReader();
         reader.onload = function (e) {
             $('#preview-image').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+<script>
+    function previewImage1(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#preview-image1').attr('src', e.target.result);
         };
         reader.readAsDataURL(input.files[0]);
     }
