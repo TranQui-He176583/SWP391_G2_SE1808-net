@@ -5,6 +5,8 @@
 
 package Controller.Dashboard;
 
+import Model.Club;
+import Model.ClubDAO;
 import Model.Team;
 import Model.TeamDAO;
 import java.io.IOException;
@@ -15,6 +17,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
 
@@ -86,36 +89,34 @@ public class addTeam extends HttpServlet {
         String xStatus = request.getParameter("status");
         int status = Integer.parseInt(xStatus);
         String xClubID = request.getParameter("clubID");
-        boolean checkValid =true;
+        ClubDAO cdao = new ClubDAO();
+        Club c = cdao.getClub(xClubID);
         if (name.equals("")) {
-           request.setAttribute("invalidName", "Team Name cannot be empty!");
-           checkValid= false;
+           request.getSession().setAttribute("invalidName", "Team Name cannot be empty!");
+           response.sendRedirect("clubdetaildb?cid="+xClubID);
+           return;
        }
        else if (name.matches(".*<.*>.*")) {
-           request.setAttribute("invalidName", "Team Name cannot contain HTML tags!");
-           checkValid = false;
+           request.getSession().setAttribute("invalidName", "Team Name cannot contain HTML tags!");
+           response.sendRedirect("clubdetaildb?cid="+xClubID);
+           return;
         }
        if (xDetail.equals("")) {
-           request.setAttribute("invalidDetail", "Team Detail cannot be empty!");
-           checkValid= false;
+           request.getSession().setAttribute("invalidDetail", "Team Detail cannot be empty!");
+           response.sendRedirect("clubdetaildb?cid="+xClubID);
+           return;
        }
        if (xImage.getSize()==0) {
-           request.setAttribute("invalidImage", "Team Avatar cannot be empty!");
-           checkValid= false;
+           request.getSession().setAttribute("invalidImage", "Team Avatar cannot be empty!");
+           response.sendRedirect("clubdetaildb?cid="+xClubID);
+           return;
        } else {
             String fileName = xImage.getSubmittedFileName();
             request.setAttribute("image", fileName);
-       }
-       if (checkValid== false) {
-           request.setAttribute("name", name);
-           request.setAttribute("detail", xDetail);
-           response.sendRedirect("clubdetaildb?cid="+xClubID);
-       }  else {  
         int clubID = Integer.parseInt(xClubID);
         String imageURL = saveUploadedFile(request);
         Team t = new Team(0, name, imageURL, xDetail, status, clubID);
         TeamDAO tdao = new TeamDAO();
-       
         pr.print(tdao.add(t));
         response.sendRedirect("clubdetaildb?cid="+xClubID);
   }

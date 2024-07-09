@@ -60,13 +60,26 @@ public class clubdetaildb extends HttpServlet {
         List<Team> teamClub = tdao.getAllCLubByClubID(id);
         String completeChange = (String) request.getSession().getAttribute("completeChange");
         request.getSession().removeAttribute("completeChange");
+        
+        String invalidName = (String) request.getSession().getAttribute("invalidName");
+        request.getSession().removeAttribute("invalidName");
+        
+        String invalidDetail = (String) request.getSession().getAttribute("invalidDetail");
+        request.getSession().removeAttribute("invalidDetail");
+        
+        String invalidImage = (String) request.getSession().getAttribute("invalidImage");
+        request.getSession().removeAttribute("invalidImage");
+        
         request.setAttribute("detailC", c );
         request.setAttribute("Manager", a );
         request.setAttribute("cTeam", count );
         request.setAttribute("listdb", detailindb );
         request.setAttribute("listTeam", teamClub );
         request.setAttribute("completeChange", completeChange);
-
+        request.setAttribute("invalidName", invalidName);
+        request.setAttribute("invalidDetail", invalidDetail);
+        request.setAttribute("invalidImage", invalidImage);
+        
         request.getRequestDispatcher("clubDetailDboard.jsp").forward(request, response);
       } else {
         request.setAttribute("complete", "You do not have the right to access this page.");

@@ -41,8 +41,7 @@
             
     
     <input type="hidden" id="clubid" name="clubid" value="${requestScope.cid}"  >
-        
-  
+   
   <div>
     <label for="time">Thời gian:</label>
     <input type="datetime-local" id="time" name="time" value="${requestScope.time}"  >

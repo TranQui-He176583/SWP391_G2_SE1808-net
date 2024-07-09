@@ -256,7 +256,7 @@
                             </form>
 
         <form action="addTeam" method="post" enctype="multipart/form-data">
-                    
+                    <input type="hidden" id="clubID" name="clubID" value="${detailC.id}">
                     <div class="modal fade" id="newteamadd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"style="">
                         <div class="modal-dialog modal-lg modal-dialog-centered">
 
@@ -284,7 +284,7 @@
                     
                 </div>
 <p style="color: red">${requestScope.invalidImage}</p>
-<input type="hidden" id="clubID" name="clubID" value="${cid}">
+
                 <div class="col-12">
                     <div class="mb-3" style="padding-top: 10px">
                         <label class="form-label">Team Name <span class="text-danger"></span></label>
@@ -323,10 +323,8 @@
             <label class="form-label">Description <span class="text-danger">*</span></label>
             <textarea name="details" id="details" rows="4" class="form-control" minlength="1" maxlength="500"> ${details} </textarea>
             <p style="color: red">${requestScope.invalidDetail}</p>
-        </div>
-        
+        </div>   
     </div>
-    
     <div class="col-lg-12 text-end">
         <button type="submit" class="btn btn-primary">ADD</button>
     </div>
