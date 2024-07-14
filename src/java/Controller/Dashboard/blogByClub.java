@@ -5,6 +5,7 @@
 
 package Controller.Dashboard;
 
+import Model.Account;
 import Model.Blog;
 import Model.BlogDAO;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -33,7 +35,11 @@ public class blogByClub extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         String indexPage = request.getParameter("index");
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+
+    if (account != null && account.getRoleId() == 1) {
+        String indexPage = request.getParameter("index");
         String xClubID = request.getParameter("clubID");
         
     int index = 1; // Default to page 1
@@ -49,7 +55,11 @@ public class blogByClub extends HttpServlet {
         request.setAttribute("mPage", maxPage);
         request.setAttribute("tag", index);
         request.getRequestDispatcher("BlogsDBoard.jsp").forward(request, response);
-    } 
+    } else {
+        request.setAttribute("complete", "You do not have the right to access this page.");
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

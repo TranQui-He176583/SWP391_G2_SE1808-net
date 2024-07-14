@@ -30,9 +30,28 @@
     <p style="color: red">${requestScope.invalidName}</p>
     <p style="color: red">${requestScope.invalidlName}</p>
   </div>
+<<<<<<< HEAD
   <div style="width: 15%; ">
       <label style="margin-left: 30%" for="time">Thời gian:</label>
     <input style="margin-left: 30%" type="datetime-local" id="time" name="time" value="${requestScope.time}"  >
+=======
+  
+  <div>
+  
+      <label style="" for="image">Avatar of Event</label> <br>
+      <input style="font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;" type="file" id="image" name="image" accept="image/*"" value="${requestScope.image}" >
+  </div>
+    <p style="color: red">${requestScope.invalidImage}</p>
+            
+    
+    <input type="hidden" id="clubid" name="clubid" value="${requestScope.cid}"  >
+   
+  <div>
+    <label for="time">Thời gian:</label>
+    <input type="datetime-local" id="time" name="time" value="${requestScope.time}"  >
+>>>>>>> 7e2a7f23efa93ed5624b6d0d1f7358c6c97ddfd2
     <p style="color: red">${requestScope.invalidTime}</p>
   </div>
           </div>

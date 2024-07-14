@@ -6,8 +6,9 @@
 package Controller.Dashboard;
 
 import Model.Account;
-import Model.Contact;
-import Model.ContactDAO;
+import Model.Team;
+import Model.TeamDAO;
+import Model.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -22,8 +23,8 @@ import java.util.List;
  *
  * @author pc
  */
-@WebServlet(name="statusContact", urlPatterns={"/statusContact"})
-public class statusContact extends HttpServlet {
+@WebServlet(name="detailTeam", urlPatterns={"/detailTeam"})
+public class detailTeam extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,30 +36,34 @@ public class statusContact extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        Account account = (Account) session.getAttribute("account");
-
-    if (account != null && account.getRoleId() == 1) {
-        String Status = request.getParameter("xStatus");
-        String indexPage = request.getParameter("index");
-   
-        int index = 1; // Default to page 1
-        if (indexPage != null) {
-        index = Integer.parseInt(indexPage);
-        }
-        ContactDAO dao = new ContactDAO();
-        int countStatus = dao.getTotalContactByStatus(Status);
-        int maxPage = (countStatus / 5) + (countStatus % 5 != 0 ? 1 : 0);
-        List<Contact> lit = dao.getAllContactByStatus(Status,index);
-        request.setAttribute("listCT", lit);
-        request.setAttribute("mPage", maxPage);
-        request.setAttribute("tag", index);
-        request.getRequestDispatcher("contactList.jsp").forward(request, response);
+        PrintWriter pr = response.getWriter();
+         HttpSession session = request.getSession();
+         Account account = (Account) session.getAttribute("account");
+      
+    if (account != null && account.getRoleId() == 1) 
+    {
+        String id =request.getParameter("tid");
+        TeamDAO dao = new TeamDAO();
+        UserDAO udao = new UserDAO();
+        Team t = dao.getTeam(id);
+        List<Account> listLeader= udao.getLeaderByTeamID("4",id);
+        String completeChange = (String) request.getSession().getAttribute("completeChange");
+        request.getSession().removeAttribute("completeChange");
+        String invalidLeader = (String) request.getSession().getAttribute("invalidLeader");
+        request.getSession().removeAttribute("invalidLeader");
+        String invalidName = (String) request.getSession().getAttribute("invalidName");
+        request.getSession().removeAttribute("invalidName");
+        request.setAttribute("listte", t);
+        request.setAttribute("listLeader", listLeader);
+        request.setAttribute("completeChange", completeChange);
+        request.setAttribute("invalidLeader", invalidLeader);
+        request.setAttribute("invalidName", invalidName);
+        request.getRequestDispatcher("TeamDetail.jsp").forward(request, response);
     } else {
         request.setAttribute("complete", "You do not have the right to access this page.");
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
-}
+   } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

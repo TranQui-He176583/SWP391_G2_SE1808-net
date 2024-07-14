@@ -34,6 +34,25 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
         <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <style>
+            .dropdown-item:hover {
+    color: #007bff !important;
+  }
+               .preview-box {
+  width: 180px;
+  height: 180px;
+  margin-left: 80px;
+  background-color: #f8f9fa;
+  border-radius: 100%; /* Add this line to round the corners */
+}
+
+#preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100%; /* Add this line to round the corners of the image */
+}
+        </style>
     </head>
 
     <body>
@@ -88,11 +107,9 @@
     </div>
                                             </form>
     <div class="d-grid" style="margin-left: 20px">
-      <a href="add_club" class="btn btn-primary" style="height: 35px;width: 130px">ADD NEW</a>
+        <a href="add_club" class="btn btn-primary" style="height: 35px;width: 130px">ADD NEW</a>
     </div>
-    
 
-  
                                 </div>
                             </div>    
                         </div>
@@ -177,7 +194,6 @@
                     </div>
                 </div><!--end container-->
 
-                <!-- Footer Start -->
                 <footer class="bg-white shadow py-3">
                     <div class="container-fluid">
                         <div class="row align-items-center">
@@ -210,6 +226,21 @@
         <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./assets/js/popper.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
+        <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('details');
+</script>
+        <script>
+    function previewImage(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#preview-image').attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
     </body>
 
 </html>

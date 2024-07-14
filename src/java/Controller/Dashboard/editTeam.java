@@ -5,8 +5,11 @@
 
 package Controller.Dashboard;
 
-import Model.Blog;
-import Model.BlogDAO;
+import Model.StudentClubDAO;
+import Model.Team;
+import Model.TeamDAO;
+import Model.UserDAO;
+import Model.student_club;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,19 +20,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
-import java.time.LocalDateTime;
 
 /**
  *
  * @author pc
  */
-@WebServlet(name="editBlogdb", urlPatterns={"/editBlogdb"})
+@WebServlet(name="editTeam", urlPatterns={"/editTeam"})
 @MultipartConfig(
         fileSizeThreshold = 1024 * 1024, // 1MB
         maxFileSize = 1024 * 1024 * 5, // 5MB
         maxRequestSize = 1024 * 1024 * 10 // 10MB
 )
-public class editBlogdb extends HttpServlet {
+
+public class editTeam extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -46,10 +49,10 @@ public class editBlogdb extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet editBlogdb</title>");  
+            out.println("<title>Servlet editTeam</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet editBlogdb at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet editTeam at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -76,71 +79,78 @@ public class editBlogdb extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private static final String UPLOAD_DIR = "assets/img/blog";
+    private static final String UPLOAD_DIR = "assets/img/team";
     @Override
-   protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    PrintWriter out = response.getWriter();
-    String xid = request.getParameter("id");
-   
-    String xName = request.getParameter("name");
-    String xDetails = request.getParameter("details");
-    LocalDateTime xTime =  LocalDateTime.now();
-    Part xImage = request.getPart("image");
-    
-    String xStatus = request.getParameter("status");
-    int status = Integer.parseInt(xStatus);
-    BlogDAO bdao = new BlogDAO();
-    
-    Blog b= bdao.getBlog(xid);
-   if (xName.matches(".*<.*>.*")) {
-        request.getSession().setAttribute("invalidName", "Blog title cannot contain HTML tags!");
-        response.sendRedirect("blogdetaildb?bid="+xid);
-        return;
-   }else if (xName.length() < 2 || xName.length() > 50) {
-      request.getSession().setAttribute("invalidName", "Blog title must be between 2 and 50 characters.");
-      response.sendRedirect("blogdetaildb?bid="+xid);
-      return;
-    }else if (xDetails.length() < 2 || xDetails.length() > 100) {
-      request.getSession().setAttribute("invalidDetails", "Description must be between 2 and 100 characters.");
-      response.sendRedirect("blogdetaildb?bid="+xid);
-      return;
-   }
-   
-   
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+                PrintWriter out = response.getWriter();
+         String xid = request.getParameter("id");
+         int id = Integer.parseInt(xid);
+         String xName = request.getParameter("name");
+         String xStatus = request.getParameter("status");
+         int status = Integer.parseInt(xStatus);
+         Part xImage = request.getPart("image");
+         String xDetails = request.getParameter("details");
+         String leader = request.getParameter("leader");
+         String regex = "^[a-zA-Z\\p{L}\\s]+$";
+    UserDAO udao = new UserDAO();
+    TeamDAO tdao = new TeamDAO();
+    StudentClubDAO scdao= new StudentClubDAO();
+    Team t= tdao.getTeam(xid);
+    student_club scu = scdao.getStudentClub(xid);
+    int leaderID = udao.getIdByName(leader);  
+    int RoleID = udao.getRoleIdByUserId(leaderID);
     String imageURL="";
-    if (b != null) {
-        if (xImage != null && xImage.getSize() > 0) { // Check if an image was uploaded
+    if (t != null) {
+        if (xImage != null && xImage.getSize() > 0) {
             imageURL = saveUploadedFile(request);
-            if (b.getImage() != null) {
-                File file = new File("C:\\Users\\pc\\Swp291\\build\\web\\" + b.getImage());
+            if (t.getImage()!= null) {
+                File file = new File("C:\\Users\\pc\\SWP391_G2_SE1808-net\\build\\web\\" + t.getImage());
                 file.delete();
             }
-        } else {
-            imageURL = b.getImage(); // Use the existing image URL
+        }else if (!leader.matches(regex)) {
+            request.getSession().setAttribute("invalidLeader", "Team Leader cannot contain special characters, numbers, or HTML tags!");
+            response.sendRedirect("detailTeam?tid="+xid);
+            return;
+        }else if(!scdao.checkUserExist(leader)){
+            request.getSession().setAttribute("invalidLeader", "This name does not exist");
+            response.sendRedirect("detailTeam?tid="+xid);
+            return;
+        } else if (xName.matches(".*<.*>.*")) {
+           request.getSession().setAttribute("invalidName", "Team Name cannot contain HTML tags!");
+           response.sendRedirect("detailTeam?tid="+xid);
+           return;
+        
+        } else if (RoleID != 4) {
+           request.getSession().setAttribute("invalidLeader", "Inappropriate user role.");
+           response.sendRedirect("detailTeam?tid="+xid);
+           return;
+        }else {
+            imageURL = t.getImage(); // Use the existing image URL
         }
-        b.setName(xName);
-        b.setDetails(xDetails);
-        b.setImage(imageURL);
-        b.setStatus(status);
-        b.setTime(xTime);
-        bdao.EditBlog(b);
-   
+
+        scu.setAccount_ID(leaderID);
+        t.setName(xName);
+        t.setImage(imageURL);
+        t.setDetails(xDetails);
+        t.setStatus(status);
+//        out.print(t.getName());
+       out.print(tdao.EdiTeam(t));
+       scdao.EditStudentClub(scu);
         request.getSession().setAttribute("completeChange", "Change Information Susscess!");
-        response.sendRedirect("blogdetaildb?bid="+xid);
+        response.sendRedirect("detailTeam?tid="+xid);
     } else {
-        out.println("<html><body><h1>Error: 'blog' attribute is null</h1></body></html>");
+        out.println("<html><body><h1>Error: 'Team' attribute is null</h1></body></html>");
     }
-}
+}   
+
 
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description
      */
-   
-    
-   String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
-    String uploadPath = "assets/img/blog/";
+        String saveUploadedFile(HttpServletRequest request) throws IOException, ServletException {
+    String uploadPath = "assets/img/team/";
 
     Part part = request.getPart("image");
     String fileName = getUniqueFileName(part);
@@ -159,10 +169,11 @@ public class editBlogdb extends HttpServlet {
     }
 }
 
-    String getUniqueFileName(Part part) {
+     String getUniqueFileName(Part part) {
         String submittedFileName = part.getSubmittedFileName();
         String fileExtension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
         String newFileName = System.currentTimeMillis() + fileExtension;
         return newFileName;
     }
 }
+

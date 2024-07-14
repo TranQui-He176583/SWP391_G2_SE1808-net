@@ -5,6 +5,7 @@
 
 package Controller.Dashboard;
 
+import Model.Account;
 import Model.Club;
 import Model.ClubDAO;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -37,6 +39,10 @@ public class clubdb extends HttpServlet {
     throws ServletException, IOException {
          PrintWriter out = response.getWriter();
         response.setContentType("text/html;charset=UTF-8");
+         HttpSession session = request.getSession();
+         Account account = (Account) session.getAttribute("account");
+
+    if (account != null && account.getRoleId() == 1) {
         String indexPage = request.getParameter("index");
         
     int index = 1; // Default to page 1
@@ -48,12 +54,17 @@ public class clubdb extends HttpServlet {
     int count = cdao.getTotalClub();
     int maxPage = (count / 5) + (count % 5 != 0 ? 1 : 0);
     List<Club> litClub = cdao.pagingClub(index);
+//    List<Club> lisClub = cdao.getAllClub();
     request.setAttribute("listCLB", litClub);
+//    request.setAttribute("CLB", lisClub);
     request.setAttribute("mPage", maxPage);
     request.setAttribute("tag", index);
-
     request.getRequestDispatcher("clubDboard.jsp").forward(request, response);
-    } 
+    } else {
+        request.setAttribute("complete", "You do not have the right to access this page.");
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

@@ -179,6 +179,53 @@ public class UserDAO extends MyDAO{
         }
     return null;
     }
+    
+   
+   public int getIdByName (String Fullname) {
+       xSql = "SELECT id FROM account WHERE fullname = ?";
+       int userId = 0;
+       
+
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setString(1, Fullname);
+        rs = ps.executeQuery();
+      
+       if (rs.next()) {
+           userId = rs.getInt("id");  
+           
+       }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception    e) {
+        e.printStackTrace();
+     }
+       return userId;
+       
+   }
+   
+   public int getRoleIdByUserId(int userId) {
+    String xSql = "SELECT roleId FROM account WHERE id = ?";
+    int RoleID = 0;
+
+    try {
+        ps = con.prepareStatement(xSql);
+        ps.setInt(1, userId);
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            RoleID = rs.getInt("roleId");
+        }
+
+        rs.close();
+        ps.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return RoleID;
+}
     public void changeStatus(int status,int id ) {
          xSql = "UPDATE account \n" +
 "        SET Status = ?\n" +
@@ -377,9 +424,9 @@ public class UserDAO extends MyDAO{
  }
  
   public Account getManagerByClubID(String XroleID,String XclubID){
-        xSql = "select *from student_club join club join account \n" +
+        xSql = "select *from account join student_club join club \n" +
 "on account.id = student_club.account_ID and club.id = student_club.club_ID\n" +
-"where student_club.role_ID =? and club.id=?"; 
+"where account.roleId =? and club.id=?"; 
         Account account = new Account();
       
         try {
@@ -408,6 +455,41 @@ public class UserDAO extends MyDAO{
         return account;
     }
   
+  public List<Account> getLeaderByTeamID(String XroleID, String xID){
+      List<Account> t = new ArrayList<>();
+        xSql = "select *from account join student_club join team \n" +
+"on account.id = student_club.account_ID and team.id = student_club.team_ID\n" +
+"where account.roleId =? and team.id=?"; 
+       
+      
+        try {
+      ps = con.prepareStatement(xSql);   
+      ps.setString(1, XroleID );
+      ps.setString(2, xID );
+      rs = ps.executeQuery();           
+      while(rs.next()) {
+            int id = rs.getInt("id");  
+            String password= rs.getString("password");  
+            int roleId= rs.getInt("roleId");  
+            int status= rs.getInt("status");  
+            String fullname= rs.getString("fullname");  
+            String email= rs.getString("email");  
+            String phone= rs.getString("phone");  
+            int gender= rs.getInt("gender");  
+            String image= rs.getString("image");  
+            String note= rs.getString("note");  
+            t.add(new Account(id, password, roleId, status, fullname, email, phone, gender, image,note));
+     
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+    }
+  
     public boolean checkNameExist(String username) {
         xSql = "select *from account where fullname=? ";     
         try {
@@ -427,8 +509,10 @@ public class UserDAO extends MyDAO{
     }
 //    public static void main(String[] args) {
 //        UserDAO dao =new UserDAO();
-//        Account a = dao.getManagerByClubID("2", "1");
-//        System.out.println(a.getFullname());
+//        List<Account> list =  dao.getManagerByClubID("2", "1");
+//        for(Account a: list){
+//            System.out.println(a);
+//        }
 //    }
     
    

@@ -84,7 +84,7 @@ public class sendContact extends HttpServlet {
         String message = request.getParameter("message");
 
         MailHandler mailHandler = new MailHandler();
-        String recipientEmail = "duongtthe172408@fpt.edu.vn";
+        String recipientEmail = "swp391g2k17@gmail.com";
 
         try {
             mailHandler.SendMail(recipientEmail, subject, "From: " + name + "\nEmail: " + email + "\n\n" + message);

@@ -5,6 +5,7 @@
 
 package Controller.Dashboard;
 
+import Model.Account;
 import Model.Contact;
 import Model.ContactDAO;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -33,6 +35,10 @@ public class contactASC extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+         HttpSession session = request.getSession();
+    Account account = (Account) session.getAttribute("account");
+
+    if (account != null && account.getRoleId() == 1) {
            String indexPage = request.getParameter("index1");
    
     int index1 = 1; // Default to page 1
@@ -47,7 +53,11 @@ public class contactASC extends HttpServlet {
     request.setAttribute("mPage1", maxPage1);
     request.setAttribute("tag1", index1);
     request.getRequestDispatcher("SortContact_1.jsp").forward(request, response);
-    } 
+    } else {
+        request.setAttribute("complete", "You do not have the right to access this page.");
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

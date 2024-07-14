@@ -8,6 +8,8 @@ package Controller.Dashboard;
 import Model.Account;
 import Model.Club;
 import Model.ClubDAO;
+import Model.Team;
+import Model.TeamDAO;
 import Model.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,6 +18,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -36,28 +39,59 @@ public class clubdetaildb extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter pr =response.getWriter();
+         HttpSession session = request.getSession();
+         Account account = (Account) session.getAttribute("account");
+
+    if (account != null && account.getRoleId() == 1) {
         String id=request.getParameter("cid");
-       
+        String FullName = request.getParameter("fullname");
            ClubDAO cdao =new ClubDAO();
            UserDAO udao = new UserDAO();
+           TeamDAO tdao= new TeamDAO();
            String indexPage = request.getParameter("index");
         int index = 1; 
         if (indexPage != null) {
         index = Integer.parseInt(indexPage);
     }
+        int count = tdao.getTotalTeamByClubID(id);
         Club c =cdao.getClub(id);
+      
         Account a = udao.getManagerByClubID("2", id);
+
         List<Club> detailindb = cdao.pagingClub(index);
+        List<Team> teamClub = tdao.getAllCLubByClubID(id);
         String completeChange = (String) request.getSession().getAttribute("completeChange");
         request.getSession().removeAttribute("completeChange");
+        
+        String invalidName = (String) request.getSession().getAttribute("invalidName");
+        request.getSession().removeAttribute("invalidName");
+        
+        String invalidLeader = (String) request.getSession().getAttribute("invalidLeader");
+        request.getSession().removeAttribute("invalidLeader");
+        
+        String invalidDetail = (String) request.getSession().getAttribute("invalidDetail");
+        request.getSession().removeAttribute("invalidDetail");
+        
+        String invalidImage = (String) request.getSession().getAttribute("invalidImage");
+        request.getSession().removeAttribute("invalidImage");
+//        pr.print(b.getFullname());
         request.setAttribute("detailC", c );
         request.setAttribute("Manager", a );
-       
+        request.setAttribute("cTeam", count );
         request.setAttribute("listdb", detailindb );
+        request.setAttribute("listTeam", teamClub );
         request.setAttribute("completeChange", completeChange);
-
+        request.setAttribute("invalidName", invalidName);
+        request.setAttribute("invalidLeader", invalidLeader);
+        request.setAttribute("invalidDetail", invalidDetail);
+        request.setAttribute("invalidImage", invalidImage);
+        
         request.getRequestDispatcher("clubDetailDboard.jsp").forward(request, response);
-      } 
+      } else {
+        request.setAttribute("complete", "You do not have the right to access this page.");
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
+}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
