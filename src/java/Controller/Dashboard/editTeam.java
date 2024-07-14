@@ -5,8 +5,11 @@
 
 package Controller.Dashboard;
 
+import Model.StudentClubDAO;
 import Model.Team;
 import Model.TeamDAO;
+import Model.UserDAO;
+import Model.student_club;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -88,9 +91,15 @@ public class editTeam extends HttpServlet {
          int status = Integer.parseInt(xStatus);
          Part xImage = request.getPart("image");
          String xDetails = request.getParameter("details");
-
+         String leader = request.getParameter("leader");
+         String regex = "^[a-zA-Z\\p{L}\\s]+$";
+    UserDAO udao = new UserDAO();
     TeamDAO tdao = new TeamDAO();
+    StudentClubDAO scdao= new StudentClubDAO();
     Team t= tdao.getTeam(xid);
+    student_club scu = scdao.getStudentClub(xid);
+    int leaderID = udao.getIdByName(leader);  
+    int RoleID = udao.getRoleIdByUserId(leaderID);
     String imageURL="";
     if (t != null) {
         if (xImage != null && xImage.getSize() > 0) {
@@ -99,15 +108,35 @@ public class editTeam extends HttpServlet {
                 File file = new File("C:\\Users\\pc\\SWP391_G2_SE1808-net\\build\\web\\" + t.getImage());
                 file.delete();
             }
-        } else {
+        }else if (!leader.matches(regex)) {
+            request.getSession().setAttribute("invalidLeader", "Team Leader cannot contain special characters, numbers, or HTML tags!");
+            response.sendRedirect("detailTeam?tid="+xid);
+            return;
+        }else if(!scdao.checkUserExist(leader)){
+            request.getSession().setAttribute("invalidLeader", "This name does not exist");
+            response.sendRedirect("detailTeam?tid="+xid);
+            return;
+        } else if (xName.matches(".*<.*>.*")) {
+           request.getSession().setAttribute("invalidName", "Team Name cannot contain HTML tags!");
+           response.sendRedirect("detailTeam?tid="+xid);
+           return;
+        
+        } else if (RoleID != 4) {
+           request.getSession().setAttribute("invalidLeader", "Inappropriate user role.");
+           response.sendRedirect("detailTeam?tid="+xid);
+           return;
+        }else {
             imageURL = t.getImage(); // Use the existing image URL
         }
+
+        scu.setAccount_ID(leaderID);
         t.setName(xName);
         t.setImage(imageURL);
         t.setDetails(xDetails);
         t.setStatus(status);
 //        out.print(t.getName());
        out.print(tdao.EdiTeam(t));
+       scdao.EditStudentClub(scu);
         request.getSession().setAttribute("completeChange", "Change Information Susscess!");
         response.sendRedirect("detailTeam?tid="+xid);
     } else {

@@ -102,6 +102,8 @@ public class addTeam extends HttpServlet {
         StudentClubDAO scdao= new StudentClubDAO();
         Club c = cdao.getClub(xClubID);
         String regex = "^[a-zA-Z\\p{L}\\s]+$";
+        int leaderID = udao.getIdByName(leader); 
+        int RoleID = udao.getRoleIdByUserId(leaderID);
         if (name.equals("")) {
            request.getSession().setAttribute("invalidName", "Team Name cannot be empty!");
            response.sendRedirect("clubdetaildb?cid="+xClubID);
@@ -134,11 +136,15 @@ public class addTeam extends HttpServlet {
            request.getSession().setAttribute("invalidImage", "Team Avatar cannot be empty!");
            response.sendRedirect("clubdetaildb?cid="+xClubID);
            return;
+       } else if (RoleID != 4) {
+           request.getSession().setAttribute("invalidLeader", "Inappropriate user role.");
+           response.sendRedirect("clubdetaildb?cid="+xClubID);
+           return;
        } else {
             
             String fileName = xImage.getSubmittedFileName();
             request.setAttribute("image", fileName);
-        int leaderID = udao.getIdByName(leader);  
+        
         int clubID = Integer.parseInt(xClubID);
         String imageURL = saveUploadedFile(request);
         Team t = new Team(0, name, imageURL, xDetail, status, clubID);

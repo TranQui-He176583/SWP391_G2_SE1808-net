@@ -199,17 +199,18 @@
                 <div class="form-group col-md-12">
                     <label style="color: yellowgreen;font-weight: bold">Name</label>
                     <input value="${listte.name}" type="text" class="form-control" name="name" minlength="1" maxlength="30">
-                </div>
+                </div> 
             </div>
-            
+            <p style="color: red; font-size: 15px">${requestScope.invalidName}</p>
                 <div class="form-group">
                     <label style="color: yellowgreen;font-weight: bold">Team Leader</label>
         <c:set var="LeaderNames" value="" />
         <c:forEach items="${listLeader}" var="ll" varStatus="loop">
             <c:set var="LeaderNames" value="${LeaderNames}${ll.fullname}${!loop.last ? ',  ' : ''}" />
         </c:forEach>
-        <input value="${LeaderNames}" type="text" class="form-control" name="leader" readonly>
+        <input value="${LeaderNames}" type="text" class="form-control" name="leader" >
                 </div>
+                <p style="color: red; font-size: 15px">${requestScope.invalidLeader}</p>
                 <div class="form-group">
                     <label style="color: yellowgreen; font-weight: bold">Status</label>
                     <div class="context-status" style="display: flex;">

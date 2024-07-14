@@ -62,7 +62,6 @@ public class detailUser extends HttpServlet {
         request.setAttribute("wrongFormat", wrongFormat);
         request.getRequestDispatcher("User_detail.jsp").forward(request, response);
         
-       
         }else{
            request.setAttribute("complete", "You do not have the right to access this page.");
            request.getRequestDispatcher("index.jsp").forward(request, response);

@@ -44,6 +44,43 @@ public class StudentClubDAO extends MyDAO{
      } 
         return false;
     }
+       public String EditStudentClub(student_club sc) {
+        xSql = "UPDATE student_club \n" +
+"                    SET account_ID = ?\n" +
+"                      WHERE team_ID = ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, sc.getAccount_ID());
+            ps.setInt(2, sc.getTeam_ID());
+            
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+        return "ok";
+
+    }
+       public student_club getStudentClub(String TeamID) {
+      
+        xSql = "select * from student_club where team_ID=?";
+        try {
+           ps = con.prepareStatement(xSql);
+           ps.setString(1, TeamID);
+           rs = ps.executeQuery();
+          while(rs.next()) {
+
+            return new student_club(rs.getInt(1), 
+                rs.getInt(2), 
+                rs.getInt(3), 
+                rs.getInt(4));
+           }
+        }
+        catch(Exception e) {
+ //           System.out.println(e);
+        }
+    return null;
+    }
 //     public static void main(String[] args) {
 //        StudentClubDAO dao = new StudentClubDAO();
 //         System.out.println(dao.checkUserExist(" Quí"));

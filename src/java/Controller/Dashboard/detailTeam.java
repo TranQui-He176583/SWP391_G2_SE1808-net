@@ -49,9 +49,15 @@ public class detailTeam extends HttpServlet {
         List<Account> listLeader= udao.getLeaderByTeamID("4",id);
         String completeChange = (String) request.getSession().getAttribute("completeChange");
         request.getSession().removeAttribute("completeChange");
+        String invalidLeader = (String) request.getSession().getAttribute("invalidLeader");
+        request.getSession().removeAttribute("invalidLeader");
+        String invalidName = (String) request.getSession().getAttribute("invalidName");
+        request.getSession().removeAttribute("invalidName");
         request.setAttribute("listte", t);
         request.setAttribute("listLeader", listLeader);
         request.setAttribute("completeChange", completeChange);
+        request.setAttribute("invalidLeader", invalidLeader);
+        request.setAttribute("invalidName", invalidName);
         request.getRequestDispatcher("TeamDetail.jsp").forward(request, response);
     } else {
         request.setAttribute("complete", "You do not have the right to access this page.");

@@ -184,6 +184,7 @@ public class UserDAO extends MyDAO{
    public int getIdByName (String Fullname) {
        xSql = "SELECT id FROM account WHERE fullname = ?";
        int userId = 0;
+       
 
        try {
         ps = con.prepareStatement(xSql);
@@ -192,7 +193,8 @@ public class UserDAO extends MyDAO{
       
        if (rs.next()) {
            userId = rs.getInt("id");  
-      }
+           
+       }
       rs.close();
       ps.close();
      }
@@ -200,7 +202,30 @@ public class UserDAO extends MyDAO{
         e.printStackTrace();
      }
        return userId;
+       
    }
+   
+   public int getRoleIdByUserId(int userId) {
+    String xSql = "SELECT roleId FROM account WHERE id = ?";
+    int RoleID = 0;
+
+    try {
+        ps = con.prepareStatement(xSql);
+        ps.setInt(1, userId);
+        rs = ps.executeQuery();
+
+        if (rs.next()) {
+            RoleID = rs.getInt("roleId");
+        }
+
+        rs.close();
+        ps.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return RoleID;
+}
     public void changeStatus(int status,int id ) {
          xSql = "UPDATE account \n" +
 "        SET Status = ?\n" +

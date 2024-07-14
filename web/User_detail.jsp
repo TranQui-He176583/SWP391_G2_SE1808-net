@@ -183,7 +183,7 @@
                                 <div style="text-align: center"> <p style="color: red; font-size: 15px">${requestScope.wrongFormat}</p></div>
                             
                             
-                            <div class="col-lg-9 col-lg-6 mt-4">
+                            <div class="col-lg-12 col-lg-6 mt-4">
                                 <div class="card rounded shadow border-0 overflow-hidden"style="display: flex">
                                    
                                     <div class="p-4">
@@ -191,7 +191,6 @@
                                       <form action="editUser" method="POST">
 		<div class="row gutters">
                   
-<!--			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">-->
                            <input type="hidden"  name="id" value="${detail.id}" readonly required>
                             <div class="card-body">
                                         <div class="user-avatar" style="text-align: center;">
@@ -201,130 +200,104 @@
                                         <h5 class="user-email"style="text-align: center">${detail.email}</h5>
                                      
                                     </div>
-                                        <div class="form-row" style="display: flex">
-    <div class="form-group col-md-6">
-        <label style="color: yellowgreen;font-weight: bold">Full Name</label>
-        <input value="${detail.fullname}" type="text" class="form-control" name="fullname" minlength="1" maxlength="25">
+                                        <div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label style="color: yellowgreen;font-weight: bold">Full Name</label>
+            <input value="${detail.fullname}" type="text" class="form-control" name="fullname" minlength="1" maxlength="25">
+        </div>
+        <div class="form-group">
+            <label style="color: yellowgreen;font-weight: bold">Phone</label>
+            <input value="${detail.phone}" type="text" class="form-control" name="phone" minlength="1" maxlength="10">
+        </div>
+        <div class="form-group">
+            <label style="color: yellowgreen;font-weight: bold">Club</label>
+            <c:set var="clubNames" value="" />
+            <c:forEach items="${listC}" var="lic" varStatus="loop">
+                <c:set var="clubNames" value="${clubNames}${lic.name}${!loop.last ? ',  ' : ''}" />
+            </c:forEach>
+            <input value="${clubNames}" type="text" class="form-control" name="club" readonly>
+        </div>
     </div>
-    <div class="form-group col-md-6" style="margin-left: 20px">
-        <label style="color: yellowgreen; font-weight: bold">Role</label>
-        <div class="context-role" style="display: flex;">
-            <div style="display: flex; align-items: center;padding-right: 15px">
-                <input ${detail.roleId== 1 ? 'checked' : ''} value="1" type="radio" name="roleId" style="font-size: 10px;  margin-right: 10px">
-                Admin
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label style="color: yellowgreen; font-weight: bold">Role</label>
+            <div class="context-role" style="margin-top: 5px; display: flex;">
+  <div style="flex: 1;">
+    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+      <input ${detail.roleId == 1 ? 'checked' : ''} value="1" type="radio" name="roleId" style="font-size: 10px; margin-right: 10px;">
+      Admin
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+      <input ${detail.roleId == 2 ? 'checked' : ''} value="2" type="radio" name="roleId" style="font-size: 10px; margin-right: 10px;">
+      Manager
+    </div>
+  </div>
+  <div style="flex: 1;">
+    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+      <input ${detail.roleId == 3 ? 'checked' : ''} value="3" type="radio" name="roleId" style="font-size: 10px; margin-right: 10px;">
+      NormalUser
+    </div>
+    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+      <input ${detail.roleId == 4 ? 'checked' : ''} value="4" type="radio" name="roleId" style="font-size: 10px; margin-right: 10px;">
+      Team Leader
+    </div>
+  </div>
+</div>
+        </div>
+        <div class="form-group">
+            <label style="color: yellowgreen; font-weight: bold">Gender</label>
+            <div class="context-gender" style="display: flex;margin-top: 5px;">
+                <div style="display: flex; align-items: center;">
+                    <input ${detail.gender == 1 ? 'checked' : ''} value="1" type="radio" name="gender" style="font-size: 10px;  margin-right: 10px">
+                    Male
+                </div>
+                <div style="display: flex; align-items: center; margin-left: 20px;">
+                    <input ${detail.gender== 2 ? 'checked' : ''} value="2" type="radio" name="gender" style="font-size: 10px;  margin-right: 10px">
+                    Female
+                </div>
             </div>
-            <div style="display: flex; align-items: center;padding-right: 20px">
-                <input ${detail.roleId== 2 ? 'checked' : ''} value="2" type="radio" name="roleId" style="font-size: 10px;  margin-right: 10px">
-                Manager
-            </div>
-            <div style="display: flex; align-items: center;">
-                <input ${detail.roleId== 3 ? 'checked' : ''} value="3" type="radio" name="roleId" style="font-size: 10px;  margin-right: 10px">
-                NormalUser
+        </div>
+        <div class="form-group">
+            <label style="color: yellowgreen; font-weight: bold">Status</label>
+            <div class="context-status" style="display: flex;margin-top: 5px;">
+                <div style="display: flex; align-items: center;">
+                    <input ${detail.status == 1 ? 'checked' : ''} value="1" type="radio" name="status" style="font-size: 10px;  margin-right: 10px">
+                    active
+                </div>
+                <div style="display: flex; align-items: center; margin-left: 20px;">
+                    <input ${detail.status== 0 ? 'checked' : ''} value="0" type="radio" name="status" style="font-size: 10px;  margin-right: 10px">
+                    block
+                </div>
             </div>
         </div>
     </div>
-</div>
-			<div class="form-row" style="display: flex">
-    <div class="form-group col-md-6">
-        <label style="color: yellowgreen;font-weight: bold">Phone</label>
-        <input value="${detail.phone}" type="text" class="form-control" name="phone" minlength="1" maxlength="10">
-    </div>
-    <div class="form-group col-md-6" style="margin-left: 15px">
-        <label style="color: yellowgreen; font-weight: bold">Gender</label>
-        <div class="context-gender" style="display: flex;">
-            <div style="display: flex; align-items: center;">
-                <input ${detail.gender == 1 ? 'checked' : ''} value="1" type="radio" name="gender" style="font-size: 10px;  margin-right: 10px">
-                Male
-            </div>
-            <div style="display: flex; align-items: center; margin-left: 20px;">
-                <input ${detail.gender== 2 ? 'checked' : ''} value="2" type="radio" name="gender" style="font-size: 10px;  margin-right: 10px">
-                Female
-            </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label style="color: yellowgreen;font-weight: bold">Note</label>
+            <textarea class="form-control" name="note" rows="6">${detail.note}</textarea>
         </div>
     </div>
 </div>
-                <div class="form-row" style="display: flex">
-    <div class="form-group col-md-6">
-        <label style="color: yellowgreen;font-weight: bold">Club</label>
-        <c:set var="clubNames" value="" />
-        <c:forEach items="${listC}" var="lic" varStatus="loop">
-            <c:set var="clubNames" value="${clubNames}${lic.name}${!loop.last ? ',  ' : ''}" />
-        </c:forEach>
-        <input value="${clubNames}" type="text" class="form-control" name="club" readonly>
-    </div>
-    <div class="form-group col-md-6" style="margin-left: 15px">
-        <label style="color: yellowgreen; font-weight: bold">Status</label>
-        <div class="context-status" style="display: flex;">
-            <div style="display: flex; align-items: center;">
-                <input ${detail.status == 1 ? 'checked' : ''} value="1" type="radio" name="status" style="font-size: 10px;  margin-right: 10px">
-                active
-            </div>
-            <div style="display: flex; align-items: center; margin-left: 20px;">
-                <input ${detail.status== 0 ? 'checked' : ''} value="0" type="radio" name="status" style="font-size: 10px;  margin-right: 10px">
-                block
-            </div>
-        </div>
-    </div>
-</div>
-    <div class="form-group">
-        <label style="color: yellowgreen;font-weight: bold">Note</label>
-        <textarea class="form-control" name="note" rows="4" >${detail.note}</textarea>
-    </div>
 
-<!--                        </div>-->
-                               
+<div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="text-right" style="padding-left: 610px;display: flex">
+            <a href="" class="btn btn-success" style="margin-right: 5px">Cancel</a>
+            <button type="submit" name="submit" class="btn btn-primary" style="background: green">Save</button>
+        </div>
+    </div>
+</div>
                                 
 		</div>
-		
-		<div class="row gutters">
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="text-right"style="padding-left: 420px;display: flex">
-                                
-                                <a href="" class="btn btn-success" style="margin-right: 5px">Cancel</a> 
-                                <button type="submit" name="submit" class="btn btn-primary" style="background: green">Save</button>
-                                       
-				</div>
-			</div>
-		</div>
+	
       </form>
                                      
                                     </div>
                                 </div>
                             </div><!--end col-->
         
-                            <div class="col-lg-3 col-md-3 mt-4">
-                                <div class="card border-0 sidebar sticky-bar rounded shadow">
-                                    <div class="card-body">
-                                        <!-- SEARCH -->
-                                        <div class="widget mb-4 pb-2">
-                                            <h5 class="widget-title">Search</h5>
-                                            <div id="search2" class="widget-search mt-4 mb-0">
-                                                <form action="detailUser" method="post" id="searchform1" class="searchform">
-                                                    <div>
-                                                        <input type="text" class="border rounded" name="search" id="s1" placeholder="Search Keywords...">
-                                                        <input type="submit" id="searchsubmit1" value="Search">
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- SEARCH -->
-            
-                                        <!-- RECENT POST -->
-                                        <div class="widget mb-4 pb-2">
-                                            <h5 class="widget-title">Recent User</h5>
-                                            <div class="mt-4">
-                                                <c:forEach items="${listdb}" var="lisb">
-                                                <div class="clearfix post-recent">
-                                                    <div class="post-recent-thumb float-start"> <a href=""> <img alt="img" src="${lisb.image}" class="img-fluid rounded" style="width: 50px;height: 50px"></a></div>
-                                                    <div class="post-recent-content float-start" style="padding-top: 10px"><a href="detailUser?uid=${lisb.id}">${lisb.fullname}</a></div>
-                                                </div>
-                                                </c:forEach>
-                                            </div>
-                                        </div>
-                                      
-                                    </div>
-                                </div>
-                            </div><!--end col-->
+        
                         </div><!--end row-->
                     </div>
                 </div><!--end container-->
@@ -373,10 +346,7 @@
         <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./assets/js/popper.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
-            <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace('note');
-</script>
+           
     </body>
 
 </html>
