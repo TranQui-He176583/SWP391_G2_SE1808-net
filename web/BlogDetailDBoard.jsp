@@ -172,6 +172,7 @@
                         <input name="name" id="name" type="text" class="form-control" value="${detailBlog.name}">
                     </div>
                 </div>
+                <p style="color: red; font-size: 15px">${requestScope.invalidName}</p>
                 <div class="col-12">
                     <div class="mb-3">
                         <label class="form-label">Blog Date  <span class="text-danger">*</span></label>
@@ -202,6 +203,7 @@
             <label class="form-label">Description <span class="text-danger">*</span></label>
             <textarea name="details" id="comments" rows="4" class="form-control" placeholder=" description :">${detailBlog.details}</textarea>
         </div>
+        <p style="color: red; font-size: 15px">${requestScope.invalidDetails}</p>
         <div style="text-align: center"> <p style="color: red; font-size: 15px">${requestScope.wrongFormat}</p></div>
     </div>
     

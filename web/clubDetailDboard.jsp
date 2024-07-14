@@ -289,16 +289,20 @@
                     <div class="mb-3" style="padding-top: 10px">
                         <label class="form-label">Team Name <span class="text-danger"></span></label>
                         <input name="name" id="name" type="text" class="form-control" value="${name}" minlength="2" maxlength="40">
-                         <p style="color: red">${requestScope.invalidName}</p>
+                        <p style="color: red">${requestScope.invalidName}</p>
                     </div>
                 </div>
+                
                 <div class="col-12">
                     <div class="mb-3">
                         <label class="form-label">Team Leader <span class="text-danger"></span></label>
-                        <input name="leader" id="leader" type="text" class="form-control" value="">
+                       
+                          <input name="leader" id="leader" type="text" class="form-control" value="${leader}">
+                       
+                        <p style="color: red">${requestScope.invalidLeader}</p>
                     </div>
                 </div>
-            
+                
                 <div class="col-12">
                     <div class="mb-3">
                         <label class="form-label">Status</label>

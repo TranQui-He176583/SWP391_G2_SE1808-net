@@ -93,6 +93,20 @@ public class editBlogdb extends HttpServlet {
     BlogDAO bdao = new BlogDAO();
     
     Blog b= bdao.getBlog(xid);
+   if (xName.matches(".*<.*>.*")) {
+        request.getSession().setAttribute("invalidName", "Blog title cannot contain HTML tags!");
+        response.sendRedirect("blogdetaildb?bid="+xid);
+        return;
+   }else if (xName.length() < 2 || xName.length() > 50) {
+      request.getSession().setAttribute("invalidName", "Blog title must be between 2 and 50 characters.");
+      response.sendRedirect("blogdetaildb?bid="+xid);
+      return;
+    }else if (xDetails.length() < 2 || xDetails.length() > 100) {
+      request.getSession().setAttribute("invalidDetails", "Description must be between 2 and 100 characters.");
+      response.sendRedirect("blogdetaildb?bid="+xid);
+      return;
+   }
+   
    
     String imageURL="";
     if (b != null) {

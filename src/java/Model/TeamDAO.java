@@ -117,6 +117,26 @@ public class TeamDAO extends MyDAO{
         return "ok";
 
     }
+      
+     public int getId_newTeam () {
+       xSql = "SELECT *  FROM team ORDER BY id DESC LIMIT 1;";
+       try {
+        ps = con.prepareStatement(xSql);
+        rs = ps.executeQuery();
+       
+         
+       if (rs.next()) {
+          return (rs.getInt("id"));      
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception    e) {
+        e.printStackTrace();
+     }
+       return 1;
+   }
+      
 //     public static void main(String[] args) {
 //        TeamDAO dao =new TeamDAO();
 //        

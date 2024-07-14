@@ -56,12 +56,20 @@ public class blogdetaildb extends HttpServlet {
         
         String completeChange = (String) request.getSession().getAttribute("completeChange");
         request.getSession().removeAttribute("completeChange");
+        
+        String invalidName = (String) request.getSession().getAttribute("invalidName");
+        request.getSession().removeAttribute("invalidName");
+        
+        String invalidDetails = (String) request.getSession().getAttribute("invalidDetails");
+        request.getSession().removeAttribute("invalidDetails");
+        
         request.setAttribute("detailBlog", b);
         request.setAttribute("nameClub", c);
         request.setAttribute("listdb", listBlog);
        
         request.setAttribute("completeChange", completeChange);
-        
+        request.setAttribute("invalidName", invalidName);
+        request.setAttribute("invalidDetails", invalidDetails);
         request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
      
         } else {

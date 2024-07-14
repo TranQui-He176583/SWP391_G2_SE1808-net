@@ -44,7 +44,7 @@ public class clubdetaildb extends HttpServlet {
 
     if (account != null && account.getRoleId() == 1) {
         String id=request.getParameter("cid");
-        
+        String FullName = request.getParameter("fullname");
            ClubDAO cdao =new ClubDAO();
            UserDAO udao = new UserDAO();
            TeamDAO tdao= new TeamDAO();
@@ -55,7 +55,9 @@ public class clubdetaildb extends HttpServlet {
     }
         int count = tdao.getTotalTeamByClubID(id);
         Club c =cdao.getClub(id);
+      
         Account a = udao.getManagerByClubID("2", id);
+
         List<Club> detailindb = cdao.pagingClub(index);
         List<Team> teamClub = tdao.getAllCLubByClubID(id);
         String completeChange = (String) request.getSession().getAttribute("completeChange");
@@ -64,12 +66,15 @@ public class clubdetaildb extends HttpServlet {
         String invalidName = (String) request.getSession().getAttribute("invalidName");
         request.getSession().removeAttribute("invalidName");
         
+        String invalidLeader = (String) request.getSession().getAttribute("invalidLeader");
+        request.getSession().removeAttribute("invalidLeader");
+        
         String invalidDetail = (String) request.getSession().getAttribute("invalidDetail");
         request.getSession().removeAttribute("invalidDetail");
         
         String invalidImage = (String) request.getSession().getAttribute("invalidImage");
         request.getSession().removeAttribute("invalidImage");
-        
+//        pr.print(b.getFullname());
         request.setAttribute("detailC", c );
         request.setAttribute("Manager", a );
         request.setAttribute("cTeam", count );
@@ -77,6 +82,7 @@ public class clubdetaildb extends HttpServlet {
         request.setAttribute("listTeam", teamClub );
         request.setAttribute("completeChange", completeChange);
         request.setAttribute("invalidName", invalidName);
+        request.setAttribute("invalidLeader", invalidLeader);
         request.setAttribute("invalidDetail", invalidDetail);
         request.setAttribute("invalidImage", invalidImage);
         

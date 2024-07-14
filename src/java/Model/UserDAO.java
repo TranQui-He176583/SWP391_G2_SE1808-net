@@ -179,6 +179,28 @@ public class UserDAO extends MyDAO{
         }
     return null;
     }
+    
+   
+   public int getIdByName (String Fullname) {
+       xSql = "SELECT id FROM account WHERE fullname = ?";
+       int userId = 0;
+
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setString(1, Fullname);
+        rs = ps.executeQuery();
+      
+       if (rs.next()) {
+           userId = rs.getInt("id");  
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception    e) {
+        e.printStackTrace();
+     }
+       return userId;
+   }
     public void changeStatus(int status,int id ) {
          xSql = "UPDATE account \n" +
 "        SET Status = ?\n" +

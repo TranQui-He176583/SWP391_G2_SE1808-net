@@ -5,10 +5,14 @@
 
 package Controller.Dashboard;
 
+import Model.Account;
 import Model.Club;
 import Model.ClubDAO;
+import Model.StudentClubDAO;
 import Model.Team;
 import Model.TeamDAO;
+import Model.UserDAO;
+import Model.student_club;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -84,13 +88,20 @@ public class addTeam extends HttpServlet {
     throws ServletException, IOException {
        PrintWriter pr  = response.getWriter();
         String name = request.getParameter("name");
+        String leader = request.getParameter("leader");
+        
         Part xImage = request.getPart("image");
         String xDetail = request.getParameter("details");
         String xStatus = request.getParameter("status");
         int status = Integer.parseInt(xStatus);
         String xClubID = request.getParameter("clubID");
+       
         ClubDAO cdao = new ClubDAO();
+        UserDAO udao = new UserDAO();
+        TeamDAO tdao = new TeamDAO();
+        StudentClubDAO scdao= new StudentClubDAO();
         Club c = cdao.getClub(xClubID);
+        String regex = "^[a-zA-Z\\p{L}\\s]+$";
         if (name.equals("")) {
            request.getSession().setAttribute("invalidName", "Team Name cannot be empty!");
            response.sendRedirect("clubdetaildb?cid="+xClubID);
@@ -100,6 +111,19 @@ public class addTeam extends HttpServlet {
            request.getSession().setAttribute("invalidName", "Team Name cannot contain HTML tags!");
            response.sendRedirect("clubdetaildb?cid="+xClubID);
            return;
+        }
+        if (leader.equals("")) {
+           request.getSession().setAttribute("invalidLeader", "Team Leader cannot be empty!");
+           response.sendRedirect("clubdetaildb?cid="+xClubID);
+           return;
+       }else if(!leader.matches(regex)) {
+            request.getSession().setAttribute("invalidLeader", "Team Leader cannot contain special characters, numbers, or HTML tags!");
+            response.sendRedirect("clubdetaildb?cid=" + xClubID);
+            return;
+        }else if(!scdao.checkUserExist(leader)){
+            request.getSession().setAttribute("invalidLeader", "This name does not exist");
+            response.sendRedirect("clubdetaildb?cid=" + xClubID);
+            return;
         }
        if (xDetail.equals("")) {
            request.getSession().setAttribute("invalidDetail", "Team Detail cannot be empty!");
@@ -111,15 +135,20 @@ public class addTeam extends HttpServlet {
            response.sendRedirect("clubdetaildb?cid="+xClubID);
            return;
        } else {
+            
             String fileName = xImage.getSubmittedFileName();
             request.setAttribute("image", fileName);
+        int leaderID = udao.getIdByName(leader);  
         int clubID = Integer.parseInt(xClubID);
         String imageURL = saveUploadedFile(request);
         Team t = new Team(0, name, imageURL, xDetail, status, clubID);
-        TeamDAO tdao = new TeamDAO();
-        pr.print(tdao.add(t));
+        tdao.add(t);
+        int newTeamID = tdao.getId_newTeam();
+        student_club sc = new student_club(leaderID, clubID, 4, newTeamID);
+    
+        pr.print(scdao.add(sc));
         response.sendRedirect("clubdetaildb?cid="+xClubID);
-  }
+       }
     }
 
     /** 
