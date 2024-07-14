@@ -1,82 +1,61 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Jun 16, 2024, 12:44:01 PM
-    Author     : quyka
-*/
-
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f8f8f8;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f5f5f5;
       margin: 0;
       padding: 0;
     }
 
-    .containerr {
-      border: 5px solid lightblue;
-      max-width: 1000px;
-      margin: 60px auto;
-      padding: 30px;
-      background-color: #fff;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    table {
+      width: 90%;
+      margin: 40px auto;
+      border-collapse: separate;
+      border-spacing: 0;
       border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      font-size: 16px;
     }
 
-    h1 {
-      text-align: center;
-      color: #333;
-      margin-bottom: 30px;
+    th {
+      background-color: #2196f3;
+      color: #fff;
+      padding: 16px 20px;
+      text-align: left;
+      font-weight: 500;
     }
 
-    .task-list {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    .task-list li {
-       
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px;
-      border-bottom: 2px solid #f05123;
+    td {
+      padding: 16px 20px;
+      border-bottom: 1px solid #e0e0e0;
       transition: background-color 0.3s ease;
     }
 
-    .task-list li:last-child {
-      border-bottom: 1px solid #f05123;
+    tr:nth-child(even) {
+      background-color: #fafafa;
     }
 
-    .task-list li:hover {
-      background-color: #f4f4f4;
+    tr:hover {
+      background-color: #f0f0f0;
     }
 
-    .task-list li .task-name {
-       width: 35%;
-      margin-right: 20px;
-      font-size: 16px;
-      font-weight: 600;
-      color: #333;
-    }
-  
-
-    .task-list li .status {
-      font-weight: 600;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-size: 14px;
+    a {
+      color: #2196f3;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
     }
 
-    .task-list li .status.in-progress {
-      background-color: #ffd700;
-      color: #333;
+    a:hover {
+      color: #1976d2;
     }
 
-    .task-list li .status.completed {
-      background-color: #4caf50;
-      color: #fff;
+    .status-complete {
+      color: #4caf50;
+      font-weight: 500;
+    }
+
+    .status-going {
+        color: #00c0ff;
+      font-weight: 500;
     }

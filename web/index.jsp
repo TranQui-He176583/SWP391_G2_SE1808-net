@@ -1,7 +1,12 @@
 <!doctype html>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import = "Model.*" %>
 
+<%@page import = "java.util.*" %>
+<%
+     List<Event> eList = (List<Event>) request.getAttribute("eList");
+%>
 <c:if test="${not empty requestScope.complete}">
   <script>
     alert(" ${requestScope.complete} ");
@@ -17,17 +22,87 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
+<link rel="stylesheet" href="assets/css/bootstrap.min_2.css">
+ <link rel="stylesheet" href="assets/css/templatemo-snapx-photography.css">
         <%@include file="commonFunction/CSS.jsp" %>
+
     </head>
+            <div style="width: 100%; height: 400px; margin-top: 200px">
+            <section class="popular-categories">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="section-heading">
+            
+              <h4 style="font-family: sans-serif" ><em>New Events </em></h4>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="main-button">
+            <a href="get_EvenList_ClubId?search=&cPage=1&clubid=0">Discover All Events</a>
+          </div>
+        </div>
+        <% for(int i=0 ;i<4;i++) {%>
+        
+          <div class="col-lg-3 col-sm-6">
+          <div class="popular-item">
+            <div class="top-content">
+              <div class="right">
+              <% if (eList.get(i).getName().length()>33) {
+              String name = eList.get(i).getName().substring(0,33);
+              name=name+"...";
+                  
+              %>    
+              <a href="event_Details?id=<%=eList.get(i).getId()%>&k=0&c=0">
+              <h4 style="font-size: 20px;  margin-top: 5px; font-weight: 700;font-family: sans-serif"><%=name%></h4> 
+                <%} else {%>
+                <a href="event_Details?id=<%=eList.get(i).getId()%>&k=0&c=0">
+                    <h4 style="font-size: 20px;  margin-top: 5px; font-weight: 700; font-family: sans-serif"><%=eList.get(i).getName()%></h4> 
+                    </a>
+                <%}%>
+                </a>
+              <%
+                  Club c = new Club();
+                  ClubDAO cDAO = new ClubDAO();
+                  c= cDAO.getClubById(eList.get(i).getClub_id());    
+            if (eList.get(i).getLocation().length()>20) {
+              String location = eList.get(i).getLocation().substring(0,20);
+              location=location+"...";
+              %>  
+                <span><em>Location:</em></span> <span style="font-size: 14px"> <%=location%></span>
+                <%} else {%>
+                <span><em>Location:</em></span> <span style="font-size: 14px"> <%=eList.get(i).getLocation()%></span>
+                <%}%> <br>
+                <span><em>Date :</em> </span> <span style="margin-left: 10%;font-size: 14px"> <%=eList.get(i).getDate().toLocalDate()%></span>
+              </div>
+            </div>
+               <a href="event_Details?id=<%=eList.get(i).getId()%>&k=0&c=0">
+            <div class="thumb">
+                <img style="width:260px; height: 170px  " src="<%=eList.get(i).getAvatar()%>" alt="">
+              <span class="category">Top Contest</span>
+              <span class="likes"><i class="fa fa-heart"></i> 256</span>
+            </div>
+               </a>
+            <div class="border-button">
+              <a href="get_EvenList_ClubId?cPage=1&search=&clubid=<%=c.getId()%>">Discover more about <%=c.getName()%></a>
+            </div>
+          </div>
+        </div>
+            
+            <%}%>
+      </div>
+    </div>
+  </section>
+        
+      </div>    
     <body>
 
         <%@include file="commonFunction/header.jsp" %>
-        <main>
+        <main >
             <!--? About-2 Area Start -->
             <section style="background : white" class="about-area2 testimonial-area section-padding30 fix">
                 <div class="container">
-                    <div class="row align-items-center">
+                    <div style=" margin-top: 100px;" class="row align-items-center">
 
                         <div class="col-lg-6 col-md-9 col-sm-9">
                             <div class="about-caption">

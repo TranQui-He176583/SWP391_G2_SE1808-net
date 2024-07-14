@@ -125,7 +125,6 @@ public class task_Update extends HttpServlet {
          Map<String, Boolean> aMap = new HashMap<>(); 
          AccountDAO aDAO = new AccountDAO();
        String name= request.getParameter("name");
-        String sTime = request.getParameter("start");
         String eTime = request.getParameter("end");
         String details = request.getParameter("details");
         String xeventid = request.getParameter("eventid");
@@ -143,20 +142,21 @@ public class task_Update extends HttpServlet {
            request.setAttribute("invalidName", "Task name cannot be empty!");
            checkValid= false;
        } 
+       if (validateChar(name)==false) {
+           request.setAttribute("invalidName", "Task name can't contain special characters!");
+           checkValid= false;
+       }
+       
        if (name.length()>100) {
             request.setAttribute("invalidlName", "Task name has a maximum length of 150 characters");
             checkValid= false;
        }
-       if (sTime.equals("")) {
-           request.setAttribute("invalidTime", "Start time cannot be empty!");
-           checkValid= false;
-       }
        if (eTime.equals("")) {
-           request.setAttribute("invalidLocation", "End time cannot be empty!");
+           request.setAttribute("invalidTime", "End time cannot be empty!");
            checkValid= false;
        }
        if (details.equals("")) {
-           request.setAttribute("invalidDetail", "Task Detail cannot be empty!");
+           request.setAttribute("invalidDetails", "Task Detail cannot be empty!");
            checkValid= false;
        }
      if (checkValid == false) {
@@ -171,7 +171,6 @@ public class task_Update extends HttpServlet {
          request.setAttribute("task_id", task_id);
          request.setAttribute("aMap", aMap);
          request.setAttribute("name", name);
-         request.setAttribute("stime", sTime);
          request.setAttribute("etime", eTime);
          request.setAttribute("details", details);
          get_aList gal = new get_aList();
@@ -185,7 +184,7 @@ public class task_Update extends HttpServlet {
          if (xeventid != null) {
              eventid= Integer.parseInt(xeventid);
          }
-          LocalDateTime stime = LocalDateTime.parse(sTime);
+          LocalDateTime stime = LocalDateTime.now();
           LocalDateTime etime = LocalDateTime.parse(eTime);
           Task t = new Task(task_id, name, stime, etime, true, "", eventid, details,club_id);
           TaskDAO tDAO = new TaskDAO();  
@@ -207,5 +206,25 @@ public class task_Update extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
+    public boolean validateChar(String taskName) {
+          taskName = taskName.trim();
+          int openingParenthesisCount = 0;
+        int closingParenthesisCount = 0;
+           for (int i = 0; i < taskName.length(); i++) {
+            char c = taskName.charAt(i);
+            if (!Character.isLetterOrDigit(c) && c != ' ' && c != '(' && c != ')') {
+                return false;
+            }
+           else if (c == '(') {
+                openingParenthesisCount++;
+            }
+            else if (c == ')') {
+                closingParenthesisCount++;
+            }
+            
+        }
+            return openingParenthesisCount == closingParenthesisCount;
+    }
+    
 }

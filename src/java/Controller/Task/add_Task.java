@@ -96,7 +96,7 @@ public class add_Task extends HttpServlet {
          Map<String, Boolean> aMap = new HashMap<>(); 
          AccountDAO aDAO = new AccountDAO();
        String name= request.getParameter("name");
-        String sTime = request.getParameter("start");
+      //  String sTime = request.getParameter("start");
         String eTime = request.getParameter("end");
         String details = request.getParameter("details");
         String xeventid = request.getParameter("eventid");
@@ -118,12 +118,12 @@ public class add_Task extends HttpServlet {
             request.setAttribute("invalidlName", "Task name has a maximum length of 150 characters");
             checkValid= false;
        }
-       if (sTime.equals("")) {
-           request.setAttribute("invalidTime", "Start time cannot be empty!");
-           checkValid= false;
-       }
+//       if (sTime.equals("")) {
+//           request.setAttribute("invalidTime", "Start time cannot be empty!");
+//           checkValid= false;
+//       }
        if (eTime.equals("")) {
-           request.setAttribute("invalidLocation", "End time cannot be empty!");
+           request.setAttribute("invalidTime", "End time cannot be empty!");
            checkValid= false;
        }
        if (details.equals("")) {
@@ -139,8 +139,7 @@ public class add_Task extends HttpServlet {
          }
          }
          request.setAttribute("aMap", aMap);
-         request.setAttribute("name", name);
-         request.setAttribute("stime", sTime);
+         request.setAttribute("name", name);     
          request.setAttribute("etime", eTime);
          request.setAttribute("details", details);
          get_aList gal = new get_aList();
@@ -154,7 +153,7 @@ public class add_Task extends HttpServlet {
          if (xeventid != null) {
              eventid= Integer.parseInt(xeventid);
          }
-          LocalDateTime stime = LocalDateTime.parse(sTime);
+          LocalDateTime stime = LocalDateTime.now();
           LocalDateTime etime = LocalDateTime.parse(eTime);
           Task t = new Task(0, name, stime, etime, true, "", eventid, details,club_id);
           TaskDAO tDAO = new TaskDAO();
@@ -164,6 +163,7 @@ public class add_Task extends HttpServlet {
          for (int i=0;i<iList.length;i++) { 
           out.print(tDAO.insertStudent(Integer.parseInt(iList[i]), tDAO.getId()));
          }
+        
          response.sendRedirect("task_Details?task_id="+tDAO.getId());
                  
                  

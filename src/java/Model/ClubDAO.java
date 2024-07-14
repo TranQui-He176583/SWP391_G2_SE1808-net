@@ -70,6 +70,24 @@ public class ClubDAO extends MyDAO {
         }
         return iList;
     }
+    
+    public List<Integer> get_ClubId(int account_id) {
+        List<Integer> iList = new ArrayList<>();
+        String sql = "SELECT * FROM student_club where account_id =? and role_id=1;";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, account_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("club_id");
+                iList.add(id);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return iList;
+    }
 
     public void displayClub() {
 
@@ -160,7 +178,7 @@ public class ClubDAO extends MyDAO {
                 club.setName(rs.getString("name"));
                 club.setStatus(rs.getInt("status"));
                 club.setAvatar(rs.getString("avatar"));
-                club.setDetail("details");
+                club.setDetail("detail");
                 clubs.add(club);
             }
         } catch (SQLException e) {

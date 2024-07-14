@@ -142,9 +142,8 @@ public class AccountDAO extends MyDAO {
     }
      
     public Account getAccount(int id) {
-        xSql = "select *from account where id=?"; 
+        xSql = "select *from account where id=? and status =1"; 
         Account account = new Account();
-      
         try {
       ps = con.prepareStatement(xSql);   
       ps.setInt(1, id );

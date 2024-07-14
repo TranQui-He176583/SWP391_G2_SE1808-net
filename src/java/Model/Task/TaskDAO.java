@@ -41,18 +41,30 @@ public class TaskDAO extends MyDAO {
   }
     
     public String update (Task t) {
-     xSql = "UPDATE task SET name = ?,  startday = ?,deadline = ?, status = ?, note = ?,event_id = ?, detail = ?,club_id = ? WHERE id = ?;"; 
+     xSql = "UPDATE task SET name = ? ,deadline = ?, status = ?, note = ?,event_id = ?, detail = ?,club_id = ? WHERE id = ?;"; 
      try {    
     ps = con.prepareStatement(xSql);      
     ps.setString(1,t.getName());
-    ps.setObject(2, t.getStartTime());
-    ps.setObject(3, t.getEndTime());
-    ps.setBoolean(4, t.isStatus());
-    ps.setString(5,t.getNote());
-    ps.setInt (6,t.getEvent_id());
-    ps.setString(7,t.getDetails());
-    ps.setInt(8,t.getClub_id());
-    ps.setInt(9,t.getId());
+    ps.setObject(2, t.getEndTime());
+    ps.setBoolean(3, t.isStatus());
+    ps.setString(4,t.getNote());
+    ps.setInt (5,t.getEvent_id());
+    ps.setString(6,t.getDetails());
+    ps.setInt(7,t.getClub_id());
+    ps.setInt(8,t.getId());
+      ps.executeUpdate();
+      ps.close();
+     }     
+     catch(Exception e) {
+        return(e.getMessage());
+     }
+     return("Ok");
+  }
+     public String update (int  id ) {
+     xSql = "UPDATE task set status=0 WHERE id = ?;"; 
+     try {    
+    ps = con.prepareStatement(xSql);      
+    ps.setInt(1, id);
       ps.executeUpdate();
       ps.close();
      }     
@@ -98,14 +110,56 @@ public class TaskDAO extends MyDAO {
     }
    
   
-   public Task getTask(int id,String search) {
-       String xSql="select *from task where id= ? and name like ?;";
+   public Task getTask(int id,String search,String event_id, String club_id) {
+    if (event_id.equals("") ){
+       if (club_id.equals("") ){
+           xSql = "select *from task where id= ? and name like ?;";
+             try{
+                  ps = con.prepareStatement(xSql);   
+                  ps.setInt(1, id );
+                  ps.setString(2,"%"+search+"%");
+             } catch(Exception e){
+                 
+             }
+       } else {
+           xSql = "select *from task where id= ? and name like ? and club_id=?;";
+             try{
+                  ps = con.prepareStatement(xSql);   
+                  ps.setInt(1, id );
+                  ps.setString(2,"%"+search+"%");
+                   ps.setString(3,club_id);
+             } catch(Exception e){
+                 
+             }
+       }
+    } else {
+         if (club_id.equals("") ){
+           xSql = "select *from task where id= ? and name like ? and event_id=?;";
+             try{
+                  ps = con.prepareStatement(xSql);   
+                  ps.setInt(1, id );
+                  ps.setString(2,"%"+search+"%");
+                  ps.setString(3,event_id);
+             } catch(Exception e){
+                 
+             }
+       } else {
+           xSql = "select *from task where id= ? and name like ? and club_id=? and event_id=?;";
+             try{
+                  ps = con.prepareStatement(xSql);   
+                  ps.setInt(1, id );
+                  ps.setString(2,"%"+search+"%");
+                  ps.setString(3,club_id);
+                  ps.setString(4,event_id);
+             } catch(Exception e){
+                 
+             }
+       }
+        
+    }     
        Task t = new Task();
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        try {
-      ps = con.prepareStatement(xSql);   
-      ps.setInt(1, id );
-      ps.setString(2,"%"+search+"%");
+        try {   
       rs = ps.executeQuery();           
       if (rs.next()) {         
        t.setId(rs.getInt("id"));
@@ -171,8 +225,8 @@ public class TaskDAO extends MyDAO {
      } 
         return false;
     }
-    public boolean checkManager(int account_id, int club_id) {
-        xSql = "select *from student_club where account_id=? club task_id=?";     
+    public  boolean checkManager(int account_id, int club_id) {
+        xSql = "select *from student_club where account_id=? and club_id=?";     
         try {
       ps = con.prepareStatement(xSql);   
       ps.setInt(1,account_id);
@@ -227,22 +281,41 @@ public int getId() {
         return number;
     }
 
- public List<Task> get_TaskList(int club_id,String search,int cpage) {
+ public List<Task> get_TaskList(int club_id,String search,int cpage, String event_id) {
         List<Task> tList = new ArrayList<>();
-        String sql = "select *from task where club_id=? and name like ? order by id desc limit 10 offset ?";
         int offset = (cpage-1)*10;
-        try {
-            ps = con.prepareStatement(sql);
+if (event_id.equals("") ){
+       
+            xSql = "select *from task where club_id=? and name like ? order by id desc limit 10 offset ? ";
+             try{
+            ps = con.prepareStatement(xSql);
             ps.setInt(1, club_id );
             ps.setString(2,"%"+search+"%");
             ps.setInt(3, offset );
+             } catch(Exception e){
+                 
+             }
+}
+             
+          else {
+                 xSql = "select *from task where club_id=? and name like ? and event_id= ? order by id desc limit 10 offset ?";
+                 try{
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, club_id );
+            ps.setString(2,"%"+search+"%");
+            ps.setString(3,event_id);
+            ps.setInt(4, offset );
+             } catch(Exception e){
+                
+             }
+        }
+        try {
             rs = ps.executeQuery();
              DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             while (rs.next()) {
                 Task t = new Task();
                 t.setId(rs.getInt("id"));
-       t.setName(rs.getString("name"));
-       
+       t.setName(rs.getString("name"));      
        t.setStartTime(LocalDateTime.parse(rs.getString("startday"),formatter));
        t.setEndTime(LocalDateTime.parse(rs.getString("deadline"),formatter));
        t.setStatus(rs.getBoolean("status"));
@@ -257,15 +330,34 @@ public int getId() {
         } 
         return tList;
     }
-  public int get_numberTask(int club_id,String search) {
+  public int get_numberTask(int club_id,String search, String event_id) {
         
-        String sql = "select *from task where club_id=? and name like ? ";
+   if (event_id.equals("") ){
+       
+            xSql = "select *from task where club_id=? and name like ?  ";
+             try{
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, club_id );
+            ps.setString(2,"%"+search+"%");
+             } catch(Exception e){
+                 
+             }
+}
+             
+          else {
+                 xSql = "select *from task where club_id=? and name like ? and event_id= ? ";
+                 try{
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, club_id );
+            ps.setString(2,"%"+search+"%");
+            ps.setString(3,event_id);
+             } catch(Exception e){
+                
+             }
+        }
         int count =0;
         boolean check=false;
         try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, club_id );
-            ps.setString(2,"%"+search+"%");
             rs = ps.executeQuery();
             
             while (rs.next()) {
@@ -302,8 +394,24 @@ public int getId() {
      }
     return  "ok";
     }
-
-
-
+    public List<Integer> getDoing_Task() {
+        List<Integer> tList = new ArrayList<>();
+        xSql = "select * from task  where deadline< current_timestamp and status = 1";
+       try {
+        ps = con.prepareStatement(xSql);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+            int id = rs.getInt("id");
+            tList.add(id);
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(tList);
+    }
+   
     
 }

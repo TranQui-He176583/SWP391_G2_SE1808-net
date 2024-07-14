@@ -78,6 +78,8 @@ public class add_Event extends HttpServlet {
            request.getRequestDispatcher("index.jsp").forward(request, response);
        } else {
               request.setAttribute("cid", cid);
+              PrintWriter pr  = response.getWriter();
+              pr.print(cid);
        request.getRequestDispatcher("add_Event.jsp").forward(request, response);
           }} else {
       request.setAttribute("complete", "Please Login");
@@ -161,7 +163,7 @@ public class add_Event extends HttpServlet {
         EventDAO eDAO = new EventDAO();
        
         pr.print(eDAO.insert(e));
-       response.sendRedirect("event_Details?id="+eDAO.getId_newEvent());
+       response.sendRedirect("event_Details?id="+eDAO.getId_newEvent()+"&k=0&c=0");
   }
     }
 

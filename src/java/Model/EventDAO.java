@@ -34,6 +34,88 @@ public class EventDAO extends MyDAO {
      }
      return("Ok");
   }
+      
+      public boolean checkRegister(int account_id, String event_id){
+ 
+        xSql = "select *from account_event where account_id=? and event_id=?";     
+        try {
+      ps = con.prepareStatement(xSql);   
+      ps.setInt(1,account_id);
+      ps.setString(2,event_id);
+      rs = ps.executeQuery();           
+      if (rs.next()) {         
+          return false;
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {      
+     } 
+        return true;
+    }
+      
+      public List<account_event> getAccount_Event(int event_id) {
+        List<account_event> aeList = new ArrayList<>();
+        xSql = "select * from account_event where event_id= ? and status = 0";
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setInt(1, event_id);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+            int id = rs.getInt("id");
+            int account_id = rs.getInt("account_id");
+            account_event ae = new account_event(id, account_id, event_id, rs.getBoolean("status")); 
+            aeList.add(ae);   
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(aeList);
+    }
+      public List<account_event> getAccount_Event1(int event_id) {
+        List<account_event> aeList = new ArrayList<>();
+        xSql = "select * from account_event where event_id= ? and status = 1";
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setInt(1, event_id);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+            int id = rs.getInt("id");
+            int account_id = rs.getInt("account_id");
+            account_event ae = new account_event(id, account_id, event_id, rs.getBoolean("status")); 
+            aeList.add(ae);   
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(aeList);
+    }
+      
+      
+      
+      public String insertAccount_Event (int account_id, String event_id) {
+     xSql = "insert into account_event (account_id, event_id, status) values (?,?,?)"; 
+     try {    
+      ps = con.prepareStatement(xSql);      
+      ps.setInt(1, account_id);
+      ps.setString(2, event_id);     
+      ps.setBoolean(3, false);
+      ps.executeUpdate();
+      ps.close();
+     }     
+     catch(Exception e) {
+        return(e.getMessage());
+     }
+     return("Ok");
+  }
+      
+      
             public String delete_Event (int event_id) {
      xSql = " update event set status = 0 where id = ?"; 
      try {    
@@ -47,7 +129,32 @@ public class EventDAO extends MyDAO {
      }
      return("Ok");
   }
-      
+       public String accept (int ae_id) {
+     xSql = " update account_event set status = 1 where id = ?"; 
+     try {    
+      ps = con.prepareStatement(xSql);      
+      ps.setInt(1, ae_id);
+      ps.executeUpdate();
+      ps.close();
+     }     
+     catch(Exception e) {
+        return(e.getMessage());
+     }
+     return("Ok");
+  }
+       public String delete (int ae_id) {
+     xSql = " delete from account_event where id = ?"; 
+     try {    
+      ps = con.prepareStatement(xSql);      
+      ps.setInt(1, ae_id);
+      ps.executeUpdate();
+      ps.close();
+     }     
+     catch(Exception e) {
+        return(e.getMessage());
+     }
+     return("Ok");
+  }
     
        public int get_Event_List_Npage(int club_Id,String search ) {
       
@@ -63,11 +170,11 @@ public class EventDAO extends MyDAO {
              }
              
         }  else {
-                 xSql = "SELECT * FROM event WHERE (name LIKE ? or time like ? ) and status =1 ";
+                 xSql = "SELECT * FROM event WHERE (name LIKE ?  ) and status =1 ";
                  try{
                       ps = con.prepareStatement(xSql);
                  ps.setString(1,"%"+search+"%");    
-                 ps.setString(2,"%"+search+"%");
+                
                
              } catch(Exception e){
                 
@@ -85,13 +192,11 @@ public class EventDAO extends MyDAO {
                  
              }
         } else {
-             xSql = "SELECT * FROM event WHERE club_id = ? AND ( name LIKE ? or time like ?) and status =1 ";
+             xSql = "SELECT * FROM event WHERE club_id = ? AND ( name LIKE ? ) and status =1 ";
              try{
         ps = con.prepareStatement(xSql);
                  ps.setInt(1, club_Id);  
-                 ps.setString(2,"%"+search+"%");
-                 ps.setString(3,"%"+search+"%");
-                
+                 ps.setString(2,"%"+search+"%");               
              } catch(Exception e){
                  
              }
@@ -145,12 +250,11 @@ public class EventDAO extends MyDAO {
              }
              
         }  else {
-                 xSql = "SELECT * FROM event WHERE ( name LIKE ? or time like ?) and status=1 ORDER BY id DESC limit 9 offset ?;";
+                 xSql = "SELECT * FROM event WHERE ( name LIKE ? ) and status=1 ORDER BY id DESC limit 9 offset ?;";
                  try{
                       ps = con.prepareStatement(xSql);
-                 ps.setString(1,"%"+search+"%");    
-                 ps.setString(2,"%"+search+"%");
-                 ps.setInt(3, cPage);
+                 ps.setString(1,"%"+search+"%");                    
+                 ps.setInt(2, cPage);
              } catch(Exception e){
                 
              }
@@ -167,13 +271,12 @@ public class EventDAO extends MyDAO {
                  
              }
         } else {
-             xSql = "SELECT * FROM event WHERE club_id = ? AND (name LIKE ? or time like ?) and status =1 ORDER BY id DESC LIMIT 9 OFFSET ?;";
+             xSql = "SELECT * FROM event WHERE club_id = ? AND (name LIKE ? ) and status =1 ORDER BY id DESC LIMIT 9 OFFSET ?;";
              try{
         ps = con.prepareStatement(xSql);
                  ps.setInt(1, club_Id);  
                  ps.setString(2,"%"+search+"%");
-                 ps.setString(3,"%"+search+"%");
-                 ps.setInt(4, cPage);
+                 ps.setInt(3, cPage);
              } catch(Exception e){
                  
              }
@@ -188,7 +291,7 @@ public class EventDAO extends MyDAO {
         e.setId( rs.getInt("id"));
         e.setName(rs.getString("name"));
         e.setAvatar(rs.getString("avatar"));
-        e.setClub_id(club_Id);
+        e.setClub_id(rs.getInt("club_id"));
         e.setDate(LocalDateTime.parse(rs.getString("time"),formatter));
         e.setLocation(rs.getString("location"));
         e.setDetails(rs.getString("details"));
@@ -330,6 +433,39 @@ public class EventDAO extends MyDAO {
      }
     return(t);
     }
+    
+     public List<Event> getAllEvent1() {
+        List<Event> t = new ArrayList<>();
+        xSql = "select * from event where status = 1 and  time >= DATE(NOW()) + INTERVAL 1 DAY AND time < DATE(NOW()) + INTERVAL 2 DAY;  ";
+       try {
+        ps = con.prepareStatement(xSql);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            int club_id = rs.getInt("club_id");
+            LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+            String location = rs.getString("location");
+            String details = rs.getString("details");
+            String avatar = rs.getString("avatar");
+            boolean status = rs.getBoolean("status");
+            
+            Event event = new Event(id, name, club_id, time, location, details,avatar,status);
+            t.add(event);
+     
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+    }
+    
+    
+    
+    
     public String updateEvent(Event e) {
        
         xSql = "UPDATE Event SET name = ?, avatar = ?, club_id=? ,time=?,location=?,details=?,status=? WHERE id = ?;";
@@ -342,8 +478,8 @@ public class EventDAO extends MyDAO {
         ps.setObject(4, e.getDate());  
         ps.setString(5, e.getLocation());
         ps.setString(6, e.getDetails());
-        ps.setInt(7,e.getId());
-        ps.setBoolean(8, e.isStatus());
+        ps.setInt(8,e.getId());
+        ps.setBoolean(7, e.isStatus());
         ps.executeUpdate();
       rs.close();
       ps.close();
@@ -393,6 +529,62 @@ public class EventDAO extends MyDAO {
             Event event = new Event(id, name, club_id, time, location, details,avatar,status);
             t.add(event);
      
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+    }
+    
+    public List<Event> getEventByClubID(String ClubID){
+         List<Event> t = new ArrayList<>();
+         xSql = "select * from event where club_id =? ORDER BY id ";
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setString(1, ClubID);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            int club_id = rs.getInt("club_id");
+            LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+            String location = rs.getString("location");
+            String details = rs.getString("details");
+            String avatar = rs.getString("avatar");
+            boolean status = rs.getBoolean("status");
+            Event event = new Event(id, name, club_id, time, location, details,avatar,status);
+            t.add(event);
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+    }
+    
+     public List<Event> geteListdate(String ClubID){
+         List<Event> t = new ArrayList<>();
+         xSql = "select * from event where club_id =? and time>CURRENT_TIMESTAMP ORDER BY id desc ";
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setString(1, ClubID);
+        rs = ps.executeQuery();
+       while(rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            int club_id = rs.getInt("club_id");
+            LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+            String location = rs.getString("location");
+            String details = rs.getString("details");
+            String avatar = rs.getString("avatar");
+            boolean status = rs.getBoolean("status");
+            Event event = new Event(id, name, club_id, time, location, details,avatar,status);
+            t.add(event);
       }
       rs.close();
       ps.close();

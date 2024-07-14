@@ -3,9 +3,9 @@
 
 
 
-<header style="border-bottom:  dotted #ccc;" >
+<header  >
     <!--? Header Start -->
-    <div style="background: #f05123;" class="header-area header-transparent">
+    <div style="background: #f05123; height: 118px" class="header-area header-transparent">
         <div class="main-header header-sticky">
             <div class="container-fluid">
                 <div class="row align-items-center">
@@ -58,7 +58,8 @@
                                         </c:if>
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="myclublist">My Club List</a>
-                                        <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="task_List?search=&cPage=1">My Task</a>
+                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="manage_registerEvent?club_id=&cPage=1&event_id=">Register Event</a>
+                                        <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="task_List?search=&cPage=1&club_id=&event_id=">My Task</a>
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>                                       
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           
                                     </div>

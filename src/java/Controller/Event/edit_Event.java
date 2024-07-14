@@ -140,9 +140,11 @@ public class edit_Event extends HttpServlet {
         LocalDateTime time = LocalDateTime.parse(Stime);        
         int club_Id = Integer.parseInt(xClubId);        
         Event e = new Event(id, name, club_Id, time, xLocation, xDetail,imageURL,true);       
-        pr.print(eDAO.updateEvent(e));
-        pr.print(e.getName());
-      response.sendRedirect("event_Details?id="+id);
+        pr.println(eDAO.updateEvent(e));
+        pr.println(e.getName());
+        pr.println(xLocation);
+        pr.println(id);
+      response.sendRedirect("event_Details?id="+id+"&k=0&c=0");
   }
     }
 

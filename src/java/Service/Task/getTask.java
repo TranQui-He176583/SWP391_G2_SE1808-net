@@ -15,14 +15,14 @@ import java.util.*;
  */
 public class getTask {
    // List<Task> tList=  new ArrayList<>();
-    public  List<Task> gettList ( int id,String search,int cPage ) {
+    public  List<Task> gettList ( int id,String search,int cPage, String event_id, String club_id ) {
       List<Integer> iList = new ArrayList<>();
       TaskDAO tDAO = new TaskDAO();
       iList = tDAO.getAccount(id);
       List<Task> tList = new ArrayList<>();
         for (int i=0;i<iList.size();i++) {
             Task t = new Task();
-            t=tDAO.getTask(iList.get(i),search);
+            t=tDAO.getTask(iList.get(i),search, event_id,club_id);
             if (t.getName()!=null) {
                 tList.add(t);  
             }
@@ -38,14 +38,14 @@ public class getTask {
         return ttList;
     }
     
-     public  int gett_nPage ( int id,String search ) {
+     public  int gett_nPage ( int id,String search,String event_id,String club_id ) {
       List<Integer> iList = new ArrayList<>();
       TaskDAO tDAO = new TaskDAO();
       iList = tDAO.getAccount(id);
       List<Task> tList = new ArrayList<>();
         for (int i=0;i<iList.size();i++) {
             Task t = new Task();
-            t=tDAO.getTask(iList.get(i),search);
+            t=tDAO.getTask(iList.get(i),search,event_id,club_id);
             tList.add(t);            
         }
         int nPage = tList.size();

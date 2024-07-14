@@ -71,7 +71,7 @@ public class loginGoogle extends HttpServlet {
        HttpSession session = request.getSession();
        a = aDAO.getAccount(a.getEmail()); 
        session.setAttribute("account", a);
-       request.getRequestDispatcher("index.jsp").forward(request, response);
+       request.getRequestDispatcher("Home").forward(request, response);
        
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

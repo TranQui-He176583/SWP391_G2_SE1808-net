@@ -94,7 +94,7 @@ public class change_F_Password extends HttpServlet {
           session.setAttribute("account",account);
           
          request.setAttribute("complete", "Change Password Complete!");
-         request.getRequestDispatcher("index.jsp").forward(request, response);
+         request.getRequestDispatcher("Home").forward(request, response);
         
     } else {
        

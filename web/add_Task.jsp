@@ -28,6 +28,15 @@
     .checkbox-list > div.hidden {
       display: none;
     }
+     .checkbox-list {
+    max-height: 130px;
+    overflow-y: auto;
+    padding-right: 15px;
+  }
+
+  .checkbox-list .hidden {
+    display: none;
+  }
   </style>
 <html>
     <head>
@@ -42,44 +51,27 @@
     <body>
                     
         <div  class="login-container">
-        <form action="add_Task" method="post" >
-            <div>
-    <label for="name">Task Name:</label>
+            <form action="add_Task" method="post" " >
+                <div style="display: flex">
+            <div style="width: 65%; height: 250px">
+                <label for="name">Task Name:</label>
     <input type="text" id="name" name="name" value="${requestScope.name}" >
     <p style="color: red">${requestScope.invalidName}</p>
     <p style="color: red">${requestScope.invalidlName}</p>
-  </div>
-    <p style="color: red">${requestScope.invalidImage}</p>
-            
- 
-    <input type="hidden" id="cid" name="clubid" value="${requestScope.club_id}"  >
-    <input type="hidden" id="eid" name="eventid" value="${requestScope.event_id}"  > 
-  
-  <div>
-    <label for="time">Start:</label>
-    <input type="datetime-local" id="time" name="start" value="${requestScope.stime}"  >
-    <p style="color: red">${requestScope.invalidTime}</p>
-  </div>
-  
-  <div>
-    <label for="time">End:</label>
+              <div>
+    <label for="time">Deadline:</label>
     <input type="datetime-local" id="time" name="end" value="${requestScope.etime}"  >
     <p style="color: red">${requestScope.invalidTime}</p>
-  </div>
-  
-  <div>
-    <label for="details">Chi tiết:</label>
-    <textarea  id="details" name="details"  rows="10"  " > ${requestScope.detail} </textarea>
-    <p style="color: red">${requestScope.invalidDetail}</p>
-  </div>
-  
-  
- <div>
+  </div>    
+            </div>
+            
+  <div style="width: 15%; margin-left: 10% ">
+      <div>
       <label for="details">Member:</label>
     <input type="text" id="searchInput" placeholder="Tìm kiếm..." />
  
     <div class="checkbox-list">
-       <% for (int i=0;i<aList.size();i++) {%>     
+       <% for (int i=0;i<aList.size();i++) {%>    
       <%if (aMap.get(aList.get(i).getEmail())==null) {%>
 
       <div>
@@ -99,7 +91,25 @@
      
     </div>
       <p style="color: red">${requestScope.invalidMember}</p>
+        </div>
+      </div> 
   </div>
+  
+          
+    <input type="hidden" id="cid" name="clubid" value="${requestScope.club_id}"  >
+    <input type="hidden" id="eid" name="eventid" value="${requestScope.event_id}"  > 
+    
+   
+  
+  
+    <div >
+    <label for="details">Chi tiết:</label>
+    <textarea  id="details" name="details"  rows="10"  " > ${requestScope.detail} </textarea>
+    <p style="color: red">${requestScope.invalidDetail}</p>
+  </div>
+  
+  
+ 
      
      <script>
     const checkboxList = document.querySelector('.checkbox-list');

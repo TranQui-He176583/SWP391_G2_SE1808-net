@@ -3,12 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.Task;
+package Controller.Event;
 
-import Model.Account;
-import Model.ClubDAO;
-import Model.EventDAO;
-import Model.Task.*;
+import Model.*;
+import Util.MailHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,14 +14,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author quyka
  */
-@WebServlet(name="task_Details", urlPatterns={"/task_Details"})
-public class task_Details extends HttpServlet {
+@WebServlet(name="accept_registerEvent", urlPatterns={"/accept_registerEvent"})
+public class accept_registerEvent extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +37,10 @@ public class task_Details extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet task_Details</title>");  
+            out.println("<title>Servlet accept_registerEvent</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet task_Details at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet accept_registerEvent at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,47 +57,7 @@ public class task_Details extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        Account a = new Account();
-        a = (Account) session.getAttribute("account");
-        TaskDAO TaskDAO = new TaskDAO(); 
-          
-        String xid= request.getParameter("task_id");
-        int id = Integer.parseInt(xid);
-        Task t = new Task();
-        t = TaskDAO.getTask(id);
-     if (a == null) {
-         request.setAttribute("complete", "Please Login!");
-         request.getRequestDispatcher("index.jsp").forward(request, response);
-     } else {   
-        
-     if (TaskDAO.checkTask(a.getId(), id)==false && TaskDAO.checkManager(a.getId(), t.getClub_id())==false) {
-         request.setAttribute("complete", "You don't have this task!");
-         request.getRequestDispatcher("index.jsp").forward(request, response);
-     } else {
-             
-        ClubDAO cDAO = new ClubDAO();
-        EventDAO eDAO = new EventDAO();
-        
-        if (t.isStatus()) {
-            request.setAttribute("status", "Đang thực hiện");
-        } else {
-            request.setAttribute("status", "Đã Hoàn Thành");
-        }
-        request.setAttribute("role", TaskDAO.checkManager(a.getId(), t.getClub_id()));
-        request.setAttribute("id", xid);
-        request.setAttribute("name", t.getName());
-        request.setAttribute("eventid", t.getEvent_id());
-        request.setAttribute("clubid", t.getClub_id());
-        request.setAttribute("start", t.getStartTime().toLocalDate()+" at "+t.getStartTime().toLocalTime());
-        request.setAttribute("end", t.getEndTime().toLocalDate()+" at "+t.getEndTime().toLocalTime());
-        request.setAttribute("event", eDAO.getEvent(t.getEvent_id()).getName());
-        request.setAttribute("club", cDAO.getClub_Id(t.getClub_id()).getName());
-        request.setAttribute("details", t.getDetails());
-        request.getRequestDispatcher("task_details.jsp").forward(request, response);
-     }
-     }
+        processRequest(request, response);
     } 
 
     /** 
@@ -113,7 +70,41 @@ public class task_Details extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+         String xClub_id = request.getParameter("club_id");      
+        String event_id = request.getParameter("event_id");
+         String eid = request.getParameter("eid");
+        String type = request.getParameter("type");
+        String cPage = request.getParameter("cPage");
+        String ae_id = request.getParameter("ae_id");
+        String email = request.getParameter("email");
+         MailHandler mh = new MailHandler(); 
+         EventDAO eDAO = new EventDAO();
+         Event ev = eDAO.getEvent(Integer.parseInt(eid));
+         
+      if (type.equals("1") ) {
+          out.print(eDAO.accept(Integer.parseInt(ae_id)));
+           try {
+               mh.SendMail(email, "Response to registration application for Event: "+ev.getName(),"Your event registration has been accepted."
+                       + "<br><br>Event: "+ev.getName()+
+                       "<br>Location: "+ev.getLocation()+
+                       "<br>Time: "+ev.getDate());               
+            } catch (Exception e) {
+                out.print(e);
+            }
+      }   else {
+          eDAO.delete(Integer.parseInt(ae_id));
+          try {
+               mh.SendMail(email, "Response to registration application for Event: "+ev.getName(),"Your event registration has not been accepted."
+                       + "<br><br>Event: "+ev.getName()+
+                       "<br>Location: "+ev.getLocation()+
+                       "<br>Time: "+ev.getDate());               
+            } catch (Exception e) {
+                out.print(e);
+            }
+      }
+      request.getRequestDispatcher("manage_registerEvent?club_id="+xClub_id+"&cPage="+cPage+"&event_id="+event_id).forward(request, response);
+     
     }
 
     /** 

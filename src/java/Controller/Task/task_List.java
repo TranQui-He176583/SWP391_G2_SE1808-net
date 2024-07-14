@@ -6,6 +6,7 @@
 package Controller.Task;
 
 import Model.Account;
+import Model.*;
 import Model.Task.*;
 import Service.Task.getTask;
 import java.io.IOException;
@@ -61,16 +62,20 @@ public class task_List extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
          response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-       
+        PrintWriter out = response.getWriter();      
         String search = request.getParameter("search");
+        String event_id = request.getParameter("event_id");
+        String club_id = request.getParameter("club_id");
         int cPage = Integer.parseInt(request.getParameter("cPage"));
-        
         if (search==null) {
             search = "";
         }
-       
-        
+        if (club_id == null) {
+            club_id="";
+        }
+        if (event_id == null) {
+            event_id="";
+        } 
         getTask gTask = new  getTask();
         List<Task> tList = new ArrayList<Task>();
         HttpSession session = request.getSession();
@@ -80,22 +85,65 @@ public class task_List extends HttpServlet {
            request.setAttribute("complete", "Please Login!");
            request.getRequestDispatcher("index.jsp").forward(request, response);
        } else {
-          tList = gTask.gettList(a.getId(),search,cPage);
-          int nPage= gTask.gett_nPage(a.getId(), search);      
+        tList = gTask.gettList(a.getId(),search,cPage,"","");
+        ClubDAO cDAO = new ClubDAO();
+        EventDAO eDAO = new EventDAO();
+        ArrayList<Club> cList = new ArrayList<Club>();
+        ArrayList<Event> eList = new ArrayList<Event>();
+        for (int i=0;i<tList.size();i++) {   
+            out.println(tList.get(i).getId());
+          if (checkCList(tList.get(i).getClub_id(), cList)) {
+            Club c = new Club();
+            c= cDAO.getClubById(tList.get(i).getClub_id());
+           if (c.getName() != null) {
+              cList.add(c); 
+           }             
+          }
+        }
+         tList = gTask.gettList(a.getId(),search,cPage,"",club_id); 
+       for (int i=0;i<tList.size();i++) {   
+        if (checkEList(tList.get(i).getEvent_id(), eList)) { 
+             Event e = new Event();
+            e = eDAO.getEvent(tList.get(i).getEvent_id());
+            if (e.getName()!=null) {
+                eList.add(e);
+            } 
+        }
+       }
         
+        
+        tList = gTask.gettList(a.getId(),search,cPage,event_id,club_id);
+          int nPage= gTask.gett_nPage(a.getId(), search,event_id,club_id);
+         request.setAttribute("cList", cList);
+         request.setAttribute("eList", eList);
         request.setAttribute("tList", tList);
         request.setAttribute("search", search);
-   
+        request.setAttribute("cC", club_id);
+        request.setAttribute("cE", event_id);
          request.setAttribute("nPage", nPage);
          request.setAttribute("cPage", cPage);
          request.setAttribute("typeSearch", false);
         request.getRequestDispatcher("task_List.jsp").forward(request, response); 
-        
        }
-        
+      
         
     } 
-
+public boolean checkEList(int id, ArrayList<Event> eList) {
+    for (Event event : eList) {
+        if (event.getId() == id) {
+            return false;
+        }
+    }
+    return true;
+}
+public boolean checkCList(int id, ArrayList<Club> cList) {
+    for (Club club : cList) {
+        if (club.getId() == id) {
+            return false;
+        }
+    }
+    return true;
+}
     /** 
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
@@ -109,26 +157,35 @@ public class task_List extends HttpServlet {
         PrintWriter out = response.getWriter();
         String xClub_id = request.getParameter("club_id");
         String search = request.getParameter("search");
-        int cPage = Integer.parseInt(request.getParameter("cPage"));
-        
+        String event_id = request.getParameter("event_id");
+        int cPage = Integer.parseInt(request.getParameter("cPage"));        
         if (search==null) {
             search = "";
         }
+        if (event_id==null) {
+            event_id="";
+        }
+      
         int club_id = Integer.parseInt(xClub_id);
         List<Task> tList = new ArrayList<Task>();
         TaskDAO tDAO = new TaskDAO();
-       tList=  tDAO.get_TaskList(club_id,search,cPage);
+       tList=  tDAO.get_TaskList(club_id,search,cPage,event_id);
+       List<Event>  eList = new ArrayList<Event>();
+       EventDAO eDAO = new EventDAO();
+       eList= eDAO.getEventByClubID(xClub_id);
        
-       int nPage = tDAO.get_numberTask(club_id, search);
-       out.print(nPage);
-       
+       int nPage = tDAO.get_numberTask(club_id, search,event_id);
+      
+       out.print(club_id);
         request.setAttribute("search", search);
-        request.setAttribute("club_id", club_id);
+        request.setAttribute("club_id", String.valueOf(club_id));
+        request.setAttribute("cE", event_id);
          request.setAttribute("tList", tList);
+         request.setAttribute("eList", eList);
          request.setAttribute("nPage", nPage);
          request.setAttribute("cPage", cPage);
           request.setAttribute("typeSearch", true);
-        request.getRequestDispatcher("task_List.jsp").forward(request, response); 
+       request.getRequestDispatcher("task_List.jsp").forward(request, response); 
         
     }
 

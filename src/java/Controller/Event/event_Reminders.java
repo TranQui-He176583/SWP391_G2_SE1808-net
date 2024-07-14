@@ -3,12 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.Task;
+package Controller.Event;
 
-import Model.Account;
-import Model.ClubDAO;
-import Model.EventDAO;
+import Model.*;
 import Model.Task.*;
+import Util.MailHandler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,14 +15,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.util.*;
 
 /**
  *
  * @author quyka
  */
-@WebServlet(name="task_Details", urlPatterns={"/task_Details"})
-public class task_Details extends HttpServlet {
+@WebServlet(name="event_Reminders", urlPatterns={"/event_Reminders"})
+public class event_Reminders extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +39,10 @@ public class task_Details extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet task_Details</title>");  
+            out.println("<title>Servlet event_Reminders</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet task_Details at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet event_Reminders at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,46 +60,36 @@ public class task_Details extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        Account a = new Account();
-        a = (Account) session.getAttribute("account");
-        TaskDAO TaskDAO = new TaskDAO(); 
-          
-        String xid= request.getParameter("task_id");
-        int id = Integer.parseInt(xid);
-        Task t = new Task();
-        t = TaskDAO.getTask(id);
-     if (a == null) {
-         request.setAttribute("complete", "Please Login!");
-         request.getRequestDispatcher("index.jsp").forward(request, response);
-     } else {   
-        
-     if (TaskDAO.checkTask(a.getId(), id)==false && TaskDAO.checkManager(a.getId(), t.getClub_id())==false) {
-         request.setAttribute("complete", "You don't have this task!");
-         request.getRequestDispatcher("index.jsp").forward(request, response);
-     } else {
-             
-        ClubDAO cDAO = new ClubDAO();
         EventDAO eDAO = new EventDAO();
-        
-        if (t.isStatus()) {
-            request.setAttribute("status", "Đang thực hiện");
-        } else {
-            request.setAttribute("status", "Đã Hoàn Thành");
-        }
-        request.setAttribute("role", TaskDAO.checkManager(a.getId(), t.getClub_id()));
-        request.setAttribute("id", xid);
-        request.setAttribute("name", t.getName());
-        request.setAttribute("eventid", t.getEvent_id());
-        request.setAttribute("clubid", t.getClub_id());
-        request.setAttribute("start", t.getStartTime().toLocalDate()+" at "+t.getStartTime().toLocalTime());
-        request.setAttribute("end", t.getEndTime().toLocalDate()+" at "+t.getEndTime().toLocalTime());
-        request.setAttribute("event", eDAO.getEvent(t.getEvent_id()).getName());
-        request.setAttribute("club", cDAO.getClub_Id(t.getClub_id()).getName());
-        request.setAttribute("details", t.getDetails());
-        request.getRequestDispatcher("task_details.jsp").forward(request, response);
-     }
-     }
+        AccountDAO aDAO = new AccountDAO();
+        List<Event>  eList = new ArrayList<Event>();
+        eList= eDAO.getAllEvent1();     
+        out.print(eList.size());
+        MailHandler mh = new MailHandler(); 
+       for (int i =0;i<eList.size();i++) {
+           List<account_event> aeList = new ArrayList<account_event>();           
+           aeList=eDAO.getAccount_Event1(eList.get(i).getId());
+           out.print(aeList.size());
+          for (int j=0;j<aeList.size();j++) {
+              Account a = aDAO.getAccount(aeList.get(j).getAccount_id());
+              out.print(a.getEmail());
+              try {
+               mh.SendMail(a.getEmail(), "Event participation reminder: "+eList.get(i).getName(),"<br>Event Information:"
+                       + "<br>Event: "+eList.get(i).getName()+
+                       "<br>Location: "+eList.get(i).getLocation()+
+                       "<br>Time: "+eList.get(i).getDate());               
+            } catch (Exception e) {
+                out.print(e);
+            }
+          } 
+       }
+       List<Integer> tList = new ArrayList<Integer>();
+       TaskDAO tDAO = new TaskDAO();
+       tList= tDAO.getDoing_Task();
+       for (int i=0; i <tList.size();i++) {
+           tDAO.update(tList.get(i));
+       }       
+       response.sendRedirect("Home");
     } 
 
     /** 
@@ -113,7 +102,8 @@ public class task_Details extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        
+                
     }
 
     /** 

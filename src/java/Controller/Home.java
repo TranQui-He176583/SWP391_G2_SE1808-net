@@ -5,6 +5,7 @@
 
 package Controller;
 
+import Model.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.*;
 
 /**
  *
@@ -29,6 +31,10 @@ public class Home extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+         EventDAO eDAO = new EventDAO();
+        List<Event> eList = new ArrayList<Event>();
+        eList = eDAO.get_Event_List(0,"", 1);
+       request.setAttribute("eList", eList);
        request.getRequestDispatcher("index.jsp").forward(request, response);
     } 
 
