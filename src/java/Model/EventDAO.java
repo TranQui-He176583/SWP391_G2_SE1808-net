@@ -15,6 +15,8 @@ import java.util.List;
  * @author quyka
  */
 public class EventDAO extends MyDAO {
+    
+    
       public String insert (Event x) {
      xSql = "insert into Event (name,club_id,time,location,details,avatar,status) values (?,?,?,?,?,?,?)"; 
      try {    
@@ -34,6 +36,24 @@ public class EventDAO extends MyDAO {
      }
      return("Ok");
   }
+        public int getNumberEvent() {
+        xSql = "select max(id) as id from event";
+        int number = 3;
+        try {
+            ps = con.prepareStatement(xSql);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                number = rs.getInt("id");
+                return number;
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+
+        }
+        return number;
+    }
       
       public boolean checkRegister(int account_id, String event_id){
  
@@ -114,7 +134,21 @@ public class EventDAO extends MyDAO {
      }
      return("Ok");
   }
-      
+      public String insertMember_Event (int account_id, String event_id) {
+     xSql = "insert into account_event (account_id, event_id, status) values (?,?,?)"; 
+     try {    
+      ps = con.prepareStatement(xSql);      
+      ps.setInt(1, account_id);
+      ps.setString(2, event_id);     
+      ps.setBoolean(3, true);
+      ps.executeUpdate();
+      ps.close();
+     }     
+     catch(Exception e) {
+        return(e.getMessage());
+     }
+     return("Ok");
+  }
       
             public String delete_Event (int event_id) {
      xSql = " update event set status = 0 where id = ?"; 
@@ -215,26 +249,7 @@ public class EventDAO extends MyDAO {
      }
     return count;
     }
-    
-     public int getId_newEvent () {
-       xSql = "SELECT *  FROM event ORDER BY id DESC LIMIT 1;";
-       try {
-        ps = con.prepareStatement(xSql);
-        rs = ps.executeQuery();
-       
-         
-       if (rs.next()) {
-          return (rs.getInt("id"));      
-      }
-      rs.close();
-      ps.close();
-     }
-     catch(Exception    e) {
-        e.printStackTrace();
-     }
-       return 1;
-   }
-    
+        
     
    public List<Event> get_Event_List(int club_Id,String search ,int cPage) {
         List<Event> eList = new ArrayList<>();

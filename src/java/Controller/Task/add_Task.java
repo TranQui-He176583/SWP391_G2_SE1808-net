@@ -118,10 +118,10 @@ public class add_Task extends HttpServlet {
             request.setAttribute("invalidlName", "Task name has a maximum length of 150 characters");
             checkValid= false;
        }
-//       if (sTime.equals("")) {
-//           request.setAttribute("invalidTime", "Start time cannot be empty!");
-//           checkValid= false;
-//       }
+       if (validateChar(name)==false) {
+           request.setAttribute("invalidName1", "Task name can't contain special characters!");
+           checkValid= false;
+       }
        if (eTime.equals("")) {
            request.setAttribute("invalidTime", "End time cannot be empty!");
            checkValid= false;
@@ -179,5 +179,24 @@ public class add_Task extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+     public boolean validateChar(String taskName) {
+          taskName = taskName.trim();
+          int openingParenthesisCount = 0;
+        int closingParenthesisCount = 0;
+           for (int i = 0; i < taskName.length(); i++) {
+            char c = taskName.charAt(i);
+            if (!Character.isLetterOrDigit(c) && c != ' ' && c != '(' && c != ')') {
+                return false;
+            }
+           else if (c == '(') {
+                openingParenthesisCount++;
+            }
+            else if (c == ')') {
+                closingParenthesisCount++;
+            }
+            
+        }
+            return openingParenthesisCount == closingParenthesisCount;
+    }
 
 }

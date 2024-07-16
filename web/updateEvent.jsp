@@ -22,49 +22,69 @@
 </div>
     <body>
                     
-        <div  class="login-container">
+       <div  class="login-container">
         <form action="edit_Event" method="post" enctype="multipart/form-data" >
-            <input type="hidden" name="id" value="${requestScope.Event.getId()}"     
-            
-            <div>
+            <input type="hidden" name="id" value="${requestScope.id}" > 
+            <input type="hidden" id="clubid" name="clubid" value="${requestScope.club_id}"  >
+            <div style="display: flex; ">
+                <div style="width: 65%">
     <label for="name">Tên sự kiện:</label>
-    <input type="text" id="name" name="name" value="${requestScope.Event.getName()}" >
+    <input type="text" id="name" name="name" value="${requestScope.name}" >
     <p style="color: red">${requestScope.invalidName}</p>
+    <p style="color: red">${requestScope.invalidlName}</p>
   </div>
-  
-  <div>
-  
-      <label style="" for="image">Avatar of Event</label> <br>
-      <input style="font-size: 15px;
-    margin-top: 5px;
-    margin-bottom: 5px;" type="file" id="image" name="image" accept="image/*"" value="${requestScope.image}" >
+  <div style="width: 15%; ">
+      <label style="margin-left: 30%" for="time">Thời gian:</label>
+    <input style="margin-left: 30%" type="datetime-local" id="time" name="time" value="${requestScope.time}"  >
+
+    <p style="color: red; margin-left: 30%">${requestScope.invalidTime}</p>
   </div>
-    <p style="color: red">${requestScope.invalidImage}</p>
-            
-    <div>
-  
-    <input type="hidden" id="clubid" name="clubid" value="${requestScope.Event.getClub_id()}"  >
-  </div>        
-  
-  <div>
-    <label for="time">Thời gian:</label>
-    <input type="datetime-local" id="time" name="time" value="${requestScope.Event.getDate()}"  >
-    <p style="color: red">${requestScope.invalidTime}</p>
-  </div>
-  
-  <div>
-    <label for="location">Địa điểm:</label>
-    <input type="text" id="location" name="location" value="${requestScope.Event.getLocation()}">
+          </div>
+  <div style="display: flex; ">
+      <div style="width: 65%">
+          <label  for="location">Địa điểm:</label>
+    <input type="text" id="location" name="location" value="${requestScope.location}">
     <p style="color: red">${requestScope.invalidLocation}</p>
+    <p style="color: red">${requestScope.invalidlLocation}</p>
   </div>
-  
+  <div style="width: 15%; margin-left: 5%  ">
+      <label  for="image">Avatar of Event:</label> <br>
+      <input style=" font-size: 15px" type="file" id="image" name="image" accept="image/*" onchange="previewImage()">
+       <p style="color: red">${requestScope.invalidImage}</p> 
+    <br>
+    <img id="preview" src="#" alt="Preview" style="max-width: 200px; max-height: 200px; display: none;">
+    
+</div>
+  <script>
+      function previewImage() {
+    var preview = document.getElementById('preview');
+    var file = document.getElementById('image').files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function () {
+        preview.src = reader.result;
+        preview.style.display = 'block';
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = "";
+        preview.style.display = 'none';
+    }
+}      
+  </script>
+      
+    <input type="hidden" id="clubid" name="clubid" value="${requestScope.cid}">  
+
+   </div>  
   <div>
     <label for="details">Chi tiết:</label>
-    <textarea  id="details" name="details"  rows="10"  " > ${requestScope.Event.getDetails()} </textarea>
+    <textarea  id="details" name="details"  rows="10"  " > ${requestScope.detail} </textarea>
     <p style="color: red">${requestScope.invalidDetail}</p>
   </div>
   
-  <button style="width: 100%" type="submit">Lưu sự kiện</button>
+  <button type="submit">Lưu sự kiện</button>
    
         </form>
                 </div>

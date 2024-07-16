@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.time.LocalDate;
+import java.util.*;
 /**
  *
  * @author quyka
@@ -66,16 +67,17 @@ public class add_Event extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        HttpSession session = request.getSession();
+      
          String cid = request.getParameter("cid");
+          EventDAO eDAO = new EventDAO();
        Account a = new Account();
-       EventDAO eDAO = new EventDAO();
+        HttpSession session = request.getSession();
        a = (Account) session.getAttribute("account");
       if (a!=null) {
           if (eDAO.checkManager(a.getId(), Integer.parseInt(cid))==false) {
            request.setAttribute("complete", "You don't have role to add event!");
            
-           request.getRequestDispatcher("index.jsp").forward(request, response);
+           request.getRequestDispatcher("Home").forward(request, response);
        } else {
               request.setAttribute("cid", cid);
               PrintWriter pr  = response.getWriter();
@@ -83,7 +85,7 @@ public class add_Event extends HttpServlet {
        request.getRequestDispatcher("add_Event.jsp").forward(request, response);
           }} else {
       request.setAttribute("complete", "Please Login");
-           request.getRequestDispatcher("index.jsp").forward(request, response);
+           request.getRequestDispatcher("Home").forward(request, response);
       }
        
        
@@ -112,9 +114,13 @@ public class add_Event extends HttpServlet {
         String xClubId = request.getParameter("clubid");
         boolean checkValid =true;
       
-       if (name.length()<15) {
-            request.setAttribute("invalidlName", "Event Name length <15 chars");
+       if (name.length()<10) {
+            request.setAttribute("invalidlName", "Event Name length <10 chars");
             checkValid= false;
+       }
+       if (validateChar(name)==false) {
+           request.setAttribute("invalidName", "Task name can't contain special characters!");
+           checkValid= false;
        }
        
        if (name.length()>150) {
@@ -153,6 +159,7 @@ public class add_Event extends HttpServlet {
       request.setAttribute("time", Stime);
       request.setAttribute("location", xLocation);
       request.setAttribute("detail", xDetail);
+      request.setAttribute("cid", xClubId);
       request.getRequestDispatcher("add_Event.jsp").forward(request, response);
   }   else {  
         LocalDateTime time = LocalDateTime.parse(Stime);
@@ -160,10 +167,17 @@ public class add_Event extends HttpServlet {
         int club_Id = Integer.parseInt(xClubId);
         String imageURL = saveUploadedFile(request);
         Event e = new Event(0, name, club_Id, time, xLocation, xDetail,imageURL,true);
-        EventDAO eDAO = new EventDAO();
-       
+        EventDAO eDAO = new EventDAO();      
         pr.print(eDAO.insert(e));
-       response.sendRedirect("event_Details?id="+eDAO.getId_newEvent()+"&k=0&c=0");
+        ClubDAO cDAO = new ClubDAO();
+        List<Integer> iList = cDAO.getaList(club_Id);
+        int id =eDAO.getNumberEvent();  
+        pr.print(iList.size()); 
+       for (int i=0;i<iList.size();i++) {
+           pr.println(iList.get(i));
+          pr.print( eDAO.insertMember_Event(iList.get(i),String.valueOf(id)) );
+       } 
+      response.sendRedirect("event_Details?id="+id+"&k=0&c=0");
 
   }
     }
@@ -197,6 +211,25 @@ public class add_Event extends HttpServlet {
         String fileExtension = submittedFileName.substring(submittedFileName.lastIndexOf('.'));
         String newFileName = System.currentTimeMillis() + fileExtension;
         return newFileName;
+    }
+      public boolean validateChar(String taskName) {
+          taskName = taskName.trim();
+          int openingParenthesisCount = 0;
+        int closingParenthesisCount = 0;
+           for (int i = 0; i < taskName.length(); i++) {
+            char c = taskName.charAt(i);
+            if (!Character.isLetterOrDigit(c) && c != ' ' && c != '(' && c != ')') {
+                return false;
+            }
+           else if (c == '(') {
+                openingParenthesisCount++;
+            }
+            else if (c == ')') {
+                closingParenthesisCount++;
+            }
+            
+        }
+            return openingParenthesisCount == closingParenthesisCount;
     }
 
 }

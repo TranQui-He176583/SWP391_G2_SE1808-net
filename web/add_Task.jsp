@@ -58,6 +58,7 @@
     <input type="text" id="name" name="name" value="${requestScope.name}" >
     <p style="color: red">${requestScope.invalidName}</p>
     <p style="color: red">${requestScope.invalidlName}</p>
+    <p style="color: red">${requestScope.invalidName1}</p>
               <div>
     <label for="time">Deadline:</label>
     <input type="datetime-local" id="time" name="end" value="${requestScope.etime}"  >

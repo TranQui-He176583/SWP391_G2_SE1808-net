@@ -30,6 +30,22 @@ public class ClubDAO extends MyDAO {
             e.printStackTrace();
         }
     }
+        public List<Integer> getaList(int club_id) {
+        List<Integer> aList = new ArrayList<>();
+        String sql = "SELECT * FROM student_club where club_id=?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1,club_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int i = rs.getInt("account_id");
+                aList.add(i);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return aList;
+    }
 
     public List<Club> getClubs() {
         List<Club> clubs = new ArrayList<>();

@@ -70,8 +70,27 @@ public class edit_Event extends HttpServlet {
         int id = Integer.parseInt(xid);
         EventDAO eDAO = new EventDAO();
         Event e = eDAO.getEvent(id);
-        request.setAttribute("Event", e);
+ 
+       Account a = new Account();
+        HttpSession session = request.getSession();
+       a = (Account) session.getAttribute("account");
+      if (a!=null) {
+          if (eDAO.checkManager(a.getId(), e.getClub_id())==false) {
+           request.setAttribute("complete", "You don't have role to Update this  Event!");
+           
+           request.getRequestDispatcher("Home").forward(request, response);
+       } else {
+        request.setAttribute("name",e.getName());
+      request.setAttribute("time", e.getDate().toString());
+      request.setAttribute("location", e.getLocation());
+      request.setAttribute("detail", e.getDetails());
+      request.setAttribute("club_id", e.getClub_id());
+      request.setAttribute("id", e.getId());
         request.getRequestDispatcher("updateEvent.jsp").forward(request, response);
+          }} else {
+           request.setAttribute("complete", "Please Login");
+           request.getRequestDispatcher("Home").forward(request, response);
+      } 
     } 
 
     /** 
@@ -97,19 +116,21 @@ public class edit_Event extends HttpServlet {
         String xLocation = request.getParameter("location");
         String xDetail = request.getParameter("details");
         String xClubId = request.getParameter("clubid");
-//      HttpSession session = request.getSession();
-//       Account a = new Account();
-//       a = (Account) session.getAttribute("account");
-//      if (a!=null) {
-//          if (eDAO.checkManager(a.getId(), xClubId)) {
-//           request.setAttribute("complete", "You don't have role to update this event!");
-//       }  
         Event getE = eDAO.getEvent(id);
         boolean checkValid =true;
-       if (name.equals("")) {
-           request.setAttribute("invalidName", "Event name cannot be empty!");
+       if (name.length()<10) {
+            request.setAttribute("invalidlName", "Event Name length <10 chars");
+            checkValid= false;
+       }
+       if (validateChar(name)==false) {
+           request.setAttribute("invalidName", "Task name can't contain special characters!");
            checkValid= false;
-       } 
+       }
+       
+       if (name.length()>150) {
+            request.setAttribute("invalidlName", "Event name has a maximum length of 150 characters");
+            checkValid= false;
+       }
        if (Stime.equals("")) {
            request.setAttribute("invalidTime", "Event time cannot be empty!");
            checkValid= false;
@@ -117,6 +138,14 @@ public class edit_Event extends HttpServlet {
        if (xLocation.equals("")) {
            request.setAttribute("invalidLocation", "Event location cannot be empty!");
            checkValid= false;
+       }
+       if (xLocation.length()>100) {
+            request.setAttribute("invalidlLocation", "Event location has a maximum length of 100 characters");
+            checkValid= false;
+       }
+       if (xLocation.length()<5) {
+            request.setAttribute("invalidlLocation", "Event location length <5 chars");
+            checkValid= false;
        }
        if (xDetail.equals("")) {
            request.setAttribute("invalidDetail", "Event Detail cannot be empty!");
@@ -131,11 +160,13 @@ public class edit_Event extends HttpServlet {
              imageURL = saveUploadedFile(request);
        }
   if (checkValid== false) {
+        request.setAttribute("club_id",xClubId );
+      request.setAttribute("id", id );
       request.setAttribute("name", name);
       request.setAttribute("time", Stime);
       request.setAttribute("location", xLocation);
-      request.setAttribute("detail", xDetail);
-      request.getRequestDispatcher("add_Event.jsp").forward(request, response);
+      request.setAttribute("detail", xDetail);       
+      request.getRequestDispatcher("updateEvent.jsp").forward(request, response);
   }   else {  
         LocalDateTime time = LocalDateTime.parse(Stime);        
         int club_Id = Integer.parseInt(xClubId);        
@@ -178,5 +209,26 @@ public class edit_Event extends HttpServlet {
         String newFileName = System.currentTimeMillis() + fileExtension;
         return newFileName;
     }
+      public boolean validateChar(String taskName) {
+          taskName = taskName.trim();
+          int openingParenthesisCount = 0;
+        int closingParenthesisCount = 0;
+           for (int i = 0; i < taskName.length(); i++) {
+            char c = taskName.charAt(i);
+            if (!Character.isLetterOrDigit(c) && c != ' ' && c != '(' && c != ')') {
+                return false;
+            }
+           else if (c == '(') {
+                openingParenthesisCount++;
+            }
+            else if (c == ')') {
+                closingParenthesisCount++;
+            }
+            
+        }
+            return openingParenthesisCount == closingParenthesisCount;
+    }
+
+     
 
 }
