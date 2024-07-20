@@ -68,6 +68,7 @@ public class manager_club extends HttpServlet {
         HttpSession session = request.getSession();     
          Account a = new Account();
          a = (Account) session.getAttribute("account");
+         String complete = (String) request.getAttribute("complete");
          String search = request.getParameter("s");
          int cPage = Integer.parseInt(request.getParameter("cPage"));
        AccountDAO aDAO = new AccountDAO();
@@ -101,6 +102,7 @@ public class manager_club extends HttpServlet {
        
            
            out.print(cList.size());
+           request.setAttribute("complete", complete);
           request.setAttribute("cList", crList);     
            request.setAttribute("nPage", nPage);
            request.setAttribute("search", search); 

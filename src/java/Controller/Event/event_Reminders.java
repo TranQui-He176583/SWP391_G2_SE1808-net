@@ -89,7 +89,8 @@ public class event_Reminders extends HttpServlet {
        for (int i=0; i <tList.size();i++) {
            tDAO.update(tList.get(i));
        }       
-       response.sendRedirect("Home");
+       request.setAttribute("complete", "Reminder complete!");
+       request.getRequestDispatcher("manager_club?cPage=1").forward(request, response);
     } 
 
     /** 
