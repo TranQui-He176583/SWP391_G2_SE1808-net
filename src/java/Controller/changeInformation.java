@@ -93,20 +93,36 @@ public class changeInformation extends HttpServlet {
         String xEmail = request.getParameter("email");
         String xPhone = request.getParameter("phone");
         String xGender = request.getParameter("gender");
+        boolean check =true;
+        
         if (xFullName.equals("")) {
-            request.setAttribute("phone", xPhone);
-            request.setAttribute("wrong", "Fullname can't null!");
-            request.getRequestDispatcher("changeInformation.jsp").forward(request, response);
+            check =false;
+            request.setAttribute("wrongName", "Fullname can't null!");
+       
         }
         if (xGender == null) {
-            request.setAttribute("phone", xPhone);
-            request.setAttribute("wrong", "Please choose gender!");
-            request.getRequestDispatcher("changeInformation.jsp").forward(request, response);
+            check =false;
+           
+            request.setAttribute("wrongGender", "Please choose gender!");
+            
         }
+        
+        
         if (aDAO.checkPhone(xPhone, xEmail) == false && xPhone.equals("") == false) {
+            check =false;
+            request.setAttribute("wrongPhone", "This phone number is registered to another account!");            
+        } 
+        
+        if (xPhone.equals("")==false) {
+            if ( (xPhone.length()!= 10 && xPhone.length()!= 11) || xPhone.matches("^[0-9]+$") == false) {
+                check =false;
+                request.setAttribute("wrongPhone", "Phone Number only 10 or 11 digit!");
+            }
+        }
+        
+        if (check==false) {
             request.setAttribute("phone", xPhone);
-            request.setAttribute("wrong", "This phone number is registered to another account!");
-            request.getRequestDispatcher("changeInformation.jsp").forward(request, response);
+           request.getRequestDispatcher("changeInformation.jsp").forward(request, response);
         } else {
 
             int gender = Integer.parseInt(xGender);
@@ -137,6 +153,7 @@ public class changeInformation extends HttpServlet {
             request.getRequestDispatcher("userProfile.jsp").forward(request, response);
         }
     }
+    
 
     /**
      * Returns a short description of the servlet.

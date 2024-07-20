@@ -176,7 +176,7 @@ public boolean checkCList(int id, ArrayList<Club> cList) {
        
        int nPage = tDAO.get_numberTask(club_id, search,event_id);
       
-       out.print(club_id);
+       out.print(eList.size());
         request.setAttribute("search", search);
         request.setAttribute("club_id", String.valueOf(club_id));
         request.setAttribute("cE", event_id);

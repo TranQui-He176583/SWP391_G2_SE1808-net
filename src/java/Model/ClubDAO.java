@@ -157,7 +157,7 @@ public class ClubDAO extends MyDAO {
         List<Club> t = new ArrayList<>();
         xSql = "select * from account join student_club join club\n"
                 + "        on account.id = student_club.account_ID and student_club.club_ID=club.id \n"
-                + "        where account_ID= ?";
+                + "        where account_ID= ? and role_id=1";
         try {
             ps = con.prepareStatement(xSql);
             ps.setString(1, AccountID);
@@ -179,7 +179,6 @@ public class ClubDAO extends MyDAO {
         }
         return (t);
     }
-
     public List<Club> getClubListByUserId(int accountId) {
         List<Club> clubs = new ArrayList<>();
         String sql = "SELECT c.* FROM Club c INNER JOIN student_club sc ON c.id = sc.club_id WHERE sc.account_id = ?";
@@ -194,7 +193,8 @@ public class ClubDAO extends MyDAO {
                 club.setName(rs.getString("name"));
                 club.setStatus(rs.getInt("status"));
                 club.setAvatar(rs.getString("avatar"));
-                club.setDetail("detail");
+                club.setDetail(rs.getString("detail"));
+                club.setCategory(rs.getString("category"));
                 clubs.add(club);
             }
         } catch (SQLException e) {
@@ -202,6 +202,33 @@ public class ClubDAO extends MyDAO {
         }
         return clubs;
     }
+
+    public List<Club> get_club_manager(int account_id,String search) {
+        List<Club> clubs = new ArrayList<>();
+        String sql = "select club.id, club.status,club.name,club.avatar,club.category,club.detail  from account join student_club join club on account.id = student_club.account_ID and student_club.club_ID=club.id where account_ID= ? and role_id=1 and club.status=1 and club.name like ?;";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, account_id);
+            ps.setString(2,"%"+search+"%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Club club = new Club();
+                club.setId(rs.getInt("id"));
+                club.setName(rs.getString("name"));
+                club.setStatus(rs.getInt("status"));
+                club.setAvatar(rs.getString("avatar"));
+                club.setDetail(rs.getString("detail"));
+                club.setCategory(rs.getString("category"));
+                clubs.add(club);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clubs;
+    }
+    
+    
 
     public int getTotalClub() {
         xSql = "select count(*)from club";
@@ -484,6 +511,21 @@ public class ClubDAO extends MyDAO {
         }
         return null;
     }
+    public int get_club_event_id(int event_id) {
+
+        xSql = "select * from event where id=?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setInt(1, event_id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                 return (rs.getInt("club_id"));   
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+    
 
     public String EditClub(Club c) {
         xSql = "UPDATE club \n"

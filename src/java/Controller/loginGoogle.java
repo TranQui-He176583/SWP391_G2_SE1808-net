@@ -65,6 +65,7 @@ public class loginGoogle extends HttpServlet {
            a.setPassWord(password);
            a.setId(aDAO.getNumberAccount()+1);
            a.setRoleId(3);
+           a.setStatus(1);
            out.print(aDAO.insert(a));
         
        }

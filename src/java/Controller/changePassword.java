@@ -78,38 +78,36 @@ public class changePassword extends HttpServlet {
         String xNewPassword = request.getParameter("newPassword");
         String newpass = xNewPassword;
         String xConfrimPassword = request.getParameter("confirmPassword");
+        boolean check = true;
+        
       if (xNewPassword.length()<6 || xNewPassword.length()>20) {
-             request.setAttribute("password", xOldPassword);
-            request.setAttribute("newpassword", xNewPassword);
-            request.setAttribute("confirmpassword", xConfrimPassword);
-            request.setAttribute("wrong", "Password can be from 6 to 20 characters!");
-        request.getRequestDispatcher("changePassword.jsp").forward(request, response);
-    }    
+             check = false;
+            request.setAttribute("wrong1", "Password can be from 6 to 20 characters!"); 
+    }
       
       if (xNewPassword.equals(xConfrimPassword)==false) {
-            request.setAttribute("password", xOldPassword);
-            request.setAttribute("newpassword", xNewPassword);
-            request.setAttribute("confirmpassword", xConfrimPassword);
-            request.setAttribute("wrong", "New password and confirm password not same!");
-            request.getRequestDispatcher("changePassword.jsp").forward(request, response);
-      }   else {
+            check = false;
+            request.setAttribute("wrong2", "New password and confirm password not same!");            
+      }      
          encodePassword ep = new encodePassword();
           xNewPassword = ep.toSHA1(xNewPassword);
          xOldPassword = ep.toSHA1(xOldPassword);
           out.print(xEmail);
          AccountDAO aDAO = new AccountDAO();
-         if (aDAO.checkLogin(xEmail, xOldPassword)) {
-             aDAO.updatePassWord(xEmail, xNewPassword);           
-             request.setAttribute("complete", "Change Password Complete!");
-                 request.getRequestDispatcher("index.jsp").forward(request, response);
-         }  else {
+           if (aDAO.checkLogin(xEmail, xOldPassword)==false) {
+               check = false;
+               request.setAttribute("wrongLogin", "Old Password Wrong!");
+           }
+           
+         if (check == false ) {
              request.setAttribute("password", oldpass);
             request.setAttribute("newpassword", newpass);
             request.setAttribute("confirmpassword", xConfrimPassword);
-             request.setAttribute("wrong", "Old Password Wrong!");
-             request.getRequestDispatcher("changePassword.jsp").forward(request, response);
-         }
-            
+            request.getRequestDispatcher("changePassword.jsp").forward(request, response);
+         } else {         
+            aDAO.updatePassWord(xEmail, xNewPassword);           
+             request.setAttribute("complete", "Change Password Complete!");
+                 request.getRequestDispatcher("Home").forward(request, response);    
     }
     }
     /** 

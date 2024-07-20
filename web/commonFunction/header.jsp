@@ -1,7 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<%@page import = "Model.*" %>
+<%@page import = "Model.Task.*" %>
+<%@page import = "java.util.*" %>
+<%
+    AccountDAO aDAO = new AccountDAO();
+Account a = new Account();
+         a = (Account) session.getAttribute("account");
+%>
 
 <header  >
     <!--? Header Start -->
@@ -56,9 +63,12 @@
 
                                             <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="dboard">Admin</a>
                                         </c:if>
+                                      <% if (aDAO.check_Manager(a.getId())==true) {%>
+                                      
+                                       <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="manager_club?cPage=1">Manager</a>
+                                      <%}%>
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
-                                        <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="myclublist">My Club List</a>
-                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="manage_registerEvent?club_id=&cPage=1&event_id=">Register Event</a>
+                                        <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="myclublist">My Club List</a>                                       
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="task_List?search=&cPage=1&club_id=&event_id=">My Task</a>
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>                                       
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           

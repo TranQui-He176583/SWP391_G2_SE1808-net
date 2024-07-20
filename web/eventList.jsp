@@ -136,7 +136,7 @@
             %> 
             <div  style="margin-left: 7%;width: 370px; height: 230px; margin-top: 160px">
                 <a href="event_Details?id=<%=eList.get(j).getId()%>&k=0&c=0">
-                    <img style="width: 370px; height: 230px; border-radius: 10px " src="<%= eList.get(j).getAvatar()%>" alt="alt"/>
+                    <img style="width: 370px; height: 230px; border-radius: 10px; border: solid 1px black" src="<%= eList.get(j).getAvatar()%>" alt="alt"/>
                 </a>
                 <div  >
                     <h2  style="font-size:20px; font-family: none; width: 100%; margin-top: 15px " ><%=eList.get(j).getName()%></h2>
@@ -224,7 +224,7 @@
             %> 
             <div style="margin-left: 7.2%;width: 360px; height: 210px; margin-top: 160px" >
                 <a href="event_Details?id=<%=eList.get(j).getId()%>&k=0&c=0">
-                    <img style="width: 360px; height: 210px; border-radius: 10px " src="<%= eList.get(j).getAvatar()%>" alt="alt"/>
+                    <img style="width: 360px; height: 210px; border-radius: 10px; border: solid 1px black " src="<%= eList.get(j).getAvatar()%>" alt="alt"/>
                 </a>
 
                 <h2  style="font-size:20px; font-family: none; width: 100%; margin-top: 15px " ><%=eList.get(j).getName()%></h2>

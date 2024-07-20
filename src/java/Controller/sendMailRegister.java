@@ -78,49 +78,60 @@ public class sendMailRegister extends HttpServlet {
         String xPassWord = request.getParameter("password");
         String xCPassWord = request.getParameter("cpassword");
          AccountDAO aDAO = new AccountDAO();
+         boolean check = true;
    if (xFullname.equals("")){
-       request.setAttribute("fullname", xFullname);
-        request.setAttribute("password", xPassWord);
-         request.setAttribute("cpassword", xCPassWord);
-        request.setAttribute("email", xMail);
-        request.setAttribute("wrongRegister", "Fullname can not be blank!");
-        request.getRequestDispatcher("register.jsp").forward(request, response);
-   }
-    if (aDAO.isValidEmail(xMail)==false){
-       request.setAttribute("fullname", xFullname);
-        request.setAttribute("password", xPassWord);
-         request.setAttribute("cpassword", xCPassWord);
-        request.setAttribute("email", xMail);
-        request.setAttribute("wrongRegister", "Email invalidate!");
-        request.getRequestDispatcher("register.jsp").forward(request, response);
-   }
-    if (xPassWord.equals("")){
-       request.setAttribute("fullname", xFullname);
-        request.setAttribute("password", xPassWord);
-         request.setAttribute("cpassword", xCPassWord);
-        request.setAttribute("email", xMail);
-        request.setAttribute("wrongRegister", "Password invalidate!");
-        request.getRequestDispatcher("register.jsp").forward(request, response);
+       check = false;
+        request.setAttribute("wrongName", "FullName can not be blank!");     
+   } else {
+       if (xFullname.length()>35) {
+           check = false;
+            request.setAttribute("wrongName", "FullName cannot be more than 35 characters!");
+       }
+       if (xFullname.matches("[a-zA-Z\\s\\p{L}]+")==false) {
+           check = false;
+        request.setAttribute("wrongName", "FullName has only alphanumeric characters!");
+       }
    }
    
-     
+    if (aDAO.isValidEmail(xMail)==false){
+       check = false;
+        request.setAttribute("wrongEmail", "Email invalidate!");  
+   } else {
+        if (xMail.length()>35) {
+            check = false;
+            request.setAttribute("wrongEmail", "Email cannot be more than 35 characters!"); 
+        }
+    }
+    
+    if (xPassWord.equals("")){
+       check = false;
+        request.setAttribute("wrongPassWord", "Password invalidate!");      
+   } else {
+        if (xPassWord.length()>25) {
+            check = false;
+        request.setAttribute("wrongPassWord", "Password cannot be more than 25 characters!");
+        }
+    }
       if (xPassWord.equals(xCPassWord)==false) {
-          request.setAttribute("fullname", xFullname);
-        request.setAttribute("password", xPassWord);
-         request.setAttribute("cpassword", xCPassWord);
-        request.setAttribute("email", xMail);
-        request.setAttribute("wrongRegister", "Password and Confirm Password not the same!");
-        request.getRequestDispatcher("register.jsp").forward(request, response);
-      } else {
-       
+          check = false;
+        request.setAttribute("wrongCPassWord", "Password and Confirm Password not the same!");
+        
+      } 
+          
       if (aDAO.checkAccountExist(xMail)) {
+           check = false;
+            request.setAttribute("wrongRegister", "This email is registered to another account!");
+           
+        } 
+      
+      if (check == false) {
            request.setAttribute("fullname", xFullname);
         request.setAttribute("password", xPassWord);
          request.setAttribute("cpassword", xCPassWord);
         request.setAttribute("email", xMail);
-            request.setAttribute("wrongRegister", "This email is registered to another account!");
-            request.getRequestDispatcher("register.jsp").forward(request, response);
-        }  else {
+         request.getRequestDispatcher("register.jsp").forward(request, response);
+      }       
+      else {
         MailHandler mh = new MailHandler(); 
              Random rand = new Random();
          int code = rand.nextInt(900000) + 100000;
@@ -139,7 +150,7 @@ public class sendMailRegister extends HttpServlet {
         request.getRequestDispatcher("confirmRegister.jsp").forward(request, response);
     }
       }
-    }
+    
 
     /** 
      * Returns a short description of the servlet.

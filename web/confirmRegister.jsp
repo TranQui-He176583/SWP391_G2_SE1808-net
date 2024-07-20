@@ -90,7 +90,7 @@
        
         <p> Enter Code in ${requestScope.email}: </p>
         <form action="confirmRegisterPassword" method="post">
-            <input type="text" placeholder="Code" name="code" value="${requestScope.ucode}" required>
+            <input type="text" placeholder="Code" name="code" value="${requestScope.ucode}" >
             <input type="hidden"  name="realcode" value="${requestScope.code}" >
             <input type="hidden"  name="email" value="${requestScope.email}" >
             <input type="hidden"  name="fullname" value="${requestScope.fullname}" >

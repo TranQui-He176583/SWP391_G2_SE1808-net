@@ -28,13 +28,13 @@
             <input type="hidden" id="clubid" name="clubid" value="${requestScope.club_id}"  >
             <div style="display: flex; ">
                 <div style="width: 65%">
-    <label for="name">Tên sự kiện:</label>
+    <label for="name">Name:</label>
     <input type="text" id="name" name="name" value="${requestScope.name}" >
     <p style="color: red">${requestScope.invalidName}</p>
     <p style="color: red">${requestScope.invalidlName}</p>
   </div>
   <div style="width: 15%; ">
-      <label style="margin-left: 30%" for="time">Thời gian:</label>
+      <label style="margin-left: 30%" for="time">Time:</label>
     <input style="margin-left: 30%" type="datetime-local" id="time" name="time" value="${requestScope.time}"  >
 
     <p style="color: red; margin-left: 30%">${requestScope.invalidTime}</p>
@@ -42,12 +42,12 @@
           </div>
   <div style="display: flex; ">
       <div style="width: 65%">
-          <label  for="location">Địa điểm:</label>
+          <label  for="location">Location:</label>
     <input type="text" id="location" name="location" value="${requestScope.location}">
     <p style="color: red">${requestScope.invalidLocation}</p>
     <p style="color: red">${requestScope.invalidlLocation}</p>
   </div>
-  <div style="width: 15%; margin-left: 5%  ">
+  <div style="width: 15%; margin-left: 4.5%  ">
       <label  for="image">Avatar of Event:</label> <br>
       <input style=" font-size: 15px" type="file" id="image" name="image" accept="image/*" onchange="previewImage()">
        <p style="color: red">${requestScope.invalidImage}</p> 
@@ -79,7 +79,7 @@
 
    </div>  
   <div>
-    <label for="details">Chi tiết:</label>
+    <label for="details">Details:</label>
     <textarea  id="details" name="details"  rows="10"  " > ${requestScope.detail} </textarea>
     <p style="color: red">${requestScope.invalidDetail}</p>
   </div>

@@ -79,7 +79,9 @@
         <form action="changeInformation" method="post" enctype="multipart/form-data">
             <label for="image"></label>
     <input type="file" id="image" name="image" accept="image/*" ><br><br>
-    <input type="text"  value="${sessionScope.account.fullname}" name="fullname" id="fullname" required>
+    <input type="text"  value="${sessionScope.account.fullname}" name="fullname" id="fullname" >
+    <p style="color:red; text-align: left; margin-left: 5%" >${requestScope.wrongName}</p>    
+    
     <input type="hidden"  value="${sessionScope.account.email}" name="email" >
             
             <div style="display: flex;margin-left: 5px">
@@ -95,9 +97,12 @@
       <input type="radio" id="other" name="gender" value="3">
       <label for="other">Other</label>
     </div>
+                  
   </div>
-    <input type="text" placeholder="Phone Number" value="${sessionScope.account.phone}" name="phone" minlength="10" maxlength="11" >     
-    <p style="color:red" >${requestScope.wrong}</p>     
+    <p style="color:red; text-align: left; margin-left: 5%" >${requestScope.wrongGender}</p>  
+    <input type="text" placeholder="Phone Number" value="${sessionScope.account.phone}" name="phone" > 
+    
+     <p style="color:red; text-align: left; margin-left: 5%" >${requestScope.wrongPhone}</p>    
             <button type="submit">Change</button>
         </form>
         

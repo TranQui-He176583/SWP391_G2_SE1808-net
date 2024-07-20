@@ -99,7 +99,7 @@
         <div class="login-container">
         <h2 style="font-size: 50px" >Reset Password</h2>
         <form action="forgotPassword" method="post">
-            <input type="email" placeholder="Gmail" name="gmail" required>
+            <input type="email" placeholder="Gmail" name="gmail">
          <button type="submit">Get Code</button>
          <p style="color: red; font-size: 14px">${requestScope.wrongEmail}</p>
         </div>
@@ -109,15 +109,15 @@
      <c:if test ="${requestScope.code != null}"  >
           <div class="login-container"> 
         <h2 style="font-size: 50px" >Reset Password</h2>
-        <p style="color: red">${requestScope.wrongCode}</p>
+       
         <p> Enter Code in ${requestScope.email}: </p>
         <form action="confirmCodeF_Password" method="post">
-            <input type="hidden" placeholder="${requestScope.email}" name="email" value="${requestScope.email}" readonly required>
-            <input type="text" placeholder="Code" name="code" value="${requestScope.ucode}" required>
+            <input type="hidden" placeholder="${requestScope.email}" name="email" value="${requestScope.email}" >
+            
+            <input type="text" placeholder="Code" name="code" value="${requestScope.ucode}" >
+            
             <input type="hidden"  name="realcode" value="${requestScope.code}" >
-<!--            <input type="hidden"  name="fullname" value="${requestScope.fullname}" >
-            <input type="hidden"  name="password" value="${requestScope.password}" >
-            <input type="hidden"  name="gender" value="${requestScope.gender}" >-->
+        <p style="color: red;text-align: left; margin-left: 4%">${requestScope.wrongCode}</p>
          <button type="submit">Confirm</button>
         </form>
           </div>

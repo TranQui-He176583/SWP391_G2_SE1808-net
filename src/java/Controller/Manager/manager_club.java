@@ -3,10 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package Controller.Event;
+package Controller.Manager;
 
-import Model.*;
-import Util.MailHandler;
+import Model.Account;
+import Model.AccountDAO;
+import Model.Club;
+import Model.ClubDAO;
+import Model.EventDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,13 +17,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author quyka
  */
-@WebServlet(name="accept_registerEvent", urlPatterns={"/accept_registerEvent"})
-public class accept_registerEvent extends HttpServlet {
+@WebServlet(name="manager_club", urlPatterns={"/manager_club"})
+public class manager_club extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +43,10 @@ public class accept_registerEvent extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet accept_registerEvent</title>");  
+            out.println("<title>Servlet manager_event</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet accept_registerEvent at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet manager_event at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +63,50 @@ public class accept_registerEvent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        EventDAO eDAO = new EventDAO();
+        PrintWriter out = response.getWriter(); 
+        HttpSession session = request.getSession();     
+         Account a = new Account();
+         a = (Account) session.getAttribute("account");
+         String search = request.getParameter("s");
+         int cPage = Integer.parseInt(request.getParameter("cPage"));
+       AccountDAO aDAO = new AccountDAO();
+     if (a == null ) {
+         request.setAttribute("complete", "Please Login!");
+           request.getRequestDispatcher("Home").forward(request, response);
+     } else { 
+         if (search==null) {
+             search="";
+         }
+       if (aDAO.check_Manager(a.getId())==false) {
+           request.setAttribute("complete", "You don't have role manager!");
+           request.getRequestDispatcher("Home").forward(request, response);
+       } else {
+           ClubDAO cDAO = new ClubDAO();
+           List<Club> cList = new ArrayList<Club>();
+           List<Club> crList = new ArrayList<Club>();
+           cList= cDAO.get_club_manager(a.getId(),search);
+        
+         int  nPage = cList.size()/5;
+         if (cList.size()%5!=0) nPage++;
+       if (cPage*5>cList.size()) {
+           if ((nPage-1)*5>cList.size()) {
+               cList=null;
+           } else {
+               crList =cList.subList((cPage-1)*5, cList.size());
+           }
+       } else {
+           crList =cList.subList((cPage-1)*5, cPage*5);
+       }   
+       
+           
+           out.print(cList.size());
+          request.setAttribute("cList", crList);     
+           request.setAttribute("nPage", nPage);
+           request.setAttribute("search", search); 
+          request.getRequestDispatcher("club_manager.jsp").forward(request, response);
+       }
+     }
     } 
 
     /** 
@@ -70,44 +119,7 @@ public class accept_registerEvent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-         String xClub_id = request.getParameter("club_id");      
-        String event_id = request.getParameter("event_id");
-         String eid = request.getParameter("eid");
-        String type = request.getParameter("type");
-        String cPage = request.getParameter("cPage");
-        String ae_id = request.getParameter("ae_id");
-        String email = request.getParameter("email");
-         MailHandler mh = new MailHandler(); 
-         EventDAO eDAO = new EventDAO();
-         Event ev = eDAO.getEvent(Integer.parseInt(eid));
-         
-      if (type.equals("1") ) {
-          request.setAttribute("type", 1);
-          out.print(eDAO.accept(Integer.parseInt(ae_id)));
-           try {
-               mh.SendMail(email, "Response to registration application for Event: "+ev.getName(),"Your event registration has been accepted."
-                       + "<br><br>Event: "+ev.getName()+
-                       "<br>Location: "+ev.getLocation()+
-                       "<br>Time: "+ev.getDate());               
-            } catch (Exception e) {
-                out.print(e);
-            }
-      }   else {
-           request.setAttribute("type", 2);
-          eDAO.delete(Integer.parseInt(ae_id));
-          try {
-               mh.SendMail(email, "Response to registration application for Event: "+ev.getName(),"Your event registration has not been accepted."
-                       + "<br><br>Event: "+ev.getName()+
-                       "<br>Location: "+ev.getLocation()+
-                       "<br>Time: "+ev.getDate());               
-            } catch (Exception e) {
-                out.print(e);
-            }
-      }
-      
-      request.getRequestDispatcher("manage_registerEvent?club_id="+xClub_id+"&cPage="+cPage+"&event_id="+event_id).forward(request, response);
-     
+        
     }
 
     /** 
@@ -120,3 +132,4 @@ public class accept_registerEvent extends HttpServlet {
     }// </editor-fold>
 
 }
+

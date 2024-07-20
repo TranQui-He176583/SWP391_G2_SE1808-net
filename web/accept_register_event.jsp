@@ -9,9 +9,47 @@
 <%@page import = "Model.Task.*" %>
 <%@page import = "java.util.*" %>
 <link rel="stylesheet" href="assets/css/task_list.css"/>
-<!DOCTYPE html>
+<meta charset="utf-8" />
+        <title>Doctris - Doctor Appointment Booking System</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Premium Bootstrap 4 Landing Page Template" />
+        <meta name="keywords" content="Appointment, Booking, System, Dashboard, Health" />
+        <meta name="author" content="Shreethemes" />
+        <meta name="email" content="support@shreethemes.in" />
+        <meta name="website" content="../../../index.html" />
+        <meta name="Version" content="v1.2.0" />
+        <!-- favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico.png">
+        <!-- Bootstrap -->
+        <link href="assets/css/bootstrap.min_1.css" rel="stylesheet" type="text/css" />
+        <!-- simplebar -->
+        <link href="assets/css/simplebar.css" rel="stylesheet" type="text/css" />
+        <!-- Icons -->
+        <link href="assets/css/materialdesignicons.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/remixicon.css" rel="stylesheet" type="text/css" />
+        <link href="https://unicons.iconscout.com/release/v3.0.6/css/line.css"  rel="stylesheet">
+        <!-- Css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css">
+        <link href="assets/css/style.min.css" rel="stylesheet" type="text/css" id="theme-opt" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 <style>
+.dropdown-item:hover {
+    color: #007bff !important;
+  }
+               .preview-box {
+  width: 180px;
+  height: 180px;
+  margin-left: 80px;
+  background-color: #f8f9fa;
+  border-radius: 100%; /* Add this line to round the corners */
+}
 
+#preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100%; /* Add this line to round the corners of the image */
+}
 
   .accept-btn, .reject-btn {
     padding: 8px 16px;
@@ -35,6 +73,44 @@
   .accept-btn:hover, .reject-btn:hover {
     opacity: 0.8;
   }
+  .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .notification-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button1 {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
 </style>
     <%
     List<account_event> aeList = (List<account_event>)request.getAttribute("aeList"); 
@@ -47,23 +123,31 @@
     String club_id = (String)request.getAttribute("club_id");
     String event_id = (String) request.getAttribute("event_id");
     %>
- <%@include file="commonFunction/CSS.jsp" %>
-  <%@include file="commonFunction/header.jsp" %>
+ 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
+        
+        <div class="page-wrapper doctris-theme toggled">
+      <%@include file="commonFunction/header_manager.jsp"%>
+            <main class="page-content bg-light">
+                <%@include file="commonFunction/header_manager1.jsp"%>
+
+    <body>
+        <div class="container-fluid">
+            <div class="layout-specing">
        
-         <h2 style="text-align: center; margin-top:10%; font-size: 50px; font-family: sans-serif ">Register Event</h2>
+         <h2 style="text-align: center; font-size: 50px; font-family: sans-serif ">Register Event</h2>
          <div style="display: flex; justify-content: space-between">  
-       <div style=" height: 35px; font-size: 18px; margin-top: 10px; margin-left: 2%">
+       <div style=" height: 35px; font-size: 15px; margin-top: 10px; margin-left: 2%">
              <form action="manage_registerEvent" id="selectClub" onchange="submitForm()" method="get" >
                     <input type="hidden" name="event_id" value="${requestScope.cE}">
                     <input type="hidden" name="cPage" value="1">                  
-                    <label style="border: 1px solid; background:#f05123; border-radius: 5px;width: 120px; height: 35px; padding: 4px " for="options">Select Club:</label>
-                    <select style="color:#f05123;height: 35px; padding: 4px" id="options" name="club_id">
+                    <label style="border: 1px solid; background:lightblue; border-radius: 5px;width: 120px; height: 25px; padding:  " for="options">Select Club:</label>
+                    <select style="color:lightblue;height: 25px; padding: 0px" id="options" name="club_id">
 
                         <option value=""> All Club</option> 
                         <%   for (int i=0;i<(cList.size());i++) { 
@@ -82,12 +166,12 @@
                     }
                 </script>      
         </div> 
-                     <div style=" height: 35px; font-size: 17px; margin-top: 15px; margin-right: 2%">
+                     <div style=" height: 35px; font-size: 15px; margin-top: 15px; margin-right: 2%">
                 <form id="selectEvent" onchange="submit()" action="manage_registerEvent" method="get">             
                     <input type="hidden" name="cPage" value="1">
                     <input type="hidden" name="club_id" value="${requestScope.club_id}">                   
-                    <label style="border: 1px solid; background:#f05123; border-radius: 5px;width: 120px; height: 35px; padding: 4px " for="options">Select Event:</label>
-                    <select style="color:black;height: 35px; padding: 4px; width: 200px;" id="options" name="event_id">
+                    <label style="border: 1px solid; background:lightblue; border-radius: 5px;width: 120px; height: 25px; padding: 0px " for="options">Select Event:</label>
+                    <select style="color:black;height: 25px; padding: 0px; width: 200px;" id="options" name="event_id">
                         <option value=""> All Event</option>               
                         <%   for (int i=0;i<(eList.size());i++) { 
                                if (String.valueOf(eList.get(i).getId()).equals(event_id) ) {
@@ -108,7 +192,80 @@
             </div>  
                     
                     
-            </div>    
+            </div>
+          <c:if test="${requestScope.type == 1}">                  
+                    <script>
+                      window.onload = function() {
+                      showNotificationOverlay();
+                                                     };
+                     </script>
+          </c:if>
+          <c:if test="${requestScope.type == 2}">      
+                
+                    <script>
+                      window.onload = function() {
+                      showNotificationOverlay1();
+                                                     };
+                     </script>
+          </c:if>            
+      <div id="notification-overlay" class="overlay">
+        <div class="notification-content">
+            <span class="close-button">&times;</span>
+            <h3>Notification</h3>
+            <p>Accept Complete.</p>
+        </div>
+    </div>
+                     
+     <div id="notification-overlay1" class="overlay">
+        <div class="notification-content">
+            <span class="close-button1">&times;</span>
+            <h3>Notification</h3>
+            <p>Reject Complete.</p>
+        </div>
+    </div>
+                   
+      <script>
+        const notificationOverlay = document.getElementById('notification-overlay');
+        const closeButton = document.querySelector('.close-button');
+        
+        
+
+        function showNotificationOverlay() {
+            notificationOverlay.style.display = 'flex';
+        }
+
+        function hideNotificationOverlay() {
+            notificationOverlay.style.display = 'none';
+        }
+        closeButton.addEventListener('click', hideNotificationOverlay);
+        notificationOverlay.addEventListener('click', (event) => {
+            if (event.target === notificationOverlay) {
+                hideNotificationOverlay();
+            }
+        });
+
+        const notificationOverlay1 = document.getElementById('notification-overlay1');
+        const closeButton1 = document.querySelector('.close-button1');
+
+        function showNotificationOverlay1() {
+            notificationOverlay1.style.display = 'flex';
+        }
+
+        function hideNotificationOverlay1() {
+            notificationOverlay1.style.display = 'none';
+        }
+        closeButton1.addEventListener('click', hideNotificationOverlay1);
+        notificationOverlay1.addEventListener('click', (event) => {
+            if (event.target === notificationOverlay1) {
+                hideNotificationOverlay1();
+            }
+        });
+
+    </script>
+  
+                     
+                    
+                    
         <table  id="manager-register-event-table">
   <thead>
     <tr>
@@ -168,6 +325,17 @@
   </form>
   <% } %>
   </div> 
+  </div> 
+  </div> 
     </body>
-     <%@include file="commonFunction/footer.jsp" %>
+     
 </html>
+<script 
+        <script src="assets/js/app.js"></script>
+        
+        <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="./assets/js/popper.min.js"></script>
+        
+        <script src="./assets/js/bootstrap.min.js">
+            
+        </script>

@@ -83,12 +83,12 @@ public class register extends HttpServlet {
         encodePassword ep = new encodePassword();
        xPassWord = ep.toSHA1(xPassWord);  
        int numberAccount = aDAO.getNumberAccount()+1;
-       Account account = new Account(numberAccount, xPassWord, 3, 0, xFullname, xEmail, "", 0,null,xNote);
+       Account account = new Account(numberAccount, xPassWord, 3, 1, xFullname, xEmail, "", 0,null,xNote);
        out.print(aDAO.insert(account));
        
         session.setAttribute("account", account);
         request.setAttribute("complete", "Account registration has been successful");       
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("Home").forward(request, response);
    
        
            }    

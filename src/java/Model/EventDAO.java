@@ -556,7 +556,7 @@ public class EventDAO extends MyDAO {
     
     public List<Event> getEventByClubID(String ClubID){
          List<Event> t = new ArrayList<>();
-         xSql = "select * from event where club_id =? ORDER BY id ";
+         xSql = "select * from event where club_id =? and status = 1 ORDER BY id ";
        try {
         ps = con.prepareStatement(xSql);
         ps.setString(1, ClubID);
@@ -580,6 +580,64 @@ public class EventDAO extends MyDAO {
         e.printStackTrace();
      }
     return(t);
+    }
+    
+    public List<Event> get_eList_search(int ClubID, String search){
+         List<Event> t = new ArrayList<>();
+         xSql = "select * from event where club_id =? and status = 1 and name like ? ORDER BY id desc ";
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setInt(1, ClubID);
+        ps.setString(2, "%"+search+"%");
+        rs = ps.executeQuery();
+       while(rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            int club_id = rs.getInt("club_id");
+            LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+            String location = rs.getString("location");
+            String details = rs.getString("details");
+            String avatar = rs.getString("avatar");
+            boolean status = rs.getBoolean("status");
+            Event event = new Event(id, name, club_id, time, location, details,avatar,status);
+            t.add(event);
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        e.printStackTrace();
+     }
+    return(t);
+    }
+    
+    public String get_eList_search1(String ClubID, String search){
+         List<Event> t = new ArrayList<>();
+         xSql = "select * from event where club_id =? and status = 1 and name like ? ORDER BY id desc ";
+       try {
+        ps = con.prepareStatement(xSql);
+        ps.setString(1, ClubID);
+        ps.setString(2, "%"+search+"%");
+        rs = ps.executeQuery();
+       while(rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            int club_id = rs.getInt("club_id");
+            LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+            String location = rs.getString("location");
+            String details = rs.getString("details");
+            String avatar = rs.getString("avatar");
+            boolean status = rs.getBoolean("status");
+            Event event = new Event(id, name, club_id, time, location, details,avatar,status);
+            t.add(event);
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {
+        return e.getMessage();
+     }
+    return("ok");
     }
     
      public List<Event> geteListdate(String ClubID){

@@ -72,15 +72,22 @@
 
 <body>
     
-    <div style="margin-top: 100px" class="signup-container">
+    <div style="margin-top: 150px" class="signup-container">
         <h2 style="font-size: 50px;">Sign Up</h2>
         <form style="" action="sendMailRegister" method="post">
-            <input type="text" placeholder="Full Name" name="fullname" id="fullname" value="${requestScope.fullname}" required>
-            <input type="email" placeholder="Email" name="email" value="${requestScope.email}" required>
-            <input type="password" placeholder="Password" name="password" minlength="6" maxlength="20" value="${requestScope.password}"required>
-            <input type="password" placeholder="Confirm Password" name="cpassword" minlength="6" maxlength="20" value="${requestScope.cpassword}"required>  
+            <input type="text" placeholder="Full Name" name="fullname" id="fullname" value="${requestScope.fullname}" >
+            <p style="color: red;  font-size: 15px; text-align: left; margin-left:3%">${requestScope.wrongName}</p>     
             
-            <p style="color: red;  font-size: 15px">${requestScope.wrongRegister}</p>
+            <input type="email" placeholder="Email" name="email" value="${requestScope.email}" >
+            <p style="color: red;  font-size: 15px; text-align: left; margin-left:3%">${requestScope.wrongEmail}</p>
+            
+            <input type="password" placeholder="Password" name="password" minlength="6" maxlength="20" value="${requestScope.password}">
+            <p style="color: red;  font-size: 15px; text-align: left; margin-left:3% ">${requestScope.wrongPassWord}</p>
+            
+            <input type="password" placeholder="Confirm Password" name="cpassword"  value="${requestScope.cpassword}">  
+            <p style="color: red;  font-size: 15px; text-align: left; margin-left:3%">${requestScope.wrongCPassWord}</p>
+            
+            <p style="color: red;  font-size: 15px; text-align: left; margin-left:3%">${requestScope.wrongRegister}</p>
             <button type="submit">Sign Up</button>
         </form>
         <div class="links">

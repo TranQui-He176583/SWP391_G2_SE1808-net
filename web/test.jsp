@@ -1,85 +1,88 @@
-<link rel="stylesheet" href="assets/css/task_list.css"/>
-<table id="manager-register-event-table">
-  <thead>
-    <tr>
-      <th style="text-align: center;">Event</th>
-      <th style="text-align: center;">Username</th>
-      <th style="text-align: center;">User Email</th>
-      <th style="text-align: center;">Service</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-        <td style="text-align: center">Event 1</td>
-      <td style="text-align: center">user1</td>
-      <td  style="text-align: center"> >user1@example.com</td>
-      <td>
-        <div style="display: flex; justify-content: center; align-items: center;">
-          <button class="accept-btn">Ch?p nh?n</button>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Notification Overlay</title>
+    <style>
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
 
-          <button class="reject-btn">T? ch?i</button>
+        .notification-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <%
+        int type = 1; // set the type value
+        if (type == 1) {
+    %>
+    <script>
+        window.onload = function() {
+            showNotificationOverlay();
+        };
+    </script>
+    <% } %>
+
+    <div id="notification-overlay" class="overlay">
+        <div class="notification-content">
+            <span class="close-button">&times;</span>
+            <h3>Notification</h3>
+            <p>Accept Complete.</p>
         </div>
-      </td>
-    </tr>
-    <tr>
-      <td  style="text-align: center">Event 2</td>
-      <td  style="text-align: center">user2</td>
-      <td  style="text-align: center">>user2@example.com</td>
-      <td>
-        <div style="display: flex; justify-content: center; align-items: center;">
-          <button class="accept-btn">Ch?p nh?n</button>
-     
-          <button class="reject-btn">T? ch?i</button>
-        </div>
-      </td>
-    </tr>
-    <!-- Add more rows as needed -->
-  </tbody>
-</table>
+    </div>
 
-<style>
+    <script>
+        // Get the overlay and close button elements
+        const notificationOverlay = document.getElementById('notification-overlay');
+        const closeButton = document.querySelector('.close-button');
+        const showNotificationButton = document.getElementById('showNotification');
 
+        // Show the overlay
+        function showNotificationOverlay() {
+            notificationOverlay.style.display = 'flex';
+        }
 
-  .accept-btn, .reject-btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    margin-right: 8px;
-  }
+        // Hide the overlay
+        function hideNotificationOverlay() {
+            notificationOverlay.style.display = 'none';
+        }
 
-  .accept-btn {
-    background-color: #4CAF50;
-    color: white;
-  }
+        // Add event listeners to the close button and overlay
+        closeButton.addEventListener('click', hideNotificationOverlay);
+        notificationOverlay.addEventListener('click', (event) => {
+            if (event.target === notificationOverlay) {
+                hideNotificationOverlay();
+            }
+        });
 
-  .reject-btn {
-    background-color: #f44336;
-    color: white;
-  }
-
-  .accept-btn:hover, .reject-btn:hover {
-    opacity: 0.8;
-  }
-</style>
-
-<script>
-  // Add event listeners to the "Ch?p nh?n" and "T? ch?i" buttons
-  const acceptBtns = document.querySelectorAll('.accept-btn');
-  const rejectBtns = document.querySelectorAll('.reject-btn');
-
-  acceptBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Handle "Ch?p nh?n" button click
-      console.log('Ch?p nh?n button clicked');
-    });
-  });
-
-  rejectBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Handle "T? ch?i" button click
-      console.log('T? ch?i button clicked');
-    });
-  });
-</script>
+    </script>
+</body>
+</html>

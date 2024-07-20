@@ -79,7 +79,7 @@ public class confirmCodeF_Password extends HttpServlet {
            request.setAttribute("ucode", xCode);
            request.setAttribute("email", xEmail);
            request.setAttribute("code", xRealCode);
-           request.setAttribute("wrongCode","Wrong Code!!" );
+           request.setAttribute("wrongCode","Wrong Code!" );
            request.getRequestDispatcher("forgotPassword.jsp").forward(request, response);
        }
    }

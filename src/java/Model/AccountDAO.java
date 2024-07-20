@@ -50,7 +50,22 @@ public class AccountDAO extends MyDAO {
      } 
         return number;
     }
-     
+     public boolean check_Manager (int account_id) {
+        xSql = "select *from student_club where account_id=? and role_id=1";     
+        try {
+      ps = con.prepareStatement(xSql);   
+      ps.setInt(1, account_id);
+      rs = ps.executeQuery();           
+      if (rs.next()) {         
+       return true;                    
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {      
+     } 
+        return false;
+    }
      
  public boolean checkLogin(String username, String password) {
         xSql = "select *from account where email=? and password=?";     
