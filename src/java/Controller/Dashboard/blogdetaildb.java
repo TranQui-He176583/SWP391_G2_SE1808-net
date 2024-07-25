@@ -53,23 +53,11 @@ public class blogdetaildb extends HttpServlet {
         Blog b = bdao.getBlog(id);
         List<Blog> listBlog= bdao.pagingBlog(index);
         Club c = cdao.getNameByBlogID(id);
-        
-        String completeChange = (String) request.getSession().getAttribute("completeChange");
-        request.getSession().removeAttribute("completeChange");
-        
-        String invalidName = (String) request.getSession().getAttribute("invalidName");
-        request.getSession().removeAttribute("invalidName");
-        
-        String invalidDetails = (String) request.getSession().getAttribute("invalidDetails");
-        request.getSession().removeAttribute("invalidDetails");
-        
+     
         request.setAttribute("detailBlog", b);
         request.setAttribute("nameClub", c);
         request.setAttribute("listdb", listBlog);
-       
-        request.setAttribute("completeChange", completeChange);
-        request.setAttribute("invalidName", invalidName);
-        request.setAttribute("invalidDetails", invalidDetails);
+     
         request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
      
         } else {
@@ -102,11 +90,7 @@ public class blogdetaildb extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String TitleSearch =request.getParameter("search");
-         BlogDAO dao = new BlogDAO();
-         List<Blog> lis= dao.getSearchBlogByTitle(TitleSearch);
-         request.setAttribute("listdb", lis);
-         request.getRequestDispatcher("BlogDetailDBoard.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 

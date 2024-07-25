@@ -6,6 +6,8 @@
 package Controller.Dashboard;
 
 import Model.Account;
+import Model.Club;
+import Model.ClubDAO;
 import Model.Team;
 import Model.TeamDAO;
 import Model.UserDAO;
@@ -43,22 +45,20 @@ public class detailTeam extends HttpServlet {
     if (account != null && account.getRoleId() == 1) 
     {
         String id =request.getParameter("tid");
+        String xClubID = request.getParameter("clubID");
         TeamDAO dao = new TeamDAO();
         UserDAO udao = new UserDAO();
+        ClubDAO cdao =new ClubDAO();
         Team t = dao.getTeam(id);
-        List<Account> listLeader= udao.getLeaderByTeamID("4",id);
-        String completeChange = (String) request.getSession().getAttribute("completeChange");
-        request.getSession().removeAttribute("completeChange");
-        String invalidLeader = (String) request.getSession().getAttribute("invalidLeader");
-        request.getSession().removeAttribute("invalidLeader");
-        String invalidName = (String) request.getSession().getAttribute("invalidName");
-        request.getSession().removeAttribute("invalidName");
+        Club c =cdao.getClub(xClubID);
+        List<Account> listLeader= udao.getLeaderByTeamID("2",id);
+        List<Account> AccountList = udao.getAllUsersByClubID(xClubID);
+        request.setAttribute("detailC", c );
         request.setAttribute("listte", t);
         request.setAttribute("listLeader", listLeader);
-        request.setAttribute("completeChange", completeChange);
-        request.setAttribute("invalidLeader", invalidLeader);
-        request.setAttribute("invalidName", invalidName);
+        request.setAttribute("AccountList", AccountList );
         request.getRequestDispatcher("TeamDetail.jsp").forward(request, response);
+
     } else {
         request.setAttribute("complete", "You do not have the right to access this page.");
         request.getRequestDispatcher("index.jsp").forward(request, response);

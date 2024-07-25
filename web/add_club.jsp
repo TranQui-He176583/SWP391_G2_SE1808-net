@@ -36,8 +36,8 @@
 <style>
     .form-row {
         display: grid;
-        grid-template-columns: 1fr 20%; 
-        gap: 20px; 
+        grid-template-columns: 1fr 20%;
+        gap: 20px;
     }
 
     .form-column {
@@ -46,7 +46,7 @@
     }
 
     .category-column {
-        grid-column: 2; 
+        grid-column: 2;
     }
 
     .form-column select {
@@ -76,14 +76,15 @@
     }
 
     .form-column input {
-        margin-bottom: 10px; 
+        margin-bottom: 10px;
     }
-    
+
     #imagePreview {
         max-width: 100%;
         max-height: 200px;
         margin-top: 10px;
-        display: none;     }
+        display: none;
+    }
 </style>
 <html>
     <head>
@@ -101,6 +102,8 @@
             <h2 style="font-size: 50px; text-align: center;" >Add Club</h2>
             <form action="add_club" method="post" enctype="multipart/form-data">
                 <div class="form-row">
+                    <input type="hidden" id="username" name="username" value="<%= session.getAttribute("username") %>">
+
                     <div class="form-column">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" value="<%= request.getAttribute("name") != null ? request.getAttribute("name") : "" %>">
@@ -131,7 +134,7 @@
                     <div class="error-message"><%= request.getAttribute("invalidImage") %></div>
                     <% } %>
                 </div>
-                
+
                 <div>
                     <label for="detail">Description</label>
                     <textarea id="detail" name="detail" rows="5" ><%= request.getAttribute("detail") != null ? request.getAttribute("detail") : "" %></textarea>
@@ -139,7 +142,7 @@
                     <div class="error-message"><%= request.getAttribute("invalidDetail") %></div>
                     <% } %>
                 </div>
-                
+
                 <button type="submit">ADD</button>
             </form>
         </div>

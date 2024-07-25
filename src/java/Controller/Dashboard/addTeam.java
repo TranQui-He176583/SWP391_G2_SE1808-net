@@ -8,11 +8,13 @@ package Controller.Dashboard;
 import Model.Account;
 import Model.Club;
 import Model.ClubDAO;
-import Model.StudentClubDAO;
+
+import Model.StudentTeamDAO;
+import Model.Student_team;
 import Model.Team;
 import Model.TeamDAO;
 import Model.UserDAO;
-import Model.student_club;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -95,65 +97,60 @@ public class addTeam extends HttpServlet {
         String xStatus = request.getParameter("status");
         int status = Integer.parseInt(xStatus);
         String xClubID = request.getParameter("clubID");
-       
+        String xRoleID = request.getParameter("roleID");
         ClubDAO cdao = new ClubDAO();
         UserDAO udao = new UserDAO();
         TeamDAO tdao = new TeamDAO();
-        StudentClubDAO scdao= new StudentClubDAO();
+        StudentTeamDAO stdao= new StudentTeamDAO();
         Club c = cdao.getClub(xClubID);
         String regex = "^[a-zA-Z\\p{L}\\s]+$";
         int leaderID = udao.getIdByName(leader); 
-        int RoleID = udao.getRoleIdByUserId(leaderID);
+        
+        boolean checkValid =true;
         if (name.equals("")) {
-           request.getSession().setAttribute("invalidName", "Team Name cannot be empty!");
-           response.sendRedirect("clubdetaildb?cid="+xClubID);
-           return;
+           request.setAttribute("invalidName", "Team Name cannot be empty!");
+           
+           checkValid= false;
        }
-       else if (name.matches(".*<.*>.*")) {
-           request.getSession().setAttribute("invalidName", "Team Name cannot contain HTML tags!");
-           response.sendRedirect("clubdetaildb?cid="+xClubID);
-           return;
+        else if (tdao.checkTeamExist(xClubID,name)) {
+           request.setAttribute("invalidName", "This team name already exists in this club");
+           
+           checkValid= false;
         }
-        if (leader.equals("")) {
-           request.getSession().setAttribute("invalidLeader", "Team Leader cannot be empty!");
-           response.sendRedirect("clubdetaildb?cid="+xClubID);
-           return;
-       }else if(!leader.matches(regex)) {
-            request.getSession().setAttribute("invalidLeader", "Team Leader cannot contain special characters, numbers, or HTML tags!");
-            response.sendRedirect("clubdetaildb?cid=" + xClubID);
-            return;
-        }else if(!scdao.checkUserExist(leader)){
-            request.getSession().setAttribute("invalidLeader", "This name does not exist");
-            response.sendRedirect("clubdetaildb?cid=" + xClubID);
-            return;
+       else if (name.matches(".*<.*>.*")) {
+           request.setAttribute("invalidName", "Team Name cannot contain HTML tags!");
+           checkValid= false;
         }
        if (xDetail.equals("")) {
-           request.getSession().setAttribute("invalidDetail", "Team Detail cannot be empty!");
-           response.sendRedirect("clubdetaildb?cid="+xClubID);
-           return;
+           request.setAttribute("invalidDetail", "Team Detail cannot be empty!");
+           
+           checkValid= false;
        }
        if (xImage.getSize()==0) {
-           request.getSession().setAttribute("invalidImage", "Team Avatar cannot be empty!");
-           response.sendRedirect("clubdetaildb?cid="+xClubID);
-           return;
-       } else if (RoleID != 4) {
-           request.getSession().setAttribute("invalidLeader", "Inappropriate user role.");
-           response.sendRedirect("clubdetaildb?cid="+xClubID);
-           return;
+           request.setAttribute("invalidImage", "Team Avatar cannot be empty!");
+           
+           checkValid= false;
        } else {
             
             String fileName = xImage.getSubmittedFileName();
             request.setAttribute("image", fileName);
-        
+       }
+       if (checkValid== false) {
+           request.setAttribute("name", name);
+           request.setAttribute("leader", leader);
+           request.setAttribute("details", xDetail);
+           request.getRequestDispatcher("clubdetaildb?cid="+xClubID).forward(request, response);
+    } else {  
         int clubID = Integer.parseInt(xClubID);
         String imageURL = saveUploadedFile(request);
+
         Team t = new Team(0, name, imageURL, xDetail, status, clubID);
         tdao.add(t);
         int newTeamID = tdao.getId_newTeam();
-        student_club sc = new student_club(leaderID, clubID, 4, newTeamID);
+        Student_team st = new Student_team(0, leaderID, 2, newTeamID);
     
-        pr.print(scdao.add(sc));
-        response.sendRedirect("clubdetaildb?cid="+xClubID);
+        pr.print(stdao.add(st));
+        request.getRequestDispatcher("clubdetaildb?cid="+xClubID).forward(request, response);
        }
     }
 

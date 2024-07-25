@@ -3,9 +3,45 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Model/ClubDAO.java</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/login.java</file>
-            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/commonFunction/header.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/web/TeamDetail.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/web/accept_register_event.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/editTeam.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/detailUser.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/blogdetaildb.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/searchUser.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/web/User_detail.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/editUser.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Model/StudentClubDAO.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/add.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Model/Student_team.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/web/ContactDetail.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/searchBlogs.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/editBlogdb.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/web/clubDetailDboard.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Model/TeamDAO.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Event/manage_registerEvent.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Model/UserDAO.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/web/dashboard.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Model/NotificationsDAO.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/web/BlogDetailDBoard.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/web/MyCList.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/deleteTeam.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/notificationdb.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Model/student_club.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/web/clubDboard.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/countUser.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Model/ClubDAO.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Model/StudentTeamDAO.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/searchClub.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Model/Notifications.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/club_detail.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/editClubdb.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/web/User_list.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/addTeam.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/web/contact.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/web/BlogsDBoard.jsp</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/clubdetaildb.java</file>
+            <file>file:/C:/Users/pc/Downloads/SWP291_Final/SWP291_Final/SWP391_G2_SE1808-net/src/java/Controller/Dashboard/detailTeam.java</file>
         </group>
     </open-files>
 </project-private>

@@ -59,10 +59,9 @@
 
                                             <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="dboard">Admin</a>
                                         </c:if>
-                                      
-                                      <c:if test="${sessionScope.isManager == true}">
-                                       <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="manager_club?cPage=1">Manager</a>
-                                      </c:if>
+                                        <c:if test="${sessionScope.isManager == true}">
+                                            <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="manager_club?cPage=1">Manager</a>
+                                        </c:if>
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="myclublist">My Club List</a>                                       
                                         <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="task_List?search=&cPage=1&club_id=&event_id=">My Task</a>

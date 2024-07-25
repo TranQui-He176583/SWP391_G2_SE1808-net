@@ -56,37 +56,19 @@ public class clubdetaildb extends HttpServlet {
         int count = tdao.getTotalTeamByClubID(id);
         Club c =cdao.getClub(id);
       
-        Account a = udao.getManagerByClubID("2", id);
+        Account a = udao.getManagerByClubID("1", id);
 
         List<Club> detailindb = cdao.pagingClub(index);
         List<Team> teamClub = tdao.getAllCLubByClubID(id);
-        String completeChange = (String) request.getSession().getAttribute("completeChange");
-        request.getSession().removeAttribute("completeChange");
-        
-        String invalidName = (String) request.getSession().getAttribute("invalidName");
-        request.getSession().removeAttribute("invalidName");
-        
-        String invalidLeader = (String) request.getSession().getAttribute("invalidLeader");
-        request.getSession().removeAttribute("invalidLeader");
-        
-        String invalidDetail = (String) request.getSession().getAttribute("invalidDetail");
-        request.getSession().removeAttribute("invalidDetail");
-        
-        String invalidImage = (String) request.getSession().getAttribute("invalidImage");
-        request.getSession().removeAttribute("invalidImage");
-//        pr.print(b.getFullname());
+        List<Account> AccountList = udao.getAllUsersByClubID(id);
         request.setAttribute("detailC", c );
         request.setAttribute("Manager", a );
         request.setAttribute("cTeam", count );
         request.setAttribute("listdb", detailindb );
         request.setAttribute("listTeam", teamClub );
-        request.setAttribute("completeChange", completeChange);
-        request.setAttribute("invalidName", invalidName);
-        request.setAttribute("invalidLeader", invalidLeader);
-        request.setAttribute("invalidDetail", invalidDetail);
-        request.setAttribute("invalidImage", invalidImage);
-        
+        request.setAttribute("AccountList", AccountList );
         request.getRequestDispatcher("clubDetailDboard.jsp").forward(request, response);
+//pr. print(teamClub.get(0).getName());
       } else {
         request.setAttribute("complete", "You do not have the right to access this page.");
         request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -117,11 +99,8 @@ public class clubdetaildb extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String NameSearch =request.getParameter("search");
-         ClubDAO dao = new ClubDAO();
-         List<Club> lis= dao.getSearchClubByName(NameSearch);
-         request.setAttribute("listdb", lis);
-         request.getRequestDispatcher("clubDetailDboard.jsp").forward(request, response);
+ processRequest(request, response);
+         
     }
 
     /** 

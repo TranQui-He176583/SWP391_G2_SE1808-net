@@ -136,6 +136,42 @@ public class TeamDAO extends MyDAO{
      }
        return 1;
    }
+     
+     public boolean checkTeamExist(String xClubID, String TeamName) {
+        xSql = "select *from team where clubID=? and name=?";     
+        try {
+      ps = con.prepareStatement(xSql);   
+      ps.setString(1, xClubID );
+      ps.setString(2, TeamName );
+     
+      rs = ps.executeQuery();           
+      if (rs.next()) {         
+       return true;                    
+      }
+      rs.close();
+      ps.close();
+     }
+     catch(Exception e) {      
+     } 
+        return false;
+    }
+        public void changeStatus(int status,int id ) {
+         xSql = "UPDATE team \n" +
+"        SET status = ?\n" +
+"        WHERE id = ? "; 
+     try {       
+      ps = con.prepareStatement(xSql);
+      ps.setInt(1, status);
+      ps.setInt(2,id);
+    
+      ps.executeUpdate();
+      ps.close();
+     }     
+     catch(Exception e) {
+       
+     }
+     
+ }
       
 //     public static void main(String[] args) {
 //        TeamDAO dao =new TeamDAO();

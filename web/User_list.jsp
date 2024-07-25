@@ -105,8 +105,7 @@
                                                     <select class="form-control time-during select2input"onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-href');">
                                                         <option value=""  data-href="countUser">Role</option>
                                                         <option value="1" data-href="${pageContext.request.contextPath}/role?xRoleId=1" ${param.xRoleId eq '1' ? 'selected' : ''}>Admin</option>
-                                                        <option value="2" data-href="${pageContext.request.contextPath}/role?xRoleId=2" ${param.xRoleId eq '2' ? 'selected' : ''}>manager</option>
-                                                        <option value="4" data-href="${pageContext.request.contextPath}/role?xRoleId=4" ${param.xRoleId eq '4' ? 'selected' : ''}>Team Leader</option>
+                                                        
                                                         <option value="3" data-href="${pageContext.request.contextPath}/role?xRoleId=3" ${param.xRoleId eq '3' ? 'selected' : ''}>normalUser</option>
                                                         
                                                     </select>
@@ -119,7 +118,7 @@
                                 </div>
                                                     <div class="col-sm-12 col-md-5" style="padding-left: 460px">
                                                         <div class="justify-content-md-end"style="display: flex;padding-left: 30px">
-                                    <form action="countUser" method="post" style="display: flex; align-items: center;">
+                                    <form action="searchUser" method="post" style="display: flex; align-items: center;">
     <div class="search-wrapper" style="position: relative;">
       <input type="text" name="search" placeholder="search here" style="padding-left: 30px;border-radius: 10px;font-size: 15px">
       <i class="fas fa-search" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%);"></i>
@@ -169,12 +168,7 @@
                                         <c:when test="${o.roleId == 1}">
                                           <span class="text-primary">Admin</span>
                                         </c:when>
-                                        <c:when test="${o.roleId == 2}">
-                                          <span class="text-primary">Manager</span>
-                                        </c:when>
-                                        <c:when test="${o.roleId == 4}">
-                                          <span class="text-primary">Team Leader</span>
-                                        </c:when>
+                                        
                                         <c:when test="${o.roleId == 3}">
                                           <span class="text-primary">NormalUser</span>
                                         </c:when>
@@ -192,9 +186,13 @@
                                                 </c:if>
                                                     <td class="text-end py-3" style="display: flex;">
                                                     
-                                                    <a href="detailUser?uid=${o.id}" class="btn btn-icon btn-pills btn-soft-primary"><i class="uil uil-eye"></i> </a>
-                                                    <a href="deleteUser?id=${o.id}&status=1" class="btn btn-icon btn-pills btn-soft-success" style="margin: 0px 5px"><i class="uil uil-check-circle text"></i></a>
+                                                    <a href="detailUser?uid=${o.id}" class="btn btn-icon btn-pills btn-soft-primary" style="margin: 0px 5px"><i class="uil uil-eye"></i> </a>
+                                                    <c:if test="${o.status == 0}">
+                                                    <a href="deleteUser?id=${o.id}&status=1" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-check-circle text"></i></a>
+                                                    </c:if>
+                                                    <c:if test="${o.status == 1}">
                                                     <a href="deleteUser?id=${o.id}&status=0" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-multiply text"></i></a>
+                                                    </c:if>
                                                   
                                                 </td>
     
@@ -277,28 +275,7 @@
                 </h5>
                 <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
             </div>
-            <div class="offcanvas-body p-4 px-md-5">
-                <div class="row">
-                    <div class="col-12">
-                        <!-- Style switcher -->
-                        <div id="style-switcher">
-                            <div>
-                                <ul class="text-center list-unstyled mb-0">
-                                    <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/light-dash-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/dark-dash-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/dark-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/dark-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
-                                    <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
-                                    <li class="d-grid"><a href="../landing/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Landing Demos</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- end Style switcher -->
-                    </div><!--end col-->
-                </div><!--end row-->
-            </div>
-
+            
            
         </div>
         <!-- Offcanvas End -->
@@ -321,28 +298,32 @@
                     <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black;font-weight: bold"> Name</label>
-                            <input type="text" class="form-control" name="fullname" id="fullname" placeholder="fullname" minlength="1" maxlength="25" required="required" >
+                            <input type="text" class="form-control" name="fullname" id="fullname" value="${fullname}" minlength="1" maxlength="25" required="required" >
                         </fieldset>
+                        <p style="color: red; font-size: 15px">${requestScope.wrongName}</p>
                     </div>
                      <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black;font-weight: bold"> Password</label>
-                            <input type="text" class="form-control" name="password" id="password"  placeholder="password" minlength="6" maxlength="20" required="required">
+                            <input type="text" class="form-control" name="password" id="password" value="${password}" minlength="6" maxlength="20" required="required">
                         </fieldset>
+                        
                     </div>
                 </div>
                     <div class="row">
                     <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black;font-weight: bold"> Email</label>
-                            <input type="text" class="form-control" name="email" id="email" placeholder="email" minlength="11" maxlength="30" required="required">
+                            <input type="text" class="form-control" name="email" id="email" value="${email}" minlength="11" maxlength="30" required="required">
                         </fieldset>
+                        <p style="color: red; font-size: 15px">${requestScope.wrongRegister}</p>
                     </div>
                     <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black;font-weight: bold"> Phone</label>
-                            <input type="text" class="form-control" name="phone" id="phone" placeholder="phone" minlength="1" maxlength="10">
+                            <input type="text" class="form-control" name="phone" id="phone" value="${phone}" minlength="1" maxlength="10">
                         </fieldset>
+                        <p style="color: red; font-size: 15px">${requestScope.wrongPhone}</p>
                     </div>
                     </div>
                 
@@ -352,21 +333,14 @@
                     <div class="col-md-6">
                         <fieldset class="form-group">
                             <label style="color: black; font-weight: bold">Role</label>
-                          <div class="context-gender" style="display: flex;">
+                          <div class="context-gender" style="display: flex;margin-top: 10px">
     <div style="display: flex; align-items: center;padding-right: 20px">
         <input value="1" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
         Admin
     </div>
-    <div style="display: flex; align-items: center;padding-right: 20px">
-        <input value="2" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
-        Manager
-    </div>
-    <div style="display: flex; align-items: center;padding-right: 20px">
-        <input value="4" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
-        Team Leader
-    </div>
+    
     <div style="display: flex; align-items: center;">
-        <input value="3" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px">
+        <input value="3" type="radio"  name="roleId" style="font-size: 10px;  margin-right: 10px" checked="">
         NormalUser
     </div>
 </div>
@@ -375,7 +349,7 @@
                     <div class="col-md-6">
                         <fieldset class="form-group">
                              <label style="color: black; font-weight: bold">Status</label>
-                          <div class="context-status" style="display: flex;">
+                          <div class="context-status" style="display: flex; margin-top: 10px">
     
     <div style="display: flex; align-items: center;padding-right: 20px">
         <input  value="1" type="radio"  name="status" style="font-size: 10px;  margin-right: 10px" checked>
@@ -390,8 +364,8 @@
                         </fieldset>
                     </div>
                 </div>
-              <div style="display: flex; align-items: center; justify-content: space-between;">
-    <p style="color: red; font-size: 15px">${requestScope.wrongRegister}</p>
+              <div style="margin-left: 650px">
+    
     <div class="text-center">
         <button type="submit" class="btn btn-success" style="font-weight: bold">ADD</button>
     </div>

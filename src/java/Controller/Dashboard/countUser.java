@@ -49,12 +49,10 @@ public class countUser extends HttpServlet {
     int maxPage = (count / 5) + (count % 5 != 0 ? 1 : 0);
 
     List<Account> list = countdao.pagingUser(index);
-    String wrongRegister = (String) request.getSession().getAttribute("wrongRegister");
-    request.getSession().removeAttribute("wrongRegister");
+   
     request.setAttribute("listUs", list);
     request.setAttribute("mPage", maxPage);
     request.setAttribute("tag", index);
-    request.setAttribute("wrongRegister", wrongRegister);
    
     request.getRequestDispatcher("User_list.jsp").forward(request, response);
 }else{
@@ -87,12 +85,7 @@ public class countUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String NameSearch =request.getParameter("search");
-         UserDAO dao = new UserDAO();
-         List<Account> lis= dao.getSearchUser(NameSearch);
-         request.setAttribute("listUs", lis);
-         request.setAttribute("NameSearch", NameSearch);
-         request.getRequestDispatcher("User_list.jsp").forward(request, response);
+         processRequest(request, response);
     }
     
 

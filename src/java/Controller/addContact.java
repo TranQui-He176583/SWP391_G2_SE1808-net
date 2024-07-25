@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Contact;
 import Model.ContactDAO;
+import Util.MailHandler;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,7 +30,6 @@ public class addContact extends HttpServlet {
         String email = request.getParameter("email");
         String phonenumber = request.getParameter("phonenumber");
 
-        // Validate the form
         Map<String, String> errors = validateForm(name, subject, details, email, phonenumber);
         if (!errors.isEmpty()) {
             for (Map.Entry<String, String> error : errors.entrySet()) {
@@ -39,7 +39,6 @@ public class addContact extends HttpServlet {
             return;
         }
 
-        // Create new contact object if no errors
         Contact newContact = new Contact();
         newContact.setName(name);
         newContact.setSubject(subject);
@@ -47,14 +46,19 @@ public class addContact extends HttpServlet {
         newContact.setEmail(email);
         newContact.setPhonenumber(phonenumber);
 
+        MailHandler mailHandler = new MailHandler();
+        String recipientEmail = "swp391g2k17@gmail.com";
+
         ContactDAO contactDAO = new ContactDAO();
         try {
             contactDAO.saveContact(newContact);
+            mailHandler.SendMail(recipientEmail, subject, "From: " + name + "<br>Email: " + email + "<br>Phonenumber: " + phonenumber + "<br><br>" + details);
             request.setAttribute("send", "Done!!!");
-            request.getRequestDispatcher("contact.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        request.getRequestDispatcher("contact.jsp").forward(request, response);
     }
 
     private Map<String, String> validateForm(String name, String subject, String details, String email, String phonenumber) {
@@ -62,16 +66,24 @@ public class addContact extends HttpServlet {
 
         if (name == null || name.isEmpty()) {
             errors.put("errorName", "Name is required.");
+        } else if (name.length() > 35) {
+            errors.put("errorName", "Name cannot exceed 35 characters.");
         }
+
         if (subject == null || subject.isEmpty()) {
             errors.put("errorSubject", "Subject is required.");
+        } else if (subject.length() > 20) {
+            errors.put("errorSubject", "Subject cannot exceed 20 characters.");
         }
+
         if (details == null || details.isEmpty()) {
             errors.put("errorDetails", "Message details are required.");
         }
+
         if (email == null || email.isEmpty() || !email.matches("\\b[\\w.%-]+@[\\w.-]+\\.[A-Za-z]{2,4}\\b")) {
             errors.put("errorEmail", "Valid email is required.");
         }
+
         if (phonenumber == null || phonenumber.isEmpty() || !phonenumber.matches("\\d{10}")) {
             errors.put("errorPhonenumber", "Valid phone number is required.");
         }

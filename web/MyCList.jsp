@@ -9,8 +9,9 @@
     <meta charset="UTF-8">
     <title>My Clubs</title>
     <link rel="stylesheet" href="styles.css">
-    
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+
     <style>
         body {
             background-color: #fff;
@@ -23,20 +24,21 @@
             height: 100vh;
             margin: 0;
         }
-        
+
         h1 {
             margin-bottom: 20px;
         }
 
         .club-list-container {
+            width: 70%;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            position: relative;
         }
 
         .club-item {
             width: 250px;
-            height: 280px;
+            height: 255px;
             background-color: orange;
             border-radius: 10px;
             overflow: hidden;
@@ -47,6 +49,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            margin: 0 10px; /* Add horizontal margin to create space between items */
+            padding-top: 10px; /* Add padding to move the image down */
         }
 
         .club-item img {
@@ -54,6 +58,7 @@
             height: 200px;
             object-fit: cover;
             border-radius: 5px;
+            margin: auto; /* Center the image within its container */
         }
 
         .club-name {
@@ -84,16 +89,27 @@
             transform: scale(1.1);
         }
 
-        
+        .slick-prev, .slick-next {
+            width: 30px;
+            height: 30px;
+            z-index: 1000;
+        }
+
+        .slick-prev:before, .slick-next:before {
+            font-size: 30px;
+            color: black;
+        }
+
     </style>
 </head>
 <body>
     <h1>My Club</h1>
-    <div class="club-list-container">
+    <div class="club-list-container slider">
         <%
             List<Club> clubs = (List<Club>) request.getAttribute("clubs");
             if (clubs != null && !clubs.isEmpty()) {
                 for (Club club : clubs) {
+                    if (club.getStatus() == 1) {
         %>
         <div class="club-item">
             <a href="club_detail?id=<%= club.getId() %>">
@@ -101,7 +117,8 @@
                 <p class="club-name"><%= club.getName() %></p>
             </a>
         </div>
-        <%  
+        <%
+                    }
                 }
             } else {
         %>
@@ -109,24 +126,20 @@
         <% 
             }
         %>
-        
     </div>
 
-    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="./assets/js/jquery.slicknav.min.js"></script>
-    <script src="./assets/js/owl.carousel.min.js"></script>
-    <script src="./assets/js/slick.min.js"></script>
-    <script src="./assets/js/wow.min.js"></script>
-    <script src="./assets/js/animated.headline.js"></script>
-    <script src="./assets/js/jquery.nice-select.min.js"></script>
-    <script src="./assets/js/jquery.sticky.js"></script>
-    <script src="./assets/js/jquery.magnific-popup.js"></script>
-    <script src="./assets/js/contact.js"></script>
-    <script src="./assets/js/jquery.form.js"></script>
-    <script src="./assets/js/jquery.validate.min.js"></script>
-    <script src="./assets/js/mail-script.js"></script>
-    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-    <script src="./assets/js/plugins.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.slider').slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                prevArrow: '<button type="button" class="slick-prev">&larr;</button>',
+                nextArrow: '<button type="button" class="slick-next">&rarr;</button>',
+                infinite: true
+            });
+        });
+    </script>
 </body>
 </html>

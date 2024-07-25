@@ -194,22 +194,25 @@
                            <input type="hidden"  name="id" value="${detail.id}" readonly required>
                             <div class="card-body">
                                         <div class="user-avatar" style="text-align: center;">
-					<img src="${detail.image}" alt="Maxwell Admin"style="width: 100px;height: 100px;border-radius: 50px">
+					<img src="${detail.image}" alt="Maxwell Admin"style="width: 150px;height: 150px;border-radius: 100px">
 				        </div>
                               
                                         <h5 class="user-email"style="text-align: center">${detail.email}</h5>
-                                     
+                                        <p style="color: green; font-size: 15px;text-align: center">${requestScope.complete}</p>
                                     </div>
+                                     
                                         <div class="row">
     <div class="col-lg-4">
         <div class="form-group">
             <label style="color: yellowgreen;font-weight: bold">Full Name</label>
             <input value="${detail.fullname}" type="text" class="form-control" name="fullname" minlength="1" maxlength="25">
         </div>
+        <p style="color: red; font-size: 15px">${requestScope.wrongName}</p>
         <div class="form-group">
             <label style="color: yellowgreen;font-weight: bold">Phone</label>
             <input value="${detail.phone}" type="text" class="form-control" name="phone" minlength="1" maxlength="10">
         </div>
+        <p style="color: red; font-size: 15px">${requestScope.wrongPhone}</p>
         <div class="form-group">
             <label style="color: yellowgreen;font-weight: bold">Club</label>
             <c:set var="clubNames" value="" />
@@ -228,20 +231,13 @@
       <input ${detail.roleId == 1 ? 'checked' : ''} value="1" type="radio" name="roleId" style="font-size: 10px; margin-right: 10px;">
       Admin
     </div>
-    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-      <input ${detail.roleId == 2 ? 'checked' : ''} value="2" type="radio" name="roleId" style="font-size: 10px; margin-right: 10px;">
-      Manager
-    </div>
   </div>
   <div style="flex: 1;">
     <div style="display: flex; align-items: center; margin-bottom: 10px;">
       <input ${detail.roleId == 3 ? 'checked' : ''} value="3" type="radio" name="roleId" style="font-size: 10px; margin-right: 10px;">
       NormalUser
     </div>
-    <div style="display: flex; align-items: center; margin-bottom: 10px;">
-      <input ${detail.roleId == 4 ? 'checked' : ''} value="4" type="radio" name="roleId" style="font-size: 10px; margin-right: 10px;">
-      Team Leader
-    </div>
+    
   </div>
 </div>
         </div>

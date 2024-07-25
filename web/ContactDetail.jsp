@@ -183,10 +183,10 @@
                                    
                                     <div class="p-4">
                                       
-                                      <form action="editContact" method="POST">
+<!--                                      <form action="editContact" method="POST">-->
                                            <div class="modal-header border-bottom p-3"> 
     <div class="d-flex align-items-center justify-content-between w-100">
-    <h5 class="modal-title" id="exampleModalLabel">Edit Contact</h5>
+    <h5 class="modal-title" id="exampleModalLabel">Contact Detail</h5>
     <div class="d-flex align-items-center">
         <p style="color: green; font-size: 15px; margin-right: 20px;">${requestScope.complete}</p>
         <p style="color: red; font-size: 15px; margin-right: 0;">${requestScope.wrongFormat}</p>
@@ -196,40 +196,40 @@
 
   <div class="row gutters">
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-      <input type="hidden" name="id" value="${listct.id}" readonly required>
+<!--      <input type="hidden" name="id" value="" readonly required>-->
       <div class="form-group">
         <label style="color: yellowgreen;font-weight: bold">Subject</label>
-        <input value="${listct.subject}" type="text" class="form-control" name="subject" minlength="1" maxlength="100">
+        <input value="${listct.subject}" type="text" class="form-control" name="subject" minlength="1" maxlength="100" readonly="">
       </div>
       <div class="form-group">
         <label style="color: yellowgreen;font-weight: bold">Name</label>
-        <input value="${listct.name}" type="text" class="form-control"  name="name" minlength="1" maxlength="25">
+        <input value="${listct.name}" type="text" class="form-control"  name="name" minlength="1" maxlength="25" readonly="">
       </div>
       <div class="form-group">
         <label style="color: yellowgreen;font-weight: bold">Email</label>
-        <input value="${listct.email}" type="text" class="form-control" name="email" minlength="11" maxlength="20">
+        <input value="${listct.email}" type="text" class="form-control" name="email" minlength="11" maxlength="20" readonly="">
       </div>
       <div class="form-group">
         <label style="color: yellowgreen;font-weight: bold">Phone</label>
-        <input value="${listct.phonenumber}" type="text" class="form-control" name="phonenumber" minlength="1" maxlength="10">
+        <input value="${listct.phonenumber}" type="text" class="form-control" name="phonenumber" minlength="1" maxlength="10"readonly="">
       </div>
     </div>
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
       <div class="form-group">
         <label style="color: yellowgreen;font-weight: bold">Messages</label>
-        <textarea type="text" rows="4" class="form-control" name="details">${listct.details}</textarea>
+        <textarea type="text" rows="4" class="form-control" name="details" readonly="">${listct.details}</textarea>
       </div>
     </div>
   </div>
-  <div class="row gutters">
+<!--  <div class="row gutters">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
       <div class="text-right" style="padding-left: 630px;display: flex">
         <a href="" class="btn btn-success" style="margin-right: 5px">Cancel</a>
         <button type="submit" name="submit" class="btn btn-primary" style="background: green">Save</button>
       </div>
     </div>
-  </div>
-</form>
+  </div>-->
+<!--</form>-->
                                     </div>
                                 </div>
                            
@@ -271,10 +271,12 @@
         <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./assets/js/popper.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
-           <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace('details');
-</script>
+        <script src="ckeditor/ckeditor.js" type="text/javascript"></script>
+ <script>
+           $(document).ready(function() {
+  CKEDITOR.replace('details');
+});
+        </script>    
     </body>
 
 </html>
