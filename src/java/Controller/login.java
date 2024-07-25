@@ -80,12 +80,17 @@ public class login extends HttpServlet {
         xPassWord = ep.toSHA1(xPassWord);
          HttpSession session = request.getSession();
           Account account = aDAO.getAccount(xUserName, xPassWord);  
+          boolean isManager = false;
        if (account.getFullname() ==null) {
            request.setAttribute("wrongLogin", "Account or password is incorrect");
            request.setAttribute("email", xUserName);
            request.setAttribute("password", xR_P);
           request.getRequestDispatcher("login.jsp").forward(request, response);
        } else {
+            if (aDAO.check_Manager(account.getId())==true) {
+                isManager = true;
+            } 
+           session.setAttribute("isManager", isManager);
            session.setAttribute("account", account);
           request.getRequestDispatcher("Home").forward(request, response);
        }
