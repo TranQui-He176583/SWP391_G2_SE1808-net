@@ -147,8 +147,12 @@
                                                 <td class="text-end p-3">
                                                     
                                                     <a href="detailContact?ctid=${lct.id}" class="btn btn-icon btn-pills btn-soft-primary"><i class="uil uil-eye"></i> </a>
+                                                    <c:if test="${lct.status == 0}">
                                                     <a href="deleteContact?id=${lct.id}&status=1" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-check-circle text"></i></a>
+                                                    </c:if>
+                                                    <c:if test="${lct.status == 1}">
                                                     <a href="deleteContact?id=${lct.id}&status=0" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-multiply text"></i></a>
+                                                    </c:if>
                                                   
                                                 </td>
                                             </tr>

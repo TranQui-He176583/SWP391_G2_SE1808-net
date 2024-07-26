@@ -59,6 +59,18 @@
   object-fit: cover;
   border-radius: 100%; /* Add this line to round the corners of the image */
 }
+.text-success:hover {
+  background-color: #dc3545 !important; /* Màu đỏ */
+  color: #fff !important; /* Chuyển màu chữ thành trắng */
+  border-radius: 30%;
+}
+
+.text-danger:hover {
+  background-color: #28a745 !important; /* Màu xanh */
+  color: #fff !important; /* Chuyển màu chữ thành trắng */
+  border-radius: 30%;
+}
+
            </style>
     </head>
 
@@ -89,10 +101,10 @@
             <div class="d-flex align-items-center" >
                 <span class="team-name">${lte.name}</span>
                 <c:if test="${lte.status == 1}">
-                    <a href="deleteTeam?id=${lte.id}&clubID=${lte.clubID}&status=0" class="btn btn-icon btn-pills btn-soft-success ms-2"><i class="uil uil-check-circle text"></i></a>
+                    <a href="deleteTeam?id=${lte.id}&clubID=${lte.clubID}&status=0" class="text-success"><i class="uil uil-check-circle text"></i></a>
                 </c:if>
                 <c:if test="${lte.status == 0}">
-                    <a href="deleteTeam?id=${lte.id}&clubID=${lte.clubID}&status=1" class="btn btn-icon btn-pills btn-soft-danger ms-2"><i class="uil uil-multiply text"></i></a>
+                <a href="deleteTeam?id=${lte.id}&clubID=${lte.clubID}&status=1" class="text-danger"><i class="uil uil-ban text"></i></a>
                 </c:if>
             </div>
         </a>

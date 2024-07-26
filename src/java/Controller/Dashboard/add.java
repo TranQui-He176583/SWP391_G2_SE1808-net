@@ -130,11 +130,11 @@ else {
 
     try {
          mh.SendMail(xMail, "Your Registration Information", 
-                    "Thank you for registering with our application.\n" +
-                    "Here are the details you provided:\n" +
-                    "Email: " + xMail + "\n" +
-                    "password: " + xPassword + "\n" + 
-                    "Please use this infor to complete your registration at http://localhost:9999/SWP/LoginAccount");
+                    "Thank you for registering with our application." +
+                    "<br>Here are the details you provided:\n" +
+                    "<br>Email: " + xMail + "\n" +
+                    "<br>password: " + xPassword + "\n" + 
+                    "<br>Please use this infor to complete your registration at http://localhost:9999/SWP/LoginAccount");
         
         
     } catch (Exception e) {
