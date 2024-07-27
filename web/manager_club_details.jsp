@@ -35,88 +35,97 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <style>
             .dropdown-item:hover {
-    color: #007bff !important;
-  }
-               .preview-box {
-  width: 180px;
-  height: 180px;
-  margin-left: 80px;
-  background-color: #f8f9fa;
-  border-radius: 100%; /* Add this line to round the corners */
-}
+                color: #007bff !important;
+            }
+            .preview-box {
+                width: 180px;
+                height: 180px;
+                margin-left: 80px;
+                background-color: #f8f9fa;
+                border-radius: 100%; /* Add this line to round the corners */
+            }
 
-#preview-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 100%; /* Add this line to round the corners of the image */
-}
+            #preview-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 100%; /* Add this line to round the corners of the image */
+            }
         </style>
-        
-  <%
-      Club c = (Club) request.getAttribute("c");
-  %>      
-        
+
+        <%
+            Club c = (Club) request.getAttribute("c");
+        %>      
+
     </head>
 
     <body>
         <!-- Loader -->
-    <div class="page-wrapper doctris-theme toggled">
-      <%@include file="commonFunction/header_manager.jsp"%>
+        <div class="page-wrapper doctris-theme toggled">
+            <%@include file="commonFunction/header_manager.jsp"%>
             <main class="page-content bg-light">
                 <%@include file="commonFunction/header_manager1.jsp"%>
 
-    <body>
-        <div class="container-fluid">
-            <div class="layout-specing">
-                
-                
-                <h4 style=""><%=c.getName()%></h4>   
-                
-               <div style="display: flex; justify-content: flex-start; ">
-                    <a href="add_blog?cid=${requestScope.c.getId()}" >
-                        <button style="width: 100px; height: 40px; border-radius: 5px;
-                                background: #2196f3;border: none">Add Blog</button>
-                    </a>
-                    
-                    <a href="add_Event?cid=${requestScope.c.getId()}" >
-                        <button style="width: 100px; height: 40px; border-radius: 5px ; margin-left: 20px;
-                                background: #2196f3;border: none">Add Event</button>
-                    </a>
-                    <a href="add_Task?eventid=0&clubid=${requestScope.c.getId()}" style="margin-left: 20px">
-                        <button style="width: 100px; height: 40px; border-radius: 5px;
-                                background: #2196f3;border: none">Add Task</button>
-                    </a>
-                        
-                   <a style="margin-left: 20px" >
-                        <form action="task_List" method="Post">
-                            <input type="hidden" name="club_id" value="${requestScope.c.getId()}">
-                            <input type="hidden" name="cPage" value="1">
-                            <button type="submit" style="width: 100px; height: 40px; border-radius: 5px;
-                                    background: #2196f3;border: none">Task List</button>
-                        </form>
-                    </a>
-                    
-                </div>
-                                
+                <body>
+                    <div class="container-fluid">
+                        <div class="layout-specing">
+
+
+                            <h4 style=""><%=c.getName()%></h4>   
+
+                            <div style="display: flex; justify-content: flex-start; ">
+                                <a href="add_blog?cid=${requestScope.c.getId()}" >
+                                    <button style="width: 100px; height: 40px; border-radius: 5px;
+                                            background: #2196f3;border: none">Add Blog</button>
+                                </a>
+
+                                <a href="add_Event?cid=${requestScope.c.getId()}" >
+                                    <button style="width: 100px; height: 40px; border-radius: 5px ; margin-left: 20px;
+                                            background: #2196f3;border: none">Add Event</button>
+                                </a>
+                                <a href="add_Task?eventid=0&clubid=${requestScope.c.getId()}" style="margin-left: 20px">
+                                    <button style="width: 100px; height: 40px; border-radius: 5px;
+                                            background: #2196f3;border: none">Add Task</button>
+                                </a>
+
+                                <a style="margin-left: 20px" >
+                                    <form action="task_List" method="Post">
+                                        <input type="hidden" name="club_id" value="${requestScope.c.getId()}">
+                                        <input type="hidden" name="cPage" value="1">
+                                        <button type="submit" style="width: 100px; height: 40px; border-radius: 5px;
+                                                background: #2196f3;border: none">Task List</button>
+                                    </form>
+                                </a>
+
+                                <a href="ClubMembers?clubid=${requestScope.c.getId()}" style="margin-left: 20px;">
+                                    <form action="ClubMembers" method="post" style="display: inline;">
+                                        <input type="hidden" name="clubid" value="${requestScope.c.getId()}">
+                                        <input type="hidden" name="status" value="1">
+                                        <button type="submit" style="width: 100px; height: 40px; border-radius: 5px;
+                                                background: #2196f3;border: none">Members</button>    
+                                    </form>
+                                </a>
+
+                            </div>
+
                             <img style="width:90%; height: 80% " src="<%=c.getAvatar()%>" >
                             <p style="margin-top: 5%"> <%=c.getDetail()%> </p>
-                
-                
-            </div>
-        </div>
-    </body>
-</html>
- <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <!-- simplebar -->
-        <script src="assets/js/simplebar.min.js"></script>
-        <!-- Icons -->
-        <script src="assets/js/feather.min.js"></script>
-        <!-- Main Js -->
-        <script src="assets/js/app.js"></script>
-        
-        <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="./assets/js/popper.min.js"></script>
-        <script src="./assets/js/bootstrap.min.js">
-            
-        </script>
+
+
+                        </div>
+                    </div>
+                </body>
+                </html>
+                <script src="assets/js/bootstrap.bundle.min.js"></script>
+                <!-- simplebar -->
+                <script src="assets/js/simplebar.min.js"></script>
+                <!-- Icons -->
+                <script src="assets/js/feather.min.js"></script>
+                <!-- Main Js -->
+                <script src="assets/js/app.js"></script>
+
+                <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+                <script src="./assets/js/popper.min.js"></script>
+                <script src="./assets/js/bootstrap.min.js">
+
+                </script>

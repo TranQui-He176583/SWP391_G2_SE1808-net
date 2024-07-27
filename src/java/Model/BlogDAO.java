@@ -427,7 +427,7 @@ public class BlogDAO extends MyDAO {
 
     public void addClubNameToBlogs(List<Blog> blogs) {
         try {
-            String sql = "SELECT club.name FROM club INNER JOIN blog ON club.id = blog.clubID WHERE blog.id = ?";
+            String sql = "SELECT club.name FROM club INNER JOIN blog ON club.id = blog.clubID WHERE blog.clubid = ?";
             ps = con.prepareStatement(sql);
 
             for (Blog blog : blogs) {

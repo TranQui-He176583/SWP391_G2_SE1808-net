@@ -32,7 +32,7 @@ public class BlogDetail extends HttpServlet {
                                    .collect(Collectors.toList());
                 Collections.shuffle(allBlogs);
                 List<Blog> recentBlogs = allBlogs.size() > 3 ? allBlogs.subList(0, 3) : allBlogs;
-                String clubName = blogDAO.getClubNameByClubID(blog.getId());
+                String clubName = blogDAO.getClubNameByClubID(blog.getClubID());
                 blog.setNameclub(clubName);
                 request.setAttribute("blog", blog);
                 request.setAttribute("recentBlogs", recentBlogs);

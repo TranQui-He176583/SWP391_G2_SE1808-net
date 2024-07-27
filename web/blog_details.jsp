@@ -178,7 +178,7 @@
         <%@include file="commonFunction/header.jsp" %>
 
         <main>
-            <section class="blog_area single-post-area section-padding">
+            <section class="blog_area single-post-area section-padding" style="margin-top: 150px">
                 <div class="container">
                     <div class="main-content">
                         <div class="blog_details" >
