@@ -28,7 +28,10 @@ public class get_aList {
        for (int i=0;i<iList.size();i++) {
            Account a = new Account();
            a = aDAO.getAccount(iList.get(i));
-           aList.add(a);
+         if (a.getEmail()!=null) {
+             aList.add(a);
+         }  
+           
        }
         return aList;
    }

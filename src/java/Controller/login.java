@@ -87,6 +87,10 @@ public class login extends HttpServlet {
            request.setAttribute("password", xR_P);
           request.getRequestDispatcher("login.jsp").forward(request, response);
        } else {
+        if (account.getStatus() == 0 ) {
+            request.setAttribute("complete","Your Account has been Block!" );
+            request.getRequestDispatcher("Home").forward(request, response);
+        } else {      
             if (aDAO.check_Manager(account.getId())==true) {
                 isManager = true;
             } 
@@ -94,7 +98,7 @@ public class login extends HttpServlet {
            session.setAttribute("account", account);
           request.getRequestDispatcher("Home").forward(request, response);
        }
-        
+        }
     }
 
     /** 

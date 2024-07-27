@@ -88,7 +88,7 @@
                     </a>
                              <a style="margin-left: 20px" href="edit_Event?id=${requestScope.e.getId()}">
                 <button type="submit" style="width: 100px; height: 40px; border-radius: 5px;
-                                    background: #2196f3;border: none">Task List</button>
+                                    background: #2196f3;border: none">Edit Event</button>
                 </a>
                  <form style="margin-left: 20px" id="delete-form" method="post" action="event_Delete">
                      <input type="hidden" id="record-id" name="event_id" value="${requestScope.e.getId()}">  

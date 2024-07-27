@@ -73,8 +73,15 @@
                 
                 <h4 style=""><%=c.getName()%></h4>   
                 
+                
                <div style="display: flex; justify-content: flex-start; ">
-                    <a href="add_blog?cid=${requestScope.c.getId()}" >
+                   
+                    <a href="manager_event?cPage=1&search=&club_id=${requestScope.c.getId()}" >
+                        <button style="width: 100px; height: 40px; border-radius: 5px;
+                                background: #2196f3;border: none">Event List</button>
+                            </a> 
+                        
+                    <a style="margin-left: 20px" href="add_blog?cid=${requestScope.c.getId()}"  >
                         <button style="width: 100px; height: 40px; border-radius: 5px;
                                 background: #2196f3;border: none">Add Blog</button>
                     </a>
@@ -96,6 +103,8 @@
                                     background: #2196f3;border: none">Task List</button>
                         </form>
                     </a>
+                         
+                                   
                     
                 </div>
                                 

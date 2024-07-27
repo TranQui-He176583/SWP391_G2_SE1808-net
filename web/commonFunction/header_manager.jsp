@@ -24,7 +24,7 @@
                         
                        <li><a href="manage_registerEvent?club_id=&cPage=1&event_id="><i class="uil uil-envelope me-2 d-inline-block"></i>Register Event</a></li>
 
-                        <li><a href="event_Reminders"><i class="uil uil-link-alt me-2 d-inline-block"></i>Event Reminders</a> </li>
+                       
                     </ul>
                 </div>
          

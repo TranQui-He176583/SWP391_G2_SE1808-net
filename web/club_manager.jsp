@@ -52,12 +52,7 @@
   border-radius: 100%; /* Add this line to round the corners of the image */
 }
         </style>
-    <c:if test="${not empty requestScope.complete}">
-  <script>
-    alert(" ${requestScope.complete} ");
     
-  </script>
-</c:if>    
   <%
    List<Club> cList = (List<Club>)request.getAttribute("cList");
    int nPage = (int)request.getAttribute("nPage");

@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.*;
 
 /**
@@ -66,7 +67,13 @@ public class event_Reminders extends HttpServlet {
         eList= eDAO.getAllEvent1();     
         out.print(eList.size());
         MailHandler mh = new MailHandler(); 
+      HttpSession session = request.getSession();
+       Account account = (Account) session.getAttribute("account");
+      if (account!=null) {
+          if (account.getId() == 1) {
+ 
        for (int i =0;i<eList.size();i++) {
+           
            List<account_event> aeList = new ArrayList<account_event>();           
            aeList=eDAO.getAccount_Event1(eList.get(i).getId());
            out.print(aeList.size());
@@ -90,8 +97,16 @@ public class event_Reminders extends HttpServlet {
            tDAO.update(tList.get(i));
        }       
        request.setAttribute("complete", "Reminder complete!");
-       request.getRequestDispatcher("manager_club?cPage=1").forward(request, response);
-    } 
+       request.getRequestDispatcher("dboard").forward(request, response);
+    } else {
+            request.setAttribute("complete", "You don't have role!");         
+           request.getRequestDispatcher("Home").forward(request, response);  
+          }            
+    } else {
+           request.setAttribute("complete", "Please Login!");         
+           request.getRequestDispatcher("Home").forward(request, response); 
+      }
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.

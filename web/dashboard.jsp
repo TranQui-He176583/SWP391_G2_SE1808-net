@@ -63,6 +63,12 @@
 }
 
            </style>
+              <c:if test="${not empty requestScope.complete}">
+  <script>
+    alert(" ${requestScope.complete} ");
+    
+  </script>
+</c:if> 
     </head>
     
     <body>

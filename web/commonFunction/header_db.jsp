@@ -43,6 +43,8 @@
                                 </ul>
                             </div>
                         </li>
+                        
+                         <li><a href="event_Reminders"><i class="uil uil-link-alt me-2 d-inline-block"></i>Event Reminders</a> </li>
                     </ul>
                 </div>
          
