@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Blog;
 import Model.BlogDAO;
+import Model.Club;
 import Model.ClubDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,20 +44,35 @@ public class blog extends HttpServlet {
             page = Integer.parseInt(request.getParameter("page"));
         }
 
+        String searchName = request.getParameter("searchName");
+        String clubIdStr = request.getParameter("clubId");
+        int clubId = (clubIdStr != null && !clubIdStr.isEmpty()) ? Integer.parseInt(clubIdStr) : -1;
+
         BlogDAO blogDAO = new BlogDAO();
-        List<Blog> allBlogs = blogDAO.getAllBlogs();
+        ClubDAO clubDAO = new ClubDAO();
+        List<Blog> allBlogs;
+        if (searchName != null && !searchName.isEmpty()) {
+            allBlogs = blogDAO.searchBlogsByName(searchName);
+        } else if (clubId != -1) {
+            allBlogs = blogDAO.getBlogsByClub(clubId);
+        } else {
+            allBlogs = blogDAO.getAllBlogs();
+        }
+
         int totalBlogs = allBlogs.size();
-        int totalPages = (int) Math.ceil((double) totalBlogs / 3);
+        int totalPages = (int) Math.ceil((double) totalBlogs / 6);
 
-        int start = (page - 1) * 3;
-        int end = Math.min(start + 3, totalBlogs);
+        int start = (page - 1) * 6;
+        int end = Math.min(start + 6, totalBlogs);
 
-        // Làm gì đó với clubName, ví dụ: đưa vào thuộc tính của blog
         List<Blog> blogs = allBlogs.subList(start, end);
         blogDAO.addClubNameToBlogs(blogs);
+        List<Club> clubs = clubDAO.getAllClub();
         request.setAttribute("blogs", blogs);
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPages", totalPages);
+        request.setAttribute("clubs", clubs);
+        request.setAttribute("allBlogs", allBlogs);
 
         request.getRequestDispatcher("blog.jsp").forward(request, response);
     }

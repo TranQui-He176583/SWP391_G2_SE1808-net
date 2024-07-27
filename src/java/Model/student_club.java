@@ -12,16 +12,15 @@ public class student_club {
     int account_ID;
     int club_ID;
     int role_ID;
-    int team_ID;
+
 
     public student_club() {
     }
 
-    public student_club(int account_ID, int club_ID, int role_ID, int team_ID) {
+    public student_club(int account_ID, int club_ID, int role_ID) {
         this.account_ID = account_ID;
         this.club_ID = club_ID;
         this.role_ID = role_ID;
-        this.team_ID = team_ID;
     }
 
     public int getAccount_ID() {
@@ -48,13 +47,4 @@ public class student_club {
         this.role_ID = role_ID;
     }
 
-    public int getTeam_ID() {
-        return team_ID;
-    }
-
-    public void setTeam_ID(int team_ID) {
-        this.team_ID = team_ID;
-    }
-    
-    
 }

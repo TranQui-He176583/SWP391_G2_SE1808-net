@@ -2,6 +2,8 @@
 <%@page import="Model.Club"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -31,25 +33,25 @@
             width: 25%;
         }
         .club-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 50px;
-            justify-content: flex-start;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 clubs per row */
+            gap: 30px;
             width: 75%;
         }
         .club-card {
-            flex: 1 1 calc(35%);
-            max-width: 20%;
+            max-width: 100%;
             box-sizing: border-box;
             margin: 20px;
             padding: 10px;
             border-radius: 5px;
             text-align: center;
+            background-color: #fff;
         }
         .club-avatar img {
             width: 150px;
             height: 150px;
             object-fit: cover;
+            border-radius: 50%;
         }
         .club-name {
             margin-top: 10px;
@@ -68,23 +70,19 @@
             padding: 10px;
             background-color: #f9f9f9;
         }
-
         .category-filters h3 {
             font-size: 1.2em;
             font-weight: bold;
             margin-bottom: 10px;
         }
-
         .category-filters ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
-
         .category-filters ul li {
             margin-bottom: 5px;
         }
-
         .category-filters ul li a {
             display: block;
             padding: 8px 16px;
@@ -92,14 +90,10 @@
             color: #333;
             transition: background-color 0.3s ease;
         }
-
         .category-filters ul li a:hover {
             background-color: #ddd;
         }
     </style>
-
-
-
 </head>
 <body>
     <%@include file="commonFunction/header.jsp" %>
@@ -111,24 +105,23 @@
                         <form action="#">
                             <div class="form-group">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder='Search'
+                                    <input type="text" class="form-control" placeholder="Search"
                                            onfocus="this.placeholder = ''"
-                                           onblur="this.placeholder = 'Search'"  <input type="text" name="search" placeholder="Search clubs" value="<%= request.getAttribute("searchQuery") != null ? request.getAttribute("searchQuery") : "" %>">
+                                           onblur="this.placeholder = 'Search'" 
+                                           name="search" placeholder="Search clubs" 
+                                           value="<%= request.getAttribute("searchQuery") != null ? request.getAttribute("searchQuery") : "" %>">
                                     <div class="input-group-append">
                                         <button class="btns" type="button"><i class="ti-search"></i></button>
                                     </div>
                                 </div>
                             </div>
-                            <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Search</button>
                         </form>
 
-
                         <form action="add_club" method="get">
-                            <c:if test="${sessionScope.account.roleId != null }">
+                            <c:if test="${sessionScope.account.roleId != null}">
                                 <div>
                                     <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                            type="submit">ADD</button> 
+                                            type="submit">ADD</button>
                                 </div>
                             </c:if>
                         </form>
@@ -144,7 +137,6 @@
                         <li><a href="ClubList?category=Cộng%20Đồng">Cộng Đồng</a></li>
                     </ul>
                 </div>
-
             </div>
             <div class="club-container">
                 <%
@@ -175,13 +167,6 @@
                 %>
             </div>
         </div>
-        <c:if test="${sessionScope.account.roleId != null}">
-            <a href="add_club">
-                <div class="add-club-button">
-                    +
-                </div>
-            </a>
-        </c:if>
         <nav class="blog-pagination justify-content-center d-flex">
             <ul class="pagination">
                 <c:if test="${currentPage > 1}">

@@ -57,7 +57,7 @@
 
                                 <nav aria-label="breadcrumb" class="d-inline-block mt-1">
                                     <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
-                                        <li class="breadcrumb-item"><a href="blogdb">DashBoard</a></li>
+                                        <li class="breadcrumb-item"><a href="dboard">DashBoard</a></li>
                                         <li class="breadcrumb-item active" aria-current="page">Blogs</li>
                                     </ul>
                                 </nav>
@@ -147,9 +147,13 @@
                                                 </c:if>
                                                     <td class="text-end p-3" >
                                                     
-                                                    <a href="blogdetaildb?bid=${lb.id}" class="btn btn-icon btn-pills btn-soft-primary"><i class="uil uil-eye"></i> </a>
-                                                    <a href="deleteBlog?id=${lb.id}&status=1" class="btn btn-icon btn-pills btn-soft-success" style="margin: 0px 10px"><i class="uil uil-check-circle text"></i></a>
+                                                    <a href="blogdetaildb?bid=${lb.id}" class="btn btn-icon btn-pills btn-soft-primary" style="margin: 0px 10px"><i class="uil uil-eye"></i> </a>
+                                                    <c:if test="${lb.status == 0}">
+                                                    <a href="deleteBlog?id=${lb.id}&status=1" class="btn btn-icon btn-pills btn-soft-success" ><i class="uil uil-check-circle text"></i></a>
+                                                    </c:if>
+                                                    <c:if test="${lb.status == 1}">
                                                     <a href="deleteBlog?id=${lb.id}&status=0" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-multiply text"></i></a>
+                                                    </c:if>
                                                   
                                                 </td>
                                             </tr>
@@ -349,22 +353,6 @@
     </div>
 </div>
 
-<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
-<script>
-CKEDITOR.replace('blog-description', {
-//    toolbar: [],
-    height: '100px',
-    resize_enabled: false
-});
-</script>
-
-<style>
-.cke_textarea_inline, .cke_wysiwyg_frame {
-    resize: none !important;
-    height: 100px !important;
-    max-height: 100px !important;
-}
-</style>
                                             <div class="col-lg-12 text-end">
                                                 <button type="submit" class="btn btn-primary">ADD</button>
                                             </div>end col

@@ -42,6 +42,12 @@ public class club_detail extends HttpServlet {
                 if (eDAO.checkManager(a.getId(), id)) {
                     request.setAttribute("manager", true);
                 }
+                if (eDAO.checkMember(a.getId(), id)) {
+                    request.setAttribute("member", true);
+                }
+                if(eDAO.checkstatusMember(a.getId(), id)){
+                    request.setAttribute("check", true);
+                }
             }
 
             List<Event> eList = new ArrayList<>();
@@ -61,6 +67,7 @@ public class club_detail extends HttpServlet {
 
             request.setAttribute("club", c);
             request.setAttribute("licu", lisclub);
+          
 
             request.getRequestDispatcher("club_detail.jsp").forward(request, response);
 

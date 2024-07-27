@@ -59,6 +59,18 @@
   object-fit: cover;
   border-radius: 100%; /* Add this line to round the corners of the image */
 }
+.text-success:hover {
+  background-color: #dc3545 !important; /* Màu đỏ */
+  color: #fff !important; /* Chuyển màu chữ thành trắng */
+  border-radius: 30%;
+}
+
+.text-danger:hover {
+  background-color: #28a745 !important; /* Màu xanh */
+  color: #fff !important; /* Chuyển màu chữ thành trắng */
+  border-radius: 30%;
+}
+
            </style>
     </head>
 
@@ -78,17 +90,26 @@
                                 <ul class="list-unstyled mt-2 mb-0">
                                     <li class="list-inline-item user text-muted me-2"><i class="mdi mdi-account"></i>Manager: ${Manager.fullname}</li>
                                 </ul>  
-                              <div class="dropdown">
+                               <input type="hidden"  name="id" value="${detailC.id}" readonly required>
+                               <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     ${cTeam} Team
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <c:forEach items="${listTeam}" var="lte">
-                                        <a class="dropdown-item team-option" href="detailTeam?tid=${lte.id}" data-href="" style="color: inherit;">
-                                          <span class="team-name">${lte.name}</span>
-                                        </a>
-                                    </c:forEach>
-                                </div>
+                               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <c:forEach items="${listTeam}" var="lte">
+        <a class="dropdown-item team-option d-flex justify-content-between align-items-center" href="detailTeam?tid=${lte.id}&clubID=${lte.clubID}" data-href="" style="color: inherit;">
+            <div class="d-flex align-items-center" >
+                <span class="team-name">${lte.name}</span>
+                <c:if test="${lte.status == 1}">
+                    <a href="deleteTeam?id=${lte.id}&clubID=${lte.clubID}&status=0" class="text-success"><i class="uil uil-check-circle text"></i></a>
+                </c:if>
+                <c:if test="${lte.status == 0}">
+                <a href="deleteTeam?id=${lte.id}&clubID=${lte.clubID}&status=1" class="text-danger"><i class="uil uil-ban text"></i></a>
+                </c:if>
+            </div>
+        </a>
+    </c:forEach>
+</div>
                               </div>
                                 <div style="margin-left: 20px">
                                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newteamadd" style="">ADD TEAM</a>
@@ -139,10 +160,10 @@
                                         <div class="widget mb-4 pb-2">
                                             <h5 class="widget-title">Search</h5>
                                             <div id="search2" class="widget-search mt-4 mb-0">
-                                                <form action="clubdetaildb" method="post" id="searchform1" class="searchform">
+                                                <form action="searchClub" method="post" id="searchform1" class="searchform">
                                                     <div>
-                                                        <input type="text" class="border rounded" name="search" id="search" placeholder="Search Keywords...">
-                                                        <input type="submit" id="searchsubmit1" value="Search">
+                                                        <input type="text" class="border rounded" name="search" id="search" value="${NameSearch}" placeholder="Search Keywords...">
+                                                        <input type="submit" id="searchsubmit1" value="">
                                                     </div>
                                                 </form>
                                             </div>
@@ -208,12 +229,26 @@
                         <label class="form-label">Club Name <span class="text-danger">*</span></label>
                         <input name="name" id="name" type="text" class="form-control" value="${detailC.name}">
                     </div>
+                    <p style="color: red">${requestScope.invalidName}</p>
                 </div>
                 <div class="col-12">
                     <div class="mb-3">
                         <label class="form-label">Manager <span class="text-danger">*</span></label>
-                        <input name="name" id="name" type="text" class="form-control" value="${Manager.fullname}">
+                       <input type="hidden" id="clubID" name="clubID" value="${detailC.id}">
+                      
+                    <select class="form-control" id="team-leader-select" onchange="updateManagerField(this.value, this.options[this.selectedIndex].text)">
+    <option value="${Manager.id}" <c:if test="${Manager.id == selectedLeaderId}">selected</c:if>>${Manager.getFullname()}</option>
+    <c:forEach items="${AccountList}" var="accLis">
+        <c:if test="${accLis.id != Manager.id}">
+            <option value="${accLis.id}">${accLis.fullname}</option>
+        </c:if>
+    </c:forEach>
+</select>
+    <input type="hidden" id="initial_manager" name="initial_manager" value="${Manager.fullname}">
+    <input type="hidden" id="manager" name="manager" value="">
+    
                     </div>
+   
                 </div>
                 <div class="col-12">
                     <div class="mb-3">
@@ -240,7 +275,7 @@
             <textarea name="detail" id="comments" rows="4" class="form-control" placeholder=" description :"> ${detailC.detail} </textarea>
         </div>
         <div>
-            <p style="color: red; font-size: 15px">${requestScope.wrongName}</p>
+        <p style="color: red; font-size: 15px">${requestScope.invalidDetail}</p>
         </div>
     </div>
     
@@ -293,15 +328,20 @@
                     </div>
                 </div>
                 
-                <div class="col-12">
-                    <div class="mb-3">
-                        <label class="form-label">Team Leader <span class="text-danger"></span></label>
-                       
-                          <input name="leader" id="leader" type="text" class="form-control" value="${leader}">
-                       
-                        <p style="color: red">${requestScope.invalidLeader}</p>
-                    </div>
-                </div>
+               <div class="col-12">
+    <div class="mb-3">
+        <label class="form-label">Team Leader <span class="text-danger"></span></label>
+        <input type="hidden" id="clubID" name="clubID" value="${detailC.id}">
+        <select class="form-control" id="team-leader-select" onchange="updateLeaderField(this.value, this.options[this.selectedIndex].text)">
+            <option value="" disabled selected>Select Team Leader</option>
+            <c:forEach items="${AccountList}" var="accLis">
+                <option value="${accLis.id}">${accLis.fullname}</option>
+            </c:forEach>
+        </select>
+        <input type="hidden" id="leader" name="leader" value="">
+    </div>
+</div>
+
                 
                 <div class="col-12">
                     <div class="mb-3">
@@ -367,11 +407,14 @@
         <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./assets/js/popper.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
-        <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+        <script src="ckeditor/ckeditor.js" type="text/javascript"></script>
+
 <script>
-    CKEDITOR.replace('detail');
-    CKEDITOR.replace('details');
-</script>
+           $(document).ready(function() {
+  CKEDITOR.replace('details');
+  CKEDITOR.replace('detail');
+});
+        </script>      
 <script>
     function previewImage(input) {
     if (input.files && input.files[0]) {
@@ -394,6 +437,20 @@
     }
 }
 </script>
+<script>
+    function updateLeaderField(id,fullname) {
+        document.getElementById('leader').value = fullname;
+    }
+</script>
+
+<script>
+    function updateManagerField(id,fullname) {
+        document.getElementById('manager').value = fullname;
+    }
+</script>
+
+
+
     </body>
 
 </html>

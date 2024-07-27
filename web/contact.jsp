@@ -53,7 +53,7 @@
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="hero-cap hero-cap2 pt-70 text-center">
-                                    <h2>CONTACT US</h2>
+                                    <h2 style="color: black; font-family: initial">CONTACT US</h2>
                                 </div>
                             </div>
                         </div>

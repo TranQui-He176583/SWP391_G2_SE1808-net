@@ -8,6 +8,12 @@
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Model/ClubDAO.java</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Model/AccountDAO.java</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Model/UserDAO.java</file>
+            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/commonFunction/header_manager.jsp</file>
+            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/addContact.java</file>
+            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/contact.jsp</file>
+            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/User_list.jsp</file>
+            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Util/MailHandler.java</file>
+            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/Dashboard/clubdb.java</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/commonFunction/header_db.jsp</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/Task/add_Task.java</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/manager_event_details.jsp</file>
@@ -15,7 +21,9 @@
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/manager_club_details.jsp</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/login.java</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/dashboard.jsp</file>
+            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/add_blog.java</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/club_manager.jsp</file>
+            <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Controller/Dashboard/add.java</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/web/commonFunction/header.jsp</file>
             <file>file:/D:/SWP/Project/SWP391_G2_SE1808-net/Swp/src/java/Model/ContactDAO.java</file>
         </group>

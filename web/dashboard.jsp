@@ -72,14 +72,12 @@
     </head>
     
     <body>
-        <!-- Loader -->
         
-        <!-- Loader -->
-
         <div class="page-wrapper doctris-theme toggled">
             <%@include file="commonFunction/header_db.jsp"%>
             <main class="page-content bg-light">
                 <%@include file="commonFunction/header_db_1.jsp"%>
+   
                 <div class="container-fluid">
                     <div class="layout-specing">
                         <h5 class="mb-0">Dashboard</h5>

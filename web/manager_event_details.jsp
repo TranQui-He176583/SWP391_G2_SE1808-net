@@ -35,38 +35,39 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <style>
             .dropdown-item:hover {
-    color: #007bff !important;
-  }
-               .preview-box {
-  width: 180px;
-  height: 180px;
-  margin-left: 80px;
-  background-color: #f8f9fa;
-  border-radius: 100%; /* Add this line to round the corners */
-}
+                color: #007bff !important;
+            }
+            .preview-box {
+                width: 180px;
+                height: 180px;
+                margin-left: 80px;
+                background-color: #f8f9fa;
+                border-radius: 100%; /* Add this line to round the corners */
+            }
 
-#preview-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 100%; /* Add this line to round the corners of the image */
-}
+            #preview-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 100%; /* Add this line to round the corners of the image */
+            }
         </style>
-        
-      
-        
+
+
+
     </head>
 
     <body>
         <!-- Loader -->
-    <div class="page-wrapper doctris-theme toggled">
-      <%@include file="commonFunction/header_manager.jsp"%>
+        <div class="page-wrapper doctris-theme toggled">
+            <%@include file="commonFunction/header_manager.jsp"%>
             <main class="page-content bg-light">
                 <%@include file="commonFunction/header_manager1.jsp"%>
 
-    <body>
-        <div class="container-fluid">
-            <div class="layout-specing">
+                <body>
+                    <div class="container-fluid">
+                        <div class="layout-specing">
+
 
                <div style="display: flex; ">
                     
@@ -108,24 +109,25 @@ function confirmDelete(recordId, recordName) {
                     
                 
                     <h4 style="">${requestScope.e.getName()}</h4>                 
+
                             <img style="width:90%; height: 80% " src="${requestScope.e.getAvatar()}" >
                             <p style="margin-top: 5%"> ${requestScope.e.getDetails()} </p>
-                
-                
-            </div>
-        </div>
-    </body>
-</html>
- <script src="assets/js/bootstrap.bundle.min.js"></script>
-        <!-- simplebar -->
-        <script src="assets/js/simplebar.min.js"></script>
-        <!-- Icons -->
-        <script src="assets/js/feather.min.js"></script>
-        <!-- Main Js -->
-        <script src="assets/js/app.js"></script>
-        
-        <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="./assets/js/popper.min.js"></script>
-        <script src="./assets/js/bootstrap.min.js">
-            
-        </script>
+
+
+                        </div>
+                    </div>
+                </body>
+                </html>
+                <script src="assets/js/bootstrap.bundle.min.js"></script>
+                <!-- simplebar -->
+                <script src="assets/js/simplebar.min.js"></script>
+                <!-- Icons -->
+                <script src="assets/js/feather.min.js"></script>
+                <!-- Main Js -->
+                <script src="assets/js/app.js"></script>
+
+                <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
+                <script src="./assets/js/popper.min.js"></script>
+                <script src="./assets/js/bootstrap.min.js">
+
+                </script>

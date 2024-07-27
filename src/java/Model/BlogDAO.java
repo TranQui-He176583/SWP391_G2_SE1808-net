@@ -18,51 +18,12 @@ import java.util.List;
  * @author pc
  */
 public class BlogDAO extends MyDAO {
-//      public List<Blog> getBlogsByClubId(int id) {
-//        List<Blog> blogs = new ArrayList<>();
-//        try {
-//            String sql = "SELECT * FROM blog WHERE clubID = ?";
-//            ps = con.prepareStatement(sql);
-//            ps.setInt(1, id);
-//            rs = ps.executeQuery();
-//
-//            while (rs.next()) {
-//                Blog blog = new Blog();
-//                blog.setID(rs.getInt("id"));
-//                blog.setName(rs.getString("name"));
-//                blog.setDetails(rs.getString("details"));
-//                blog.setClubID(rs.getInt("clubID"));
-//                blog.setImage(rs.getString("image"));
-//                Timestamp timestamp = rs.getTimestamp("time");
-//                if (timestamp != null) {
-//                    blog.setDate(timestamp.toLocalDateTime());
-//                } else {
-//                    blog.setDate(null);
-//                }
-//                blog.setStatus(rs.getInt("status"));
-//                blogs.add(blog);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//                if (ps != null) {
-//                    ps.close();
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return blogs;
-//    }
-    
+
+
     public List<Blog> getBlogsByClubId(int id) {
         List<Blog> blogs = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM blog WHERE clubID = ?";
+            String sql = "SELECT * FROM blog WHERE clubID = ? order by id desc ";
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             rs = ps.executeQuery();
@@ -100,9 +61,8 @@ public class BlogDAO extends MyDAO {
         return blogs;
     }
 
-
     public String addBlog(Blog blog) {
-        String sql = "INSERT INTO blog ( name, details, clubID, image, time) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO blog ( name, details, clubID, image, time, status) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -150,6 +110,52 @@ public class BlogDAO extends MyDAO {
         return (lst);
     }
 
+    public List<Blog> getBlogsByClub(int clubId) {
+        List<Blog> blogs = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM blogs WHERE club_id = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, clubId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String details = rs.getString("details");
+                int clubID = rs.getInt("clubID");
+                String image = rs.getString("image");
+                LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+                int status = rs.getInt("status");
+                blogs.add(new Blog(id, name, details, clubID, image, time, status));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blogs;
+    }
+
+    public List<Blog> searchBlogsByName(String name) {
+        List<Blog> blogs = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM blog WHERE name LIKE ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, "%" + name + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String blogName = rs.getString("name");
+                String details = rs.getString("details");
+                int clubID = rs.getInt("clubID");
+                String image = rs.getString("image");
+                LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+                int status = rs.getInt("status");
+                blogs.add(new Blog(id, blogName, details, clubID, image, time, status));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blogs;
+    }
+
     public Blog getBlogByID(int id) {
         Blog blog = null;
         try {
@@ -164,6 +170,7 @@ public class BlogDAO extends MyDAO {
                 blog.setName(rs.getString("name"));
                 blog.setDetails(rs.getString("details"));
                 blog.setClubID(rs.getInt("clubID"));
+                blog.setTime(rs.getTimestamp("time").toLocalDateTime());
                 blog.setImage(rs.getString("image"));
                 blog.setStatus(rs.getInt("status"));
             }
@@ -389,7 +396,7 @@ public class BlogDAO extends MyDAO {
 
     public List<Blog> getAllBlogs() {
         List<Blog> blogs = new ArrayList<>();
-        String sql = "SELECT * FROM blog";
+        String sql = "SELECT * FROM blog ORDER BY time DESC";
 
         try {
             ps = con.prepareStatement(sql);
@@ -420,7 +427,7 @@ public class BlogDAO extends MyDAO {
 
     public void addClubNameToBlogs(List<Blog> blogs) {
         try {
-            String sql = "SELECT club.name FROM club INNER JOIN blog ON club.id = blog.clubID WHERE blog.id = ?";
+            String sql = "SELECT club.name FROM club INNER JOIN blog ON club.id = blog.clubID WHERE blog.clubid = ?";
             ps = con.prepareStatement(sql);
 
             for (Blog blog : blogs) {
@@ -429,7 +436,7 @@ public class BlogDAO extends MyDAO {
 
                 if (rs.next()) {
                     String clubName = rs.getString("name");
-//                    blog.setNameclub(clubName);
+                    blog.setNameclub(clubName);
                 }
             }
         } catch (SQLException e) {
@@ -476,8 +483,6 @@ public class BlogDAO extends MyDAO {
         return clubName;
     }
 
-  
-    
     public int getTotalBlogByClubID(String ClubID) {
         xSql = "select count(*)from blog where clubID = ?";
 
@@ -493,43 +498,33 @@ public class BlogDAO extends MyDAO {
         }
         return 0;
     }
-    
-    public List<Blog> getAllBlogByClubID(String ClubID, int index){
-         List<Blog> t = new ArrayList<>();
-         xSql = "select * from blog where clubID =?\n"
-                  + "ORDER BY id desc\n "
-                  + "LIMIT 5 OFFSET ?";
-       try {
-        ps = con.prepareStatement(xSql);
-        ps.setString(1, ClubID);
-        ps.setInt(2, (index - 1) * 5);
-        rs = ps.executeQuery();
-       while(rs.next()) {
-            int id = rs.getInt("id");
-            String name = rs.getString("name");
-            String details = rs.getString("details");
-            int clubID = rs.getInt("clubID");
-            String image = rs.getString("image");
-            LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
-            int status = rs.getInt("status");
-            t.add(new Blog(id, name, details, clubID, image, time, status));
-      }
-      rs.close();
-      ps.close();
-     }
-     catch(Exception e) {
-        e.printStackTrace();
-     }
-    return(t);
-    }
 
-//    public static void main(String[] args) {
-//        BlogDAO dao = new BlogDAO();
-//        
-//        
-//            System.out.println(dao.getTotalBlogByClubID("1"));
-//        
-//        
-//    }
+    public List<Blog> getAllBlogByClubID(String ClubID, int index) {
+        List<Blog> t = new ArrayList<>();
+        xSql = "select * from blog where clubID =?\n"
+                + "ORDER BY id desc\n "
+                + "LIMIT 5 OFFSET ?";
+        try {
+            ps = con.prepareStatement(xSql);
+            ps.setString(1, ClubID);
+            ps.setInt(2, (index - 1) * 5);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String details = rs.getString("details");
+                int clubID = rs.getInt("clubID");
+                String image = rs.getString("image");
+                LocalDateTime time = rs.getTimestamp("time").toLocalDateTime();
+                int status = rs.getInt("status");
+                t.add(new Blog(id, name, details, clubID, image, time, status));
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return (t);
+    }
 
 }

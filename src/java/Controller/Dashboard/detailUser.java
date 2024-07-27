@@ -53,13 +53,9 @@ public class detailUser extends HttpServlet {
         List<Club> listC= cdao.getAllCLubByAccountID(id);
         List<Account> listindb = countdao.pagingUser(index);
       
-        String wrongFormat = (String) request.getSession().getAttribute("wrongFormat");
-        request.getSession().removeAttribute("wrongFormat");
-        
         request.setAttribute("listC", listC );
         request.setAttribute("listdb", listindb );
         request.setAttribute("detail", u);
-        request.setAttribute("wrongFormat", wrongFormat);
         request.getRequestDispatcher("User_detail.jsp").forward(request, response);
         
         }else{
@@ -93,11 +89,7 @@ public class detailUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         String NameSearch =request.getParameter("search");
-         UserDAO dao = new UserDAO();
-         List<Account> lis= dao.getSearchUser(NameSearch);
-         request.setAttribute("listdb", lis);
-         request.getRequestDispatcher("User_detail.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 

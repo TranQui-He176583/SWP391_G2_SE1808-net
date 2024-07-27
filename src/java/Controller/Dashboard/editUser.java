@@ -70,27 +70,36 @@ public class editUser extends HttpServlet {
        String xStatus = request.getParameter("status");
        int status =Integer.parseInt(xStatus);
        String xNote = request.getParameter("note");
-       String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
        String phoneRegex = "^[0-9]{10}$";
-       if (xPhone == null || xPhone.trim().isEmpty()) {
-    
-           response.sendRedirect("detailUser?uid=" + id);
-           return;
+       String nameRegex = "^[a-zA-Z\\p{L}\\s]+$";
+       boolean checkValid =true;
+       if (xPhone.equals("")) {
+           request.setAttribute("wrongPhone", "Phone is not empty");
+           checkValid= false;
        } else if (!xPhone.matches(phoneRegex)) {
-    
-           request.getSession().setAttribute("wrongFormat", "Invalid phone format");
-           response.sendRedirect("detailUser?uid=" + id);
-           return;
+           request.setAttribute("wrongPhone", "Invalid phone format");
+           checkValid= false;
         }
-       if (!xFullName.matches("[^<>&0-9@/\\?+%#!*()_-]+")) {
-          request.getSession().setAttribute("wrongFormat", "Name should not contain special characters ");
-          response.sendRedirect("detailUser?uid=" + id);
-          return;
+        if (xFullName.matches(".*<.*>.*")) {
+          request.setAttribute("wrongName", "Name cannot contain HTML tags!");
+          checkValid= false;
+        }else if (xFullName.equals("")) {
+           request.setAttribute("wrongName", "Name is not empty");
+           checkValid= false;
+        }else if (!xFullName.matches(nameRegex)) {
+           request.setAttribute("wrongName", "Name cannot contain special characters");
+           checkValid= false;
         }
+   if (checkValid== false) {
+          
+        request.getRequestDispatcher("detailUser?uid=" + id).forward(request, response);
+    } else {  
+       
        UserDAO udao = new UserDAO();
        out.print(udao.EditUser(roleId, status, xFullName, xPhone, gender,xNote, id));
-       response.sendRedirect("detailUser?uid=" + id);
-
+       request.setAttribute("complete", "Information successfully updated!");
+       request.getRequestDispatcher("detailUser?uid=" + id).forward(request, response);
+   }
    }
     /** 
      * Returns a short description of the servlet.

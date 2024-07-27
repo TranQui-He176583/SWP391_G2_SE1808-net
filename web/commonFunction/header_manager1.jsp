@@ -91,28 +91,36 @@
                             
                         
                          <c:if test="${sessionScope.account.roleId != null}">                                  
-                             <div class="image-container">
-                             
-                                 <c:if test="${sessionScope.account.image == null }">  
-                                     
-                                    <img style="width: 28px; margin-top: -10px" src="assets/img/avatar/Avatar1.png" class="img-fluid"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="image-container">
+
+                                    <c:if test="${sessionScope.account.image == null }">  
+
+                                        <img style="width: 35px; margin-top: -10px" src="assets/img/avatar/Avatar1.png" class="img-fluid"
+                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </c:if>
-                                    
+
                                     <c:if test="${sessionScope.account.image != null}">  
-                                       
-                                        <img style="width: 50px;height: 50px; margin-top: -10px;border-radius: 30px" src="${sessionScope.account.image}" class="img-fluid"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                        <img style="width: 35px; margin-top: -10px" src="${sessionScope.account.image}" class="img-fluid"
+                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </c:if>
-                                    
-                                        <div style="margin-top: 20px" class="dropdown-menu"> 
-                                            
-                                   <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
-                                    <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>
-                                   <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           
+
+                                    <div style="margin-top: 20px" class="dropdown-menu"> 
+                                        <c:if test="${sessionScope.account.roleId == 1}">  
+
+                                            <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="dboard">Admin</a>
+                                        </c:if>
+                                        <c:if test="${sessionScope.isManager == true}">
+                                            <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="manager_club?cPage=1">Manager</a>
+                                        </c:if>
+                                        <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Profile">Information</a>
+                                        <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="myclublist">My Club List</a>                                       
+                                        <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="task_List?search=&cPage=1&club_id=&event_id=">My Task</a>
+                                        <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="Change_Password">Change Password</a>                                       
+                                        <a style="font-size: 14px; font-weight: bold " class="dropdown-item" href="logout">Log Out</a>                           
+                                    </div>
                                 </div>
-                            </div>
-                         </c:if>
+                            </c:if>
                         </div>
                     </div>   
                             </li>

@@ -90,25 +90,29 @@ public class editBlogdb extends HttpServlet {
     
     String xStatus = request.getParameter("status");
     int status = Integer.parseInt(xStatus);
+    boolean checkValid =true;
     BlogDAO bdao = new BlogDAO();
     
     Blog b= bdao.getBlog(xid);
-   if (xName.matches(".*<.*>.*")) {
-        request.getSession().setAttribute("invalidName", "Blog title cannot contain HTML tags!");
-        response.sendRedirect("blogdetaildb?bid="+xid);
-        return;
-   }else if (xName.length() < 2 || xName.length() > 50) {
-      request.getSession().setAttribute("invalidName", "Blog title must be between 2 and 50 characters.");
-      response.sendRedirect("blogdetaildb?bid="+xid);
-      return;
-    }else if (xDetails.length() < 2 || xDetails.length() > 100) {
-      request.getSession().setAttribute("invalidDetails", "Description must be between 2 and 100 characters.");
-      response.sendRedirect("blogdetaildb?bid="+xid);
-      return;
+    if (xName.equals("")) {
+      request.setAttribute("invalidName", "Blog title cannot empty.");
+      checkValid= false;
+    }else if (xName.matches(".*<.*>.*")) {
+        request.setAttribute("invalidName", "Blog title cannot contain HTML tags!");
+        checkValid= false;
+    }else if (xName.length() < 2 || xName.length() > 100) {
+      request.setAttribute("invalidName", "Blog title must be between 2 and 100 characters.");
+      checkValid= false;
+    }
+   if (xDetails.equals("")) {
+      request.setAttribute("invalidDetails", "Description cannot empty.");
+      checkValid= false;
    }
-   
-   
     String imageURL="";
+     if (checkValid== false) {
+        request.getRequestDispatcher("blogdetaildb?bid="+xid).forward(request, response);
+    }else{
+   
     if (b != null) {
         if (xImage != null && xImage.getSize() > 0) { // Check if an image was uploaded
             imageURL = saveUploadedFile(request);
@@ -126,11 +130,12 @@ public class editBlogdb extends HttpServlet {
         b.setTime(xTime);
         bdao.EditBlog(b);
    
-        request.getSession().setAttribute("completeChange", "Change Information Susscess!");
-        response.sendRedirect("blogdetaildb?bid="+xid);
+        request.setAttribute("completeChange", "Change Information Susscess!");
+        request.getRequestDispatcher("blogdetaildb?bid="+xid).forward(request, response);
     } else {
         out.println("<html><body><h1>Error: 'blog' attribute is null</h1></body></html>");
     }
+     }
 }
 
     /** 

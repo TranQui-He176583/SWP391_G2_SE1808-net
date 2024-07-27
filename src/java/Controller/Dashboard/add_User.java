@@ -21,8 +21,8 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author pc
  */
-@WebServlet(name="add", urlPatterns={"/add"})
-public class add extends HttpServlet {
+@WebServlet(name="add_User", urlPatterns={"/add_User"})
+public class add_User extends HttpServlet {
    
    /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -79,31 +79,51 @@ String xPassword = request.getParameter("password");
     String xNote=request.getParameter("note");
     String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     String phoneRegex = "^[0-9]{10}$";
+    String regex = "^[a-zA-Z\\p{L}\\s]+$";
+    
     UserDAO aDAO = new UserDAO();
-
+    boolean checkValid =true;
 if (aDAO.checkUserExist(xMail)) {
-    request.getSession().setAttribute("wrongRegister", "This email is registered to another account");
-    response.sendRedirect("countUser");
-    return;
+    request.setAttribute("wrongRegister", "This email is registered to another account");
+    checkValid= false;
+   
+}
+else if (xMail.equals("")) {
+    request.setAttribute("wrongRegister", "Email not null");
+    checkValid= false;
+    
 }
 else if (!xMail.matches(emailRegex)) {
-    request.getSession().setAttribute("wrongRegister", "Invalid email format");
-    response.sendRedirect("countUser");
-    return;
-}
-else if (xPhone == null || xPhone.trim().isEmpty()) {
+    request.setAttribute("wrongRegister", "Invalid email format");
+    checkValid= false;
     
-    response.sendRedirect("countUser");
-    return;
-} else if (!xPhone.matches(phoneRegex)) {
-    request.getSession().setAttribute("wrongRegister", "Invalid phone format");
-    response.sendRedirect("countUser");
-    return;
 }
-else if (!xFullname.matches("[^<>&0-9@/\\?+%#!*()_-]+")) {
-    request.getSession().setAttribute("wrongRegister", "Name should not contain special characters ");
-    response.sendRedirect("countUser");
-    return;
+if (xPhone.equals("")) {
+    request.setAttribute("wrongPhone", "Phone not null");
+    checkValid= false;
+  
+} else if (!xPhone.matches(phoneRegex)) {
+    request.setAttribute("wrongPhone", "Invalid phone format");
+    checkValid= false;
+}
+if (xFullname.equals("")) {
+    request.setAttribute("wrongName", "Name not null");
+    checkValid= false;
+}
+else if (xFullname.matches(".*<.*>.*")) {
+    request.setAttribute("wrongName", "Name cannot contain HTML tags!");
+    checkValid= false;
+}
+else if(!xFullname.matches(regex)) {
+    request.setAttribute("wrongName", "Name cannot contain special characters, numbers, or HTML tags!");
+    checkValid= false;
+}
+if (checkValid== false) {
+       request.setAttribute("email", xMail);
+       request.setAttribute("fullname", xFullname);
+       request.setAttribute("password", xPassword);
+       request.setAttribute("phone", xPhone);
+       request.getRequestDispatcher("countUser").forward(request, response);
 }
 else {
      
@@ -111,28 +131,27 @@ else {
 
     try {
          mh.SendMail(xMail, "Your Registration Information", 
-                    "Thank you for registering with our application.\n" +
-                    "Here are the details you provided:\n" +
-                    "Email: " + xMail + "\n" +
-                    "password: " + xPassword + "\n" + 
-                    "Please use this infor to complete your registration at http://localhost:9999/SWP/LoginAccount");
+                    "Thank you for registering with our application." +
+                    "<br>Here are the details you provided:\n" +
+                    "<br>Email: " + xMail + "\n" +
+                    "<br>password: " + xPassword + "\n" + 
+                    "<br>Please use this infor to complete your registration at http://localhost:9999/SWP/LoginAccount");
         
         
     } catch (Exception e) {
         out.print(e);
     }
-    
+   
         encodePassword ep = new encodePassword();
         xPassword = ep.toSHA1(xPassword);
         int numberUser = aDAO.getNumberUser() + 1;
         Account u = new Account(numberUser, xPassword, roleId, status, xFullname, xMail, xPhone, 0, image,xNote);
         out.print(aDAO.add(u));
-    request.setAttribute("fullname", xFullname);
-    request.setAttribute("password", xPassword);
-    request.setAttribute("email", xMail);
+    
     request.setAttribute("addnew", "add successfull");
-    response.sendRedirect("countUser");
-}
+    request.getRequestDispatcher("countUser").forward(request, response);
+    }
+
     
     
 

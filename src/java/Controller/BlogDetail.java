@@ -8,6 +8,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "BlogDetail", urlPatterns = {"/BlogDetail"})
 public class BlogDetail extends HttpServlet {
@@ -22,19 +26,24 @@ public class BlogDetail extends HttpServlet {
             Blog blog = blogDAO.getBlogByID(blogId);
 
             if (blog != null) {
-                
+                List<Blog> allBlogs = blogDAO.getAllBlogs();
+                allBlogs = allBlogs.stream()
+                                   .filter(b -> b.getId() != blogId)
+                                   .collect(Collectors.toList());
+                Collections.shuffle(allBlogs);
+                List<Blog> recentBlogs = allBlogs.size() > 3 ? allBlogs.subList(0, 3) : allBlogs;
                 String clubName = blogDAO.getClubNameByClubID(blog.getClubID());
-//                blog.setNameclub(clubName); 
-
+                blog.setNameclub(clubName);
                 request.setAttribute("blog", blog);
+                request.setAttribute("recentBlogs", recentBlogs);
                 request.getRequestDispatcher("blog_details.jsp").forward(request, response);
             } else {
-                response.getWriter().println("Blog not found");
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Blog not found");
             }
         } catch (NumberFormatException e) {
-            response.getWriter().println("Invalid blog ID");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid blog ID");
         } catch (Exception e) {
-            response.getWriter().println("Error: " + e.getMessage());
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error: " + e.getMessage());
         }
     }
 

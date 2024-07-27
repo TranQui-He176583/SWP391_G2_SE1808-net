@@ -202,15 +202,28 @@
                 </div> 
             </div>
             <p style="color: red; font-size: 15px">${requestScope.invalidName}</p>
-                <div class="form-group">
-                    <label style="color: yellowgreen;font-weight: bold">Team Leader</label>
-        <c:set var="LeaderNames" value="" />
-        <c:forEach items="${listLeader}" var="ll" varStatus="loop">
-            <c:set var="LeaderNames" value="${LeaderNames}${ll.fullname}${!loop.last ? ',  ' : ''}" />
+               <div class="form-group">
+    <label style="color: yellowgreen;font-weight: bold">Team Leader</label>
+    <input type="hidden" id="clubID" name="clubID" value="${detailC.id}">
+   <select class="form-control" id="team-leader-select" onchange="updateLeaderField(this.value, this.options[this.selectedIndex].text)">
+    <c:forEach items="${listLeader}" var="ll">
+        <option value="${ll.id}" <c:if test="${ll.id == selectedLeaderId}">selected</c:if>>${ll.fullname}</option>
+    </c:forEach>
+    <c:set var="isExistInListLeader" value="false" />
+    <c:forEach items="${AccountList}" var="accLis">
+        <c:forEach items="${listLeader}" var="ll">
+            <c:if test="${accLis.fullname == ll.fullname}">
+                <c:set var="isExistInListLeader" value="true" />
+            </c:if>
         </c:forEach>
-        <input value="${LeaderNames}" type="text" class="form-control" name="leader" >
-                </div>
-                <p style="color: red; font-size: 15px">${requestScope.invalidLeader}</p>
+        <c:if test="${isExistInListLeader == false}">
+            <option value="${accLis.id}">${accLis.fullname}</option>
+        </c:if>
+        <c:set var="isExistInListLeader" value="false" />
+    </c:forEach>
+</select>
+    <input type="hidden" id="leader" name="leader" value="">
+</div>
                 <div class="form-group">
                     <label style="color: yellowgreen; font-weight: bold">Status</label>
                     <div class="context-status" style="display: flex;">
@@ -232,6 +245,7 @@
             <label style="color: yellowgreen;font-weight: bold">Details</label>
             <textarea class="form-control" name="details" rows="4">${listte.details}</textarea>
         </div>
+        <p style="color: red; font-size: 15px">${requestScope.invalidDetails}</p>
     </div>
 </div>
 		<div class="row gutters">
@@ -298,10 +312,12 @@
         <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
         <script src="./assets/js/popper.min.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
-            <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+            <script src="ckeditor/ckeditor.js" type="text/javascript"></script>
 <script>
-    CKEDITOR.replace('details');
-</script>
+           $(document).ready(function() {
+  CKEDITOR.replace('details');
+});
+        </script>   
 <script>
     function previewImage(input) {
     if (input.files && input.files[0]) {
@@ -312,6 +328,11 @@
         reader.readAsDataURL(input.files[0]);
     }
 }
+</script>
+<script>
+    function updateLeaderField(id,fullname) {
+        document.getElementById('leader').value = fullname;
+    }
 </script>
     </body>
 

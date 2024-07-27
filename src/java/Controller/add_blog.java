@@ -80,7 +80,6 @@ public class add_blog extends HttpServlet {
         if (a != null) {
             if (eDAO.checkManager(a.getId(), Integer.parseInt(cid)) == false) {
                 request.setAttribute("complete", "You don't have role to add event!");
-
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             } else {
                 request.setAttribute("cid", cid);
@@ -100,19 +99,23 @@ public class add_blog extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        PrintWriter pr = response.getWriter();
         String name = request.getParameter("name");
         String details = request.getParameter("details");
         Part imagePart = request.getPart("image");
+        int cid = Integer.parseInt(request.getParameter("clubid"));
+
         boolean isValid = true;
 
         if (name == null || name.isEmpty()) {
             request.setAttribute("invalidName", "Blog name cannot be empty!");
+            isValid = false;
+        } else if (name.length() > 60) {
+            request.setAttribute("invalidName", "Blog name cannot exceed 60 characters!");
             isValid = false;
         }
 
@@ -131,9 +134,9 @@ public class add_blog extends HttpServlet {
             request.setAttribute("details", details);
             request.getRequestDispatcher("add_blog.jsp").forward(request, response);
         } else {
-            String imageURL = saveBlogImage(request); // Changed method name to saveBlogImage
+            String imageURL = saveBlogImage(request);
             LocalDateTime time = LocalDateTime.now();
-            Blog blog = new Blog(0, name, details, 0, imageURL, time, 0);
+            Blog blog = new Blog(0, name, details, cid, imageURL, time, 0);
 
             BlogDAO blogDAO = new BlogDAO();
             blogDAO.addBlog(blog);

@@ -116,18 +116,8 @@
                         
                    <div class="row">
                             <div class="col-12 mt-4">
-                                <div class="table-responsive shadow rounded">                                  
+                                <div class="table-responsive shadow rounded">
                                     <table class="table table-center bg-white mb-0">
-                                        <div class="search-bar p-0 d-none d-md-block ms-2">
-                                <div id="search" class="menu-search mb-0">
-                                    <form role="search" method="get" id="searchform" class="searchform">
-                                        <div>
-                                            <input type="text" class="form-control border rounded-pill" name="s" id="s" placeholder="Search Keywords...">
-                                            <input type="submit" id="searchsubmit" value="Search">
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
                                         <thead>
                                             <tr>
                                                 <th class="border-bottom p-3" style="min-width: 50px;">Id</th>
@@ -167,9 +157,13 @@
                                                 </c:if>
                                                     <td class="text-end p-3" >
                                                     
-                                                    <a href="clubdetaildb?cid=${lcb.id}"  class="btn btn-icon btn-pills btn-soft-primary"><i class="uil uil-eye"></i> </a>
-                                                    <a href="deleteClub?id=${lcb.id}&status=1" class="btn btn-icon btn-pills btn-soft-success" style="margin: 0px 10px"><i class="uil uil-check-circle text"></i></a>
+                                                    <a href="clubdetaildb?cid=${lcb.id}"  class="btn btn-icon btn-pills btn-soft-primary" style="margin: 0px 5px"><i class="uil uil-eye"></i> </a>
+                                                    <c:if test="${lcb.status == 0}">
+                                                    <a href="deleteClub?id=${lcb.id}&status=1" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-check-circle text"></i></a>
+                                                    </c:if>
+                                                    <c:if test="${lcb.status == 1}">
                                                     <a href="deleteClub?id=${lcb.id}&status=0"  class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-multiply text"></i></a>
+                                                    </c:if>
                                                   
                                                 </td>
                                             </tr>

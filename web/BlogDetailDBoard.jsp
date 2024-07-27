@@ -108,9 +108,9 @@
                                         <div class="widget mb-4 pb-2">
                                             <h5 class="widget-title">Search</h5>
                                             <div id="search2" class="widget-search mt-4 mb-0">
-                                                <form action="blogdetaildb" method="post" id="searchform1" class="searchform">
+                                                <form action="searchBlogs" method="post" id="searchform1" class="searchform">
                                                     <div>
-                                                        <input type="text" class="border rounded" name="search" id="search" placeholder="Search Keywords...">
+                                                        <input type="text" class="border rounded" name="search" id="search" placeholder="Search Keywords..." value="${TitleSearch}">
                                                         <input type="submit" id="searchsubmit1" value="Search">
                                                     </div>
                                                 </form>
@@ -245,10 +245,13 @@
                         <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
                         <script src="./assets/js/popper.min.js"></script>
                         <script src="./assets/js/bootstrap.min.js"></script>
-                        <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+                       <script src="ckeditor/ckeditor.js" type="text/javascript"></script>
+
 <script>
-    CKEDITOR.replace('details');
-</script>
+           $(document).ready(function() {
+  CKEDITOR.replace('details');
+});
+        </script>   
 <script>
     function previewImage(input) {
     if (input.files && input.files[0]) {
